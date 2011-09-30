@@ -35,10 +35,12 @@
 			<Add option="-fexceptions" />
 			<Add option="-DGLOOX_IMPORTS" />
 			<Add directory="include" />
+			<Add directory="..\boost_1_47_0_sdk" />
 		</Compiler>
 		<Linker>
 			<Add library="gloox" />
 			<Add directory="lib" />
+			<Add directory="..\boost_1_47_0_sdk\lib" />
 		</Linker>
 		<Unit filename="include\XmppBot.h" />
 		<Unit filename="src\XmppBot.cpp" />

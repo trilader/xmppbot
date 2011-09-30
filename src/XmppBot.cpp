@@ -6,7 +6,7 @@ XmppBot::XmppBot()
 
     JID nick("svnbot@shin-project.org/bot");
 
-    m_Client = new Client( nick, "xxxx");
+    m_Client = new Client( nick, "xxxxxx");
 
     m_RosterManager = m_Client->rosterManager();
     m_RosterManager->registerRosterListener(this);
@@ -179,7 +179,7 @@ void XmppBot::handleMUCItems( MUCRoom* room, const Disco::ItemList& items )
 
     for(Disco::ItemList::const_iterator it = items.begin(); it!=items.end(); it++)
     {
-        std::cout << ((Disco::Item*)*it)->name()<<", " << ((Disco::Item*)(*it))->node() << " (" << ((Disco::Item*)(*it))->jid().full() << ")" << std::endl;
+        std::cout << ((Disco::Item*)*it)->name()<<", " << ((Disco::Item*)(*it))->node() << " (" << ((Disco::Item*)(*it))->jid().resource() << ")" << std::endl;
     }
 
 }
