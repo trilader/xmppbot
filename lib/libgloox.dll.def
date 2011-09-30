@@ -1,0 +1,1875 @@
+EXPORTS
+    _ZN5gloox10BytestreamC2ENS0_10StreamTypeERNS_7LogSinkERKNS_3JIDES6_RKSs @1
+    _ZN5gloox10BytestreamD0Ev @2
+    _ZN5gloox10BytestreamD1Ev @3
+    _ZN5gloox10BytestreamD2Ev @4
+    _ZN5gloox10ClientBase10disconnectENS_15ConnectionErrorE @5
+    _ZN5gloox10ClientBase10handleIqIDERKNS_2IQEi @6
+    _ZN5gloox10ClientBase11logInstanceEv @7
+    _ZN5gloox10ClientBase12addNamespaceEPNS_3TagE @8
+    _ZN5gloox10ClientBase13getStatisticsEv @9
+    _ZN5gloox10ClientBase13handleConnectEPKNS_14ConnectionBaseE @10
+    _ZN5gloox10ClientBase13setClientCertERKSsS2_ @11
+    _ZN5gloox10ClientBase14whitespacePingEv @12
+    _ZN5gloox10ClientBase15notifyOnConnectEv @13
+    _ZN5gloox10ClientBase15removeIDHandlerEPNS_9IqHandlerE @14
+    _ZN5gloox10ClientBase15removeIqHandlerEPNS_9IqHandlerEi @15
+    _ZN5gloox10ClientBase16handleDisconnectEPKNS_14ConnectionBaseENS_15ConnectionErrorE @16
+    _ZN5gloox10ClientBase16notifyIqHandlersERNS_2IQE @17
+    _ZN5gloox10ClientBase16processSASLErrorEPNS_3TagE @18
+    _ZN5gloox10ClientBase16removeTagHandlerEPNS_10TagHandlerERKSsS4_ @19
+    _ZN5gloox10ClientBase17handleIqIDForwardERKNS_2IQEi @20
+    _ZN5gloox10ClientBase17handleStreamErrorEPNS_3TagE @21
+    _ZN5gloox10ClientBase17notifyStreamEventENS_11StreamEventE @22
+    _ZN5gloox10ClientBase17notifyTagHandlersEPNS_3TagE @23
+    _ZN5gloox10ClientBase17registerIqHandlerEPNS_9IqHandlerEi @24
+    _ZN5gloox10ClientBase17setConnectionImplEPNS_14ConnectionBaseE @25
+    _ZN5gloox10ClientBase17setEncryptionImplEPNS_7TLSBaseE @26
+    _ZN5gloox10ClientBase18checkStreamVersionERKSs @27
+    _ZN5gloox10ClientBase18handleReceivedDataEPKNS_14ConnectionBaseERKSs @28
+    _ZN5gloox10ClientBase18notifyOnDisconnectENS_15ConnectionErrorE @29
+    _ZN5gloox10ClientBase18notifyOnTLSConnectERKNS_8CertInfoE @30
+    _ZN5gloox10ClientBase18processSASLSuccessEv @31
+    _ZN5gloox10ClientBase18registerTagHandlerEPNS_10TagHandlerERKSsS4_ @32
+    _ZN5gloox10ClientBase18setCompressionImplEPNS_15CompressionBaseE @33
+    _ZN5gloox10ClientBase19handleDecryptedDataEPKNS_7TLSBaseERKSs @34
+    _ZN5gloox10ClientBase19handleEncryptedDataEPKNS_7TLSBaseERKSs @35
+    _ZN5gloox10ClientBase20addPresenceExtensionEPNS_15StanzaExtensionE @36
+    _ZN5gloox10ClientBase20getDefaultEncryptionEv @37
+    _ZN5gloox10ClientBase20handleCompressedDataERKSs @38
+    _ZN5gloox10ClientBase20notifyOnResourceBindERKSs @39
+    _ZN5gloox10ClientBase20processSASLChallengeERKSs @40
+    _ZN5gloox10ClientBase20removeMessageHandlerEPNS_14MessageHandlerE @41
+    _ZN5gloox10ClientBase21disposeMessageSessionEPNS_14MessageSessionE @42
+    _ZN5gloox10ClientBase21getDefaultCompressionEv @43
+    _ZN5gloox10ClientBase21handleHandshakeResultEPKNS_7TLSBaseEbRNS_8CertInfoE @44
+    _ZN5gloox10ClientBase21notifyMessageHandlersERNS_7MessageE @45
+    _ZN5gloox10ClientBase21removePresenceHandlerEPNS_15PresenceHandlerE @46
+    _ZN5gloox10ClientBase21removePresenceHandlerERKNS_3JIDEPNS_15PresenceHandlerE @47
+    _ZN5gloox10ClientBase21removeStanzaExtensionEi @48
+    _ZN5gloox10ClientBase22handleDecompressedDataERKSs @49
+    _ZN5gloox10ClientBase22notifyPresenceHandlersERNS_8PresenceE @50
+    _ZN5gloox10ClientBase22registerMessageHandlerEPNS_14MessageHandlerE @51
+    _ZN5gloox10ClientBase22registerMessageSessionEPNS_14MessageSessionE @52
+    _ZN5gloox10ClientBase23registerPresenceHandlerEPNS_15PresenceHandlerE @53
+    _ZN5gloox10ClientBase23registerPresenceHandlerERKNS_3JIDEPNS_15PresenceHandlerE @54
+    _ZN5gloox10ClientBase23registerStanzaExtensionEPNS_15StanzaExtensionE @55
+    _ZN5gloox10ClientBase23removePresenceExtensionEi @56
+    _ZN5gloox10ClientBase23removeStatisticsHandlerEv @57
+    _ZN5gloox10ClientBase24removeConnectionListenerEPNS_18ConnectionListenerE @58
+    _ZN5gloox10ClientBase25notifyOnResourceBindErrorEPKNS_5ErrorE @59
+    _ZN5gloox10ClientBase25registerStatisticsHandlerEPNS_17StatisticsHandlerE @60
+    _ZN5gloox10ClientBase25removeSubscriptionHandlerEPNS_19SubscriptionHandlerE @61
+    _ZN5gloox10ClientBase26notifyOnSessionCreateErrorEPKNS_5ErrorE @62
+    _ZN5gloox10ClientBase26notifySubscriptionHandlersERNS_12SubscriptionE @63
+    _ZN5gloox10ClientBase26registerConnectionListenerEPNS_18ConnectionListenerE @64
+    _ZN5gloox10ClientBase26removeMUCInvitationHandlerEv @65
+    _ZN5gloox10ClientBase27registerSubscriptionHandlerEPNS_19SubscriptionHandlerE @66
+    _ZN5gloox10ClientBase28registerMUCInvitationHandlerEPNS_20MUCInvitationHandlerE @67
+    _ZN5gloox10ClientBase29registerMessageSessionHandlerEPNS_21MessageSessionHandlerEi @68
+    _ZN5gloox10ClientBase3jidEv @69
+    _ZN5gloox10ClientBase4initEv @70
+    _ZN5gloox10ClientBase4recvEi @71
+    _ZN5gloox10ClientBase4sendEPNS_3TagE @72
+    _ZN5gloox10ClientBase4sendERKNS_12SubscriptionE @73
+    _ZN5gloox10ClientBase4sendERKNS_2IQE @74
+    _ZN5gloox10ClientBase4sendERKNS_7MessageE @75
+    _ZN5gloox10ClientBase4sendERKSs @76
+    _ZN5gloox10ClientBase4sendERNS_2IQEPNS_9IqHandlerEib @77
+    _ZN5gloox10ClientBase4sendERNS_8PresenceE @78
+    _ZN5gloox10ClientBase5getIDEv @79
+    _ZN5gloox10ClientBase5parseERKSs @80
+    _ZN5gloox10ClientBase6hasTlsEv @81
+    _ZN5gloox10ClientBase6headerEv @82
+    _ZN5gloox10ClientBase7addFromEPNS_3TagE @83
+    _ZN5gloox10ClientBase7cleanupEv @84
+    _ZN5gloox10ClientBase7connectEb @85
+    _ZN5gloox10ClientBase8handleIqERKNS_2IQE @86
+    _ZN5gloox10ClientBase8startTlsEv @87
+    _ZN5gloox10ClientBase8xmppPingERKNS_3JIDEPNS_12EventHandlerE @88
+    _ZN5gloox10ClientBase9handleTagEPNS_3TagE @89
+    _ZN5gloox10ClientBase9setServerERKSs @90
+    _ZN5gloox10ClientBase9startSASLENS_13SaslMechanismE @91
+    _ZN5gloox10ClientBaseC1ERKSsS2_S2_i @92
+    _ZN5gloox10ClientBaseC1ERKSsS2_i @93
+    _ZN5gloox10ClientBaseC2ERKSsS2_S2_i @94
+    _ZN5gloox10ClientBaseC2ERKSsS2_i @95
+    _ZN5gloox10ClientBaseD0Ev @96
+    _ZN5gloox10ClientBaseD1Ev @97
+    _ZN5gloox10ClientBaseD2Ev @98
+    _ZN5gloox10FeatureNegC1EPKNS_3TagE @99
+    _ZN5gloox10FeatureNegC1EPNS_8DataFormE @100
+    _ZN5gloox10FeatureNegC2EPKNS_3TagE @101
+    _ZN5gloox10FeatureNegC2EPNS_8DataFormE @102
+    _ZN5gloox10FeatureNegD0Ev @103
+    _ZN5gloox10FeatureNegD1Ev @104
+    _ZN5gloox10FeatureNegD2Ev @105
+    _ZN5gloox10LogHandlerD0Ev @106
+    _ZN5gloox10LogHandlerD1Ev @107
+    _ZN5gloox10PrivateXML10handleIqIDERKNS_2IQEi @108
+    _ZN5gloox10PrivateXML10requestXMLERKSsS2_PNS_17PrivateXMLHandlerE @109
+    _ZN5gloox10PrivateXML8handleIqERKNS_2IQE @110
+    _ZN5gloox10PrivateXML8storeXMLEPKNS_3TagEPNS_17PrivateXMLHandlerE @111
+    _ZN5gloox10PrivateXMLC1EPNS_10ClientBaseE @112
+    _ZN5gloox10PrivateXMLC2EPNS_10ClientBaseE @113
+    _ZN5gloox10PrivateXMLD0Ev @114
+    _ZN5gloox10PrivateXMLD1Ev @115
+    _ZN5gloox10PrivateXMLD2Ev @116
+    _ZN5gloox10RosterItem11setPresenceERKSsNS_8Presence12PresenceTypeE @117
+    _ZN5gloox10RosterItem11setPriorityERKSsi @118
+    _ZN5gloox10RosterItem13setExtensionsERKSsRKSt4listIPKNS_15StanzaExtensionESaIS6_EE @119
+    _ZN5gloox10RosterItem14removeResourceERKSs @120
+    _ZN5gloox10RosterItem15setSubscriptionERKSsS2_ @121
+    _ZN5gloox10RosterItem15setSynchronizedEv @122
+    _ZN5gloox10RosterItem7setDataERKNS_14RosterItemDataE @123
+    _ZN5gloox10RosterItem7setNameERKSs @124
+    _ZN5gloox10RosterItem9setGroupsERKSt4listISsSaISsEE @125
+    _ZN5gloox10RosterItem9setStatusERKSsS2_ @126
+    _ZN5gloox10RosterItemC1ERKNS_14RosterItemDataE @127
+    _ZN5gloox10RosterItemC1ERKSsS2_ @128
+    _ZN5gloox10RosterItemC2ERKNS_14RosterItemDataE @129
+    _ZN5gloox10RosterItemC2ERKSsS2_ @130
+    _ZN5gloox10RosterItemD0Ev @131
+    _ZN5gloox10RosterItemD1Ev @132
+    _ZN5gloox10RosterItemD2Ev @133
+    _ZN5gloox10TLSDefault10setCACertsERKSt4listISsSaISsEE @134
+    _ZN5gloox10TLSDefault13setClientCertERKSsS2_ @135
+    _ZN5gloox10TLSDefault4initERKSsS2_RKSt4listISsSaISsEE @136
+    _ZN5gloox10TLSDefault5typesEv @137
+    _ZN5gloox10TLSDefault7cleanupEv @138
+    _ZN5gloox10TLSDefault7decryptERKSs @139
+    _ZN5gloox10TLSDefault7encryptERKSs @140
+    _ZN5gloox10TLSDefault9handshakeEv @141
+    _ZN5gloox10TLSDefaultC1EPNS_10TLSHandlerESsNS0_4TypeE @142
+    _ZN5gloox10TLSDefaultC2EPNS_10TLSHandlerESsNS0_4TypeE @143
+    _ZN5gloox10TLSDefaultD0Ev @144
+    _ZN5gloox10TLSDefaultD1Ev @145
+    _ZN5gloox10TLSDefaultD2Ev @146
+    _ZN5gloox10TLSHandlerD0Ev @147
+    _ZN5gloox10TLSHandlerD1Ev @148
+    _ZN5gloox10TLSHandlerD2Ev @149
+    _ZN5gloox10TagHandlerD0Ev @150
+    _ZN5gloox10TagHandlerD1Ev @151
+    _ZN5gloox10TagHandlerD2Ev @152
+    _ZN5gloox10XMLNS_AUTHE @153 DATA
+    _ZN5gloox10XMLNS_CAPSE @154 DATA
+    _ZN5gloox10XMLNS_LASTE @155 DATA
+    _ZN5gloox10XMLNS_SHIME @156 DATA
+    _ZN5gloox11Annotations16handlePrivateXMLEPKNS_3TagE @157
+    _ZN5gloox11Annotations16storeAnnotationsERKSt4listINS_19AnnotationsListItemESaIS2_EE @158
+    _ZN5gloox11Annotations18requestAnnotationsEv @159
+    _ZN5gloox11Annotations22handlePrivateXMLResultERKSsNS_17PrivateXMLHandler16PrivateXMLResultE @160
+    _ZN5gloox11AnnotationsC1EPNS_10ClientBaseE @161
+    _ZN5gloox11AnnotationsC2EPNS_10ClientBaseE @162
+    _ZN5gloox11AnnotationsD0Ev @163
+    _ZN5gloox11AnnotationsD1Ev @164
+    _ZN5gloox11AnnotationsD2Ev @165
+    _ZN5gloox11EmptyStringE @166 DATA
+    _ZN5gloox11NonSaslAuth10handleIqIDERKNS_2IQEi @167
+    _ZN5gloox11NonSaslAuth6doAuthERKSs @168
+    _ZN5gloox11NonSaslAuth8handleIqERKNS_2IQE @169
+    _ZN5gloox11NonSaslAuthC1EPNS_6ClientE @170
+    _ZN5gloox11NonSaslAuthC2EPNS_6ClientE @171
+    _ZN5gloox11NonSaslAuthD0Ev @172
+    _ZN5gloox11NonSaslAuthD1Ev @173
+    _ZN5gloox11NonSaslAuthD2Ev @174
+    _ZN5gloox11PrivacyItemC1ENS0_8ItemTypeENS0_10ItemActionEiRKSs @175
+    _ZN5gloox11PrivacyItemC2ENS0_8ItemTypeENS0_10ItemActionEiRKSs @176
+    _ZN5gloox11PrivacyItemD0Ev @177
+    _ZN5gloox11PrivacyItemD1Ev @178
+    _ZN5gloox11PrivacyItemD2Ev @179
+    _ZN5gloox11SIProfileFT10handleIqIDERKNS_2IQEi @180
+    _ZN5gloox11SIProfileFT13addStreamHostERKNS_3JIDERKSsi @181
+    _ZN5gloox11SIProfileFT14setStreamHostsESt4listINS_10StreamHostESaIS2_EE @182
+    _ZN5gloox11SIProfileFT15handleSIRequestERKNS_3JIDES3_RKSsRKNS_9SIManager2SIE @183
+    _ZN5gloox11SIProfileFT20handleSIRequestErrorERKNS_2IQERKSs @184
+    _ZN5gloox11SIProfileFT21handleBytestreamErrorERKNS_2IQERKSs @185
+    _ZN5gloox11SIProfileFT21handleSIRequestResultERKNS_3JIDES3_RKSsRKNS_9SIManager2SIE @186
+    _ZN5gloox11SIProfileFT24handleIncomingBytestreamEPNS_10BytestreamE @187
+    _ZN5gloox11SIProfileFT24handleOutgoingBytestreamEPNS_10BytestreamE @188
+    _ZN5gloox11SIProfileFT31handleIncomingBytestreamRequestERKSsRKNS_3JIDE @189
+    _ZN5gloox11SIProfileFT6cancelEPNS_10BytestreamE @190
+    _ZN5gloox11SIProfileFT7disposeEPNS_10BytestreamE @191
+    _ZN5gloox11SIProfileFT8acceptFTERKNS_3JIDERKSsNS0_10StreamTypeES3_ @192
+    _ZN5gloox11SIProfileFT8handleIqERKNS_2IQE @193
+    _ZN5gloox11SIProfileFT9declineFTERKNS_3JIDERKSsNS_9SIManager7SIErrorES5_ @194
+    _ZN5gloox11SIProfileFT9requestFTERKNS_3JIDERKSslS5_S5_S5_S5_iS3_S5_ @195
+    _ZN5gloox11SIProfileFTC1EPNS_10ClientBaseEPNS_18SIProfileFTHandlerEPNS_9SIManagerEPNS_23SOCKS5BytestreamManagerE @196
+    _ZN5gloox11SIProfileFTC2EPNS_10ClientBaseEPNS_18SIProfileFTHandlerEPNS_9SIManagerEPNS_23SOCKS5BytestreamManagerE @197
+    _ZN5gloox11SIProfileFTD0Ev @198
+    _ZN5gloox11SIProfileFTD1Ev @199
+    _ZN5gloox11SIProfileFTD2Ev @200
+    _ZN5gloox11VCardUpdateC1EPKNS_3TagE @201
+    _ZN5gloox11VCardUpdateC1ERKSs @202
+    _ZN5gloox11VCardUpdateC1Ev @203
+    _ZN5gloox11VCardUpdateC2EPKNS_3TagE @204
+    _ZN5gloox11VCardUpdateC2ERKSs @205
+    _ZN5gloox11VCardUpdateC2Ev @206
+    _ZN5gloox11VCardUpdateD0Ev @207
+    _ZN5gloox11VCardUpdateD1Ev @208
+    _ZN5gloox11VCardUpdateD2Ev @209
+    _ZN5gloox11XMLNS_DELAYE @210 DATA
+    _ZN5gloox11XMLNS_SI_FTE @211 DATA
+    _ZN5gloox11XMLNS_X_OOBE @212 DATA
+    _ZN5gloox12AdhocHandlerD0Ev @213
+    _ZN5gloox12AdhocHandlerD1Ev @214
+    _ZN5gloox12Capabilities20handleDiscoNodeItemsERKNS_3JIDES3_RKSs @215
+    _ZN5gloox12Capabilities23handleDiscoNodeFeaturesERKNS_3JIDERKSs @216
+    _ZN5gloox12Capabilities25handleDiscoNodeIdentitiesERKNS_3JIDERKSs @217
+    _ZN5gloox12Capabilities8generateEPKNS_5Disco4InfoE @218
+    _ZN5gloox12Capabilities8generateEPKNS_5DiscoE @219
+    _ZN5gloox12Capabilities8generateERKSt4listIPNS_5Disco8IdentityESaIS4_EERKS1_ISsSaISsEEPKNS_8DataFormE @220
+    _ZN5gloox12CapabilitiesC1EPKNS_3TagE @221
+    _ZN5gloox12CapabilitiesC1EPNS_5DiscoE @222
+    _ZN5gloox12CapabilitiesC2EPKNS_3TagE @223
+    _ZN5gloox12CapabilitiesC2EPNS_5DiscoE @224
+    _ZN5gloox12CapabilitiesD0Ev @225
+    _ZN5gloox12CapabilitiesD1Ev @226
+    _ZN5gloox12CapabilitiesD2Ev @227
+    _ZN5gloox12DataFormItemC1EPKNS_3TagE @228
+    _ZN5gloox12DataFormItemC1Ev @229
+    _ZN5gloox12DataFormItemC2EPKNS_3TagE @230
+    _ZN5gloox12DataFormItemC2Ev @231
+    _ZN5gloox12DataFormItemD0Ev @232
+    _ZN5gloox12DataFormItemD1Ev @233
+    _ZN5gloox12DataFormItemD2Ev @234
+    _ZN5gloox12DiscoHandler14handleDiscoSetERKNS_2IQE @235
+    _ZN5gloox12DiscoHandlerD0Ev @236
+    _ZN5gloox12DiscoHandlerD1Ev @237
+    _ZN5gloox12DiscoHandlerD2Ev @238
+    _ZN5gloox12GPGEncryptedC1EPKNS_3TagE @239
+    _ZN5gloox12GPGEncryptedC1ERKSs @240
+    _ZN5gloox12GPGEncryptedC2EPKNS_3TagE @241
+    _ZN5gloox12GPGEncryptedC2ERKSs @242
+    _ZN5gloox12GPGEncryptedD0Ev @243
+    _ZN5gloox12GPGEncryptedD1Ev @244
+    _ZN5gloox12GPGEncryptedD2Ev @245
+    _ZN5gloox12LastActivity10handleIqIDERKNS_2IQEi @246
+    _ZN5gloox12LastActivity14resetIdleTimerEv @247
+    _ZN5gloox12LastActivity5QueryC1EPKNS_3TagE @248
+    _ZN5gloox12LastActivity5QueryC1ERKSsl @249
+    _ZN5gloox12LastActivity5QueryC2EPKNS_3TagE @250
+    _ZN5gloox12LastActivity5QueryC2ERKSsl @251
+    _ZN5gloox12LastActivity5QueryD0Ev @252
+    _ZN5gloox12LastActivity5QueryD1Ev @253
+    _ZN5gloox12LastActivity5QueryD2Ev @254
+    _ZN5gloox12LastActivity5queryERKNS_3JIDE @255
+    _ZN5gloox12LastActivity8handleIqERKNS_2IQE @256
+    _ZN5gloox12LastActivityC1EPNS_10ClientBaseE @257
+    _ZN5gloox12LastActivityC2EPNS_10ClientBaseE @258
+    _ZN5gloox12LastActivityD0Ev @259
+    _ZN5gloox12LastActivityD1Ev @260
+    _ZN5gloox12LastActivityD2Ev @261
+    _ZN5gloox12MessageEventC1EPKNS_3TagE @262
+    _ZN5gloox12MessageEventC1EiRKSs @263
+    _ZN5gloox12MessageEventC2EPKNS_3TagE @264
+    _ZN5gloox12MessageEventD0Ev @265
+    _ZN5gloox12MessageEventD1Ev @266
+    _ZN5gloox12Registration10handleIqIDERKNS_2IQEi @267
+    _ZN5gloox12Registration13createAccountEPNS_8DataFormE @268
+    _ZN5gloox12Registration13createAccountEiRKNS_18RegistrationFieldsE @269
+    _ZN5gloox12Registration13removeAccountEv @270
+    _ZN5gloox12Registration14changePasswordERKSsS2_ @271
+    _ZN5gloox12Registration23fetchRegistrationFieldsEv @272
+    _ZN5gloox12Registration25removeRegistrationHandlerEv @273
+    _ZN5gloox12Registration27registerRegistrationHandlerEPNS_19RegistrationHandlerE @274
+    _ZN5gloox12Registration4initEv @275
+    _ZN5gloox12Registration8handleIqERKNS_2IQE @276
+    _ZN5gloox12RegistrationC1EPNS_10ClientBaseE @277
+    _ZN5gloox12RegistrationC1EPNS_10ClientBaseERKNS_3JIDE @278
+    _ZN5gloox12RegistrationC2EPNS_10ClientBaseE @279
+    _ZN5gloox12RegistrationC2EPNS_10ClientBaseERKNS_3JIDE @280
+    _ZN5gloox12RegistrationD0Ev @281
+    _ZN5gloox12RegistrationD1Ev @282
+    _ZN5gloox12RegistrationD2Ev @283
+    _ZN5gloox12SubscriptionC1ENS0_8S10nTypeERKNS_3JIDERKSsS6_ @284
+    _ZN5gloox12SubscriptionC1EPNS_3TagE @285
+    _ZN5gloox12SubscriptionC2ENS0_8S10nTypeERKNS_3JIDERKSsS6_ @286
+    _ZN5gloox12SubscriptionC2EPNS_3TagE @287
+    _ZN5gloox12SubscriptionD0Ev @288
+    _ZN5gloox12SubscriptionD1Ev @289
+    _ZN5gloox12SubscriptionD2Ev @290
+    _ZN5gloox12VCardHandlerD0Ev @291
+    _ZN5gloox12VCardHandlerD1Ev @292
+    _ZN5gloox12VCardManager10fetchVCardERKNS_3JIDEPNS_12VCardHandlerE @293
+    _ZN5gloox12VCardManager10handleIqIDERKNS_2IQEi @294
+    _ZN5gloox12VCardManager10storeVCardEPNS_5VCardEPNS_12VCardHandlerE @295
+    _ZN5gloox12VCardManager21cancelVCardOperationsEPNS_12VCardHandlerE @296
+    _ZN5gloox12VCardManager8handleIqERKNS_2IQE @297
+    _ZN5gloox12VCardManagerC1EPNS_10ClientBaseE @298
+    _ZN5gloox12VCardManagerC2EPNS_10ClientBaseE @299
+    _ZN5gloox12VCardManagerD0Ev @300
+    _ZN5gloox12VCardManagerD1Ev @301
+    _ZN5gloox12VCardManagerD2Ev @302
+    _ZN5gloox12XMLNS_CLIENTE @303 DATA
+    _ZN5gloox12XMLNS_IQ_OOBE @304 DATA
+    _ZN5gloox12XMLNS_JINGLEE @305 DATA
+    _ZN5gloox12XMLNS_PUBSUBE @306 DATA
+    _ZN5gloox12XMLNS_ROSTERE @307 DATA
+    _ZN5gloox12XMLNS_SEARCHE @308 DATA
+    _ZN5gloox12XMLNS_STREAME @309 DATA
+    _ZN5gloox12XMLNS_X_DATAE @310 DATA
+    _ZN5gloox13ConnectionTLS10disconnectEv @311
+    _ZN5gloox13ConnectionTLS10getTLSBaseEPNS_10TLSHandlerESs @312
+    _ZN5gloox13ConnectionTLS13getStatisticsERlS1_ @313
+    _ZN5gloox13ConnectionTLS13handleConnectEPKNS_14ConnectionBaseE @314
+    _ZN5gloox13ConnectionTLS16handleDisconnectEPKNS_14ConnectionBaseENS_15ConnectionErrorE @315
+    _ZN5gloox13ConnectionTLS17setConnectionImplEPNS_14ConnectionBaseE @316
+    _ZN5gloox13ConnectionTLS18handleReceivedDataEPKNS_14ConnectionBaseERKSs @317
+    _ZN5gloox13ConnectionTLS19handleDecryptedDataEPKNS_7TLSBaseERKSs @318
+    _ZN5gloox13ConnectionTLS19handleEncryptedDataEPKNS_7TLSBaseERKSs @319
+    _ZN5gloox13ConnectionTLS21handleHandshakeResultEPKNS_7TLSBaseEbRNS_8CertInfoE @320
+    _ZN5gloox13ConnectionTLS4recvEi @321
+    _ZN5gloox13ConnectionTLS4sendERKSs @322
+    _ZN5gloox13ConnectionTLS7cleanupEv @323
+    _ZN5gloox13ConnectionTLS7connectEv @324
+    _ZN5gloox13ConnectionTLS7receiveEv @325
+    _ZN5gloox13ConnectionTLSC1EPNS_14ConnectionBaseERKNS_7LogSinkE @326
+    _ZN5gloox13ConnectionTLSC1EPNS_21ConnectionDataHandlerEPNS_14ConnectionBaseERKNS_7LogSinkE @327
+    _ZN5gloox13ConnectionTLSC2EPNS_14ConnectionBaseERKNS_7LogSinkE @328
+    _ZN5gloox13ConnectionTLSC2EPNS_21ConnectionDataHandlerEPNS_14ConnectionBaseERKNS_7LogSinkE @329
+    _ZN5gloox13ConnectionTLSD0Ev @330
+    _ZN5gloox13ConnectionTLSD1Ev @331
+    _ZN5gloox13ConnectionTLSD2Ev @332
+    _ZN5gloox13DataFormField10setOptionsERKSt8multimapISsSsSt4lessISsESaISt4pairIKSsSsEEE @333
+    _ZN5gloox13DataFormField8addValueERKSs @334
+    _ZN5gloox13DataFormField8setValueERKSs @335
+    _ZN5gloox13DataFormFieldC1ENS0_9FieldTypeE @336
+    _ZN5gloox13DataFormFieldC1EPKNS_3TagE @337
+    _ZN5gloox13DataFormFieldC1ERKSsS2_S2_NS0_9FieldTypeE @338
+    _ZN5gloox13DataFormFieldC2ENS0_9FieldTypeE @339
+    _ZN5gloox13DataFormFieldC2EPKNS_3TagE @340
+    _ZN5gloox13DataFormFieldC2ERKSsS2_S2_NS0_9FieldTypeE @341
+    _ZN5gloox13DataFormFieldD0Ev @342
+    _ZN5gloox13DataFormFieldD1Ev @343
+    _ZN5gloox13DataFormFieldD2Ev @344
+    _ZN5gloox13GLOOX_VERSIONE @345 DATA
+    _ZN5gloox13MessageFilter8attachToEPNS_14MessageSessionE @346
+    _ZN5gloox13MessageFilterC1EPNS_14MessageSessionE @347
+    _ZN5gloox13MessageFilterC2EPNS_14MessageSessionE @348
+    _ZN5gloox13MessageFilterD0Ev @349
+    _ZN5gloox13MessageFilterD1Ev @350
+    _ZN5gloox13MessageFilterD2Ev @351
+    _ZN5gloox13RosterManager10handleIqIDERKNS_2IQEi @352
+    _ZN5gloox13RosterManager11mergeRosterERKSt4listIPNS_14RosterItemDataESaIS3_EE @353
+    _ZN5gloox13RosterManager11synchronizeEv @354
+    _ZN5gloox13RosterManager11unsubscribeERKNS_3JIDERKSs @355
+    _ZN5gloox13RosterManager12setDelimiterERKSs @356
+    _ZN5gloox13RosterManager13getRosterItemERKNS_3JIDE @357
+    _ZN5gloox13RosterManager14handlePresenceERKNS_8PresenceE @358
+    _ZN5gloox13RosterManager16handlePrivateXMLEPKNS_3TagE @359
+    _ZN5gloox13RosterManager18handleSubscriptionERKNS_12SubscriptionE @360
+    _ZN5gloox13RosterManager20removeRosterListenerEv @361
+    _ZN5gloox13RosterManager22ackSubscriptionRequestERKNS_3JIDEb @362
+    _ZN5gloox13RosterManager22handlePrivateXMLResultERKSsNS_17PrivateXMLHandler16PrivateXMLResultE @363
+    _ZN5gloox13RosterManager22registerRosterListenerEPNS_14RosterListenerEb @364
+    _ZN5gloox13RosterManager3addERKNS_3JIDERKSsRKSt4listISsSaISsEE @365
+    _ZN5gloox13RosterManager4fillEv @366
+    _ZN5gloox13RosterManager6cancelERKNS_3JIDERKSs @367
+    _ZN5gloox13RosterManager6removeERKNS_3JIDE @368
+    _ZN5gloox13RosterManager6rosterEv @369
+    _ZN5gloox13RosterManager8handleIqERKNS_2IQE @370
+    _ZN5gloox13RosterManager9mergePushERKSt4listIPNS_14RosterItemDataESaIS3_EE @371
+    _ZN5gloox13RosterManager9subscribeERKNS_3JIDERKSsRKSt4listISsSaISsEES5_ @372
+    _ZN5gloox13RosterManagerC1EPNS_10ClientBaseE @373
+    _ZN5gloox13RosterManagerC2EPNS_10ClientBaseE @374
+    _ZN5gloox13RosterManagerD0Ev @375
+    _ZN5gloox13RosterManagerD1Ev @376
+    _ZN5gloox13RosterManagerD2Ev @377
+    _ZN5gloox13SearchHandlerD0Ev @378
+    _ZN5gloox13SearchHandlerD1Ev @379
+    _ZN5gloox13UniqueMUCRoom10handleIqIDERKNS_2IQEi @380
+    _ZN5gloox13UniqueMUCRoom4joinEv @381
+    _ZN5gloox13UniqueMUCRoomC1EPNS_10ClientBaseERKNS_3JIDEPNS_14MUCRoomHandlerE @382
+    _ZN5gloox13UniqueMUCRoomC2EPNS_10ClientBaseERKNS_3JIDEPNS_14MUCRoomHandlerE @383
+    _ZN5gloox13UniqueMUCRoomD0Ev @384
+    _ZN5gloox13UniqueMUCRoomD1Ev @385
+    _ZN5gloox13UniqueMUCRoomD2Ev @386
+    _ZN5gloox13XMLNS_CHATNEGE @387 DATA
+    _ZN5gloox13XMLNS_OFFLINEE @388 DATA
+    _ZN5gloox13XMLNS_PRIVACYE @389 DATA
+    _ZN5gloox13XMLNS_VERSIONE @390 DATA
+    _ZN5gloox13XMLNS_X_DELAYE @391 DATA
+    _ZN5gloox13XMLNS_X_EVENTE @392 DATA
+    _ZN5gloox14ConnectionBOSH10disconnectEv @393
+    _ZN5gloox14ConnectionBOSH11sendRequestERKSs @394
+    _ZN5gloox14ConnectionBOSH12getHTTPFieldERKSs @395
+    _ZN5gloox14ConnectionBOSH12initInstanceEPNS_14ConnectionBaseERKSsi @396
+    _ZN5gloox14ConnectionBOSH13getConnectionEv @397
+    _ZN5gloox14ConnectionBOSH13getStatisticsERlS1_ @398
+    _ZN5gloox14ConnectionBOSH13handleConnectEPKNS_14ConnectionBaseE @399
+    _ZN5gloox14ConnectionBOSH13putConnectionEv @400
+    _ZN5gloox14ConnectionBOSH16handleDisconnectEPKNS_14ConnectionBaseENS_15ConnectionErrorE @401
+    _ZN5gloox14ConnectionBOSH18activateConnectionEv @402
+    _ZN5gloox14ConnectionBOSH18handleReceivedDataEPKNS_14ConnectionBaseERKSs @403
+    _ZN5gloox14ConnectionBOSH4recvEi @404
+    _ZN5gloox14ConnectionBOSH4sendERKSs @405
+    _ZN5gloox14ConnectionBOSH7cleanupEv @406
+    _ZN5gloox14ConnectionBOSH7connectEv @407
+    _ZN5gloox14ConnectionBOSH7receiveEv @408
+    _ZN5gloox14ConnectionBOSH7sendXMLEv @409
+    _ZN5gloox14ConnectionBOSH9handleTagEPNS_3TagE @410
+    _ZN5gloox14ConnectionBOSHC1EPNS_14ConnectionBaseERKNS_7LogSinkERKSsS7_i @411
+    _ZN5gloox14ConnectionBOSHC1EPNS_21ConnectionDataHandlerEPNS_14ConnectionBaseERKNS_7LogSinkERKSsS9_i @412
+    _ZN5gloox14ConnectionBOSHC2EPNS_14ConnectionBaseERKNS_7LogSinkERKSsS7_i @413
+    _ZN5gloox14ConnectionBOSHC2EPNS_21ConnectionDataHandlerEPNS_14ConnectionBaseERKNS_7LogSinkERKSsS9_i @414
+    _ZN5gloox14ConnectionBOSHD0Ev @415
+    _ZN5gloox14ConnectionBOSHD1Ev @416
+    _ZN5gloox14ConnectionBOSHD2Ev @417
+    _ZN5gloox14ConnectionBase7cleanupEv @418
+    _ZN5gloox14ConnectionBase9setServerERKSsi @419
+    _ZN5gloox14ConnectionBaseC2EPNS_21ConnectionDataHandlerE @420
+    _ZN5gloox14ConnectionBaseD0Ev @421
+    _ZN5gloox14ConnectionBaseD1Ev @422
+    _ZN5gloox14ConnectionBaseD2Ev @423
+    _ZN5gloox14InstantMUCRoomC1EPNS_10ClientBaseERKNS_3JIDEPNS_14MUCRoomHandlerE @424
+    _ZN5gloox14InstantMUCRoomC2EPNS_10ClientBaseERKNS_3JIDEPNS_14MUCRoomHandlerE @425
+    _ZN5gloox14InstantMUCRoomD0Ev @426
+    _ZN5gloox14InstantMUCRoomD1Ev @427
+    _ZN5gloox14InstantMUCRoomD2Ev @428
+    _ZN5gloox14MUCRoomHandlerD0Ev @429
+    _ZN5gloox14MUCRoomHandlerD1Ev @430
+    _ZN5gloox14MessageHandlerD0Ev @431
+    _ZN5gloox14MessageHandlerD1Ev @432
+    _ZN5gloox14MessageHandlerD2Ev @433
+    _ZN5gloox14MessageSession11setResourceERKSs @434
+    _ZN5gloox14MessageSession13handleMessageERNS_7MessageE @435
+    _ZN5gloox14MessageSession13resetResourceEv @436
+    _ZN5gloox14MessageSession19removeMessageFilterEPNS_13MessageFilterE @437
+    _ZN5gloox14MessageSession20disposeMessageFilterEPNS_13MessageFilterE @438
+    _ZN5gloox14MessageSession21registerMessageFilterEPNS_13MessageFilterE @439
+    _ZN5gloox14MessageSession4sendERKNS_7MessageE @440
+    _ZN5gloox14MessageSession4sendERKSsS2_RKSt4listIPKNS_15StanzaExtensionESaIS6_EE @441
+    _ZN5gloox14MessageSession8decorateERNS_7MessageE @442
+    _ZN5gloox14MessageSessionC1EPNS_10ClientBaseERKNS_3JIDEbib @443
+    _ZN5gloox14MessageSessionC2EPNS_10ClientBaseERKNS_3JIDEbib @444
+    _ZN5gloox14MessageSessionD0Ev @445
+    _ZN5gloox14MessageSessionD1Ev @446
+    _ZN5gloox14MessageSessionD2Ev @447
+    _ZN5gloox14PrivacyManager10handleIqIDERKNS_2IQEi @448
+    _ZN5gloox14PrivacyManager5storeERKSsRKSt4listINS_11PrivacyItemESaIS4_EE @449
+    _ZN5gloox14PrivacyManager8handleIqERKNS_2IQE @450
+    _ZN5gloox14PrivacyManager9operationENS0_6IdTypeERKSs @451
+    _ZN5gloox14PrivacyManagerC1EPNS_10ClientBaseE @452
+    _ZN5gloox14PrivacyManagerC2EPNS_10ClientBaseE @453
+    _ZN5gloox14PrivacyManagerD0Ev @454
+    _ZN5gloox14PrivacyManagerD1Ev @455
+    _ZN5gloox14PrivacyManagerD2Ev @456
+    _ZN5gloox14RosterItemData15setSubscriptionERKSsS2_ @457
+    _ZN5gloox14RosterItemData7setNameERKSs @458
+    _ZN5gloox14RosterItemData9setGroupsERKSt4listISsSaISsEE @459
+    _ZN5gloox14RosterItemDataC1ERKSs @460
+    _ZN5gloox14RosterItemDataC1ERKSsS2_RKSt4listISsSaISsEE @461
+    _ZN5gloox14RosterItemDataD0Ev @462
+    _ZN5gloox14RosterItemDataD1Ev @463
+    _ZN5gloox14RosterListenerD0Ev @464
+    _ZN5gloox14RosterListenerD1Ev @465
+    _ZN5gloox14XMLNS_HTTPBINDE @466 DATA
+    _ZN5gloox14XMLNS_MUC_USERE @467 DATA
+    _ZN5gloox14XMLNS_NICKNAMEE @468 DATA
+    _ZN5gloox14XMLNS_RECEIPTSE @469 DATA
+    _ZN5gloox14XMLNS_REGISTERE @470 DATA
+    _ZN5gloox14XMLNS_XHTML_IME @471 DATA
+    _ZN5gloox15BookmarkHandlerD0Ev @472
+    _ZN5gloox15BookmarkHandlerD1Ev @473
+    _ZN5gloox15BookmarkStorage14storeBookmarksERKSt4listINS_16BookmarkListItemESaIS2_EERKS1_INS_18ConferenceListItemESaIS7_EE @474
+    _ZN5gloox15BookmarkStorage16handlePrivateXMLEPKNS_3TagE @475
+    _ZN5gloox15BookmarkStorage16requestBookmarksEv @476
+    _ZN5gloox15BookmarkStorage22handlePrivateXMLResultERKSsNS_17PrivateXMLHandler16PrivateXMLResultE @477
+    _ZN5gloox15BookmarkStorageC1EPNS_10ClientBaseE @478
+    _ZN5gloox15BookmarkStorageC2EPNS_10ClientBaseE @479
+    _ZN5gloox15BookmarkStorageD0Ev @480
+    _ZN5gloox15BookmarkStorageD1Ev @481
+    _ZN5gloox15BookmarkStorageD2Ev @482
+    _ZN5gloox15ChatStateFilter12setChatStateENS_13ChatStateTypeE @483
+    _ZN5gloox15ChatStateFilter6filterERNS_7MessageE @484
+    _ZN5gloox15ChatStateFilter8decorateERNS_7MessageE @485
+    _ZN5gloox15ChatStateFilterC1EPNS_14MessageSessionE @486
+    _ZN5gloox15ChatStateFilterC2EPNS_14MessageSessionE @487
+    _ZN5gloox15ChatStateFilterD0Ev @488
+    _ZN5gloox15ChatStateFilterD1Ev @489
+    _ZN5gloox15ChatStateFilterD2Ev @490
+    _ZN5gloox15CompressionBaseD0Ev @491
+    _ZN5gloox15CompressionBaseD1Ev @492
+    _ZN5gloox15DelayedDeliveryC1EPKNS_3TagE @493
+    _ZN5gloox15DelayedDeliveryC1ERKNS_3JIDESsRKSs @494
+    _ZN5gloox15DelayedDeliveryC2EPKNS_3TagE @495
+    _ZN5gloox15DelayedDeliveryC2ERKNS_3JIDESsRKSs @496
+    _ZN5gloox15DelayedDeliveryD0Ev @497
+    _ZN5gloox15DelayedDeliveryD1Ev @498
+    _ZN5gloox15DelayedDeliveryD2Ev @499
+    _ZN5gloox15FlexibleOffline10handleIqIDERKNS_2IQEi @500
+    _ZN5gloox15FlexibleOffline11getMsgCountEv @501
+    _ZN5gloox15FlexibleOffline12checkSupportEv @502
+    _ZN5gloox15FlexibleOffline12fetchHeadersEv @503
+    _ZN5gloox15FlexibleOffline15handleDiscoInfoERKNS_3JIDERKNS_5Disco4InfoEi @504
+    _ZN5gloox15FlexibleOffline16handleDiscoErrorERKNS_3JIDEPKNS_5ErrorEi @505
+    _ZN5gloox15FlexibleOffline16handleDiscoItemsERKNS_3JIDERKNS_5Disco5ItemsEi @506
+    _ZN5gloox15FlexibleOffline16messageOperationEiRKSt4listISsSaISsEE @507
+    _ZN5gloox15FlexibleOffline28removeFlexibleOfflineHandlerEv @508
+    _ZN5gloox15FlexibleOffline30registerFlexibleOfflineHandlerEPNS_22FlexibleOfflineHandlerE @509
+    _ZN5gloox15FlexibleOffline8handleIqERKNS_2IQE @510
+    _ZN5gloox15FlexibleOfflineC1EPNS_10ClientBaseE @511
+    _ZN5gloox15FlexibleOfflineC2EPNS_10ClientBaseE @512
+    _ZN5gloox15FlexibleOfflineD0Ev @513
+    _ZN5gloox15FlexibleOfflineD1Ev @514
+    _ZN5gloox15FlexibleOfflineD2Ev @515
+    _ZN5gloox15GLOOX_CAPS_NODEE @516 DATA
+    _ZN5gloox15PresenceHandlerD0Ev @517
+    _ZN5gloox15PresenceHandlerD1Ev @518
+    _ZN5gloox15PresenceHandlerD2Ev @519
+    _ZN5gloox15SoftwareVersionC1EPKNS_3TagE @520
+    _ZN5gloox15SoftwareVersionC1ERKSsS2_S2_ @521
+    _ZN5gloox15SoftwareVersionC2EPKNS_3TagE @522
+    _ZN5gloox15SoftwareVersionC2ERKSsS2_S2_ @523
+    _ZN5gloox15SoftwareVersionD0Ev @524
+    _ZN5gloox15SoftwareVersionD1Ev @525
+    _ZN5gloox15SoftwareVersionD2Ev @526
+    _ZN5gloox15StanzaExtensionC2Ei @527
+    _ZN5gloox15StanzaExtensionD0Ev @528
+    _ZN5gloox15StanzaExtensionD1Ev @529
+    _ZN5gloox15XMLNS_ATTENTIONE @530 DATA
+    _ZN5gloox15XMLNS_BOOKMARKSE @531 DATA
+    _ZN5gloox15XMLNS_MUC_ADMINE @532 DATA
+    _ZN5gloox15XMLNS_MUC_OWNERE @533 DATA
+    _ZN5gloox15XMLNS_MUC_ROOMSE @534 DATA
+    _ZN5gloox15XMLNS_XMPP_BOSHE @535 DATA
+    _ZN5gloox15XMLNS_XMPP_PINGE @536 DATA
+    _ZN5gloox16ChatStateHandlerD0Ev @537
+    _ZN5gloox16ChatStateHandlerD1Ev @538
+    _ZN5gloox16DataFormReportedC1EPNS_3TagE @539
+    _ZN5gloox16DataFormReportedC1Ev @540
+    _ZN5gloox16DataFormReportedC2EPNS_3TagE @541
+    _ZN5gloox16DataFormReportedC2Ev @542
+    _ZN5gloox16DataFormReportedD0Ev @543
+    _ZN5gloox16DataFormReportedD1Ev @544
+    _ZN5gloox16DataFormReportedD2Ev @545
+    _ZN5gloox16DiscoNodeHandlerD0Ev @546
+    _ZN5gloox16DiscoNodeHandlerD1Ev @547
+    _ZN5gloox16DiscoNodeHandlerD2Ev @548
+    _ZN5gloox16InBandBytestream10handleIqIDERKNS_2IQEi @549
+    _ZN5gloox16InBandBytestream11returnErrorERKNS_3JIDERKSsNS_15StanzaErrorTypeENS_11StanzaErrorE @550
+    _ZN5gloox16InBandBytestream12returnResultERKNS_3JIDERKSs @551
+    _ZN5gloox16InBandBytestream13handleMessageERKNS_7MessageEPNS_14MessageSessionE @552
+    _ZN5gloox16InBandBytestream4recvEi @553
+    _ZN5gloox16InBandBytestream4sendERKSs @554
+    _ZN5gloox16InBandBytestream5closeEv @555
+    _ZN5gloox16InBandBytestream6closedEv @556
+    _ZN5gloox16InBandBytestream7connectEv @557
+    _ZN5gloox16InBandBytestream8handleIqERKNS_2IQE @558
+    _ZN5gloox16InBandBytestreamC1EPNS_10ClientBaseERNS_7LogSinkERKNS_3JIDES7_RKSs @559
+    _ZN5gloox16InBandBytestreamC2EPNS_10ClientBaseERNS_7LogSinkERKNS_3JIDES7_RKSs @560
+    _ZN5gloox16InBandBytestreamD0Ev @561
+    _ZN5gloox16InBandBytestreamD1Ev @562
+    _ZN5gloox16InBandBytestreamD2Ev @563
+    _ZN5gloox16SIProfileHandlerD0Ev @564
+    _ZN5gloox16SIProfileHandlerD1Ev @565
+    _ZN5gloox16SIProfileHandlerD2Ev @566
+    _ZN5gloox16SOCKS5Bytestream13handleConnectEPKNS_14ConnectionBaseE @567
+    _ZN5gloox16SOCKS5Bytestream14setStreamHostsERKSt4listINS_10StreamHostESaIS2_EE @568
+    _ZN5gloox16SOCKS5Bytestream16handleDisconnectEPKNS_14ConnectionBaseENS_15ConnectionErrorE @569
+    _ZN5gloox16SOCKS5Bytestream17setConnectionImplEPNS_14ConnectionBaseE @570
+    _ZN5gloox16SOCKS5Bytestream18handleReceivedDataEPKNS_14ConnectionBaseERKSs @571
+    _ZN5gloox16SOCKS5Bytestream4recvEi @572
+    _ZN5gloox16SOCKS5Bytestream4sendERKSs @573
+    _ZN5gloox16SOCKS5Bytestream5closeEv @574
+    _ZN5gloox16SOCKS5Bytestream7connectEv @575
+    _ZN5gloox16SOCKS5Bytestream8activateEv @576
+    _ZN5gloox16SOCKS5BytestreamC1EPNS_23SOCKS5BytestreamManagerEPNS_14ConnectionBaseERNS_7LogSinkERKNS_3JIDES9_RKSs @577
+    _ZN5gloox16SOCKS5BytestreamC2EPNS_23SOCKS5BytestreamManagerEPNS_14ConnectionBaseERNS_7LogSinkERKNS_3JIDES9_RKSs @578
+    _ZN5gloox16SOCKS5BytestreamD0Ev @579
+    _ZN5gloox16SOCKS5BytestreamD1Ev @580
+    _ZN5gloox16SOCKS5BytestreamD2Ev @581
+    _ZN5gloox16XMLNS_DISCO_INFOE @582 DATA
+    _ZN5gloox16XMLNS_MUC_UNIQUEE @583 DATA
+    _ZN5gloox16XMLNS_STREAM_TLSE @584 DATA
+    _ZN5gloox16XMLNS_VCARD_TEMPE @585 DATA
+    _ZN5gloox17BytestreamHandlerD0Ev @586
+    _ZN5gloox17BytestreamHandlerD1Ev @587
+    _ZN5gloox17BytestreamHandlerD2Ev @588
+    _ZN5gloox17ConnectionHandlerD0Ev @589
+    _ZN5gloox17ConnectionHandlerD1Ev @590
+    _ZN5gloox17ConnectionHandlerD2Ev @591
+    _ZN5gloox17ConnectionTCPBase10disconnectEv @592
+    _ZN5gloox17ConnectionTCPBase13dataAvailableEi @593
+    _ZN5gloox17ConnectionTCPBase13getStatisticsERlS1_ @594
+    _ZN5gloox17ConnectionTCPBase4initERKSsi @595
+    _ZN5gloox17ConnectionTCPBase4sendERKSs @596
+    _ZN5gloox17ConnectionTCPBase7cleanupEv @597
+    _ZN5gloox17ConnectionTCPBase7receiveEv @598
+    _ZN5gloox17ConnectionTCPBase9setSocketEi @599
+    _ZN5gloox17ConnectionTCPBaseC1EPNS_21ConnectionDataHandlerERKNS_7LogSinkERKSsi @600
+    _ZN5gloox17ConnectionTCPBaseC1ERKNS_7LogSinkERKSsi @601
+    _ZN5gloox17ConnectionTCPBaseC2EPNS_21ConnectionDataHandlerERKNS_7LogSinkERKSsi @602
+    _ZN5gloox17ConnectionTCPBaseC2ERKNS_7LogSinkERKSsi @603
+    _ZN5gloox17ConnectionTCPBaseD0Ev @604
+    _ZN5gloox17ConnectionTCPBaseD1Ev @605
+    _ZN5gloox17ConnectionTCPBaseD2Ev @606
+    _ZN5gloox17MUCMessageSession10setSubjectERKSs @607
+    _ZN5gloox17MUCMessageSession13handleMessageERNS_7MessageE @608
+    _ZN5gloox17MUCMessageSession4sendERKSs @609
+    _ZN5gloox17MUCMessageSessionC1EPNS_10ClientBaseERKNS_3JIDE @610
+    _ZN5gloox17MUCMessageSessionC2EPNS_10ClientBaseERKNS_3JIDE @611
+    _ZN5gloox17MUCMessageSessionD0Ev @612
+    _ZN5gloox17MUCMessageSessionD1Ev @613
+    _ZN5gloox17MUCMessageSessionD2Ev @614
+    _ZN5gloox17PrivateXMLHandlerD0Ev @615
+    _ZN5gloox17PrivateXMLHandlerD1Ev @616
+    _ZN5gloox17PrivateXMLHandlerD2Ev @617
+    _ZN5gloox17StatisticsHandlerD0Ev @618
+    _ZN5gloox17StatisticsHandlerD1Ev @619
+    _ZN5gloox17XMLNS_ANNOTATIONSE @620 DATA
+    _ZN5gloox17XMLNS_BYTESTREAMSE @621 DATA
+    _ZN5gloox17XMLNS_CHAT_STATESE @622 DATA
+    _ZN5gloox17XMLNS_COMPRESSIONE @623 DATA
+    _ZN5gloox17XMLNS_DISCO_ITEMSE @624 DATA
+    _ZN5gloox17XMLNS_FEATURE_NEGE @625 DATA
+    _ZN5gloox17XMLNS_FT_FASTMODEE @626 DATA
+    _ZN5gloox17XMLNS_MUC_REQUESTE @627 DATA
+    _ZN5gloox17XMLNS_PRIVATE_XMLE @628 DATA
+    _ZN5gloox17XMLNS_STREAM_BINDE @629 DATA
+    _ZN5gloox17XMLNS_STREAM_SASLE @630 DATA
+    _ZN5gloox17XMLNS_XMPP_STREAME @631 DATA
+    _ZN5gloox17XMLNS_X_GPGSIGNEDE @632 DATA
+    _ZN5gloox18AnnotationsHandlerD0Ev @633
+    _ZN5gloox18AnnotationsHandlerD1Ev @634
+    _ZN5gloox18ConnectionListener13onStreamEventENS_11StreamEventE @635
+    _ZN5gloox18ConnectionListener14onResourceBindERKSs @636
+    _ZN5gloox18ConnectionListener19onResourceBindErrorEPKNS_5ErrorE @637
+    _ZN5gloox18ConnectionListener20onSessionCreateErrorEPKNS_5ErrorE @638
+    _ZN5gloox18ConnectionListenerD0Ev @639
+    _ZN5gloox18ConnectionListenerD1Ev @640
+    _ZN5gloox18MessageEventFilter17raiseMessageEventENS_16MessageEventTypeE @641
+    _ZN5gloox18MessageEventFilter25removeMessageEventHandlerEv @642
+    _ZN5gloox18MessageEventFilter27registerMessageEventHandlerEPNS_19MessageEventHandlerE @643
+    _ZN5gloox18MessageEventFilter6filterERNS_7MessageE @644
+    _ZN5gloox18MessageEventFilter8decorateERNS_7MessageE @645
+    _ZN5gloox18MessageEventFilterC1EPNS_14MessageSessionE @646
+    _ZN5gloox18MessageEventFilterC2EPNS_14MessageSessionE @647
+    _ZN5gloox18MessageEventFilterD0Ev @648
+    _ZN5gloox18MessageEventFilterD1Ev @649
+    _ZN5gloox18MessageEventFilterD2Ev @650
+    _ZN5gloox18PrivacyListHandlerD0Ev @651
+    _ZN5gloox18PrivacyListHandlerD1Ev @652
+    _ZN5gloox18SIProfileFTHandlerD0Ev @653
+    _ZN5gloox18SIProfileFTHandlerD1Ev @654
+    _ZN5gloox18XMLNS_MUC_ROOMINFOE @655 DATA
+    _ZN5gloox18XMLNS_PUBSUB_EVENTE @656 DATA
+    _ZN5gloox18XMLNS_PUBSUB_OWNERE @657 DATA
+    _ZN5gloox18XMLNS_XMPP_STANZASE @658 DATA
+    _ZN5gloox19ConnectionHTTPProxy10disconnectEv @659
+    _ZN5gloox19ConnectionHTTPProxy13getStatisticsERlS1_ @660
+    _ZN5gloox19ConnectionHTTPProxy13handleConnectEPKNS_14ConnectionBaseE @661
+    _ZN5gloox19ConnectionHTTPProxy16handleDisconnectEPKNS_14ConnectionBaseENS_15ConnectionErrorE @662
+    _ZN5gloox19ConnectionHTTPProxy17setConnectionImplEPNS_14ConnectionBaseE @663
+    _ZN5gloox19ConnectionHTTPProxy18handleReceivedDataEPKNS_14ConnectionBaseERKSs @664
+    _ZN5gloox19ConnectionHTTPProxy4recvEi @665
+    _ZN5gloox19ConnectionHTTPProxy4sendERKSs @666
+    _ZN5gloox19ConnectionHTTPProxy7cleanupEv @667
+    _ZN5gloox19ConnectionHTTPProxy7connectEv @668
+    _ZN5gloox19ConnectionHTTPProxy7receiveEv @669
+    _ZN5gloox19ConnectionHTTPProxyC1EPNS_14ConnectionBaseERKNS_7LogSinkERKSsi @670
+    _ZN5gloox19ConnectionHTTPProxyC1EPNS_21ConnectionDataHandlerEPNS_14ConnectionBaseERKNS_7LogSinkERKSsi @671
+    _ZN5gloox19ConnectionHTTPProxyC2EPNS_14ConnectionBaseERKNS_7LogSinkERKSsi @672
+    _ZN5gloox19ConnectionHTTPProxyC2EPNS_21ConnectionDataHandlerEPNS_14ConnectionBaseERKNS_7LogSinkERKSsi @673
+    _ZN5gloox19ConnectionHTTPProxyD0Ev @674
+    _ZN5gloox19ConnectionHTTPProxyD1Ev @675
+    _ZN5gloox19ConnectionHTTPProxyD2Ev @676
+    _ZN5gloox19ConnectionTCPClient4recvEi @677
+    _ZN5gloox19ConnectionTCPClient7connectEv @678
+    _ZN5gloox19ConnectionTCPClientC1EPNS_21ConnectionDataHandlerERKNS_7LogSinkERKSsi @679
+    _ZN5gloox19ConnectionTCPClientC1ERKNS_7LogSinkERKSsi @680
+    _ZN5gloox19ConnectionTCPClientC2EPNS_21ConnectionDataHandlerERKNS_7LogSinkERKSsi @681
+    _ZN5gloox19ConnectionTCPClientC2ERKNS_7LogSinkERKSsi @682
+    _ZN5gloox19ConnectionTCPClientD0Ev @683
+    _ZN5gloox19ConnectionTCPClientD1Ev @684
+    _ZN5gloox19ConnectionTCPClientD2Ev @685
+    _ZN5gloox19ConnectionTCPServer4recvEi @686
+    _ZN5gloox19ConnectionTCPServer7connectEv @687
+    _ZN5gloox19ConnectionTCPServerC1EPNS_17ConnectionHandlerERKNS_7LogSinkERKSsi @688
+    _ZN5gloox19ConnectionTCPServerC2EPNS_17ConnectionHandlerERKNS_7LogSinkERKSsi @689
+    _ZN5gloox19ConnectionTCPServerD0Ev @690
+    _ZN5gloox19ConnectionTCPServerD1Ev @691
+    _ZN5gloox19ConnectionTCPServerD2Ev @692
+    _ZN5gloox19LastActivityHandlerD0Ev @693
+    _ZN5gloox19LastActivityHandlerD1Ev @694
+    _ZN5gloox19MessageEventHandlerD0Ev @695
+    _ZN5gloox19MessageEventHandlerD1Ev @696
+    _ZN5gloox19RegistrationHandlerD0Ev @697
+    _ZN5gloox19RegistrationHandlerD1Ev @698
+    _ZN5gloox19SubscriptionHandlerD0Ev @699
+    _ZN5gloox19SubscriptionHandlerD1Ev @700
+    _ZN5gloox19SubscriptionHandlerD2Ev @701
+    _ZN5gloox19XMLNS_DISCO_PUBLISHE @702 DATA
+    _ZN5gloox19XMLNS_PUBSUB_ERRORSE @703 DATA
+    _ZN5gloox19XMLNS_STREAM_IQAUTHE @704 DATA
+    _ZN5gloox20AdhocCommandProvider24handleAdhocAccessRequestERKNS_3JIDERKSs @705
+    _ZN5gloox20AdhocCommandProviderD0Ev @706
+    _ZN5gloox20AdhocCommandProviderD1Ev @707
+    _ZN5gloox20MUCInvitationHandlerD0Ev @708
+    _ZN5gloox20MUCInvitationHandlerD1Ev @709
+    _ZN5gloox20MUCRoomConfigHandlerD0Ev @710
+    _ZN5gloox20MUCRoomConfigHandlerD1Ev @711
+    _ZN5gloox20XMLNS_ADHOC_COMMANDSE @712 DATA
+    _ZN5gloox20XMLNS_JINGLE_ICE_UDPE @713 DATA
+    _ZN5gloox20XMLNS_JINGLE_RAW_UDPE @714 DATA
+    _ZN5gloox20XMLNS_STREAM_SESSIONE @715 DATA
+    _ZN5gloox20XMLNS_X_GPGENCRYPTEDE @716 DATA
+    _ZN5gloox20XMLNS_X_VCARD_UPDATEE @717 DATA
+    _ZN5gloox21BytestreamDataHandlerD0Ev @718
+    _ZN5gloox21BytestreamDataHandlerD1Ev @719
+    _ZN5gloox21ConnectionDataHandlerD0Ev @720
+    _ZN5gloox21ConnectionDataHandlerD1Ev @721
+    _ZN5gloox21ConnectionDataHandlerD2Ev @722
+    _ZN5gloox21ConnectionSOCKS5Proxy10disconnectEv @723
+    _ZN5gloox21ConnectionSOCKS5Proxy13getStatisticsERlS1_ @724
+    _ZN5gloox21ConnectionSOCKS5Proxy13handleConnectEPKNS_14ConnectionBaseE @725
+    _ZN5gloox21ConnectionSOCKS5Proxy16handleDisconnectEPKNS_14ConnectionBaseENS_15ConnectionErrorE @726
+    _ZN5gloox21ConnectionSOCKS5Proxy17setConnectionImplEPNS_14ConnectionBaseE @727
+    _ZN5gloox21ConnectionSOCKS5Proxy18handleReceivedDataEPKNS_14ConnectionBaseERKSs @728
+    _ZN5gloox21ConnectionSOCKS5Proxy4recvEi @729
+    _ZN5gloox21ConnectionSOCKS5Proxy4sendERKSs @730
+    _ZN5gloox21ConnectionSOCKS5Proxy7cleanupEv @731
+    _ZN5gloox21ConnectionSOCKS5Proxy7connectEv @732
+    _ZN5gloox21ConnectionSOCKS5Proxy7receiveEv @733
+    _ZN5gloox21ConnectionSOCKS5Proxy9negotiateEv @734
+    _ZN5gloox21ConnectionSOCKS5ProxyC1EPNS_14ConnectionBaseERKNS_7LogSinkERKSsib @735
+    _ZN5gloox21ConnectionSOCKS5ProxyC1EPNS_21ConnectionDataHandlerEPNS_14ConnectionBaseERKNS_7LogSinkERKSsib @736
+    _ZN5gloox21ConnectionSOCKS5ProxyC2EPNS_14ConnectionBaseERKNS_7LogSinkERKSsib @737
+    _ZN5gloox21ConnectionSOCKS5ProxyC2EPNS_21ConnectionDataHandlerEPNS_14ConnectionBaseERKNS_7LogSinkERKSsib @738
+    _ZN5gloox21ConnectionSOCKS5ProxyD0Ev @739
+    _ZN5gloox21ConnectionSOCKS5ProxyD1Ev @740
+    _ZN5gloox21ConnectionSOCKS5ProxyD2Ev @741
+    _ZN5gloox21MessageSessionHandlerD0Ev @742
+    _ZN5gloox21MessageSessionHandlerD1Ev @743
+    _ZN5gloox21XMLNS_STREAM_COMPRESSE @744 DATA
+    _ZN5gloox22CompressionDataHandlerD0Ev @745
+    _ZN5gloox22CompressionDataHandlerD1Ev @746
+    _ZN5gloox22CompressionDataHandlerD2Ev @747
+    _ZN5gloox22DataFormFieldContainer8addFieldENS_13DataFormField9FieldTypeERKSsS4_S4_ @748
+    _ZN5gloox22DataFormFieldContainer8addFieldEPNS_13DataFormFieldE @749
+    _ZN5gloox22DataFormFieldContainer9setFieldsERSt4listIPNS_13DataFormFieldESaIS3_EE @750
+    _ZN5gloox22DataFormFieldContainerC1ERKS0_ @751
+    _ZN5gloox22DataFormFieldContainerC1Ev @752
+    _ZN5gloox22DataFormFieldContainerC2ERKS0_ @753
+    _ZN5gloox22DataFormFieldContainerC2Ev @754
+    _ZN5gloox22DataFormFieldContainerD0Ev @755
+    _ZN5gloox22DataFormFieldContainerD1Ev @756
+    _ZN5gloox22DataFormFieldContainerD2Ev @757
+    _ZN5gloox22FlexibleOfflineHandlerD0Ev @758
+    _ZN5gloox22FlexibleOfflineHandlerD1Ev @759
+    _ZN5gloox22SOCKS5BytestreamServer10removeHashERKSs @760
+    _ZN5gloox22SOCKS5BytestreamServer12registerHashERKSs @761
+    _ZN5gloox22SOCKS5BytestreamServer13getConnectionERKSs @762
+    _ZN5gloox22SOCKS5BytestreamServer13handleConnectEPKNS_14ConnectionBaseE @763
+    _ZN5gloox22SOCKS5BytestreamServer16handleDisconnectEPKNS_14ConnectionBaseENS_15ConnectionErrorE @764
+    _ZN5gloox22SOCKS5BytestreamServer18handleReceivedDataEPKNS_14ConnectionBaseERKSs @765
+    _ZN5gloox22SOCKS5BytestreamServer24handleIncomingConnectionEPNS_14ConnectionBaseES2_ @766
+    _ZN5gloox22SOCKS5BytestreamServer4recvEi @767
+    _ZN5gloox22SOCKS5BytestreamServer4stopEv @768
+    _ZN5gloox22SOCKS5BytestreamServer6listenEv @769
+    _ZN5gloox22SOCKS5BytestreamServerC1ERKNS_7LogSinkEiRKSs @770
+    _ZN5gloox22SOCKS5BytestreamServerC2ERKNS_7LogSinkEiRKSs @771
+    _ZN5gloox22SOCKS5BytestreamServerD0Ev @772
+    _ZN5gloox22SOCKS5BytestreamServerD1Ev @773
+    _ZN5gloox22SOCKS5BytestreamServerD2Ev @774
+    _ZN5gloox22XMLNS_COMPONENT_ACCEPTE @775 DATA
+    _ZN5gloox22XMLNS_JINGLE_AUDIO_RTPE @776 DATA
+    _ZN5gloox22XMLNS_JINGLE_VIDEO_RTPE @777 DATA
+    _ZN5gloox22XMLNS_ROSTER_DELIMITERE @778 DATA
+    _ZN5gloox23SOCKS5BytestreamManager10handleIqIDERKNS_2IQEi @779
+    _ZN5gloox23SOCKS5BytestreamManager10haveStreamERKNS_3JIDE @780
+    _ZN5gloox23SOCKS5BytestreamManager13addStreamHostERKNS_3JIDERKSsi @781
+    _ZN5gloox23SOCKS5BytestreamManager14setStreamHostsESt4listINS_10StreamHostESaIS2_EE @782
+    _ZN5gloox23SOCKS5BytestreamManager21acknowledgeStreamHostEbRKNS_3JIDERKSs @783
+    _ZN5gloox23SOCKS5BytestreamManager22acceptSOCKS5BytestreamERKSs @784
+    _ZN5gloox23SOCKS5BytestreamManager22rejectSOCKS5BytestreamERKNS_3JIDERKSsNS_11StanzaErrorE @785
+    _ZN5gloox23SOCKS5BytestreamManager22rejectSOCKS5BytestreamERKSsNS_11StanzaErrorE @786
+    _ZN5gloox23SOCKS5BytestreamManager23requestSOCKS5BytestreamERKNS_3JIDENS0_7S5BModeERKSsS3_ @787
+    _ZN5gloox23SOCKS5BytestreamManager7disposeEPNS_16SOCKS5BytestreamE @788
+    _ZN5gloox23SOCKS5BytestreamManager8handleIqERKNS_2IQE @789
+    _ZN5gloox23SOCKS5BytestreamManager9findProxyERKNS_3JIDERKSsS5_ @790
+    _ZN5gloox23SOCKS5BytestreamManagerC1EPNS_10ClientBaseEPNS_17BytestreamHandlerE @791
+    _ZN5gloox23SOCKS5BytestreamManagerC2EPNS_10ClientBaseEPNS_17BytestreamHandlerE @792
+    _ZN5gloox23SOCKS5BytestreamManagerD0Ev @793
+    _ZN5gloox23SOCKS5BytestreamManagerD1Ev @794
+    _ZN5gloox23SOCKS5BytestreamManagerD2Ev @795
+    _ZN5gloox23XMLNS_COMPONENT_CONNECTE @796 DATA
+    _ZN5gloox23XMLNS_STREAM_IQREGISTERE @797 DATA
+    _ZN5gloox25XMPP_STREAM_VERSION_MAJORE @798 DATA
+    _ZN5gloox25XMPP_STREAM_VERSION_MINORE @799 DATA
+    _ZN5gloox2IQ5setIDERKSs @800
+    _ZN5gloox2IQC1ENS0_6IqTypeERKNS_3JIDERKSs @801
+    _ZN5gloox2IQC1EPNS_3TagE @802
+    _ZN5gloox2IQC2ENS0_6IqTypeERKNS_3JIDERKSs @803
+    _ZN5gloox2IQC2EPNS_3TagE @804
+    _ZN5gloox2IQD0Ev @805
+    _ZN5gloox2IQD1Ev @806
+    _ZN5gloox2IQD2Ev @807
+    _ZN5gloox3AMP4RuleC1ENS0_11DeliverTypeENS0_10ActionTypeE @808
+    _ZN5gloox3AMP4RuleC1ENS0_17MatchResourceTypeENS0_10ActionTypeE @809
+    _ZN5gloox3AMP4RuleC1ERKSsNS0_10ActionTypeE @810
+    _ZN5gloox3AMP4RuleC1ERKSsS3_S3_ @811
+    _ZN5gloox3AMP4RuleC2ENS0_11DeliverTypeENS0_10ActionTypeE @812
+    _ZN5gloox3AMP4RuleC2ENS0_17MatchResourceTypeENS0_10ActionTypeE @813
+    _ZN5gloox3AMP4RuleC2ERKSsNS0_10ActionTypeE @814
+    _ZN5gloox3AMP4RuleC2ERKSsS3_S3_ @815
+    _ZN5gloox3AMP4RuleD1Ev @816
+    _ZN5gloox3AMP4RuleD2Ev @817
+    _ZN5gloox3AMP7addRuleEPKNS0_4RuleE @818
+    _ZN5gloox3AMPC1EPKNS_3TagE @819
+    _ZN5gloox3AMPC1Eb @820
+    _ZN5gloox3AMPC2EPKNS_3TagE @821
+    _ZN5gloox3AMPC2Eb @822
+    _ZN5gloox3AMPD0Ev @823
+    _ZN5gloox3AMPD1Ev @824
+    _ZN5gloox3AMPD2Ev @825
+    _ZN5gloox3DNS11closeSocketEiRKNS_7LogSinkE @826
+    _ZN5gloox3DNS14defaultHostMapERKSsRKNS_7LogSinkE @827
+    _ZN5gloox3DNS7cleanupERKNS_7LogSinkE @828
+    _ZN5gloox3DNS7connectERKSsRKNS_7LogSinkE @829
+    _ZN5gloox3DNS7connectERKSsiRKNS_7LogSinkE @830
+    _ZN5gloox3DNS7resolveERKSsRKNS_7LogSinkE @831
+    _ZN5gloox3DNS7resolveERKSsS2_S2_RKNS_7LogSinkE @832
+    _ZN5gloox3DNS9getSocketERKNS_7LogSinkE @833
+    _ZN5gloox3DNS9getSocketEiiiRKNS_7LogSinkE @834
+    _ZN5gloox3JID10escapeNodeERKSs @835
+    _ZN5gloox3JID10setStringsEv @836
+    _ZN5gloox3JID11setResourceERKSs @837
+    _ZN5gloox3JID11setUsernameERKSs @838
+    _ZN5gloox3JID12unescapeNodeERKSs @839
+    _ZN5gloox3JID6setJIDERKSs @840
+    _ZN5gloox3JID7setBareEv @841
+    _ZN5gloox3JID7setFullEv @842
+    _ZN5gloox3JID9setServerERKSs @843
+    _ZN5gloox3JIDC1ERKSs @844
+    _ZN5gloox3JIDC1Ev @845
+    _ZN5gloox3JIDD1Ev @846
+    _ZN5gloox3MD53hexEv @847
+    _ZN5gloox3MD53padE @848 DATA
+    _ZN5gloox3MD54feedEPKhi @849
+    _ZN5gloox3MD54feedERKSs @850
+    _ZN5gloox3MD54initEv @851
+    _ZN5gloox3MD55resetEv @852
+    _ZN5gloox3MD56binaryEv @853
+    _ZN5gloox3MD57processEPKh @854
+    _ZN5gloox3MD58finalizeEv @855
+    _ZN5gloox3MD5C1Ev @856
+    _ZN5gloox3MD5C2Ev @857
+    _ZN5gloox3MD5D0Ev @858
+    _ZN5gloox3MD5D1Ev @859
+    _ZN5gloox3MD5D2Ev @860
+    _ZN5gloox3OOBC1EPKNS_3TagE @861
+    _ZN5gloox3OOBC1ERKSsS2_b @862
+    _ZN5gloox3OOBC2EPKNS_3TagE @863
+    _ZN5gloox3OOBC2ERKSsS2_b @864
+    _ZN5gloox3OOBD0Ev @865
+    _ZN5gloox3OOBD1Ev @866
+    _ZN5gloox3OOBD2Ev @867
+    _ZN5gloox3SHA3hexEv @868
+    _ZN5gloox3SHA3padEv @869
+    _ZN5gloox3SHA4feedEPKhj @870
+    _ZN5gloox3SHA4feedERKSs @871
+    _ZN5gloox3SHA4initEv @872
+    _ZN5gloox3SHA5resetEv @873
+    _ZN5gloox3SHA6binaryEv @874
+    _ZN5gloox3SHA7processEv @875
+    _ZN5gloox3SHA8finalizeEv @876
+    _ZN5gloox3SHAC1Ev @877
+    _ZN5gloox3SHAC2Ev @878
+    _ZN5gloox3SHAD0Ev @879
+    _ZN5gloox3SHAD1Ev @880
+    _ZN5gloox3SHAD2Ev @881
+    _ZN5gloox3Tag11removeChildEPS0_ @882
+    _ZN5gloox3Tag11removeChildERKSsS2_ @883
+    _ZN5gloox3Tag12addAttributeEPNS0_9AttributeE @884
+    _ZN5gloox3Tag12addAttributeERKSsS2_ @885
+    _ZN5gloox3Tag12addAttributeERKSsi @886
+    _ZN5gloox3Tag12addAttributeERKSsl @887
+    _ZN5gloox3Tag12addChildCopyEPKS0_ @888
+    _ZN5gloox3Tag12isWhitespaceEc @889
+    _ZN5gloox3Tag13setAttributesERKSt4listIPNS0_9AttributeESaIS3_EE @890
+    _ZN5gloox3Tag15removeAttributeERKSsS2_S2_ @891
+    _ZN5gloox3Tag3addERSt4listIPKS0_SaIS3_EERKS5_ @892
+    _ZN5gloox3Tag7getTypeERKSs @893
+    _ZN5gloox3Tag8addCDataERKSs @894
+    _ZN5gloox3Tag8addChildEPS0_ @895
+    _ZN5gloox3Tag8setCDataERKSs @896
+    _ZN5gloox3Tag8setXmlnsERKSsS2_ @897
+    _ZN5gloox3Tag9Attribute4initERKSsS3_S3_ @898
+    _ZN5gloox3Tag9Attribute8setValueERKSs @899
+    _ZN5gloox3Tag9Attribute8setXmlnsERKSs @900
+    _ZN5gloox3Tag9Attribute9setPrefixERKSs @901
+    _ZN5gloox3Tag9AttributeC1EPS0_RKSsS4_S4_ @902
+    _ZN5gloox3Tag9AttributeC1ERKS1_ @903
+    _ZN5gloox3Tag9AttributeC1ERKSsS3_S3_ @904
+    _ZN5gloox3Tag9AttributeC2EPS0_RKSsS4_S4_ @905
+    _ZN5gloox3Tag9AttributeC2ERKS1_ @906
+    _ZN5gloox3Tag9AttributeC2ERKSsS3_S3_ @907
+    _ZN5gloox3Tag9AttributeD0Ev @908
+    _ZN5gloox3Tag9AttributeD1Ev @909
+    _ZN5gloox3Tag9setPrefixERKSs @910
+    _ZN5gloox3TagC1EPS0_ @911
+    _ZN5gloox3TagC1EPS0_RKSsS3_ @912
+    _ZN5gloox3TagC1EPS0_RKSsS3_S3_ @913
+    _ZN5gloox3TagC1ERKSsS2_ @914
+    _ZN5gloox3TagC1ERKSsS2_S2_ @915
+    _ZN5gloox3TagC2EPS0_ @916
+    _ZN5gloox3TagC2EPS0_RKSsS3_ @917
+    _ZN5gloox3TagC2EPS0_RKSsS3_S3_ @918
+    _ZN5gloox3TagC2ERKSsS2_ @919
+    _ZN5gloox3TagC2ERKSsS2_S2_ @920
+    _ZN5gloox3TagD0Ev @921
+    _ZN5gloox3TagD1Ev @922
+    _ZN5gloox3TagD2Ev @923
+    _ZN5gloox4SHIMC1EPKNS_3TagE @924
+    _ZN5gloox4SHIMC1ERKSt3mapISsSsSt4lessISsESaISt4pairIKSsSsEEE @925
+    _ZN5gloox4SHIMC2EPKNS_3TagE @926
+    _ZN5gloox4SHIMC2ERKSt3mapISsSsSt4lessISsESaISt4pairIKSsSsEEE @927
+    _ZN5gloox4SHIMD0Ev @928
+    _ZN5gloox4SHIMD1Ev @929
+    _ZN5gloox4SHIMD2Ev @930
+    _ZN5gloox4TYPEE @931 DATA
+    _ZN5gloox4util10MutexGuardC1EPNS0_5MutexE @932
+    _ZN5gloox4util10MutexGuardC1ERNS0_5MutexE @933
+    _ZN5gloox4util10MutexGuardD1Ev @934
+    _ZN5gloox4util10replaceAllERSsRKSsS3_ @935
+    _ZN5gloox4util12internalLog2Ej @936
+    _ZN5gloox4util18checkValidXMLCharsERKSs @937
+    _ZN5gloox4util5Mutex4lockEv @938
+    _ZN5gloox4util5Mutex6unlockEv @939
+    _ZN5gloox4util5Mutex7trylockEv @940
+    _ZN5gloox4util5MutexC1Ev @941
+    _ZN5gloox4util5MutexC2Ev @942
+    _ZN5gloox4util5MutexD1Ev @943
+    _ZN5gloox4util5MutexD2Ev @944
+    _ZN5gloox4util6escapeESs @945
+    _ZN5gloox4util7_lookupERKSsPPKcji @946
+    _ZN5gloox4util7_lookupEjPPKcjRKSs @947
+    _ZN5gloox4util8_lookup2ERKSsPPKcji @948
+    _ZN5gloox4util8_lookup2EjPPKcjRKSs @949
+    _ZN5gloox5Adhoc10handleIqIDERKNS_2IQEi @950
+    _ZN5gloox5Adhoc11getCommandsERKNS_3JIDEPNS_12AdhocHandlerE @951
+    _ZN5gloox5Adhoc12checkSupportERKNS_3JIDEPNS_12AdhocHandlerE @952
+    _ZN5gloox5Adhoc15handleDiscoInfoERKNS_3JIDERKNS_5Disco4InfoEi @953
+    _ZN5gloox5Adhoc16handleDiscoErrorERKNS_3JIDEPKNS_5ErrorEi @954
+    _ZN5gloox5Adhoc16handleDiscoItemsERKNS_3JIDERKNS_5Disco5ItemsEi @955
+    _ZN5gloox5Adhoc20handleDiscoNodeItemsERKNS_3JIDES3_RKSs @956
+    _ZN5gloox5Adhoc23handleDiscoNodeFeaturesERKNS_3JIDERKSs @957
+    _ZN5gloox5Adhoc25handleDiscoNodeIdentitiesERKNS_3JIDERKSs @958
+    _ZN5gloox5Adhoc26removeAdhocCommandProviderERKSs @959
+    _ZN5gloox5Adhoc28registerAdhocCommandProviderEPNS_20AdhocCommandProviderERKSsS4_ @960
+    _ZN5gloox5Adhoc7Command4NoteC1EPKNS_3TagE @961
+    _ZN5gloox5Adhoc7Command4NoteC2EPKNS_3TagE @962
+    _ZN5gloox5Adhoc7Command4NoteD1Ev @963
+    _ZN5gloox5Adhoc7CommandC1EPKNS_3TagE @964
+    _ZN5gloox5Adhoc7CommandC1ERKSsNS1_6ActionEPNS_8DataFormE @965
+    _ZN5gloox5Adhoc7CommandC1ERKSsS3_NS1_6ActionEPNS_8DataFormE @966
+    _ZN5gloox5Adhoc7CommandC1ERKSsS3_NS1_6StatusENS1_6ActionEiPNS_8DataFormE @967
+    _ZN5gloox5Adhoc7CommandC1ERKSsS3_NS1_6StatusEPNS_8DataFormE @968
+    _ZN5gloox5Adhoc7CommandC2EPKNS_3TagE @969
+    _ZN5gloox5Adhoc7CommandC2ERKSsNS1_6ActionEPNS_8DataFormE @970
+    _ZN5gloox5Adhoc7CommandC2ERKSsS3_NS1_6ActionEPNS_8DataFormE @971
+    _ZN5gloox5Adhoc7CommandC2ERKSsS3_NS1_6StatusENS1_6ActionEiPNS_8DataFormE @972
+    _ZN5gloox5Adhoc7CommandC2ERKSsS3_NS1_6StatusEPNS_8DataFormE @973
+    _ZN5gloox5Adhoc7CommandD0Ev @974
+    _ZN5gloox5Adhoc7CommandD1Ev @975
+    _ZN5gloox5Adhoc7CommandD2Ev @976
+    _ZN5gloox5Adhoc7executeERKNS_3JIDEPKNS0_7CommandEPNS_12AdhocHandlerE @977
+    _ZN5gloox5Adhoc7respondERKNS_3JIDEPKNS0_7CommandEPKNS_5ErrorE @978
+    _ZN5gloox5Adhoc8handleIqERKNS_2IQE @979
+    _ZN5gloox5AdhocC1EPNS_10ClientBaseE @980
+    _ZN5gloox5AdhocC2EPNS_10ClientBaseE @981
+    _ZN5gloox5AdhocD0Ev @982
+    _ZN5gloox5AdhocD1Ev @983
+    _ZN5gloox5AdhocD2Ev @984
+    _ZN5gloox5Disco10addFeatureERKSs @985
+    _ZN5gloox5Disco10handleIqIDERKNS_2IQEi @986
+    _ZN5gloox5Disco10setVersionERKSsS2_S2_ @987
+    _ZN5gloox5Disco11addIdentityERKSsS2_S2_ @988
+    _ZN5gloox5Disco11setIdentityERKSsS2_S2_ @989
+    _ZN5gloox5Disco12getDiscoInfoERKNS_3JIDERKSsPNS_12DiscoHandlerEiS5_ @990
+    _ZN5gloox5Disco13getDiscoItemsERKNS_3JIDERKSsPNS_12DiscoHandlerEiS5_ @991
+    _ZN5gloox5Disco13removeFeatureERKSs @992
+    _ZN5gloox5Disco17removeNodeHandlerEPNS_16DiscoNodeHandlerERKSs @993
+    _ZN5gloox5Disco18removeDiscoHandlerEPNS_12DiscoHandlerE @994
+    _ZN5gloox5Disco18removeNodeHandlersEPNS_16DiscoNodeHandlerE @995
+    _ZN5gloox5Disco19registerNodeHandlerEPNS_16DiscoNodeHandlerERKSs @996
+    _ZN5gloox5Disco4Info11setFeaturesERKSt4listISsSaISsEE @997
+    _ZN5gloox5Disco4Info13setIdentitiesERKSt4listIPNS0_8IdentityESaIS4_EE @998
+    _ZN5gloox5Disco4Info7setFormEPNS_8DataFormE @999
+    _ZN5gloox5Disco4Info7setNodeERKSs @1000
+    _ZN5gloox5Disco4InfoC1EPKNS_3TagE @1001
+    _ZN5gloox5Disco4InfoC1ERKS1_ @1002
+    _ZN5gloox5Disco4InfoC1ERKSsb @1003
+    _ZN5gloox5Disco4InfoC2EPKNS_3TagE @1004
+    _ZN5gloox5Disco4InfoC2ERKS1_ @1005
+    _ZN5gloox5Disco4InfoC2ERKSsb @1006
+    _ZN5gloox5Disco4InfoD0Ev @1007
+    _ZN5gloox5Disco4InfoD1Ev @1008
+    _ZN5gloox5Disco4InfoD2Ev @1009
+    _ZN5gloox5Disco4ItemC1EPKNS_3TagE @1010
+    _ZN5gloox5Disco4ItemC1ERKNS_3JIDERKSsS6_ @1011
+    _ZN5gloox5Disco4ItemC2EPKNS_3TagE @1012
+    _ZN5gloox5Disco4ItemD1Ev @1013
+    _ZN5gloox5Disco5Items8setItemsERKSt4listIPNS0_4ItemESaIS4_EE @1014
+    _ZN5gloox5Disco5ItemsC1EPKNS_3TagE @1015
+    _ZN5gloox5Disco5ItemsC1ERKSs @1016
+    _ZN5gloox5Disco5ItemsC2EPKNS_3TagE @1017
+    _ZN5gloox5Disco5ItemsC2ERKSs @1018
+    _ZN5gloox5Disco5ItemsD0Ev @1019
+    _ZN5gloox5Disco5ItemsD1Ev @1020
+    _ZN5gloox5Disco5ItemsD2Ev @1021
+    _ZN5gloox5Disco7setFormEPNS_8DataFormE @1022
+    _ZN5gloox5Disco8IdentityC1EPKNS_3TagE @1023
+    _ZN5gloox5Disco8IdentityC1ERKS1_ @1024
+    _ZN5gloox5Disco8IdentityC1ERKSsS3_S3_ @1025
+    _ZN5gloox5Disco8IdentityC2EPKNS_3TagE @1026
+    _ZN5gloox5Disco8IdentityC2ERKS1_ @1027
+    _ZN5gloox5Disco8IdentityC2ERKSsS3_S3_ @1028
+    _ZN5gloox5Disco8IdentityD1Ev @1029
+    _ZN5gloox5Disco8IdentityD2Ev @1030
+    _ZN5gloox5Disco8getDiscoERKNS_3JIDERKSsPNS_12DiscoHandlerEiNS0_6IdTypeES5_ @1031
+    _ZN5gloox5Disco8handleIqERKNS_2IQE @1032
+    _ZN5gloox5DiscoC1EPNS_10ClientBaseE @1033
+    _ZN5gloox5DiscoC2EPNS_10ClientBaseE @1034
+    _ZN5gloox5DiscoD0Ev @1035
+    _ZN5gloox5DiscoD1Ev @1036
+    _ZN5gloox5DiscoD2Ev @1037
+    _ZN5gloox5ErrorC1ENS_15StanzaErrorTypeENS_11StanzaErrorEPNS_3TagE @1038
+    _ZN5gloox5ErrorC1EPKNS_3TagE @1039
+    _ZN5gloox5ErrorC1ERKS0_ @1040
+    _ZN5gloox5ErrorC2EPKNS_3TagE @1041
+    _ZN5gloox5ErrorC2ERKS0_ @1042
+    _ZN5gloox5ErrorD0Ev @1043
+    _ZN5gloox5ErrorD1Ev @1044
+    _ZN5gloox5ErrorD2Ev @1045
+    _ZN5gloox5VCard10addAddressERKSsS2_S2_S2_S2_S2_S2_i @1046
+    _ZN5gloox5VCard10checkFieldEPKNS_3TagEPKcRSs @1047
+    _ZN5gloox5VCard11insertFieldEPNS_3TagEPKcRKSs @1048
+    _ZN5gloox5VCard11insertFieldEPNS_3TagEPKcb @1049
+    _ZN5gloox5VCard12addTelephoneERKSsi @1050
+    _ZN5gloox5VCard15setOrganizationERKSsRKSt4listISsSaISsEE @1051
+    _ZN5gloox5VCard6setGeoERKSsS2_ @1052
+    _ZN5gloox5VCard7setLogoERKSs @1053
+    _ZN5gloox5VCard7setLogoERKSsS2_ @1054
+    _ZN5gloox5VCard7setNameERKSsS2_S2_S2_S2_ @1055
+    _ZN5gloox5VCard8addEmailERKSsi @1056
+    _ZN5gloox5VCard8addLabelERKSt4listISsSaISsEEi @1057
+    _ZN5gloox5VCard8setPhotoERKSs @1058
+    _ZN5gloox5VCard8setPhotoERKSsS2_ @1059
+    _ZN5gloox5VCardC1EPKNS_3TagE @1060
+    _ZN5gloox5VCardC1Ev @1061
+    _ZN5gloox5VCardC2EPKNS_3TagE @1062
+    _ZN5gloox5VCardC2Ev @1063
+    _ZN5gloox5VCardD0Ev @1064
+    _ZN5gloox5VCardD1Ev @1065
+    _ZN5gloox5XMLNSE @1066 DATA
+    _ZN5gloox6Base648decode64ERKSs @1067
+    _ZN5gloox6Base648encode64ERKSs @1068
+    _ZN5gloox6Client10disconnectENS_15ConnectionErrorE @1069
+    _ZN5gloox6Client10disconnectEv @1070
+    _ZN5gloox6Client11setPresenceENS_8Presence12PresenceTypeEiRKSs @1071
+    _ZN5gloox6Client11setPresenceERKNS_3JIDENS_8Presence12PresenceTypeEiRKSs @1072
+    _ZN5gloox6Client11setUsernameERKSs @1073
+    _ZN5gloox6Client12bindResourceERKSs @1074
+    _ZN5gloox6Client12getSaslMechsEPNS_3TagE @1075
+    _ZN5gloox6Client12nonSaslLoginEv @1076
+    _ZN5gloox6Client12rosterFilledEv @1077
+    _ZN5gloox6Client12sendPresenceERNS_8PresenceE @1078
+    _ZN5gloox6Client13bindOperationERKSsb @1079
+    _ZN5gloox6Client13createSessionEv @1080
+    _ZN5gloox6Client13disableRosterEv @1081
+    _ZN5gloox6Client14selectResourceERKSs @1082
+    _ZN5gloox6Client15handleStartNodeEv @1083
+    _ZN5gloox6Client16handleNormalNodeEPNS_3TagE @1084
+    _ZN5gloox6Client17getStreamFeaturesEPNS_3TagE @1085
+    _ZN5gloox6Client17handleIqIDForwardERKNS_2IQEi @1086
+    _ZN5gloox6Client19processResourceBindERKNS_2IQE @1087
+    _ZN5gloox6Client20negotiateCompressionENS_13StreamFeatureE @1088
+    _ZN5gloox6Client20processCreateSessionERKNS_2IQE @1089
+    _ZN5gloox6Client21getCompressionMethodsEPNS_3TagE @1090
+    _ZN5gloox6Client4initEv @1091
+    _ZN5gloox6Client5loginEv @1092
+    _ZN5gloox6Client7cleanupEv @1093
+    _ZN5gloox6Client9connectedEv @1094
+    _ZN5gloox6ClientC1ERKNS_3JIDERKSsi @1095
+    _ZN5gloox6ClientC1ERKSs @1096
+    _ZN5gloox6ClientC2ERKNS_3JIDERKSsi @1097
+    _ZN5gloox6ClientC2ERKSs @1098
+    _ZN5gloox6ClientD0Ev @1099
+    _ZN5gloox6ClientD1Ev @1100
+    _ZN5gloox6ClientD2Ev @1101
+    _ZN5gloox6Parser11forwardScanERjRKSsS3_ @1102
+    _ZN5gloox6Parser11streamEventEPNS_3TagE @1103
+    _ZN5gloox6Parser12addAttributeEv @1104
+    _ZN5gloox6Parser12isWhitespaceEh @1105
+    _ZN5gloox6Parser4feedERSs @1106
+    _ZN5gloox6Parser6addTagEv @1107
+    _ZN5gloox6Parser6decodeERjRKSs @1108
+    _ZN5gloox6Parser7cleanupEb @1109
+    _ZN5gloox6Parser7isValidEh @1110
+    _ZN5gloox6Parser8addCDataEv @1111
+    _ZN5gloox6Parser8closeTagEv @1112
+    _ZN5gloox6ParserC1EPNS_10TagHandlerEb @1113
+    _ZN5gloox6ParserC2EPNS_10TagHandlerEb @1114
+    _ZN5gloox6ParserD0Ev @1115
+    _ZN5gloox6ParserD1Ev @1116
+    _ZN5gloox6ParserD2Ev @1117
+    _ZN5gloox6PubSub13ResultHandlerD0Ev @1118
+    _ZN5gloox6PubSub13ResultHandlerD1Ev @1119
+    _ZN5gloox6PubSub4ItemC1EPKNS_3TagE @1120
+    _ZN5gloox6PubSub4ItemC1ERKS1_ @1121
+    _ZN5gloox6PubSub4ItemC1Ev @1122
+    _ZN5gloox6PubSub4ItemC2EPKNS_3TagE @1123
+    _ZN5gloox6PubSub4ItemC2ERKS1_ @1124
+    _ZN5gloox6PubSub4ItemC2Ev @1125
+    _ZN5gloox6PubSub4ItemD1Ev @1126
+    _ZN5gloox6PubSub4ItemD2Ev @1127
+    _ZN5gloox6PubSub5Event7addItemEPNS1_13ItemOperationE @1128
+    _ZN5gloox6PubSub5EventC1EPKNS_3TagE @1129
+    _ZN5gloox6PubSub5EventC1ERKSsNS0_9EventTypeE @1130
+    _ZN5gloox6PubSub5EventC2EPKNS_3TagE @1131
+    _ZN5gloox6PubSub5EventC2ERKSsNS0_9EventTypeE @1132
+    _ZN5gloox6PubSub5EventD0Ev @1133
+    _ZN5gloox6PubSub5EventD1Ev @1134
+    _ZN5gloox6PubSub5EventD2Ev @1135
+    _ZN5gloox6PubSub7Manager10createNodeERKNS_3JIDERKSsPNS_8DataFormEPNS0_13ResultHandlerE @1136
+    _ZN5gloox6PubSub7Manager10deleteItemERKNS_3JIDERKSsRKSt4listIPNS0_4ItemESaIS9_EEbPNS0_13ResultHandlerE @1137
+    _ZN5gloox6PubSub7Manager10deleteNodeERKNS_3JIDERKSsPNS0_13ResultHandlerE @1138
+    _ZN5gloox6PubSub7Manager10handleIqIDERKNS_2IQEi @1139
+    _ZN5gloox6PubSub7Manager10nodeConfigERKNS_3JIDERKSsPNS_8DataFormEPNS0_13ResultHandlerE @1140
+    _ZN5gloox6PubSub7Manager11publishItemERKNS_3JIDERKSsRSt4listIPNS0_4ItemESaIS9_EEPNS_8DataFormEPNS0_13ResultHandlerE @1141
+    _ZN5gloox6PubSub7Manager11unsubscribeERKNS_3JIDERKSsS6_PNS0_13ResultHandlerES4_ @1142
+    _ZN5gloox6PubSub7Manager12requestItemsERKNS_3JIDERKSsS6_RKSt4listIPNS0_4ItemESaIS9_EEPNS0_13ResultHandlerE @1143
+    _ZN5gloox6PubSub7Manager12requestItemsERKNS_3JIDERKSsS6_iPNS0_13ResultHandlerE @1144
+    _ZN5gloox6PubSub7Manager13affiliateListENS1_12TrackContextERKNS_3JIDERKSsRKSt4listINS0_9AffiliateESaIS9_EEPNS0_13ResultHandlerE @1145
+    _ZN5gloox6PubSub7Manager14subscriberListENS1_12TrackContextERKNS_3JIDERKSsRKSt4listINS0_10SubscriberESaIS9_EEPNS0_13ResultHandlerE @1146
+    _ZN5gloox6PubSub7Manager19subscriptionOptionsENS1_12TrackContextERKNS_3JIDES5_RKSsPNS0_13ResultHandlerEPNS_8DataFormE @1147
+    _ZN5gloox6PubSub7Manager20getDefaultNodeConfigERKNS_3JIDENS0_8NodeTypeEPNS0_13ResultHandlerE @1148
+    _ZN5gloox6PubSub7Manager30getSubscriptionsOrAffiliationsERKNS_3JIDEPNS0_13ResultHandlerENS1_12TrackContextE @1149
+    _ZN5gloox6PubSub7Manager8handleIqERKNS_2IQE @1150
+    _ZN5gloox6PubSub7Manager8removeIDERKSs @1151
+    _ZN5gloox6PubSub7Manager9purgeNodeERKNS_3JIDERKSsPNS0_13ResultHandlerE @1152
+    _ZN5gloox6PubSub7Manager9subscribeERKNS_3JIDERKSsPNS0_13ResultHandlerES4_NS0_18SubscriptionObjectEiS6_ @1153
+    _ZN5gloox6PubSub7ManagerC1EPNS_10ClientBaseE @1154
+    _ZN5gloox6PubSub7ManagerC2EPNS_10ClientBaseE @1155
+    _ZN5gloox6PubSub7ManagerD0Ev @1156
+    _ZN5gloox6PubSub7ManagerD1Ev @1157
+    _ZN5gloox6Search10handleIqIDERKNS_2IQEi @1158
+    _ZN5gloox6Search17fetchSearchFieldsERKNS_3JIDEPNS_13SearchHandlerE @1159
+    _ZN5gloox6Search6searchERKNS_3JIDEPNS_8DataFormEPNS_13SearchHandlerE @1160
+    _ZN5gloox6Search6searchERKNS_3JIDEiRKNS_17SearchFieldStructEPNS_13SearchHandlerE @1161
+    _ZN5gloox6Search8handleIqERKNS_2IQE @1162
+    _ZN5gloox6SearchC1EPNS_10ClientBaseE @1163
+    _ZN5gloox6SearchC2EPNS_10ClientBaseE @1164
+    _ZN5gloox6SearchD0Ev @1165
+    _ZN5gloox6SearchD1Ev @1166
+    _ZN5gloox6SearchD2Ev @1167
+    _ZN5gloox6Stanza12addExtensionEPKNS_15StanzaExtensionE @1168
+    _ZN5gloox6Stanza16removeExtensionsEv @1169
+    _ZN5gloox6Stanza7setFromERKNS_3JIDE @1170
+    _ZN5gloox6Stanza7setLangEPPSt3mapISsSsSt4lessISsESaISt4pairIKSsSsEEERSsPKNS_3TagE @1171
+    _ZN5gloox6Stanza7setLangEPPSt3mapISsSsSt4lessISsESaISt4pairIKSsSsEEERSsRS5_SC_ @1172
+    _ZN5gloox6Stanza8findLangEPKSt3mapISsSsSt4lessISsESaISt4pairIKSsSsEEERS5_SB_ @1173
+    _ZN5gloox6Stanza8getLangsEPKSt3mapISsSsSt4lessISsESaISt4pairIKSsSsEEERS5_SB_PNS_3TagE @1174
+    _ZN5gloox6StanzaC1EPNS_3TagE @1175
+    _ZN5gloox6StanzaC1ERKNS_3JIDE @1176
+    _ZN5gloox6StanzaC2EPNS_3TagE @1177
+    _ZN5gloox6StanzaC2ERKNS_3JIDE @1178
+    _ZN5gloox6StanzaD0Ev @1179
+    _ZN5gloox6StanzaD1Ev @1180
+    _ZN5gloox6StanzaD2Ev @1181
+    _ZN5gloox7LogSink16removeLogHandlerEPNS_10LogHandlerE @1182
+    _ZN5gloox7LogSink18registerLogHandlerENS_8LogLevelEiPNS_10LogHandlerE @1183
+    _ZN5gloox7LogSinkC1Ev @1184
+    _ZN5gloox7LogSinkC2Ev @1185
+    _ZN5gloox7LogSinkD0Ev @1186
+    _ZN5gloox7LogSinkD1Ev @1187
+    _ZN5gloox7LogSinkD2Ev @1188
+    _ZN5gloox7MUCRoom10addHistoryERKSsRKNS_3JIDES2_ @1189
+    _ZN5gloox7MUCRoom10handleIqIDERKNS_2IQEi @1190
+    _ZN5gloox7MUCRoom10setPublishEbb @1191
+    _ZN5gloox7MUCRoom10setSubjectERKSs @1192
+    _ZN5gloox7MUCRoom11getRoomInfoEv @1193
+    _ZN5gloox7MUCRoom11instantRoomEi @1194
+    _ZN5gloox7MUCRoom11requestListENS_12MUCOperationE @1195
+    _ZN5gloox7MUCRoom11setPresenceENS_8Presence12PresenceTypeERKSs @1196
+    _ZN5gloox7MUCRoom12getRoomItemsEv @1197
+    _ZN5gloox7MUCRoom12requestVoiceEv @1198
+    _ZN5gloox7MUCRoom13handleIqErrorERKNS_2IQEi @1199
+    _ZN5gloox7MUCRoom13handleMessageERKNS_7MessageEPNS_14MessageSessionE @1200
+    _ZN5gloox7MUCRoom13setRoomConfigEPNS_8DataFormE @1201
+    _ZN5gloox7MUCRoom14createDataFormERKNS_3JIDEPKNS_8DataFormE @1202
+    _ZN5gloox7MUCRoom14handleIqResultERKNS_2IQEi @1203
+    _ZN5gloox7MUCRoom14handlePresenceERKNS_8PresenceE @1204
+    _ZN5gloox7MUCRoom14setAffiliationERKSsNS_18MUCRoomAffiliationES2_ @1205
+    _ZN5gloox7MUCRoom15handleDiscoInfoERKNS_3JIDERKNS_5Disco4InfoEi @1206
+    _ZN5gloox7MUCRoom15setNonAnonymousEv @1207
+    _ZN5gloox7MUCRoom16handleDiscoErrorERKNS_3JIDEPKNS_5ErrorEi @1208
+    _ZN5gloox7MUCRoom16handleDiscoItemsERKNS_3JIDERKNS_5Disco5ItemsEi @1209
+    _ZN5gloox7MUCRoom16setSemiAnonymousEv @1210
+    _ZN5gloox7MUCRoom17declineInvitationERKNS_3JIDES3_RKSs @1211
+    _ZN5gloox7MUCRoom17requestRoomConfigEv @1212
+    _ZN5gloox7MUCRoom17setFullyAnonymousEv @1213
+    _ZN5gloox7MUCRoom17setRequestHistoryERKSs @1214
+    _ZN5gloox7MUCRoom17setRequestHistoryEiNS0_18HistoryRequestTypeE @1215
+    _ZN5gloox7MUCRoom20handleDiscoNodeItemsERKNS_3JIDES3_RKSs @1216
+    _ZN5gloox7MUCRoom22acknowledgeInstantRoomEv @1217
+    _ZN5gloox7MUCRoom23handleDiscoNodeFeaturesERKNS_3JIDERKSs @1218
+    _ZN5gloox7MUCRoom25handleDiscoNodeIdentitiesERKNS_3JIDERKSs @1219
+    _ZN5gloox7MUCRoom4joinENS_8Presence12PresenceTypeERKSsi @1220
+    _ZN5gloox7MUCRoom4sendERKSs @1221
+    _ZN5gloox7MUCRoom5leaveERKSs @1222
+    _ZN5gloox7MUCRoom6inviteERKNS_3JIDERKSsS5_ @1223
+    _ZN5gloox7MUCRoom7destroyERKSsRKNS_3JIDES2_ @1224
+    _ZN5gloox7MUCRoom7setNameERKSs @1225
+    _ZN5gloox7MUCRoom7setNickERKSs @1226
+    _ZN5gloox7MUCRoom7setRoleERKSsNS_11MUCRoomRoleES2_ @1227
+    _ZN5gloox7MUCRoom8handleIqERKNS_2IQE @1228
+    _ZN5gloox7MUCRoom9storeListESt4listINS_11MUCListItemESaIS2_EENS_12MUCOperationE @1229
+    _ZN5gloox7MUCRoomC1EPNS_10ClientBaseERKNS_3JIDEPNS_14MUCRoomHandlerEPNS_20MUCRoomConfigHandlerE @1230
+    _ZN5gloox7MUCRoomC2EPNS_10ClientBaseERKNS_3JIDEPNS_14MUCRoomHandlerEPNS_20MUCRoomConfigHandlerE @1231
+    _ZN5gloox7MUCRoomD0Ev @1232
+    _ZN5gloox7MUCRoomD1Ev @1233
+    _ZN5gloox7MUCRoomD2Ev @1234
+    _ZN5gloox7Message5setIDERKSs @1235
+    _ZN5gloox7Message9setThreadERKSs @1236
+    _ZN5gloox7MessageC1ENS0_11MessageTypeERKNS_3JIDERKSsS6_S6_S6_ @1237
+    _ZN5gloox7MessageC1EPNS_3TagE @1238
+    _ZN5gloox7MessageC2ENS0_11MessageTypeERKNS_3JIDERKSsS6_S6_S6_ @1239
+    _ZN5gloox7MessageC2EPNS_3TagE @1240
+    _ZN5gloox7MessageD0Ev @1241
+    _ZN5gloox7MessageD1Ev @1242
+    _ZN5gloox7MessageD2Ev @1243
+    _ZN5gloox7ReceiptC1EPKNS_3TagE @1244
+    _ZN5gloox7ReceiptC2EPKNS_3TagE @1245
+    _ZN5gloox7ReceiptD0Ev @1246
+    _ZN5gloox7ReceiptD1Ev @1247
+    _ZN5gloox7TLSBaseC2EPNS_10TLSHandlerESs @1248
+    _ZN5gloox7TLSBaseD0Ev @1249
+    _ZN5gloox7TLSBaseD1Ev @1250
+    _ZN5gloox7TLSBaseD2Ev @1251
+    _ZN5gloox7XHtmlIMC1EPKNS_3TagE @1252
+    _ZN5gloox7XHtmlIMC2EPKNS_3TagE @1253
+    _ZN5gloox7XHtmlIMD0Ev @1254
+    _ZN5gloox7XHtmlIMD1Ev @1255
+    _ZN5gloox7XHtmlIMD2Ev @1256
+    _ZN5gloox8DataForm5parseEPKNS_3TagE @1257
+    _ZN5gloox8DataFormC1ENS_8FormTypeERKSs @1258
+    _ZN5gloox8DataFormC1ENS_8FormTypeERKSt4listISsSaISsEERKSs @1259
+    _ZN5gloox8DataFormC1EPKNS_3TagE @1260
+    _ZN5gloox8DataFormC1ERKS0_ @1261
+    _ZN5gloox8DataFormC2ENS_8FormTypeERKSs @1262
+    _ZN5gloox8DataFormC2ENS_8FormTypeERKSt4listISsSaISsEERKSs @1263
+    _ZN5gloox8DataFormC2EPKNS_3TagE @1264
+    _ZN5gloox8DataFormC2ERKS0_ @1265
+    _ZN5gloox8DataFormD0Ev @1266
+    _ZN5gloox8DataFormD1Ev @1267
+    _ZN5gloox8DataFormD2Ev @1268
+    _ZN5gloox8NicknameC1EPKNS_3TagE @1269
+    _ZN5gloox8NicknameC2EPKNS_3TagE @1270
+    _ZN5gloox8NicknameD0Ev @1271
+    _ZN5gloox8NicknameD1Ev @1272
+    _ZN5gloox8Presence11resetStatusEv @1273
+    _ZN5gloox8Presence11setPriorityEi @1274
+    _ZN5gloox8Presence9addStatusERKSsS2_ @1275
+    _ZN5gloox8PresenceC1ENS0_12PresenceTypeERKNS_3JIDERKSsiS6_ @1276
+    _ZN5gloox8PresenceC1EPNS_3TagE @1277
+    _ZN5gloox8PresenceC2ENS0_12PresenceTypeERKNS_3JIDERKSsiS6_ @1278
+    _ZN5gloox8PresenceC2EPNS_3TagE @1279
+    _ZN5gloox8PresenceD0Ev @1280
+    _ZN5gloox8PresenceD1Ev @1281
+    _ZN5gloox8PresenceD2Ev @1282
+    _ZN5gloox8Resource10setMessageESs @1283
+    _ZN5gloox8Resource13setExtensionsERKSt4listIPKNS_15StanzaExtensionESaIS4_EE @1284
+    _ZN5gloox8ResourceC1EiRKSsNS_8Presence12PresenceTypeE @1285
+    _ZN5gloox8ResourceD0Ev @1286
+    _ZN5gloox8ResourceD1Ev @1287
+    _ZN5gloox8XMLNS_SIE @1288 DATA
+    _ZN5gloox9AttentionC1Ev @1289
+    _ZN5gloox9AttentionC2Ev @1290
+    _ZN5gloox9AttentionD0Ev @1291
+    _ZN5gloox9AttentionD1Ev @1292
+    _ZN5gloox9AttentionD2Ev @1293
+    _ZN5gloox9ChatStateC1ENS_13ChatStateTypeE @1294
+    _ZN5gloox9ChatStateC1EPKNS_3TagE @1295
+    _ZN5gloox9ChatStateC2EPKNS_3TagE @1296
+    _ZN5gloox9ChatStateD0Ev @1297
+    _ZN5gloox9ChatStateD1Ev @1298
+    _ZN5gloox9Component12rosterFilledEv @1299
+    _ZN5gloox9Component15handleStartNodeEv @1300
+    _ZN5gloox9Component16handleNormalNodeEPNS_3TagE @1301
+    _ZN5gloox9Component18checkStreamVersionERKSs @1302
+    _ZN5gloox9ComponentC1ERKSsS2_S2_S2_i @1303
+    _ZN5gloox9ComponentC2ERKSsS2_S2_S2_i @1304
+    _ZN5gloox9ComponentD0Ev @1305
+    _ZN5gloox9ComponentD1Ev @1306
+    _ZN5gloox9GPGSignedC1EPKNS_3TagE @1307
+    _ZN5gloox9GPGSignedC1ERKSs @1308
+    _ZN5gloox9GPGSignedC2EPKNS_3TagE @1309
+    _ZN5gloox9GPGSignedC2ERKSs @1310
+    _ZN5gloox9GPGSignedD0Ev @1311
+    _ZN5gloox9GPGSignedD1Ev @1312
+    _ZN5gloox9GPGSignedD2Ev @1313
+    _ZN5gloox9IqHandlerD0Ev @1314
+    _ZN5gloox9IqHandlerD1Ev @1315
+    _ZN5gloox9IqHandlerD2Ev @1316
+    _ZN5gloox9SIHandlerD0Ev @1317
+    _ZN5gloox9SIHandlerD1Ev @1318
+    _ZN5gloox9SIHandlerD2Ev @1319
+    _ZN5gloox9SIManager10handleIqIDERKNS_2IQEi @1320
+    _ZN5gloox9SIManager13removeProfileERKSs @1321
+    _ZN5gloox9SIManager15registerProfileERKSsPNS_16SIProfileHandlerE @1322
+    _ZN5gloox9SIManager8acceptSIERKNS_3JIDERKSsPNS_3TagES7_S3_ @1323
+    _ZN5gloox9SIManager8handleIqERKNS_2IQE @1324
+    _ZN5gloox9SIManager9declineSIERKNS_3JIDERKSsNS0_7SIErrorES5_ @1325
+    _ZN5gloox9SIManager9requestSIEPNS_9SIHandlerERKNS_3JIDERKSsPNS_3TagES9_S7_S5_S7_ @1326
+    _ZN5gloox9SIManagerC1EPNS_10ClientBaseEb @1327
+    _ZN5gloox9SIManagerC2EPNS_10ClientBaseEb @1328
+    _ZN5gloox9SIManagerD0Ev @1329
+    _ZN5gloox9SIManagerD1Ev @1330
+    _ZN5gloox9SIManagerD2Ev @1331
+    _ZN5gloox9XMLNS_AMPE @1332 DATA
+    _ZN5gloox9XMLNS_IBBE @1333 DATA
+    _ZN5gloox9XMLNS_MUCE @1334 DATA
+    _ZNK5gloox10Bytestream3sidEv @1335
+    _ZNK5gloox10Bytestream6targetEv @1336
+    _ZNK5gloox10ClientBase15streamErrorTextERKSs @1337
+    _ZNK5gloox10ClientBase5discoEv @1338
+    _ZNK5gloox10ClientBase5stateEv @1339
+    _ZNK5gloox10ClientBase8passwordEv @1340
+    _ZNK5gloox10ClientBase8usernameEv @1341
+    _ZNK5gloox10FeatureNeg11newInstanceEPKNS_3TagE @1342
+    _ZNK5gloox10FeatureNeg12filterStringEv @1343
+    _ZNK5gloox10FeatureNeg3tagEv @1344
+    _ZNK5gloox10FeatureNeg5cloneEv @1345
+    _ZNK5gloox10RosterItem12subscriptionEv @1346
+    _ZNK5gloox10RosterItem15highestResourceEv @1347
+    _ZNK5gloox10RosterItem3jidEv @1348
+    _ZNK5gloox10RosterItem4nameEv @1349
+    _ZNK5gloox10RosterItem6groupsEv @1350
+    _ZNK5gloox10RosterItem6onlineEv @1351
+    _ZNK5gloox10RosterItem7changedEv @1352
+    _ZNK5gloox10RosterItem8resourceERKSs @1353
+    _ZNK5gloox10TLSDefault12fetchTLSInfoEv @1354
+    _ZNK5gloox10TLSDefault8isSecureEv @1355
+    _ZNK5gloox11PrivacyItem5valueEv @1356
+    _ZNK5gloox11PrivacyItemeqERKS0_ @1357
+    _ZNK5gloox11VCardUpdate11newInstanceEPKNS_3TagE @1358
+    _ZNK5gloox11VCardUpdate12filterStringEv @1359
+    _ZNK5gloox11VCardUpdate3tagEv @1360
+    _ZNK5gloox11VCardUpdate5cloneEv @1361
+    _ZNK5gloox12Capabilities11newInstanceEPKNS_3TagE @1362
+    _ZNK5gloox12Capabilities12filterStringEv @1363
+    _ZNK5gloox12Capabilities3tagEv @1364
+    _ZNK5gloox12Capabilities3verEv @1365
+    _ZNK5gloox12Capabilities5cloneEv @1366
+    _ZNK5gloox12DataFormItem3tagEv @1367
+    _ZNK5gloox12GPGEncrypted11newInstanceEPKNS_3TagE @1368
+    _ZNK5gloox12GPGEncrypted12filterStringEv @1369
+    _ZNK5gloox12GPGEncrypted3tagEv @1370
+    _ZNK5gloox12GPGEncrypted5cloneEv @1371
+    _ZNK5gloox12LastActivity5Query11newInstanceEPKNS_3TagE @1372
+    _ZNK5gloox12LastActivity5Query12filterStringEv @1373
+    _ZNK5gloox12LastActivity5Query3tagEv @1374
+    _ZNK5gloox12LastActivity5Query5cloneEv @1375
+    _ZNK5gloox12LastActivity5Query6statusEv @1376
+    _ZNK5gloox12MessageEvent11newInstanceEPKNS_3TagE @1377
+    _ZNK5gloox12MessageEvent12filterStringEv @1378
+    _ZNK5gloox12MessageEvent3tagEv @1379
+    _ZNK5gloox12MessageEvent5cloneEv @1380
+    _ZNK5gloox12Subscription3tagEv @1381
+    _ZNK5gloox12Subscription6statusERKSs @1382
+    _ZNK5gloox13ConnectionTLS11newInstanceEv @1383
+    _ZNK5gloox13DataFormField3tagEv @1384
+    _ZNK5gloox13DataFormField4nameEv @1385
+    _ZNK5gloox13DataFormField5valueEv @1386
+    _ZNK5gloox13DataFormField6valuesEv @1387
+    _ZNK5gloox13DataFormField7optionsEv @1388
+    _ZNK5gloox14ConnectionBOSH11newInstanceEv @1389
+    _ZNK5gloox14ConnectionBase14localInterfaceEv @1390
+    _ZNK5gloox14ConnectionBase6serverEv @1391
+    _ZNK5gloox14ConnectionBase9localPortEv @1392
+    _ZNK5gloox14InstantMUCRoom15instantRoomHookEv @1393
+    _ZNK5gloox14MessageSession6targetEv @1394
+    _ZNK5gloox14MessageSession8threadIDEv @1395
+    _ZNK5gloox14RosterItemData3jidEv @1396
+    _ZNK5gloox14RosterItemData3tagEv @1397
+    _ZNK5gloox14RosterItemData4nameEv @1398
+    _ZNK5gloox14RosterItemData6groupsEv @1399
+    _ZNK5gloox15DelayedDelivery11newInstanceEPKNS_3TagE @1400
+    _ZNK5gloox15DelayedDelivery12filterStringEv @1401
+    _ZNK5gloox15DelayedDelivery3tagEv @1402
+    _ZNK5gloox15DelayedDelivery5cloneEv @1403
+    _ZNK5gloox15DelayedDelivery5stampEv @1404
+    _ZNK5gloox15SoftwareVersion11newInstanceEPKNS_3TagE @1405
+    _ZNK5gloox15SoftwareVersion12filterStringEv @1406
+    _ZNK5gloox15SoftwareVersion3tagEv @1407
+    _ZNK5gloox15SoftwareVersion5cloneEv @1408
+    _ZNK5gloox16DataFormReported3tagEv @1409
+    _ZNK5gloox17ConnectionTCPBase14localInterfaceEv @1410
+    _ZNK5gloox17ConnectionTCPBase9localPortEv @1411
+    _ZNK5gloox19ConnectionHTTPProxy11newInstanceEv @1412
+    _ZNK5gloox19ConnectionTCPClient11newInstanceEv @1413
+    _ZNK5gloox19ConnectionTCPServer11newInstanceEv @1414
+    _ZNK5gloox21ConnectionSOCKS5Proxy11newInstanceEv @1415
+    _ZNK5gloox22DataFormFieldContainer5fieldERKSs @1416
+    _ZNK5gloox22DataFormFieldContainer6fieldsEv @1417
+    _ZNK5gloox22DataFormFieldContainer8hasFieldERKSs @1418
+    _ZNK5gloox22SOCKS5BytestreamServer14localInterfaceEv @1419
+    _ZNK5gloox22SOCKS5BytestreamServer9localPortEv @1420
+    _ZNK5gloox2IQ3tagEv @1421
+    _ZNK5gloox3AMP11newInstanceEPKNS_3TagE @1422
+    _ZNK5gloox3AMP12filterStringEv @1423
+    _ZNK5gloox3AMP3tagEv @1424
+    _ZNK5gloox3AMP4Rule3tagEv @1425
+    _ZNK5gloox3AMP5cloneEv @1426
+    _ZNK5gloox3JID4bareEv @1427
+    _ZNK5gloox3JID4fullEv @1428
+    _ZNK5gloox3JID6serverEv @1429
+    _ZNK5gloox3JID7bareJIDEv @1430
+    _ZNK5gloox3JID8resourceEv @1431
+    _ZNK5gloox3JID8usernameEv @1432
+    _ZNK5gloox3JID9serverRawEv @1433
+    _ZNK5gloox3JIDeqERKS0_ @1434
+    _ZNK5gloox3JIDeqERKSs @1435
+    _ZNK5gloox3JIDneERKS0_ @1436
+    _ZNK5gloox3OOB11newInstanceEPKNS_3TagE @1437
+    _ZNK5gloox3OOB12filterStringEv @1438
+    _ZNK5gloox3OOB3tagEv @1439
+    _ZNK5gloox3OOB5cloneEv @1440
+    _ZNK5gloox3Tag10attributesEv @1441
+    _ZNK5gloox3Tag11addOperatorEPPS0_S2_S1_NS0_9TokenTypeERKSs @1442
+    _ZNK5gloox3Tag11findTagListERKSs @1443
+    _ZNK5gloox3Tag12addPredicateEPPS0_S2_S1_ @1444
+    _ZNK5gloox3Tag12findChildrenERKSsS2_ @1445
+    _ZNK5gloox3Tag12findChildrenERKSt4listIPS0_SaIS2_EERKSsS8_ @1446
+    _ZNK5gloox3Tag12hasAttributeERKSsS2_ @1447
+    _ZNK5gloox3Tag13evaluateUnionEPS0_ @1448
+    _ZNK5gloox3Tag13findAttributeERKSs @1449
+    _ZNK5gloox3Tag14allDescendantsEv @1450
+    _ZNK5gloox3Tag14evaluateEqualsEPS0_ @1451
+    _ZNK5gloox3Tag15evaluateBooleanEPS0_ @1452
+    _ZNK5gloox3Tag15evaluateTagListEPS0_ @1453
+    _ZNK5gloox3Tag17evaluatePredicateEPS0_ @1454
+    _ZNK5gloox3Tag17hasChildWithCDataERKSsS2_ @1455
+    _ZNK5gloox3Tag18closePreviousTokenEPPS0_S2_RNS0_9TokenTypeERSs @1456
+    _ZNK5gloox3Tag19findChildWithAttribERKSsS2_ @1457
+    _ZNK5gloox3Tag3xmlEv @1458
+    _ZNK5gloox3Tag4nameEv @1459
+    _ZNK5gloox3Tag5cdataEv @1460
+    _ZNK5gloox3Tag5cloneEv @1461
+    _ZNK5gloox3Tag5parseERKSsRjNS0_9TokenTypeE @1462
+    _ZNK5gloox3Tag5xmlnsERKSs @1463
+    _ZNK5gloox3Tag5xmlnsEv @1464
+    _ZNK5gloox3Tag6prefixERKSs @1465
+    _ZNK5gloox3Tag6prefixEv @1466
+    _ZNK5gloox3Tag7findTagERKSs @1467
+    _ZNK5gloox3Tag8addTokenEPPS0_S2_NS0_9TokenTypeERKSs @1468
+    _ZNK5gloox3Tag8childrenEv @1469
+    _ZNK5gloox3Tag8hasChildERKSsS2_S2_ @1470
+    _ZNK5gloox3Tag8isNumberEv @1471
+    _ZNK5gloox3Tag9Attribute3xmlEv @1472
+    _ZNK5gloox3Tag9Attribute4nameEv @1473
+    _ZNK5gloox3Tag9Attribute5valueEv @1474
+    _ZNK5gloox3Tag9Attribute5xmlnsEv @1475
+    _ZNK5gloox3Tag9Attribute6prefixEv @1476
+    _ZNK5gloox3Tag9AttributeeqERKS1_ @1477
+    _ZNK5gloox3Tag9findCDataERKSs @1478
+    _ZNK5gloox3Tag9findChildERKSs @1479
+    _ZNK5gloox3Tag9findChildERKSsS2_S2_ @1480
+    _ZNK5gloox3TageqERKS0_ @1481
+    _ZNK5gloox4SHIM11newInstanceEPKNS_3TagE @1482
+    _ZNK5gloox4SHIM12filterStringEv @1483
+    _ZNK5gloox4SHIM3tagEv @1484
+    _ZNK5gloox4SHIM5cloneEv @1485
+    _ZNK5gloox5Adhoc7Command11newInstanceEPKNS_3TagE @1486
+    _ZNK5gloox5Adhoc7Command12filterStringEv @1487
+    _ZNK5gloox5Adhoc7Command3tagEv @1488
+    _ZNK5gloox5Adhoc7Command4Note3tagEv @1489
+    _ZNK5gloox5Adhoc7Command4nodeEv @1490
+    _ZNK5gloox5Adhoc7Command5cloneEv @1491
+    _ZNK5gloox5Adhoc7Command9sessionIDEv @1492
+    _ZNK5gloox5Disco10identitiesEv @1493
+    _ZNK5gloox5Disco4Info10hasFeatureERKSs @1494
+    _ZNK5gloox5Disco4Info10identitiesEv @1495
+    _ZNK5gloox5Disco4Info11newInstanceEPKNS_3TagE @1496
+    _ZNK5gloox5Disco4Info12filterStringEv @1497
+    _ZNK5gloox5Disco4Info3tagEv @1498
+    _ZNK5gloox5Disco4Info4nodeEv @1499
+    _ZNK5gloox5Disco4Info5cloneEv @1500
+    _ZNK5gloox5Disco4Info8featuresEv @1501
+    _ZNK5gloox5Disco4Item3tagEv @1502
+    _ZNK5gloox5Disco4Item4nameEv @1503
+    _ZNK5gloox5Disco4Item4nodeEv @1504
+    _ZNK5gloox5Disco5Items11newInstanceEPKNS_3TagE @1505
+    _ZNK5gloox5Disco5Items12filterStringEv @1506
+    _ZNK5gloox5Disco5Items3tagEv @1507
+    _ZNK5gloox5Disco5Items4nodeEv @1508
+    _ZNK5gloox5Disco5Items5cloneEv @1509
+    _ZNK5gloox5Disco5Items5itemsEv @1510
+    _ZNK5gloox5Disco8Identity3tagEv @1511
+    _ZNK5gloox5Disco8Identity4nameEv @1512
+    _ZNK5gloox5Disco8Identity4typeEv @1513
+    _ZNK5gloox5Disco8Identity8categoryEv @1514
+    _ZNK5gloox5Disco8featuresEb @1515
+    _ZNK5gloox5Error11newInstanceEPKNS_3TagE @1516
+    _ZNK5gloox5Error12filterStringEv @1517
+    _ZNK5gloox5Error3tagEv @1518
+    _ZNK5gloox5Error4textERKSs @1519
+    _ZNK5gloox5Error5cloneEv @1520
+    _ZNK5gloox5VCard11newInstanceEPKNS_3TagE @1521
+    _ZNK5gloox5VCard12filterStringEv @1522
+    _ZNK5gloox5VCard3tagEv @1523
+    _ZNK5gloox5VCard5cloneEv @1524
+    _ZNK5gloox6Client8resourceEv @1525
+    _ZNK5gloox6PubSub4Item3tagEv @1526
+    _ZNK5gloox6PubSub5Event11newInstanceEPKNS_3TagE @1527
+    _ZNK5gloox6PubSub5Event12filterStringEv @1528
+    _ZNK5gloox6PubSub5Event3tagEv @1529
+    _ZNK5gloox6PubSub5Event5cloneEv @1530
+    _ZNK5gloox6Stanza10extensionsEv @1531
+    _ZNK5gloox6Stanza13findExtensionEi @1532
+    _ZNK5gloox6Stanza2idEv @1533
+    _ZNK5gloox6Stanza2toEv @1534
+    _ZNK5gloox6Stanza4fromEv @1535
+    _ZNK5gloox6Stanza5errorEv @1536
+    _ZNK5gloox7LogSink3dbgENS_7LogAreaERKSs @1537
+    _ZNK5gloox7LogSink3errENS_7LogAreaERKSs @1538
+    _ZNK5gloox7LogSink3logENS_8LogLevelENS_7LogAreaERKSs @1539
+    _ZNK5gloox7LogSink4warnENS_7LogAreaERKSs @1540
+    _ZNK5gloox7MUCRoom15instantRoomHookEv @1541
+    _ZNK5gloox7Message3tagEv @1542
+    _ZNK5gloox7Message4bodyERKSs @1543
+    _ZNK5gloox7Message4whenEv @1544
+    _ZNK5gloox7Message6threadEv @1545
+    _ZNK5gloox7Message7subjectERKSs @1546
+    _ZNK5gloox7Receipt11newInstanceEPKNS_3TagE @1547
+    _ZNK5gloox7Receipt12filterStringEv @1548
+    _ZNK5gloox7Receipt3tagEv @1549
+    _ZNK5gloox7Receipt5cloneEv @1550
+    _ZNK5gloox7TLSBase12fetchTLSInfoEv @1551
+    _ZNK5gloox7TLSBase8isSecureEv @1552
+    _ZNK5gloox7XHtmlIM11newInstanceEPKNS_3TagE @1553
+    _ZNK5gloox7XHtmlIM12filterStringEv @1554
+    _ZNK5gloox7XHtmlIM3tagEv @1555
+    _ZNK5gloox7XHtmlIM5cloneEv @1556
+    _ZNK5gloox8DataForm11newInstanceEPKNS_3TagE @1557
+    _ZNK5gloox8DataForm12filterStringEv @1558
+    _ZNK5gloox8DataForm3tagEv @1559
+    _ZNK5gloox8DataForm5cloneEv @1560
+    _ZNK5gloox8Nickname11newInstanceEPKNS_3TagE @1561
+    _ZNK5gloox8Nickname12filterStringEv @1562
+    _ZNK5gloox8Nickname3tagEv @1563
+    _ZNK5gloox8Nickname5cloneEv @1564
+    _ZNK5gloox8Presence12capabilitiesEv @1565
+    _ZNK5gloox8Presence3tagEv @1566
+    _ZNK5gloox8Presence6statusERKSs @1567
+    _ZNK5gloox9Attention11newInstanceEPKNS_3TagE @1568
+    _ZNK5gloox9Attention12filterStringEv @1569
+    _ZNK5gloox9Attention3tagEv @1570
+    _ZNK5gloox9Attention5cloneEv @1571
+    _ZNK5gloox9ChatState11newInstanceEPKNS_3TagE @1572
+    _ZNK5gloox9ChatState12filterStringEv @1573
+    _ZNK5gloox9ChatState3tagEv @1574
+    _ZNK5gloox9ChatState5cloneEv @1575
+    _ZNK5gloox9GPGSigned11newInstanceEPKNS_3TagE @1576
+    _ZNK5gloox9GPGSigned12filterStringEv @1577
+    _ZNK5gloox9GPGSigned3tagEv @1578
+    _ZNK5gloox9GPGSigned5cloneEv @1579
+    _ZTVN5gloox10BytestreamE @1580 DATA
+    _ZTVN5gloox10ClientBaseE @1581 DATA
+    _ZTVN5gloox10FeatureNegE @1582 DATA
+    _ZTVN5gloox10LogHandlerE @1583 DATA
+    _ZTVN5gloox10PrivateXMLE @1584 DATA
+    _ZTVN5gloox10RosterItemE @1585 DATA
+    _ZTVN5gloox10TLSDefaultE @1586 DATA
+    _ZTVN5gloox10TLSHandlerE @1587 DATA
+    _ZTVN5gloox10TagHandlerE @1588 DATA
+    _ZTVN5gloox11AnnotationsE @1589 DATA
+    _ZTVN5gloox11NonSaslAuthE @1590 DATA
+    _ZTVN5gloox11PrivacyItemE @1591 DATA
+    _ZTVN5gloox11SIProfileFTE @1592 DATA
+    _ZTVN5gloox11VCardUpdateE @1593 DATA
+    _ZTVN5gloox12AdhocHandlerE @1594 DATA
+    _ZTVN5gloox12CapabilitiesE @1595 DATA
+    _ZTVN5gloox12DataFormItemE @1596 DATA
+    _ZTVN5gloox12DiscoHandlerE @1597 DATA
+    _ZTVN5gloox12GPGEncryptedE @1598 DATA
+    _ZTVN5gloox12LastActivity5QueryE @1599 DATA
+    _ZTVN5gloox12LastActivityE @1600 DATA
+    _ZTVN5gloox12MessageEventE @1601 DATA
+    _ZTVN5gloox12RegistrationE @1602 DATA
+    _ZTVN5gloox12SubscriptionE @1603 DATA
+    _ZTVN5gloox12VCardHandlerE @1604 DATA
+    _ZTVN5gloox12VCardManagerE @1605 DATA
+    _ZTVN5gloox13ConnectionTLSE @1606 DATA
+    _ZTVN5gloox13DataFormFieldE @1607 DATA
+    _ZTVN5gloox13MessageFilterE @1608 DATA
+    _ZTVN5gloox13RosterManagerE @1609 DATA
+    _ZTVN5gloox13SearchHandlerE @1610 DATA
+    _ZTVN5gloox13UniqueMUCRoomE @1611 DATA
+    _ZTVN5gloox14ConnectionBOSHE @1612 DATA
+    _ZTVN5gloox14ConnectionBaseE @1613 DATA
+    _ZTVN5gloox14InstantMUCRoomE @1614 DATA
+    _ZTVN5gloox14MUCRoomHandlerE @1615 DATA
+    _ZTVN5gloox14MessageHandlerE @1616 DATA
+    _ZTVN5gloox14MessageSessionE @1617 DATA
+    _ZTVN5gloox14PrivacyManagerE @1618 DATA
+    _ZTVN5gloox14RosterItemDataE @1619 DATA
+    _ZTVN5gloox14RosterListenerE @1620 DATA
+    _ZTVN5gloox15BookmarkHandlerE @1621 DATA
+    _ZTVN5gloox15BookmarkStorageE @1622 DATA
+    _ZTVN5gloox15ChatStateFilterE @1623 DATA
+    _ZTVN5gloox15CompressionBaseE @1624 DATA
+    _ZTVN5gloox15DelayedDeliveryE @1625 DATA
+    _ZTVN5gloox15FlexibleOfflineE @1626 DATA
+    _ZTVN5gloox15PresenceHandlerE @1627 DATA
+    _ZTVN5gloox15SoftwareVersionE @1628 DATA
+    _ZTVN5gloox15StanzaExtensionE @1629 DATA
+    _ZTVN5gloox16ChatStateHandlerE @1630 DATA
+    _ZTVN5gloox16DataFormReportedE @1631 DATA
+    _ZTVN5gloox16DiscoNodeHandlerE @1632 DATA
+    _ZTVN5gloox16InBandBytestreamE @1633 DATA
+    _ZTVN5gloox16SIProfileHandlerE @1634 DATA
+    _ZTVN5gloox16SOCKS5BytestreamE @1635 DATA
+    _ZTVN5gloox17BytestreamHandlerE @1636 DATA
+    _ZTVN5gloox17ConnectionHandlerE @1637 DATA
+    _ZTVN5gloox17ConnectionTCPBaseE @1638 DATA
+    _ZTVN5gloox17MUCMessageSessionE @1639 DATA
+    _ZTVN5gloox17PrivateXMLHandlerE @1640 DATA
+    _ZTVN5gloox17StatisticsHandlerE @1641 DATA
+    _ZTVN5gloox18AnnotationsHandlerE @1642 DATA
+    _ZTVN5gloox18ConnectionListenerE @1643 DATA
+    _ZTVN5gloox18MessageEventFilterE @1644 DATA
+    _ZTVN5gloox18PrivacyListHandlerE @1645 DATA
+    _ZTVN5gloox18SIProfileFTHandlerE @1646 DATA
+    _ZTVN5gloox19ConnectionHTTPProxyE @1647 DATA
+    _ZTVN5gloox19ConnectionTCPClientE @1648 DATA
+    _ZTVN5gloox19ConnectionTCPServerE @1649 DATA
+    _ZTVN5gloox19LastActivityHandlerE @1650 DATA
+    _ZTVN5gloox19MessageEventHandlerE @1651 DATA
+    _ZTVN5gloox19RegistrationHandlerE @1652 DATA
+    _ZTVN5gloox19SubscriptionHandlerE @1653 DATA
+    _ZTVN5gloox20AdhocCommandProviderE @1654 DATA
+    _ZTVN5gloox20MUCInvitationHandlerE @1655 DATA
+    _ZTVN5gloox20MUCRoomConfigHandlerE @1656 DATA
+    _ZTVN5gloox21BytestreamDataHandlerE @1657 DATA
+    _ZTVN5gloox21ConnectionDataHandlerE @1658 DATA
+    _ZTVN5gloox21ConnectionSOCKS5ProxyE @1659 DATA
+    _ZTVN5gloox21MessageSessionHandlerE @1660 DATA
+    _ZTVN5gloox22CompressionDataHandlerE @1661 DATA
+    _ZTVN5gloox22DataFormFieldContainerE @1662 DATA
+    _ZTVN5gloox22FlexibleOfflineHandlerE @1663 DATA
+    _ZTVN5gloox22SOCKS5BytestreamServerE @1664 DATA
+    _ZTVN5gloox23SOCKS5BytestreamManagerE @1665 DATA
+    _ZTVN5gloox2IQE @1666 DATA
+    _ZTVN5gloox3AMPE @1667 DATA
+    _ZTVN5gloox3MD5E @1668 DATA
+    _ZTVN5gloox3OOBE @1669 DATA
+    _ZTVN5gloox3SHAE @1670 DATA
+    _ZTVN5gloox3Tag9AttributeE @1671 DATA
+    _ZTVN5gloox3TagE @1672 DATA
+    _ZTVN5gloox4SHIME @1673 DATA
+    _ZTVN5gloox5Adhoc7CommandE @1674 DATA
+    _ZTVN5gloox5AdhocE @1675 DATA
+    _ZTVN5gloox5Disco4InfoE @1676 DATA
+    _ZTVN5gloox5Disco5ItemsE @1677 DATA
+    _ZTVN5gloox5DiscoE @1678 DATA
+    _ZTVN5gloox5ErrorE @1679 DATA
+    _ZTVN5gloox5VCardE @1680 DATA
+    _ZTVN5gloox6ClientE @1681 DATA
+    _ZTVN5gloox6ParserE @1682 DATA
+    _ZTVN5gloox6PubSub13ResultHandlerE @1683 DATA
+    _ZTVN5gloox6PubSub5EventE @1684 DATA
+    _ZTVN5gloox6PubSub7ManagerE @1685 DATA
+    _ZTVN5gloox6SearchE @1686 DATA
+    _ZTVN5gloox6StanzaE @1687 DATA
+    _ZTVN5gloox7LogSinkE @1688 DATA
+    _ZTVN5gloox7MUCRoomE @1689 DATA
+    _ZTVN5gloox7MessageE @1690 DATA
+    _ZTVN5gloox7ReceiptE @1691 DATA
+    _ZTVN5gloox7TLSBaseE @1692 DATA
+    _ZTVN5gloox7XHtmlIME @1693 DATA
+    _ZTVN5gloox8DataFormE @1694 DATA
+    _ZTVN5gloox8NicknameE @1695 DATA
+    _ZTVN5gloox8PresenceE @1696 DATA
+    _ZTVN5gloox8ResourceE @1697 DATA
+    _ZTVN5gloox9AttentionE @1698 DATA
+    _ZTVN5gloox9ChatStateE @1699 DATA
+    _ZTVN5gloox9ComponentE @1700 DATA
+    _ZTVN5gloox9GPGSignedE @1701 DATA
+    _ZTVN5gloox9IqHandlerE @1702 DATA
+    _ZTVN5gloox9SIHandlerE @1703 DATA
+    _ZTVN5gloox9SIManagerE @1704 DATA
+    _ZThn12_N5gloox10ClientBase19handleDecryptedDataEPKNS_7TLSBaseERKSs @1705
+    _ZThn12_N5gloox10ClientBase19handleEncryptedDataEPKNS_7TLSBaseERKSs @1706
+    _ZThn12_N5gloox10ClientBase21handleHandshakeResultEPKNS_7TLSBaseEbRNS_8CertInfoE @1707
+    _ZThn12_N5gloox10ClientBaseD0Ev @1708
+    _ZThn12_N5gloox10ClientBaseD1Ev @1709
+    _ZThn12_N5gloox11SIProfileFT10handleIqIDERKNS_2IQEi @1710
+    _ZThn12_N5gloox11SIProfileFT8handleIqERKNS_2IQE @1711
+    _ZThn12_N5gloox11SIProfileFTD0Ev @1712
+    _ZThn12_N5gloox11SIProfileFTD1Ev @1713
+    _ZThn12_N5gloox12Capabilities20handleDiscoNodeItemsERKNS_3JIDES3_RKSs @1714
+    _ZThn12_N5gloox12Capabilities23handleDiscoNodeFeaturesERKNS_3JIDERKSs @1715
+    _ZThn12_N5gloox12Capabilities25handleDiscoNodeIdentitiesERKNS_3JIDERKSs @1716
+    _ZThn12_N5gloox12CapabilitiesD0Ev @1717
+    _ZThn12_N5gloox12CapabilitiesD1Ev @1718
+    _ZThn12_N5gloox13RosterManager16handlePrivateXMLEPKNS_3TagE @1719
+    _ZThn12_N5gloox13RosterManager22handlePrivateXMLResultERKSsNS_17PrivateXMLHandler16PrivateXMLResultE @1720
+    _ZThn12_N5gloox13RosterManagerD0Ev @1721
+    _ZThn12_N5gloox13RosterManagerD1Ev @1722
+    _ZThn12_N5gloox13UniqueMUCRoomD0Ev @1723
+    _ZThn12_N5gloox13UniqueMUCRoomD1Ev @1724
+    _ZThn12_N5gloox14InstantMUCRoomD0Ev @1725
+    _ZThn12_N5gloox14InstantMUCRoomD1Ev @1726
+    _ZThn12_N5gloox6ClientD0Ev @1727
+    _ZThn12_N5gloox6ClientD1Ev @1728
+    _ZThn12_N5gloox7MUCRoom13handleMessageERKNS_7MessageEPNS_14MessageSessionE @1729
+    _ZThn12_N5gloox7MUCRoomD0Ev @1730
+    _ZThn12_N5gloox7MUCRoomD1Ev @1731
+    _ZThn12_N5gloox8DataFormD0Ev @1732
+    _ZThn12_N5gloox8DataFormD1Ev @1733
+    _ZThn12_N5gloox9ComponentD0Ev @1734
+    _ZThn12_N5gloox9ComponentD1Ev @1735
+    _ZThn16_N5gloox10ClientBase10handleIqIDERKNS_2IQEi @1736
+    _ZThn16_N5gloox10ClientBase8handleIqERKNS_2IQE @1737
+    _ZThn16_N5gloox10ClientBaseD0Ev @1738
+    _ZThn16_N5gloox10ClientBaseD1Ev @1739
+    _ZThn16_N5gloox13UniqueMUCRoomD0Ev @1740
+    _ZThn16_N5gloox13UniqueMUCRoomD1Ev @1741
+    _ZThn16_N5gloox14InstantMUCRoomD0Ev @1742
+    _ZThn16_N5gloox14InstantMUCRoomD1Ev @1743
+    _ZThn16_N5gloox6ClientD0Ev @1744
+    _ZThn16_N5gloox6ClientD1Ev @1745
+    _ZThn16_N5gloox7MUCRoom20handleDiscoNodeItemsERKNS_3JIDES3_RKSs @1746
+    _ZThn16_N5gloox7MUCRoom23handleDiscoNodeFeaturesERKNS_3JIDERKSs @1747
+    _ZThn16_N5gloox7MUCRoom25handleDiscoNodeIdentitiesERKNS_3JIDERKSs @1748
+    _ZThn16_N5gloox7MUCRoomD0Ev @1749
+    _ZThn16_N5gloox7MUCRoomD1Ev @1750
+    _ZThn16_N5gloox9ComponentD0Ev @1751
+    _ZThn16_N5gloox9ComponentD1Ev @1752
+    _ZThn20_N5gloox14ConnectionBOSH13handleConnectEPKNS_14ConnectionBaseE @1753
+    _ZThn20_N5gloox14ConnectionBOSH16handleDisconnectEPKNS_14ConnectionBaseENS_15ConnectionErrorE @1754
+    _ZThn20_N5gloox14ConnectionBOSH18handleReceivedDataEPKNS_14ConnectionBaseERKSs @1755
+    _ZThn20_N5gloox14ConnectionBOSHD0Ev @1756
+    _ZThn20_N5gloox14ConnectionBOSHD1Ev @1757
+    _ZThn20_N5gloox19ConnectionHTTPProxy13handleConnectEPKNS_14ConnectionBaseE @1758
+    _ZThn20_N5gloox19ConnectionHTTPProxy16handleDisconnectEPKNS_14ConnectionBaseENS_15ConnectionErrorE @1759
+    _ZThn20_N5gloox19ConnectionHTTPProxy18handleReceivedDataEPKNS_14ConnectionBaseERKSs @1760
+    _ZThn20_N5gloox19ConnectionHTTPProxyD0Ev @1761
+    _ZThn20_N5gloox19ConnectionHTTPProxyD1Ev @1762
+    _ZThn20_N5gloox21ConnectionSOCKS5Proxy13handleConnectEPKNS_14ConnectionBaseE @1763
+    _ZThn20_N5gloox21ConnectionSOCKS5Proxy16handleDisconnectEPKNS_14ConnectionBaseENS_15ConnectionErrorE @1764
+    _ZThn20_N5gloox21ConnectionSOCKS5Proxy18handleReceivedDataEPKNS_14ConnectionBaseERKSs @1765
+    _ZThn20_N5gloox21ConnectionSOCKS5ProxyD0Ev @1766
+    _ZThn20_N5gloox21ConnectionSOCKS5ProxyD1Ev @1767
+    _ZThn24_N5gloox13ConnectionTLS13handleConnectEPKNS_14ConnectionBaseE @1768
+    _ZThn24_N5gloox13ConnectionTLS16handleDisconnectEPKNS_14ConnectionBaseENS_15ConnectionErrorE @1769
+    _ZThn24_N5gloox13ConnectionTLS18handleReceivedDataEPKNS_14ConnectionBaseERKSs @1770
+    _ZThn24_N5gloox13ConnectionTLSD0Ev @1771
+    _ZThn24_N5gloox13ConnectionTLSD1Ev @1772
+    _ZThn24_N5gloox14ConnectionBOSH9handleTagEPNS_3TagE @1773
+    _ZThn24_N5gloox14ConnectionBOSHD0Ev @1774
+    _ZThn24_N5gloox14ConnectionBOSHD1Ev @1775
+    _ZThn32_N5gloox11Annotations16handlePrivateXMLEPKNS_3TagE @1776
+    _ZThn32_N5gloox11Annotations22handlePrivateXMLResultERKSsNS_17PrivateXMLHandler16PrivateXMLResultE @1777
+    _ZThn32_N5gloox11AnnotationsD0Ev @1778
+    _ZThn32_N5gloox11AnnotationsD1Ev @1779
+    _ZThn32_N5gloox15BookmarkStorage16handlePrivateXMLEPKNS_3TagE @1780
+    _ZThn32_N5gloox15BookmarkStorage22handlePrivateXMLResultERKSsNS_17PrivateXMLHandler16PrivateXMLResultE @1781
+    _ZThn32_N5gloox15BookmarkStorageD0Ev @1782
+    _ZThn32_N5gloox15BookmarkStorageD1Ev @1783
+    _ZThn4_N5gloox10ClientBase13handleConnectEPKNS_14ConnectionBaseE @1784
+    _ZThn4_N5gloox10ClientBase16handleDisconnectEPKNS_14ConnectionBaseENS_15ConnectionErrorE @1785
+    _ZThn4_N5gloox10ClientBase18handleReceivedDataEPKNS_14ConnectionBaseERKSs @1786
+    _ZThn4_N5gloox10ClientBaseD0Ev @1787
+    _ZThn4_N5gloox10ClientBaseD1Ev @1788
+    _ZThn4_N5gloox11SIProfileFT20handleSIRequestErrorERKNS_2IQERKSs @1789
+    _ZThn4_N5gloox11SIProfileFT21handleSIRequestResultERKNS_3JIDES3_RKSsRKNS_9SIManager2SIE @1790
+    _ZThn4_N5gloox11SIProfileFTD0Ev @1791
+    _ZThn4_N5gloox11SIProfileFTD1Ev @1792
+    _ZThn4_N5gloox13ConnectionTLS10disconnectEv @1793
+    _ZThn4_N5gloox13ConnectionTLS13getStatisticsERlS1_ @1794
+    _ZThn4_N5gloox13ConnectionTLS4recvEi @1795
+    _ZThn4_N5gloox13ConnectionTLS4sendERKSs @1796
+    _ZThn4_N5gloox13ConnectionTLS7cleanupEv @1797
+    _ZThn4_N5gloox13ConnectionTLS7connectEv @1798
+    _ZThn4_N5gloox13ConnectionTLS7receiveEv @1799
+    _ZThn4_N5gloox13ConnectionTLSD0Ev @1800
+    _ZThn4_N5gloox13ConnectionTLSD1Ev @1801
+    _ZThn4_N5gloox13RosterManager14handlePresenceERKNS_8PresenceE @1802
+    _ZThn4_N5gloox13RosterManagerD0Ev @1803
+    _ZThn4_N5gloox13RosterManagerD1Ev @1804
+    _ZThn4_N5gloox13UniqueMUCRoomD0Ev @1805
+    _ZThn4_N5gloox13UniqueMUCRoomD1Ev @1806
+    _ZThn4_N5gloox14InstantMUCRoomD0Ev @1807
+    _ZThn4_N5gloox14InstantMUCRoomD1Ev @1808
+    _ZThn4_N5gloox15FlexibleOffline10handleIqIDERKNS_2IQEi @1809
+    _ZThn4_N5gloox15FlexibleOffline8handleIqERKNS_2IQE @1810
+    _ZThn4_N5gloox15FlexibleOfflineD0Ev @1811
+    _ZThn4_N5gloox15FlexibleOfflineD1Ev @1812
+    _ZThn4_N5gloox16SOCKS5Bytestream4recvEi @1813
+    _ZThn4_N5gloox16SOCKS5Bytestream4sendERKSs @1814
+    _ZThn4_N5gloox16SOCKS5Bytestream5closeEv @1815
+    _ZThn4_N5gloox16SOCKS5Bytestream7connectEv @1816
+    _ZThn4_N5gloox16SOCKS5BytestreamD0Ev @1817
+    _ZThn4_N5gloox16SOCKS5BytestreamD1Ev @1818
+    _ZThn4_N5gloox22SOCKS5BytestreamServer13handleConnectEPKNS_14ConnectionBaseE @1819
+    _ZThn4_N5gloox22SOCKS5BytestreamServer16handleDisconnectEPKNS_14ConnectionBaseENS_15ConnectionErrorE @1820
+    _ZThn4_N5gloox22SOCKS5BytestreamServer18handleReceivedDataEPKNS_14ConnectionBaseERKSs @1821
+    _ZThn4_N5gloox22SOCKS5BytestreamServerD0Ev @1822
+    _ZThn4_N5gloox22SOCKS5BytestreamServerD1Ev @1823
+    _ZThn4_N5gloox5Adhoc15handleDiscoInfoERKNS_3JIDERKNS_5Disco4InfoEi @1824
+    _ZThn4_N5gloox5Adhoc16handleDiscoErrorERKNS_3JIDEPKNS_5ErrorEi @1825
+    _ZThn4_N5gloox5Adhoc16handleDiscoItemsERKNS_3JIDERKNS_5Disco5ItemsEi @1826
+    _ZThn4_N5gloox5AdhocD0Ev @1827
+    _ZThn4_N5gloox5AdhocD1Ev @1828
+    _ZThn4_N5gloox6ClientD0Ev @1829
+    _ZThn4_N5gloox6ClientD1Ev @1830
+    _ZThn4_N5gloox7MUCRoom14handlePresenceERKNS_8PresenceE @1831
+    _ZThn4_N5gloox7MUCRoomD0Ev @1832
+    _ZThn4_N5gloox7MUCRoomD1Ev @1833
+    _ZThn4_N5gloox9ComponentD0Ev @1834
+    _ZThn4_N5gloox9ComponentD1Ev @1835
+    _ZThn4_NK5gloox13ConnectionTLS11newInstanceEv @1836
+    _ZThn80_N5gloox16InBandBytestream10handleIqIDERKNS_2IQEi @1837
+    _ZThn80_N5gloox16InBandBytestream8handleIqERKNS_2IQE @1838
+    _ZThn80_N5gloox16InBandBytestreamD0Ev @1839
+    _ZThn80_N5gloox16InBandBytestreamD1Ev @1840
+    _ZThn84_N5gloox16InBandBytestream13handleMessageERKNS_7MessageEPNS_14MessageSessionE @1841
+    _ZThn84_N5gloox16InBandBytestreamD0Ev @1842
+    _ZThn84_N5gloox16InBandBytestreamD1Ev @1843
+    _ZThn8_N5gloox10ClientBase20handleCompressedDataERKSs @1844
+    _ZThn8_N5gloox10ClientBase22handleDecompressedDataERKSs @1845
+    _ZThn8_N5gloox10ClientBaseD0Ev @1846
+    _ZThn8_N5gloox10ClientBaseD1Ev @1847
+    _ZThn8_N5gloox11SIProfileFT21handleBytestreamErrorERKNS_2IQERKSs @1848
+    _ZThn8_N5gloox11SIProfileFT24handleIncomingBytestreamEPNS_10BytestreamE @1849
+    _ZThn8_N5gloox11SIProfileFT24handleOutgoingBytestreamEPNS_10BytestreamE @1850
+    _ZThn8_N5gloox11SIProfileFT31handleIncomingBytestreamRequestERKSsRKNS_3JIDE @1851
+    _ZThn8_N5gloox11SIProfileFTD0Ev @1852
+    _ZThn8_N5gloox11SIProfileFTD1Ev @1853
+    _ZThn8_N5gloox13RosterManager18handleSubscriptionERKNS_12SubscriptionE @1854
+    _ZThn8_N5gloox13RosterManagerD0Ev @1855
+    _ZThn8_N5gloox13RosterManagerD1Ev @1856
+    _ZThn8_N5gloox13UniqueMUCRoom10handleIqIDERKNS_2IQEi @1857
+    _ZThn8_N5gloox13UniqueMUCRoomD0Ev @1858
+    _ZThn8_N5gloox13UniqueMUCRoomD1Ev @1859
+    _ZThn8_N5gloox14InstantMUCRoomD0Ev @1860
+    _ZThn8_N5gloox14InstantMUCRoomD1Ev @1861
+    _ZThn8_N5gloox5Adhoc10handleIqIDERKNS_2IQEi @1862
+    _ZThn8_N5gloox5Adhoc8handleIqERKNS_2IQE @1863
+    _ZThn8_N5gloox5AdhocD0Ev @1864
+    _ZThn8_N5gloox5AdhocD1Ev @1865
+    _ZThn8_N5gloox6ClientD0Ev @1866
+    _ZThn8_N5gloox6ClientD1Ev @1867
+    _ZThn8_N5gloox7MUCRoom10handleIqIDERKNS_2IQEi @1868
+    _ZThn8_N5gloox7MUCRoom8handleIqERKNS_2IQE @1869
+    _ZThn8_N5gloox7MUCRoomD0Ev @1870
+    _ZThn8_N5gloox7MUCRoomD1Ev @1871
+    _ZThn8_N5gloox9ComponentD0Ev @1872
+    _ZThn8_N5gloox9ComponentD1Ev @1873
+    gloox_version @1874
