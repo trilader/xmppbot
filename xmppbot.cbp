@@ -45,7 +45,11 @@
 		</Linker>
 		<Unit filename="include\BotCommand.h" />
 		<Unit filename="include\BotCommandManager.h" />
+		<Unit filename="include\TestBotCommand.h" />
 		<Unit filename="include\XmppBot.h" />
+		<Unit filename="src\BotCommand.cpp" />
+		<Unit filename="src\BotCommandManager.cpp" />
+		<Unit filename="src\TestBotCommand.cpp" />
 		<Unit filename="src\XmppBot.cpp" />
 		<Unit filename="src\main.cpp" />
 		<Extensions>
