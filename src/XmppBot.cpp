@@ -13,6 +13,7 @@ XmppBot::XmppBot()
         ("muc.name","The name to use in the MUC room")
         ("muc.room","The MUC room to connect to")
         ("muc.server","The MUC server to connect to")
+        ("command.admin.password","Password to use admin function")
         ;
 
     std::ifstream ifs("bot.cfg");
@@ -28,6 +29,7 @@ XmppBot::XmppBot()
     std::string muc_name;
     std::string muc_room;
     std::string muc_server;
+    std::string admin_pw;
 
     if(vm.count("server.user"))
         username = vm["server.user"].as<std::string>();
@@ -43,6 +45,8 @@ XmppBot::XmppBot()
         muc_room = vm["muc.room"].as<std::string>();
     if(vm.count("muc.server"))
         muc_server = vm["muc.server"].as<std::string>();
+    if(vm.count("command.admin.password"))
+        admin_pw = vm["command.admin.password"].as<std::string>();
 
     std::cout << "Done." << std::endl;
 
@@ -63,14 +67,12 @@ XmppBot::XmppBot()
 
     m_Room = new MUCRoom(m_Client, muc_nick, this, 0);
 
-    m_Adhoc = new Adhoc(m_Client);
-    m_Adhoc->registerAdhocCommandProvider(this, "name", "friendly_name");
-
     m_Client->registerMessageHandler(this);
     m_Client->registerConnectionListener(this);
 
     this->m_CommandMgr = new BotCommandManager();
-    this->m_CommandMgr->registerCommand("test", new TestBotCommand());
+    //this->m_CommandMgr->registerCommand("test", new TestBotCommand());
+    this->m_CommandMgr->registerCommand("kick", new KickCommand(m_Client,m_Room,admin_pw));
     this->m_CommandMgr->registerCommand("setsbj", new SubjectBotCommand(this->m_Room));
 
     m_Client->connect();
@@ -198,7 +200,7 @@ void XmppBot::handleRosterError( const IQ& iq )
 
 void XmppBot::handleMUCParticipantPresence( MUCRoom* room, const MUCRoomParticipant participant, const Presence& presence )
 {
-
+    std::cout << "Room presence: "<<participant.nick->full()<<" new state: "<<presence.status()<<std::endl;
 }
 
 void XmppBot::handleMUCMessage( MUCRoom* room, const Message& stanza, bool priv )
@@ -232,7 +234,7 @@ void XmppBot::handleMUCInviteDecline( MUCRoom* room, const JID& invitee, const s
 
 void XmppBot::handleMUCError( MUCRoom* room, StanzaError error )
 {
-
+    std::cout <<"Error in " << room->name() << ": "<<error << std::endl;
 }
 
 void XmppBot::handleMUCInfo( MUCRoom* room, int features, const std::string& name, const DataForm* infoForm )
@@ -246,18 +248,7 @@ void XmppBot::handleMUCItems( MUCRoom* room, const Disco::ItemList& items )
 
     for(Disco::ItemList::const_iterator it = items.begin(); it!=items.end(); it++)
     {
-        std::cout << ((Disco::Item*)*it)->name()<<", " << ((Disco::Item*)(*it))->node() << " (" << ((Disco::Item*)(*it))->jid().resource() << ")" << std::endl;
+        std::cout << ((Disco::Item*)(*it))->jid().resource() << std::endl;
     }
 
-}
-
-void XmppBot::handleAdhocCommand( const JID& from, const Adhoc::Command& command, const std::string& sessionID )
-{
-
-}
-
-bool XmppBot::handleAdhocAccessRequest( const JID& from, const std::string& command )
-{
-    // everyone can see all commands
-    return true;
 }
