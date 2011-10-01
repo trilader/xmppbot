@@ -17,6 +17,7 @@
 #include "gloox/adhoccommandprovider.h"
 #include "BotCommandManager.h"
 #include "TestBotCommand.h"
+#include "SubjectBotCommand.h"
 
 #include "boost/program_options.hpp"
 

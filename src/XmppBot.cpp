@@ -71,6 +71,7 @@ XmppBot::XmppBot()
 
     this->m_CommandMgr = new BotCommandManager();
     this->m_CommandMgr->registerCommand("test", new TestBotCommand());
+    this->m_CommandMgr->registerCommand("setsbj", new SubjectBotCommand(this->m_Room));
 
     m_Client->connect();
 }
