@@ -13,10 +13,9 @@
 #include "gloox/rostermanager.h"
 #include "gloox/mucroom.h"
 #include "gloox/mucroomhandler.h"
-#include "gloox/adhoc.h"
-#include "gloox/adhoccommandprovider.h"
 #include "BotCommandManager.h"
 #include "TestBotCommand.h"
+#include "KickCommand.h"
 
 #include "boost/program_options.hpp"
 
@@ -24,7 +23,7 @@ using namespace gloox;
 namespace opt = boost::program_options;
 
 
-class XmppBot: public MessageHandler, ConnectionListener, RosterListener, MUCRoomHandler, AdhocCommandProvider
+class XmppBot: public MessageHandler, ConnectionListener, RosterListener, MUCRoomHandler
 {
 public:
     XmppBot();
@@ -62,15 +61,10 @@ protected:
     void handleMUCInfo( MUCRoom* room, int features, const std::string& name, const DataForm* infoForm );
     void handleMUCItems( MUCRoom* room, const Disco::ItemList& items );
 
-    //AdhocCommandProvider
-    void handleAdhocCommand( const JID& from, const Adhoc::Command& command, const std::string& sessionID );
-    bool handleAdhocAccessRequest( const JID& from, const std::string& command );
-
 private:
     Client* m_Client;
     RosterManager* m_RosterManager;
     MUCRoom* m_Room;
-    Adhoc* m_Adhoc;
     BotCommandManager* m_CommandMgr;
     opt::variables_map vm;
 };

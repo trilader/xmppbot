@@ -3,7 +3,6 @@
 BotCommandManager::BotCommandManager()
 {
     this->_commandMap = new boost::unordered_map<std::string, BotCommand* >();
-    //_commandMap = new std::map<std::string, BotCommand* >();}
 }
 
 void BotCommandManager::registerCommand(const std::string& name, BotCommand *command)
