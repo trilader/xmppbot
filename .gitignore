@@ -1,5 +1,5 @@
 *.cfg
 *.exe
 obj/
-xmppbot.layout
-xmppbot.depend
+*.layout
+*.depend

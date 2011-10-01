@@ -2,6 +2,7 @@
 #define XMPPBOT_H
 
 #include <iostream>
+#include <fstream>
 #include "gloox/client.h"
 #include "gloox/message.h"
 #include "gloox/presence.h"
@@ -15,7 +16,11 @@
 #include "gloox/adhoc.h"
 #include "gloox/adhoccommandprovider.h"
 
+#include "boost/program_options.hpp"
+
 using namespace gloox;
+namespace opt = boost::program_options;
+
 
 class XmppBot: public MessageHandler, ConnectionListener, RosterListener, MUCRoomHandler, AdhocCommandProvider
 {
@@ -64,6 +69,7 @@ private:
     RosterManager* m_RosterManager;
     MUCRoom* m_Room;
     Adhoc* m_Adhoc;
+    opt::variables_map vm;
 };
 
 #endif // XMPPBOT_H

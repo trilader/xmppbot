@@ -39,6 +39,7 @@
 		</Compiler>
 		<Linker>
 			<Add library="gloox" />
+			<Add library="boost_program_options-mgw45-mt-1_47" />
 			<Add directory="lib" />
 			<Add directory="..\boost_1_47_0_sdk\lib" />
 		</Linker>
