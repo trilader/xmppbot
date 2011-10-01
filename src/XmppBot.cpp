@@ -205,11 +205,9 @@ void XmppBot::handleMUCMessage( MUCRoom* room, const Message& stanza, bool priv 
     if(!priv)
         return;
 
-    std::cout << "yepp, ";
-
     std::string msg = stanza.body();
     bool success = false;
-    std::cout << "im ";
+
     this->m_CommandMgr->tryInvokeFromString(msg, stanza.from(),&success);
 
     if(!success)
