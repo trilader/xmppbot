@@ -1,0 +1,8 @@
+server.user=bot
+server.password=my_password
+server.address=example.com
+server.resource=Bot
+
+muc.name=Bot
+muc.room=room
+muc.server=conference.example.com

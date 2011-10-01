@@ -4,14 +4,69 @@ XmppBot::XmppBot()
 {
     std::cout << "Initializing..." << std::endl;
 
+<<<<<<< HEAD
     JID nick("svnbot@shin-project.org/bot");
 
     m_Client = new Client( nick, "5h1n_svn_b0t");
+=======
+    opt::options_description desc("Options");
+    desc.add_options()
+        ("server.user","User name")
+        ("server.password","Password")
+        ("server.address","The server to connect to")
+        ("server.resource","The resource to connect as")
+        ("muc.name","The name to use in the MUC room")
+        ("muc.room","The MUC room to connect to")
+        ("muc.server","The MUC server to connect to")
+        ;
+
+    std::ifstream ifs("bot.cfg");
+    opt::store(opt::parse_config_file(ifs, desc), vm);
+    opt::notify(vm);
+
+    std::cout << "Loaded \"bot.cfg\". Parsing... ";
+
+    std::string username;
+    std::string password;
+    std::string server;
+    std::string resource;
+    std::string muc_name;
+    std::string muc_room;
+    std::string muc_server;
+
+    if(vm.count("server.user"))
+        username = vm["server.user"].as<std::string>();
+    if(vm.count("server.password"))
+        password = vm["server.password"].as<std::string>();
+    if(vm.count("server.address"))
+        server = vm["server.address"].as<std::string>();
+    if(vm.count("server.resource"))
+        resource = vm["server.resource"].as<std::string>();
+    if(vm.count("muc.name"))
+        muc_name = vm["muc.name"].as<std::string>();
+    if(vm.count("muc.room"))
+        muc_room = vm["muc.room"].as<std::string>();
+    if(vm.count("muc.server"))
+        muc_server = vm["muc.server"].as<std::string>();
+
+    std::cout << "Done." << std::endl;
+
+    JID nick;
+    nick.setUsername(username);
+    nick.setResource(resource);
+    nick.setServer(server);
+
+    m_Client = new Client( nick, password);
+>>>>>>> ad76a93487ccfbf1c0f1e0e6a946f160abcac9d5
 
     m_RosterManager = m_Client->rosterManager();
     m_RosterManager->registerRosterListener(this);
 
-    JID muc_nick("rwth@conference.shin-project.org/Bot");
+    JID muc_nick;
+    muc_nick.setUsername(muc_room);
+    muc_nick.setResource(muc_name);
+    muc_nick.setServer(muc_server);
+
     m_Room = new MUCRoom(m_Client, muc_nick, this, 0);
 
     m_Adhoc = new Adhoc(m_Client);
