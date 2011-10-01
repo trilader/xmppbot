@@ -6,7 +6,7 @@ XmppBot::XmppBot()
 
     JID nick("svnbot@shin-project.org/bot");
 
-    m_Client = new Client( nick, "xxxxxx");
+    m_Client = new Client( nick, "5h1n_svn_b0t");
 
     m_RosterManager = m_Client->rosterManager();
     m_RosterManager->registerRosterListener(this);
@@ -19,6 +19,10 @@ XmppBot::XmppBot()
 
     m_Client->registerMessageHandler(this);
     m_Client->registerConnectionListener(this);
+
+    this->m_CommandMgr = new BotCommandManager();
+    this->m_CommandMgr->registerCommand("test", new TestBotCommand());
+
     m_Client->connect();
 }
 
@@ -42,7 +46,11 @@ void XmppBot::handleMessage( const Message& stanza, MessageSession* session)
     std::string jid = stanza.from().bareJID().full();
     std::string msg = stanza.body();
 
+    bool success = false;
+    this->m_CommandMgr->tryInvokeFromString(msg, stanza.from(),&success);
 
+    if(!success)
+        std::cout <<  "invoke command failed" << std::endl;
 
     Message m(Message::Chat, stanza.from(), "Hi, "+stanza.from().username()+" you wrote: \""+stanza.body()+"\".");
     m_Client->send(m);
@@ -143,9 +151,20 @@ void XmppBot::handleMUCParticipantPresence( MUCRoom* room, const MUCRoomParticip
 
 }
 
-void XmppBot::handleMUCMessage( MUCRoom* room, const Message& msg, bool priv )
+void XmppBot::handleMUCMessage( MUCRoom* room, const Message& stanza, bool priv )
 {
+    if(!priv)
+        return;
 
+    std::cout << "yepp, ";
+
+    std::string msg = stanza.body();
+    bool success = false;
+    std::cout << "im ";
+    this->m_CommandMgr->tryInvokeFromString(msg, stanza.from(),&success);
+
+    if(!success)
+        std::cout <<  "invoke command failed" << std::endl;
 }
 
 bool XmppBot::handleMUCRoomCreation( MUCRoom* room )

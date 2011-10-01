@@ -14,6 +14,8 @@
 #include "gloox/mucroomhandler.h"
 #include "gloox/adhoc.h"
 #include "gloox/adhoccommandprovider.h"
+#include "BotCommandManager.h"
+#include "TestBotCommand.h"
 
 using namespace gloox;
 
@@ -64,6 +66,7 @@ private:
     RosterManager* m_RosterManager;
     MUCRoom* m_Room;
     Adhoc* m_Adhoc;
+    BotCommandManager* m_CommandMgr;
 };
 
 #endif // XMPPBOT_H

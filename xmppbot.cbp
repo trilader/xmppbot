@@ -42,6 +42,8 @@
 			<Add directory="lib" />
 			<Add directory="..\boost_1_47_0_sdk\lib" />
 		</Linker>
+		<Unit filename="include\BotCommand.h" />
+		<Unit filename="include\BotCommandManager.h" />
 		<Unit filename="include\XmppBot.h" />
 		<Unit filename="src\XmppBot.cpp" />
 		<Unit filename="src\main.cpp" />
