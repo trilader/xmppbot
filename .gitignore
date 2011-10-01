@@ -1,12 +1,5 @@
 *.cfg
 *.exe
 obj/
-<<<<<<< HEAD
-xmppbot.layout
-xmppbot.depend
-*.depend
-*.layout
-=======
 *.layout
 *.depend
->>>>>>> ad76a93487ccfbf1c0f1e0e6a946f160abcac9d5

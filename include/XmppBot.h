@@ -71,11 +71,8 @@ private:
     RosterManager* m_RosterManager;
     MUCRoom* m_Room;
     Adhoc* m_Adhoc;
-<<<<<<< HEAD
     BotCommandManager* m_CommandMgr;
-=======
     opt::variables_map vm;
->>>>>>> ad76a93487ccfbf1c0f1e0e6a946f160abcac9d5
 };
 
 #endif // XMPPBOT_H

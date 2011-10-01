@@ -4,11 +4,6 @@ XmppBot::XmppBot()
 {
     std::cout << "Initializing..." << std::endl;
 
-<<<<<<< HEAD
-    JID nick("svnbot@shin-project.org/bot");
-
-    m_Client = new Client( nick, "5h1n_svn_b0t");
-=======
     opt::options_description desc("Options");
     desc.add_options()
         ("server.user","User name")
@@ -57,7 +52,6 @@ XmppBot::XmppBot()
     nick.setServer(server);
 
     m_Client = new Client( nick, password);
->>>>>>> ad76a93487ccfbf1c0f1e0e6a946f160abcac9d5
 
     m_RosterManager = m_Client->rosterManager();
     m_RosterManager->registerRosterListener(this);
