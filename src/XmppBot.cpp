@@ -14,6 +14,8 @@ XmppBot::XmppBot()
         ("muc.room","The MUC room to connect to")
         ("muc.server","The MUC server to connect to")
         ("command.admin.password","Password to use admin function")
+        ("command.subject.eventname","Name of an important event which should be mentioned in the room subject")
+        ("command.subject.eventdate","Date of an important event ( depends on command.subject.eventname ); format: year-month-day eg: 2002-1-25")
         ;
 
     std::ifstream ifs("bot.cfg");
@@ -31,6 +33,9 @@ XmppBot::XmppBot()
     std::string muc_server;
     std::string admin_pw;
 
+    std::string subject_event_name;
+    std::string subject_event_date;
+
     if(vm.count("server.user"))
         username = vm["server.user"].as<std::string>();
     if(vm.count("server.password"))
@@ -47,6 +52,12 @@ XmppBot::XmppBot()
         muc_server = vm["muc.server"].as<std::string>();
     if(vm.count("command.admin.password"))
         admin_pw = vm["command.admin.password"].as<std::string>();
+
+    if(vm.count("command.subject.eventname") && vm.count("command.subject.eventdate"))
+    {
+        subject_event_name = vm["command.subject.eventname"].as<std::string>();
+        subject_event_date = vm["command.subject.eventdate"].as<std::string>();
+    }
 
     std::cout << "Done." << std::endl;
 
@@ -73,7 +84,12 @@ XmppBot::XmppBot()
     this->m_CommandMgr = new BotCommandManager();
     //this->m_CommandMgr->registerCommand("test", new TestBotCommand());
     this->m_CommandMgr->registerCommand("kick", new KickCommand(m_Client,m_Room,admin_pw));
-    this->m_CommandMgr->registerCommand("setsbj", new SubjectBotCommand(this->m_Room));
+
+    SubjectBotCommand *subjcmd = new SubjectBotCommand(this->m_Room, admin_pw);
+    if(subject_event_name.length() > 0)
+        subjcmd->setEvent(subject_event_name, subject_event_date);
+
+    this->m_CommandMgr->registerCommand("setsbj", subjcmd);
 
     m_Client->connect();
 }
