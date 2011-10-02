@@ -131,7 +131,6 @@ void XmppBot::onConnect()
 
     m_Room->join();
     m_Room->getRoomItems();
-    m_Room->requestList(GetRoomItems);
 }
 
 void XmppBot::onDisconnect(ConnectionError e)
