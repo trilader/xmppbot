@@ -82,7 +82,7 @@ XmppBot::XmppBot()
     m_Client->registerConnectionListener(this);
 
     this->m_CommandMgr = new BotCommandManager();
-    //this->m_CommandMgr->registerCommand("test", new TestBotCommand());
+    this->m_CommandMgr->registerCommand("test", new TestBotCommand());
     this->m_CommandMgr->registerCommand("kick", new KickBotCommand(m_Client,m_Room,admin_pw));
 
     SubjectBotCommand *subjcmd = new SubjectBotCommand(this->m_Room, admin_pw);
@@ -221,10 +221,18 @@ void XmppBot::handleMUCParticipantPresence( MUCRoom* room, const MUCRoomParticip
 
 void XmppBot::handleMUCMessage( MUCRoom* room, const Message& stanza, bool priv )
 {
-    if(!priv)
+    std::string msg = stanza.body();
+    bool handle = priv;
+
+    if(msg.size() > 0 && msg.at(0) == '!')
+    {
+        msg = msg.substr(1);
+        handle = true;
+    }
+
+    if(!handle)
         return;
 
-    std::string msg = stanza.body();
     std::string response;
 
     bool success = this->m_CommandMgr->tryInvokeFromString(msg, stanza.from(),&response);

@@ -34,7 +34,7 @@ bool SubjectBotCommand::invoke(const JID& user, const std::string& args, std::st
 
     this->_room->setSubject(prefix + subject);
 
-    *response = "";
+    *response = "Subject set to \"" + prefix + subject + "\".";
     return true;
 }
 
