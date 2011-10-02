@@ -1,25 +1,25 @@
 [server]
 #Username for server connection
-server.user=bot
+user=bot
 
 #Password for server connection
-server.password=my_password
+password=my_password
 
 #Server to connect to
-server.address=example.com
+address=example.com
 
 #Ressource to use
-server.resource=Bot
+resource=Bot
 
 [muc]
 #The bots nickname in the MUC room
-muc.name=Bot
+name=Bot
 
 #The MUC room name
-muc.room=room
+room=room
 
 #The conference server the room is on
-muc.server=conference.example.com
+server=conference.example.com
 
 [command]
 #Bot administration password. Required for some commands like setsbj and kick user
