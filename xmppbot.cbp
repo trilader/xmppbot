@@ -48,6 +48,7 @@
 		<Unit filename="include\BotCommand.h" />
 		<Unit filename="include\BotCommandManager.h" />
 		<Unit filename="include\KickCommand.h" />
+		<Unit filename="include\StateBotCommand.h" />
 		<Unit filename="include\SubjectBotCommand.h" />
 		<Unit filename="include\TestBotCommand.h" />
 		<Unit filename="include\XmppBot.h" />
