@@ -24,6 +24,7 @@
 #include "StateBotCommand.h"
 #include "AliasBotCommand.h"
 #include "HelpBotCommand.h"
+#include "AdminBotCommand.h"
 
 using namespace gloox;
 namespace opt = boost::program_options;
@@ -82,6 +83,8 @@ private:
     boost::unordered_map<JID,JID>* m_UserNicknameMap;
 
     StateBotCommand* m_StateCommand;
+
+    bool m_bePolite;
 };
 
 #endif // XMPPBOT_H

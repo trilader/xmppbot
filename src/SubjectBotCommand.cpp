@@ -1,22 +1,21 @@
 #include "SubjectBotCommand.h"
 
-SubjectBotCommand::SubjectBotCommand(MUCRoom *room, std::string adminpw)
+SubjectBotCommand::SubjectBotCommand(MUCRoom *room, std::string adminpw) : ProtectedBotCommand(adminpw)
 {
     this->_room = room;
-    this->_adminpw = adminpw;
 }
 
 bool SubjectBotCommand::invoke(const JID& user, const std::string& args, std::string *response) const
 {
-    std::string adminpw, subject;
-    bool success = this->parseArgs(args, &adminpw, &subject);
-    if(!success)
+    std::string subject;
+    bool success = this->checkPassword(args, &subject);
+    if("" == subject)
     {
-        *response = "expecting 2 arguments";
+        *response = "expecting custom subject";
         return false;
     }
 
-    if(adminpw != this->_adminpw)
+    if(!success)
     {
         *response = "wrong password";
         return false;
@@ -45,21 +44,6 @@ std::string SubjectBotCommand::getHelp() const
 
 bool SubjectBotCommand::showHelp() const
 {
-    return true;
-}
-
-bool SubjectBotCommand::parseArgs(const std::string& args, std::string *adminpw, std::string *subject) const
-{
-    std::string cpy = boost::trim_copy(args);
-
-    std::size_t splitpos = cpy.find(" ");
-
-    if(std::string::npos == splitpos)
-        return false;
-
-    *adminpw = cpy.substr(0,splitpos);
-    *subject = cpy.substr(splitpos + 1);
-
     return true;
 }
 

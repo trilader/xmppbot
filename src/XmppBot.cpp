@@ -16,6 +16,7 @@ XmppBot::XmppBot()
         ("command.admin.password","Password to use admin function")
         ("command.subject.eventname","Name of an important event which should be mentioned in the room subject")
         ("command.subject.eventdate","Date of an important event ( depends on command.subject.eventname ); format: year-month-day eg: 2002-1-25")
+        ("bot.polite","if enabled the bot says \"hi\" and \"goodbye\"")
         ;
 
     std::ifstream ifs("bot.cfg");
@@ -36,6 +37,8 @@ XmppBot::XmppBot()
     std::string subject_event_name;
     std::string subject_event_date;
 
+    std::string polite = "no";
+
     if(vm.count("server.user"))
         username = vm["server.user"].as<std::string>();
     if(vm.count("server.password"))
@@ -52,6 +55,8 @@ XmppBot::XmppBot()
         muc_server = vm["muc.server"].as<std::string>();
     if(vm.count("command.admin.password"))
         admin_pw = vm["command.admin.password"].as<std::string>();
+    if(vm.count("bot.polite"))
+        polite = vm["bot.polite"].as<std::string>();
 
     if(vm.count("command.subject.eventname") && vm.count("command.subject.eventdate"))
     {
@@ -60,6 +65,8 @@ XmppBot::XmppBot()
     }
 
     std::cout << "Done." << std::endl;
+
+    this->m_bePolite = polite == "yes";
 
     m_UserNicknameMap = new boost::unordered_map<JID,JID>();
 
@@ -99,6 +106,8 @@ XmppBot::XmppBot()
     //register aliases for this->m_StateCommand
     this->m_CommandMgr->registerCommand("afk", new AliasBotCommand("afk ","","[<message>] - Go afk. An optional message cam be set",true,this->m_StateCommand));
     this->m_CommandMgr->registerCommand("re", new AliasBotCommand("re ","","Come back from being afk",true,this->m_StateCommand));
+
+    this->m_CommandMgr->registerCommand("admin", new AdminBotCommand(admin_pw, this->m_Client));
 
     m_Client->connect();
 }
@@ -162,6 +171,9 @@ void XmppBot::onConnect()
 
     m_Room->join();
     m_Room->getRoomItems();
+
+    if(this->m_bePolite)
+        this->m_Room->send("hi");
 }
 
 void XmppBot::onDisconnect(ConnectionError e)
@@ -249,6 +261,7 @@ void XmppBot::handleMUCParticipantPresence( MUCRoom* room, const MUCRoomParticip
 {
     if( presence.presence() == Presence::Unavailable )
     {
+        this->m_StateCommand->removeUserState(*(participant.nick));
         m_UserNicknameMap->erase(*(participant.jid));
         std::cout << participant.nick->resource()<<" left the room"<<std::endl;
     }
