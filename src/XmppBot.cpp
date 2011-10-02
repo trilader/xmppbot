@@ -83,7 +83,7 @@ XmppBot::XmppBot()
 
     this->m_CommandMgr = new BotCommandManager();
     this->m_CommandMgr->registerCommand("test", new TestBotCommand());
-    this->m_CommandMgr->registerCommand("kick", new KickCommand(m_Client,m_Room,admin_pw));
+    this->m_CommandMgr->registerCommand("kick", new KickBotCommand(m_Client,m_Room,admin_pw));
 
     SubjectBotCommand *subjcmd = new SubjectBotCommand(this->m_Room, admin_pw);
     if(subject_event_name.length() > 0)
@@ -242,9 +242,11 @@ void XmppBot::handleMUCMessage( MUCRoom* room, const Message& stanza, bool priv 
     if(success)
         state = "[ OK ]";
     else
-        state = "[ fail ]";
+        state = "[ Fail ]";
 
     std::cout << state << " " << response << std::endl;
+    Message m(Message::Chat, stanza.from(),state+" "+response);
+    m_Client->send(m);
 }
 
 bool XmppBot::handleMUCRoomCreation( MUCRoom* room )
