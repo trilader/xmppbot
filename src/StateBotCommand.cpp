@@ -3,7 +3,7 @@
 StateBotCommand::StateBotCommand(MUCRoom *room)
 {
     this->_room = room;
-    this->_afkMap = new boost::unordered_map<std::string, boost::posix_time::ptime >();
+    this->_afkMap = new boost::unordered_map<std::string, std::pair<boost::posix_time::ptime,std::string>>();
 }
 
 bool StateBotCommand::invoke(const JID& user, const std::string& args, std::string *response) const
@@ -25,10 +25,11 @@ bool StateBotCommand::invoke(const JID& user, const std::string& args, std::stri
     boost::posix_time::ptime t(boost::posix_time::second_clock::local_time());
     if(state == "afk")
     {
-        (*(this->_afkMap))[user.resource()] = t;
         std::string reason_str;
         if(reason.length() > 0)
-            reason_str = " ( reason: " + reason +" )";
+            reason_str = " ( "+reason+" )";
+
+        (*(this->_afkMap))[user.resource()] = std::pair<boost::posix_time::ptime,std::string>(t,reason_str);
 
         this->_room->send(user.resource() + " is afk" + reason_str + "!");
     }
@@ -40,13 +41,19 @@ bool StateBotCommand::invoke(const JID& user, const std::string& args, std::stri
             return false;
         }
 
-        boost::posix_time::time_period period((*(this->_afkMap))[user.resource()], t);
+        boost::posix_time::time_period period((*(this->_afkMap))[user.resource()].first, t);
+        std::string r = (*(this->_afkMap))[user.resource()].second;
 
         this->_afkMap->erase(user.resource());
-        this->_room->send(user.resource() + " is back ( was " + boost::posix_time::to_simple_string(period.length()) + " afk )!");
+        this->_room->send(user.resource() + " is back from " +r+" (" + boost::posix_time::to_simple_string(period.length()) + ")!");
     }
 
     return true;
+}
+
+std::string StateBotCommand::help() const
+{
+    return std::string("");
 }
 
 bool StateBotCommand::parseArgs(const std::string& args, std::string *state, std::string *reason) const

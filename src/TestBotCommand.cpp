@@ -7,3 +7,8 @@ bool TestBotCommand::invoke(const JID& user, const std::string& args, std::strin
 
     return true;
 }
+
+std::string TestBotCommand::help() const
+{
+    return std::string("");
+}

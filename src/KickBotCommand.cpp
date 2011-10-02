@@ -41,3 +41,8 @@ bool KickBotCommand::invoke(const JID& user, const std::string& args, std::strin
     m_Room->kick(arg[1],"Kicked by "+user.resource());
     return true;
 }
+
+std::string KickBotCommand::help() const
+{
+    return std::string("");
+}

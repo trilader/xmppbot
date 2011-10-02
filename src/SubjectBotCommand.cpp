@@ -38,6 +38,11 @@ bool SubjectBotCommand::invoke(const JID& user, const std::string& args, std::st
     return true;
 }
 
+std::string SubjectBotCommand::help() const
+{
+    return std::string("<password> <subject> - Set the rooms description");
+}
+
 bool SubjectBotCommand::parseArgs(const std::string& args, std::string *adminpw, std::string *subject) const
 {
     std::string cpy = boost::trim_copy(args);

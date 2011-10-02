@@ -11,3 +11,8 @@ bool AliasBotCommand::invoke(const JID& user, const std::string& args, std::stri
 {
     return this->_command->invoke(user, this->_prefix + args + this->_postfix, response);
 }
+
+std::string AliasBotCommand::help() const
+{
+    return std::string("");
+}

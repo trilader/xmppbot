@@ -12,6 +12,7 @@ class SubjectBotCommand : public BotCommand
 public:
     SubjectBotCommand(MUCRoom *room, std::string adminpw);
     bool invoke(const JID& user, const std::string& args, std::string *response) const;
+    std::string help() const;
     void setEvent(std::string name, std::string datestr);
 
 private:
