@@ -9,10 +9,10 @@
 
 #include "BotCommand.h"
 
-class KickCommand : public BotCommand
+class KickBotCommand : public BotCommand
 {
 public:
-    KickCommand(Client* client, MUCRoom* room, std::string password);
+    KickBotCommand(Client* client, MUCRoom* room, std::string password);
     bool invoke(const JID& user, const std::string& args, std::string *response) const;
 
 private:

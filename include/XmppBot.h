@@ -17,7 +17,7 @@
 #include "BotCommandManager.h"
 #include "TestBotCommand.h"
 #include "SubjectBotCommand.h"
-#include "KickCommand.h"
+#include "KickBotCommand.h"
 
 #include "boost/program_options.hpp"
 
