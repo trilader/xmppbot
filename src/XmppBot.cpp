@@ -93,6 +93,12 @@ XmppBot::XmppBot()
 
     this->m_CommandMgr->registerCommand("setsbj", subjcmd);
 
+    BotCommand *statecmd = new StateBotCommand(this->m_Room);
+    this->m_CommandMgr->registerCommand("state", statecmd);
+    //register aliases for statecmd
+    this->m_CommandMgr->registerCommand("afk", new AliasBotCommand("afk ","",statecmd));
+    this->m_CommandMgr->registerCommand("re", new AliasBotCommand("re ","",statecmd));
+
     m_Client->connect();
 }
 

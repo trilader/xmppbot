@@ -18,6 +18,8 @@
 #include "TestBotCommand.h"
 #include "SubjectBotCommand.h"
 #include "KickBotCommand.h"
+#include "StateBotCommand.h"
+#include "AliasBotCommand.h"
 
 #include "boost/program_options.hpp"
 
