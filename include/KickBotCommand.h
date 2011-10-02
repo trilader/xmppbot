@@ -14,7 +14,8 @@ class KickBotCommand : public BotCommand
 public:
     KickBotCommand(Client* client, MUCRoom* room, std::string password);
     bool invoke(const JID& user, const std::string& args, std::string *response) const;
-    std::string help() const;
+    std::string getHelp() const;
+    bool showHelp() const;
 
 private:
     Client* m_Client;

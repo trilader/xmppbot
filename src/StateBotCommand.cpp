@@ -68,9 +68,14 @@ bool StateBotCommand::invoke(const JID& user, const std::string& args, std::stri
     return true;
 }
 
-std::string StateBotCommand::help() const
+std::string StateBotCommand::getHelp() const
 {
-    return std::string("");
+    return std::string("<state> [<reason>] - State can be \"afk\" or \"re\". If the state is afk you can specify an optional message for the room");
+}
+
+bool StateBotCommand::showHelp() const
+{
+    return true;
 }
 
 bool StateBotCommand::parseArgs(const std::string& args, std::string *state, std::string *reason) const

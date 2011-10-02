@@ -1,10 +1,12 @@
 #include "AliasBotCommand.h"
 
-AliasBotCommand::AliasBotCommand(std::string prefix, std::string postfix, BotCommand *command)
+AliasBotCommand::AliasBotCommand(std::string prefix, std::string postfix, std::string helptext, bool showInHelp, BotCommand *command)
 {
     this->_command = command;
     this->_prefix = prefix;
     this->_postfix = postfix;
+    this->_helptext = helptext;
+    this->_showInHelp = showInHelp;
 }
 
 bool AliasBotCommand::invoke(const JID& user, const std::string& args, std::string *response) const
@@ -12,7 +14,12 @@ bool AliasBotCommand::invoke(const JID& user, const std::string& args, std::stri
     return this->_command->invoke(user, this->_prefix + args + this->_postfix, response);
 }
 
-std::string AliasBotCommand::help() const
+std::string AliasBotCommand::getHelp() const
 {
-    return std::string("");
+    return _helptext;
+}
+
+bool AliasBotCommand::showHelp() const
+{
+    return _showInHelp;
 }

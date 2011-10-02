@@ -15,16 +15,18 @@ class BotCommandManager
 {
 public:
     BotCommandManager();
+    ~BotCommandManager();
 
     void registerCommand(const std::string& name, BotCommand *cmd);
     bool tryInvokeFromString(const std::string& str,const JID& user, std::string *response);
     bool tryInvoke(const std::string& name, const std::string& args, const JID& user, std::string *response);
     bool isKnownCommand(const std::string& name);
+    const boost::unordered_map<std::string, BotCommand*>* getCommands() const;
 
     static void splitCommandString(const std::string& str, std::string *name, std::string *args);
 
 private:
-    boost::unordered_map<std::string, BotCommand* > *_commandMap;
+    boost::unordered_map<std::string, BotCommand*>* _commandMap;
 };
 
 #endif

@@ -92,27 +92,31 @@ XmppBot::XmppBot()
         subjcmd->setEvent(subject_event_name, subject_event_date);
 
     this->m_CommandMgr->registerCommand("setsbj", subjcmd);
+    this->m_CommandMgr->registerCommand("help", new HelpBotCommand(m_CommandMgr->getCommands()));
 
     this->m_StateCommand = new StateBotCommand(this->m_Room);
     this->m_CommandMgr->registerCommand("state", this->m_StateCommand);
     //register aliases for this->m_StateCommand
-    this->m_CommandMgr->registerCommand("afk", new AliasBotCommand("afk ","",this->m_StateCommand));
-    this->m_CommandMgr->registerCommand("re", new AliasBotCommand("re ","",this->m_StateCommand));
+    this->m_CommandMgr->registerCommand("afk", new AliasBotCommand("afk ","","[<message>] - Go afk. An optional message cam be set",true,this->m_StateCommand));
+    this->m_CommandMgr->registerCommand("re", new AliasBotCommand("re ","","Come back from being afk",true,this->m_StateCommand));
 
     m_Client->connect();
 }
 
 XmppBot::~XmppBot()
 {
-    if(m_Client!=0)
-    {
-        if(m_Client->state()==StateConnected || m_Client->state()==StateConnecting)
-        {
-            m_Client->disconnect();
-        }
-    }
-    delete m_Client;
-    m_Client=0;
+    if(m_Client!=NULL)
+        delete m_Client;
+
+    if(m_CommandMgr!=NULL)
+        delete m_CommandMgr;
+
+    if(m_UserNicknameMap!=NULL)
+        delete m_UserNicknameMap;
+
+    m_UserNicknameMap=NULL;
+    m_CommandMgr=NULL;
+    m_Client=NULL;
 }
 
 void XmppBot::handleMessage( const Message& stanza, MessageSession* session)
@@ -167,46 +171,46 @@ void XmppBot::onDisconnect(ConnectionError e)
 
 bool XmppBot::onTLSConnect(const CertInfo& info)
 {
-    std::cout << "Certificate accepted!" << std::endl;
+//    std::cout << "Certificate accepted!" << std::endl;
     return true;
 }
 
 void XmppBot::handleItemAdded( const JID& jid )
 {
-    std::cout << "Added: " << jid.full() << std::endl;
+//    std::cout << "Added: " << jid.full() << std::endl;
 }
 
 void XmppBot::handleItemSubscribed( const JID& jid )
 {
-    std::cout << "Subscribed to: " << jid.full() << std::endl;
+//    std::cout << "Subscribed to: " << jid.full() << std::endl;
 }
 
 void XmppBot::handleItemRemoved( const JID& jid )
 {
-    std::cout << "Removed: " << jid.full() << std::endl;
+//    std::cout << "Removed: " << jid.full() << std::endl;
 }
 
 void XmppBot::handleItemUpdated( const JID& jid )
 {
-    std::cout << "Updated: " << jid.full() << std::endl;
+//    std::cout << "Updated: " << jid.full() << std::endl;
 }
 
 void XmppBot::handleItemUnsubscribed( const JID& jid )
 {
-    std::cout << "Unsubscribed from: " << jid.full() << std::endl;
+//    std::cout << "Unsubscribed from: " << jid.full() << std::endl;
 }
 
 void XmppBot::handleRoster( const Roster& roster )
 {
-    std::cout << "My roster:" << std::endl;
+/*    std::cout << "My roster:" << std::endl;
     for(Roster::const_iterator it=roster.begin(); it!=roster.end(); it++)
         std::cout << ((RosterItem*)(*it).second)->jid() << std::endl;
-    std::cout << "End of roster." << std::endl;
+    std::cout << "End of roster." << std::endl;*/
 }
 
 void XmppBot::handleRosterPresence( const RosterItem& item, const std::string& resource, Presence::PresenceType presence, const std::string& msg )
 {
-    std::cout << "Roster presence update: " << item.jid() << ": " << msg << std::endl;
+//    std::cout << "Roster presence update: " << item.jid() << ": " << msg << std::endl;
 }
 
 void XmppBot::handleSelfPresence( const RosterItem& item, const std::string& resource, Presence::PresenceType presence, const std::string& msg )
@@ -216,7 +220,7 @@ void XmppBot::handleSelfPresence( const RosterItem& item, const std::string& res
 
 bool XmppBot::handleSubscriptionRequest( const JID& jid, const std::string& msg )
 {
-    std::cout << "Got a subscription request from: " << jid.full() << std::endl;
+//    std::cout << "Got a subscription request from: " << jid.full() << std::endl;
     m_RosterManager->ackSubscriptionRequest(jid, true);
     m_RosterManager->subscribe(jid,"SVN-Bot",StringList(),"Hi I am the SVN-Bot from shin-project.org");
     m_RosterManager->synchronize();
@@ -225,7 +229,7 @@ bool XmppBot::handleSubscriptionRequest( const JID& jid, const std::string& msg 
 
 bool XmppBot::handleUnsubscriptionRequest( const JID& jid, const std::string& msg )
 {
-    std::cout << "Got an unsubscribe request from: " << jid.full() << std::endl;
+//    std::cout << "Got an unsubscribe request from: " << jid.full() << std::endl;
     m_RosterManager->unsubscribe(jid);
     m_RosterManager->synchronize();
     return true;
@@ -233,19 +237,29 @@ bool XmppBot::handleUnsubscriptionRequest( const JID& jid, const std::string& ms
 
 void XmppBot::handleNonrosterPresence( const Presence& presence )
 {
-    std::cout << " Got a non-roster presence: " << presence.from().full() << ": " << presence.status() << std::endl;
+//    std::cout << " Got a non-roster presence: " << presence.from().full() << ": " << presence.status() << std::endl;
 }
 
 void XmppBot::handleRosterError( const IQ& iq )
 {
-    std::cerr << "Roster error: " << iq.error() << std::endl;
+//    std::cerr << "Roster error: " << iq.error() << std::endl;
 }
 
 void XmppBot::handleMUCParticipantPresence( MUCRoom* room, const MUCRoomParticipant participant, const Presence& presence )
 {
-    (*m_UserNicknameMap)[*(participant.jid)]=*participant.nick;
+    if( presence.presence() == Presence::Unavailable )
+    {
+        m_UserNicknameMap->erase(*(participant.jid));
+        std::cout << participant.nick->resource()<<" left the room"<<std::endl;
+    }
+    else
+    {
+        (*m_UserNicknameMap)[*(participant.jid)]=*participant.nick;
+        std::cout << participant.nick->resource()<<" joined or updated his status"<<std::endl;
+    }
 
-    std::cout << "Room presence: "<<participant.nick->full()<<" ("<<participant.jid->bare()<<") new state: "<<presence.status()<<std::endl;
+
+    //std::cout << "Room presence: "<<participant.nick->full()<<" ("<<participant.jid->bare()<<") flags: "<<std::hex<<participant.flags<<std::endl;
 }
 
 void XmppBot::handleMUCMessage( MUCRoom* room, const Message& stanza, bool priv )
@@ -300,7 +314,7 @@ void XmppBot::handleMUCInviteDecline( MUCRoom* room, const JID& invitee, const s
 
 void XmppBot::handleMUCError( MUCRoom* room, StanzaError error )
 {
-    std::cout <<"Error in " << room->name() << ": "<<error << std::endl;
+//    std::cout <<"Error in " << room->name() << ": "<<error << std::endl;
 }
 
 void XmppBot::handleMUCInfo( MUCRoom* room, int features, const std::string& name, const DataForm* infoForm )
@@ -310,13 +324,14 @@ void XmppBot::handleMUCInfo( MUCRoom* room, int features, const std::string& nam
 
 void XmppBot::handleMUCItems( MUCRoom* room, const Disco::ItemList& items )
 {
+/*
     std::cout << "Users in " << room->name() << ":" << std::endl;
 
     for(Disco::ItemList::const_iterator it = items.begin(); it!=items.end(); it++)
     {
         std::cout << ((Disco::Item*)(*it))->jid().resource() << std::endl;
     }
-
+*/
 }
 
 void XmppBot::handleMUCConfigList( MUCRoom* room, const MUCListItemList& items, MUCOperation operation )
@@ -331,7 +346,7 @@ void XmppBot::handleMUCConfigForm( MUCRoom* room, const DataForm& form )
 
 void XmppBot::handleMUCConfigResult( MUCRoom* room, bool success, MUCOperation operation )
 {
-    std::cout << ""<<operation << " in " << room->name() << " " << (success?"succeeded":"failed") << std::endl;
+//    std::cout << ""<<operation << " in " << room->name() << " " << (success?"succeeded":"failed") << std::endl;
 }
 
 void XmppBot::handleMUCRequest( MUCRoom* room, const DataForm& form )

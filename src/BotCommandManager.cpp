@@ -5,9 +5,16 @@ BotCommandManager::BotCommandManager()
     this->_commandMap = new boost::unordered_map<std::string, BotCommand* >();
 }
 
+BotCommandManager::~BotCommandManager()
+{
+    for(boost::unordered_map<std::string, BotCommand*>::const_iterator it=_commandMap->begin(); it!=_commandMap->end(); it++)
+        if(it->second!=NULL)
+            delete it->second;
+}
+
 void BotCommandManager::registerCommand(const std::string& name, BotCommand *command)
 {
-    if(0 == command)
+    if(NULL == command)
         return;
 
     (*_commandMap)[name] = command;
@@ -36,6 +43,11 @@ bool BotCommandManager::tryInvokeFromString(const std::string& str,const JID& us
 bool BotCommandManager::isKnownCommand(const std::string& name)
 {
     return _commandMap->find(name) != _commandMap->end();
+}
+
+const boost::unordered_map<std::string, BotCommand*>* BotCommandManager::getCommands() const
+{
+    return (const boost::unordered_map<std::string, BotCommand*>*)_commandMap;
 }
 
 void BotCommandManager::splitCommandString(const std::string& str, std::string *name, std::string *args)
