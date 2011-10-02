@@ -17,7 +17,7 @@ void KickCommand::invoke(const JID& user, const std::string& args) const
     //std::cout << "kick called by "<<user.full() << std::endl;
     //std::cout << "args: " << args << std::endl;
 
-    int pos=args.find_first_of(" ");
+    unsigned int pos=args.find_first_of(" ");
 
     if(pos == std::string::npos)
     {

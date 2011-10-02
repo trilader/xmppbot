@@ -231,7 +231,7 @@ void XmppBot::handleMUCMessage( MUCRoom* room, const Message& stanza, bool priv 
     this->m_CommandMgr->tryInvokeFromString(msg, stanza.from(),&success);
 
     if(!success)
-        std::cout <<  "invoke command failed" << std::endl;
+        std::cout <<  "Invoke command failed (" << stanza.from().full() << " tried \"" << msg << "\"" << std::endl;
 }
 
 bool XmppBot::handleMUCRoomCreation( MUCRoom* room )
@@ -251,7 +251,7 @@ void XmppBot::handleMUCInviteDecline( MUCRoom* room, const JID& invitee, const s
 
 void XmppBot::handleMUCError( MUCRoom* room, StanzaError error )
 {
-//    std::cout <<"Error in " << room->name() << ": "<<error << std::endl;
+    std::cout <<"Error in " << room->name() << ": "<<error << std::endl;
 }
 
 void XmppBot::handleMUCInfo( MUCRoom* room, int features, const std::string& name, const DataForm* infoForm )
@@ -261,13 +261,13 @@ void XmppBot::handleMUCInfo( MUCRoom* room, int features, const std::string& nam
 
 void XmppBot::handleMUCItems( MUCRoom* room, const Disco::ItemList& items )
 {
-/*    std::cout << "Users in " << room->name() << ":" << std::endl;
+    std::cout << "Users in " << room->name() << ":" << std::endl;
 
     for(Disco::ItemList::const_iterator it = items.begin(); it!=items.end(); it++)
     {
         std::cout << ((Disco::Item*)(*it))->jid().resource() << std::endl;
     }
-*/
+
 }
 
 void XmppBot::handleMUCConfigList( MUCRoom* room, const MUCListItemList& items, MUCOperation operation )
@@ -282,7 +282,7 @@ void XmppBot::handleMUCConfigForm( MUCRoom* room, const DataForm& form )
 
 void XmppBot::handleMUCConfigResult( MUCRoom* room, bool success, MUCOperation operation )
 {
-//    std::cout << ""<<operation << " in " << room->name() << " " << (success?"succeeded":"failed") << std::endl;
+    std::cout << ""<<operation << " in " << room->name() << " " << (success?"succeeded":"failed") << std::endl;
 }
 
 void XmppBot::handleMUCRequest( MUCRoom* room, const DataForm& form )
