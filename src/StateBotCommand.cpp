@@ -37,7 +37,7 @@ bool StateBotCommand::invoke(const JID& user, const std::string& args, std::stri
     {
         if(!this->_afkMap->count(user.resource()))
         {
-            *response = "you are not afk...";
+            *response = "You are not afk...";
             return false;
         }
 
@@ -52,7 +52,7 @@ bool StateBotCommand::invoke(const JID& user, const std::string& args, std::stri
         std::string msg;
         if(!this->_afkMap->count(reason))
         {
-            msg = "if member \"" + reason + "\" exists, she/he is not afk";
+            msg = "If \"" + reason + "\" exists, he/she is not afk";
         }
         else
         {
@@ -70,7 +70,7 @@ bool StateBotCommand::invoke(const JID& user, const std::string& args, std::stri
 
 std::string StateBotCommand::getHelp() const
 {
-    return std::string("<state> [<reason>] - State can be \"afk\" or \"re\". If the state is afk you can specify an optional message for the room");
+    return std::string("<state> [<reason>] - State can be \"afk\", \"re\ or \"of\". If the state is afk you can specify an optional message for the room. With of you can query the state of a user");
 }
 
 bool StateBotCommand::showHelp() const

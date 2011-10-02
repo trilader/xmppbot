@@ -17,6 +17,9 @@ XmppBot::XmppBot()
         ("command.subject.eventname","Name of an important event which should be mentioned in the room subject")
         ("command.subject.eventdate","Date of an important event ( depends on command.subject.eventname ); format: year-month-day eg: 2002-1-25")
         ("bot.polite","if enabled the bot says \"hi\" and \"goodbye\"")
+        ("bot.message.join","Message on joining in polite-mode")
+        ("bot.message.leave","Message on leaving in polite-mode")
+        ("bot.message.subscribe","Message the bot sends clients who want to subscribe to the bot")
         ;
 
     std::ifstream ifs("bot.cfg");
@@ -38,6 +41,9 @@ XmppBot::XmppBot()
     std::string subject_event_date;
 
     std::string polite = "no";
+    msg_join="";
+    msg_leave="";
+    msg_subscribe="";
 
     if(vm.count("server.user"))
         username = vm["server.user"].as<std::string>();
@@ -57,6 +63,12 @@ XmppBot::XmppBot()
         admin_pw = vm["command.admin.password"].as<std::string>();
     if(vm.count("bot.polite"))
         polite = vm["bot.polite"].as<std::string>();
+    if(vm.count("bot.message.join"))
+        msg_join = vm["bot.message.join"].as<std::string>();
+    if(vm.count("bot.message.leave"))
+        msg_leave = vm["bot.message.leave"].as<std::string>();
+    if(vm.count("bot.message.subscribe"))
+        msg_subscribe = vm["bot.message.subscribe"].as<std::string>();
 
     if(vm.count("command.subject.eventname") && vm.count("command.subject.eventdate"))
     {
@@ -91,7 +103,7 @@ XmppBot::XmppBot()
     m_Client->registerConnectionListener(this);
 
     this->m_CommandMgr = new BotCommandManager();
-    this->m_CommandMgr->registerCommand("test", new TestBotCommand());
+    //this->m_CommandMgr->registerCommand("test", new TestBotCommand());
     this->m_CommandMgr->registerCommand("kick", new KickBotCommand(m_Client,m_Room,admin_pw));
 
     SubjectBotCommand *subjcmd = new SubjectBotCommand(this->m_Room, admin_pw);
@@ -147,19 +159,19 @@ void XmppBot::handleMessage( const Message& stanza, MessageSession* session)
     }
     else
     {
-        success =this->m_CommandMgr->tryInvokeFromString(msg, (*m_UserNicknameMap)[stanza.from()],&response);
+        success = this->m_CommandMgr->tryInvokeFromString(msg, (*m_UserNicknameMap)[stanza.from()],&response);
     }
-
+/*
     std::string state;
     if(success)
         state = "[ OK ]";
     else
         state = "[ Fail ]";
-
+*/
     if(!success)
     {
-        std::cout << state << " " << response << std::endl;
-        Message m(Message::Chat, stanza.from(),state+" "+response);
+        //std::cout << state << " " << response << std::endl;
+        Message m(Message::Chat, stanza.from(),/*state+" "+*/response);
         m_Client->send(m);
     }
 }
@@ -170,15 +182,15 @@ void XmppBot::onConnect()
     m_Client->setPresence(Presence::Available, 0);
 
     m_Room->join();
-    m_Room->getRoomItems();
 
-    if(this->m_bePolite)
-        this->m_Room->send("hi");
+    if(this->m_bePolite && msg_join!="")
+        this->m_Room->send(msg_join);
 }
 
 void XmppBot::onDisconnect(ConnectionError e)
 {
-
+    if(this->m_bePolite && msg_leave!="")
+        this->m_Room->send(msg_leave);
 }
 
 bool XmppBot::onTLSConnect(const CertInfo& info)
@@ -234,7 +246,7 @@ bool XmppBot::handleSubscriptionRequest( const JID& jid, const std::string& msg 
 {
 //    std::cout << "Got a subscription request from: " << jid.full() << std::endl;
     m_RosterManager->ackSubscriptionRequest(jid, true);
-    m_RosterManager->subscribe(jid,"SVN-Bot",StringList(),"Hi I am the SVN-Bot from shin-project.org");
+    m_RosterManager->subscribe(jid,m_Client->jid().username(),StringList(),msg_subscribe);
     m_RosterManager->synchronize();
     return true;
 }
@@ -263,12 +275,12 @@ void XmppBot::handleMUCParticipantPresence( MUCRoom* room, const MUCRoomParticip
     {
         this->m_StateCommand->removeUserState(*(participant.nick));
         m_UserNicknameMap->erase(*(participant.jid));
-        std::cout << participant.nick->resource()<<" left the room"<<std::endl;
+        //std::cout << participant.nick->resource()<<" left the room"<<std::endl;
     }
     else
     {
         (*m_UserNicknameMap)[*(participant.jid)]=*participant.nick;
-        std::cout << participant.nick->resource()<<" joined or updated his status"<<std::endl;
+        //std::cout << participant.nick->resource()<<" joined or updated his status"<<std::endl;
     }
 
 
@@ -295,17 +307,17 @@ void XmppBot::handleMUCMessage( MUCRoom* room, const Message& stanza, bool priv 
     std::string response;
 
     bool success = this->m_CommandMgr->tryInvokeFromString(msg, stanza.from(),&response);
-
+/*
     std::string state;
     if(success)
         state = "[ OK ]";
     else
         state = "[ Fail ]";
-
+*/
     if(!success && priv)
     {
-        std::cout << state << " " << response << std::endl;
-        Message m(Message::Chat, stanza.from(),state+" "+response);
+        //std::cout << state << " " << response << std::endl;
+        Message m(Message::Chat, stanza.from(),/*state+" "+*/response);
         m_Client->send(m);
     }
 }

@@ -33,8 +33,8 @@ bool AdminBotCommand::invoke(const JID& user, const std::string& args, std::stri
 
 bool AdminBotCommand::quit(std::string *response) const
 {
-    *response = "disconnecting...";
-    std::cout << "disconecting..." << std::endl;
+    *response = "";
+    //std::cout << "disconnecting..." << std::endl;
     this->_client->disconnect();
 
     return true;

@@ -22,10 +22,10 @@ bool SubjectBotCommand::invoke(const JID& user, const std::string& args, std::st
     }
 
     std::string prefix = "";
-    std::cout << "event name is" << this->_eventname << std::endl;
+    //std::cout << "event name is" << this->_eventname << std::endl;
     if(this->_eventname.length() > 0)
     {
-        std::cout << "read event" << std::endl;
+        //std::cout << "read event" << std::endl;
         boost::gregorian::date now(boost::gregorian::day_clock::local_day());
         boost::gregorian::date_period period(now, this->_eventdate);
         prefix = this->_eventname + " ( noch " + boost::lexical_cast<std::string>(period.length()) + " Tage ) - ";

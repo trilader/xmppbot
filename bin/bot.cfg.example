@@ -1,8 +1,45 @@
+[server]
+#Username for server connection
 server.user=bot
+
+#Password for server connection
 server.password=my_password
+
+#Server to connect to
 server.address=example.com
+
+#Ressource to use
 server.resource=Bot
 
+[muc]
+#The bots nickname in the MUC room
 muc.name=Bot
+
+#The MUC room name
 muc.room=room
+
+#The conference server the room is on
 muc.server=conference.example.com
+
+[command]
+#Bot administration password. Required for some commands like setsbj and kick user
+admin.password=secret
+
+#Event that should be in the subject
+subject.eventname=Awesome event
+
+#Event date for countdown
+subject.eventdate=2011-10-02
+
+[bot]
+#If set to yes the bot will send a message on joining and leaving the room
+polite=yes
+
+#Message on join
+message.join=Hello World!
+
+#Message on leave
+message.leave=Goodbye World!
+
+#Message sent to users wanting to subscribe
+message.subscribe=I am a bot of some_server

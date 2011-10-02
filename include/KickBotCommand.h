@@ -7,9 +7,9 @@
 #include "gloox/mucroom.h"
 #include "gloox/message.h"
 
-#include "BotCommand.h"
+#include "ProtectedBotCommand.h"
 
-class KickBotCommand : public BotCommand
+class KickBotCommand : public ProtectedBotCommand
 {
 public:
     KickBotCommand(Client* client, MUCRoom* room, std::string password);
@@ -20,7 +20,6 @@ public:
 private:
     Client* m_Client;
     MUCRoom* m_Room;
-    std::string m_Pw;
 };
 
 #endif

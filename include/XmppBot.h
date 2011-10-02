@@ -85,6 +85,9 @@ private:
     StateBotCommand* m_StateCommand;
 
     bool m_bePolite;
+    std::string msg_join;
+    std::string msg_leave;
+    std::string msg_subscribe;
 };
 
 #endif // XMPPBOT_H

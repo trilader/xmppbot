@@ -1,10 +1,9 @@
 #include "KickBotCommand.h"
 
-KickBotCommand::KickBotCommand(Client* client, MUCRoom* room, std::string password)
+KickBotCommand::KickBotCommand(Client* client, MUCRoom* room, std::string password): ProtectedBotCommand(password)
 {
     m_Client = client;
     m_Room = room;
-    m_Pw = password;
 }
 
 bool KickBotCommand::invoke(const JID& user, const std::string& args, std::string *response) const
@@ -22,29 +21,26 @@ bool KickBotCommand::invoke(const JID& user, const std::string& args, std::strin
         return true;
     }
 
-    std::string arg[2];
-
-    arg[0]=args.substr(0,pos);
-    arg[1]=args.substr(pos+1);
-
-    if(arg[0]!=m_Pw)
+    std::string cmd;
+    if(!this->checkPassword(args, &cmd))
     {
-        *response = "Invalid password";
+        *response = "wrong password";
         return false;
     }
-    else if(arg[1]=="")
+
+    if(""==cmd)
     {
         *response = "No user given";
         return false;
     }
 
-    m_Room->kick(arg[1],"Kicked by "+user.resource());
+    m_Room->kick(cmd,"Kicked by "+user.resource());
     return true;
 }
 
 std::string KickBotCommand::getHelp() const
 {
-    return std::string("<password> <nickname> - Kick the <nickname> from the room. Without parameters this is a self-kick");
+    return std::string("<password> <nickname> - Kick <nickname> from the room. Without parameters this is a self-kick");
 }
 
 bool KickBotCommand::showHelp() const
