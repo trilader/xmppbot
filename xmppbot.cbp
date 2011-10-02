@@ -48,6 +48,7 @@
 		<Unit filename="include\AliasBotCommand.h" />
 		<Unit filename="include\BotCommand.h" />
 		<Unit filename="include\BotCommandManager.h" />
+		<Unit filename="include\HelpBotCommand.h" />
 		<Unit filename="include\KickBotCommand.h" />
 		<Unit filename="include\StateBotCommand.h" />
 		<Unit filename="include\SubjectBotCommand.h" />
@@ -55,6 +56,7 @@
 		<Unit filename="include\XmppBot.h" />
 		<Unit filename="src\AliasBotCommand.cpp" />
 		<Unit filename="src\BotCommandManager.cpp" />
+		<Unit filename="src\HelpBotCommand.cpp" />
 		<Unit filename="src\KickBotCommand.cpp" />
 		<Unit filename="src\StateBotCommand.cpp" />
 		<Unit filename="src\SubjectBotCommand.cpp" />

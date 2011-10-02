@@ -13,7 +13,8 @@ class StateBotCommand : public BotCommand
 public:
     StateBotCommand(MUCRoom *room);
     bool invoke(const JID& user, const std::string& args, std::string *response) const;
-    std::string help() const;
+    std::string getHelp() const;
+    bool showHelp() const;
 
 private:
     bool parseArgs(const std::string& args, std::string *state, std::string *reason) const;

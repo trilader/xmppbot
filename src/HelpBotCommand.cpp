@@ -1,16 +1,36 @@
 #include "HelpBotCommand.h"
 
-HelpBotCommand::HelpBotCommand()
+HelpBotCommand::HelpBotCommand(const boost::unordered_map<std::string, BotCommand*>* commandList)
 {
-    //ctor
+    m_CommandList = commandList;
 }
 
 bool HelpBotCommand::invoke(const JID& user, const std::string& args, std::string *response) const
 {
-    return true;
+    if(m_CommandList==NULL)
+    {
+        *response = "Internal error!";
+        return false;
+    }
+
+    std::stringstream ss;
+    ss << "Available commands:"<<std::endl;
+    for(boost::unordered_map<std::string, BotCommand*>::const_iterator it=m_CommandList->begin(); it!=m_CommandList->end(); it++)
+    {
+        if(it->second->showHelp())
+            ss<<it->first<<"\t"<<it->second->getHelp()<<std::endl;
+    }
+
+    *response = ss.str();
+    return false;
 }
 
-std::string HelpBotCommand::help() const
+std::string HelpBotCommand::getHelp() const
 {
     return std::string("Get help and usage information");
+}
+
+bool HelpBotCommand::showHelp() const
+{
+    return false;
 }

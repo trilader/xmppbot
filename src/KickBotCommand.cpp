@@ -42,7 +42,12 @@ bool KickBotCommand::invoke(const JID& user, const std::string& args, std::strin
     return true;
 }
 
-std::string KickBotCommand::help() const
+std::string KickBotCommand::getHelp() const
 {
-    return std::string("");
+    return std::string("<password> <nickname> - Kick the <nickname> from the room. Without parameters this is a self-kick");
+}
+
+bool KickBotCommand::showHelp() const
+{
+    return true;
 }

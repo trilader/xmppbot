@@ -38,9 +38,14 @@ bool SubjectBotCommand::invoke(const JID& user, const std::string& args, std::st
     return true;
 }
 
-std::string SubjectBotCommand::help() const
+std::string SubjectBotCommand::getHelp() const
 {
     return std::string("<password> <subject> - Set the rooms description");
+}
+
+bool SubjectBotCommand::showHelp() const
+{
+    return true;
 }
 
 bool SubjectBotCommand::parseArgs(const std::string& args, std::string *adminpw, std::string *subject) const

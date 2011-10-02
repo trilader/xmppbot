@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+
 #include "gloox/client.h"
 #include "gloox/message.h"
 #include "gloox/presence.h"
@@ -14,14 +15,15 @@
 #include "gloox/mucroom.h"
 #include "gloox/mucroomhandler.h"
 #include "gloox/mucroomconfighandler.h"
+#include "boost/program_options.hpp"
+
 #include "BotCommandManager.h"
 #include "TestBotCommand.h"
 #include "SubjectBotCommand.h"
 #include "KickBotCommand.h"
 #include "StateBotCommand.h"
 #include "AliasBotCommand.h"
-
-#include "boost/program_options.hpp"
+#include "HelpBotCommand.h"
 
 using namespace gloox;
 namespace opt = boost::program_options;
