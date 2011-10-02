@@ -31,6 +31,10 @@ subject.eventname=Awesome event
 #Event date for countdown
 subject.eventdate=2011-10-02
 
+#Event format string %1 is the event name, %2 the days until the event date, %3 the custom subject
+#If this is not set it defaults to just the custom message (subject.format=%3)
+subject.format=%1 (%2 days remaining) - %3
+
 [bot]
 #If set to yes the bot will send a message on joining and leaving the room
 polite=yes

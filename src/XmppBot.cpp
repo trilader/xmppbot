@@ -16,6 +16,7 @@ XmppBot::XmppBot()
         ("command.admin.password","Password to use admin function")
         ("command.subject.eventname","Name of an important event which should be mentioned in the room subject")
         ("command.subject.eventdate","Date of an important event ( depends on command.subject.eventname ); format: year-month-day eg: 2002-1-25")
+        ("command.subject.format","Format string for the subject command")
         ("bot.polite","if enabled the bot says \"hi\" and \"goodbye\"")
         ("bot.message.join","Message on joining in polite-mode")
         ("bot.message.leave","Message on leaving in polite-mode")
@@ -39,6 +40,7 @@ XmppBot::XmppBot()
 
     std::string subject_event_name;
     std::string subject_event_date;
+    std::string subject_format = "%3";
 
     std::string polite = "no";
     msg_join="";
@@ -76,6 +78,9 @@ XmppBot::XmppBot()
         subject_event_date = vm["command.subject.eventdate"].as<std::string>();
     }
 
+    if(vm.count("command.subject.format"))
+        subject_format = vm["command.subject.format"].as<std::string>();
+
     std::cout << "Done." << std::endl;
 
     this->m_bePolite = polite == "yes";
@@ -106,7 +111,7 @@ XmppBot::XmppBot()
     //this->m_CommandMgr->registerCommand("test", new TestBotCommand());
     this->m_CommandMgr->registerCommand("kick", new KickBotCommand(m_Client,m_Room,admin_pw));
 
-    SubjectBotCommand *subjcmd = new SubjectBotCommand(this->m_Room, admin_pw);
+    SubjectBotCommand *subjcmd = new SubjectBotCommand(this->m_Room, admin_pw, subject_format);
     if(subject_event_name.length() > 0)
         subjcmd->setEvent(subject_event_name, subject_event_date);
 
