@@ -65,7 +65,7 @@ XmppBot::XmppBot()
     muc_nick.setResource(muc_name);
     muc_nick.setServer(muc_server);
 
-    m_Room = new MUCRoom(m_Client, muc_nick, this, 0);
+    m_Room = new MUCRoom(m_Client, muc_nick, this, this);
 
     m_Client->registerMessageHandler(this);
     m_Client->registerConnectionListener(this);
@@ -115,6 +115,7 @@ void XmppBot::onConnect()
 
     m_Room->join();
     m_Room->getRoomItems();
+    m_Room->requestList(GetRoomItems);
 }
 
 void XmppBot::onDisconnect(ConnectionError e)
@@ -234,7 +235,7 @@ void XmppBot::handleMUCInviteDecline( MUCRoom* room, const JID& invitee, const s
 
 void XmppBot::handleMUCError( MUCRoom* room, StanzaError error )
 {
-    std::cout <<"Error in " << room->name() << ": "<<error << std::endl;
+//    std::cout <<"Error in " << room->name() << ": "<<error << std::endl;
 }
 
 void XmppBot::handleMUCInfo( MUCRoom* room, int features, const std::string& name, const DataForm* infoForm )
@@ -244,11 +245,31 @@ void XmppBot::handleMUCInfo( MUCRoom* room, int features, const std::string& nam
 
 void XmppBot::handleMUCItems( MUCRoom* room, const Disco::ItemList& items )
 {
-    std::cout << "Users in " << room->name() << ":" << std::endl;
+/*    std::cout << "Users in " << room->name() << ":" << std::endl;
 
     for(Disco::ItemList::const_iterator it = items.begin(); it!=items.end(); it++)
     {
         std::cout << ((Disco::Item*)(*it))->jid().resource() << std::endl;
     }
+*/
+}
+
+void XmppBot::handleMUCConfigList( MUCRoom* room, const MUCListItemList& items, MUCOperation operation )
+{
+
+}
+
+void XmppBot::handleMUCConfigForm( MUCRoom* room, const DataForm& form )
+{
+
+}
+
+void XmppBot::handleMUCConfigResult( MUCRoom* room, bool success, MUCOperation operation )
+{
+//    std::cout << ""<<operation << " in " << room->name() << " " << (success?"succeeded":"failed") << std::endl;
+}
+
+void XmppBot::handleMUCRequest( MUCRoom* room, const DataForm& form )
+{
 
 }

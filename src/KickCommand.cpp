@@ -14,22 +14,27 @@ void KickCommand::invoke(const JID& user, const std::string& args) const
     if(m_Room==NULL)
         return;
 
-    std::cout << "kick called by "<<user.full() << std::endl;
-    std::cout << "args: " << args << std::endl;
+    //std::cout << "kick called by "<<user.full() << std::endl;
+    //std::cout << "args: " << args << std::endl;
+
+    int pos=args.find_first_of(" ");
+
+    if(pos == std::string::npos)
+    {
+        m_Room->kick(user.resource(), "Selfkick.");
+        return;
+    }
 
     std::string arg[2];
-    int pos=args.find_first_of(" ");
+
     arg[0]=args.substr(0,pos);
     arg[1]=args.substr(pos+1);
 
-    std::cout <<"arg[0]: \""<<arg[0]<<"\" arg[1]: \""<<arg[1] << "\""<< std::endl;
+    //std::cout <<"arg[0]: \""<<arg[0]<<"\" arg[1]: \""<<arg[1] << "\""<< std::endl;
 
-    if(arg[0]=="")
-        m_Room->kick(user.full(), "Kicked itself.");
-    else if(arg[1]==m_Pw)
+    if(arg[0]==m_Pw && arg[1]!="")
     {
-        std::cout << "admin kick" << std::endl;
-        m_Room->kick(arg[0],"Was kicked by "+user.resource());
+        //std::cout << "admin kick" << std::endl;
+        m_Room->kick(arg[1],"Kicked by "+user.resource());
     }
-
 }

@@ -13,6 +13,7 @@
 #include "gloox/rostermanager.h"
 #include "gloox/mucroom.h"
 #include "gloox/mucroomhandler.h"
+#include "gloox/mucroomconfighandler.h"
 #include "BotCommandManager.h"
 #include "TestBotCommand.h"
 #include "SubjectBotCommand.h"
@@ -24,7 +25,7 @@ using namespace gloox;
 namespace opt = boost::program_options;
 
 
-class XmppBot: public MessageHandler, ConnectionListener, RosterListener, MUCRoomHandler
+class XmppBot: public MessageHandler, ConnectionListener, RosterListener, MUCRoomHandler, MUCRoomConfigHandler
 {
 public:
     XmppBot();
@@ -61,6 +62,12 @@ protected:
     void handleMUCError( MUCRoom* room, StanzaError error );
     void handleMUCInfo( MUCRoom* room, int features, const std::string& name, const DataForm* infoForm );
     void handleMUCItems( MUCRoom* room, const Disco::ItemList& items );
+
+    // MUCRoomConfigHandler
+    void handleMUCConfigList( MUCRoom* room, const MUCListItemList& items, MUCOperation operation );
+    void handleMUCConfigForm( MUCRoom* room, const DataForm& form );
+    void handleMUCConfigResult( MUCRoom* room, bool success, MUCOperation operation );
+    void handleMUCRequest( MUCRoom* room, const DataForm& form );
 
 private:
     Client* m_Client;
