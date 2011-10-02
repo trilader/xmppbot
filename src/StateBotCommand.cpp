@@ -16,7 +16,7 @@ bool StateBotCommand::invoke(const JID& user, const std::string& args, std::stri
         return false;
     }
 
-    if(state != "afk" && state != "re")
+    if(state != "afk" && state != "re" && state != "of")
     {
         *response = "unknown state";
         return false;
@@ -33,7 +33,7 @@ bool StateBotCommand::invoke(const JID& user, const std::string& args, std::stri
 
         this->_room->send(user.resource() + " is afk" + reason_str + "!");
     }
-    else
+    else if(state == "re")
     {
         if(!this->_afkMap->count(user.resource()))
         {
@@ -46,6 +46,23 @@ bool StateBotCommand::invoke(const JID& user, const std::string& args, std::stri
 
         this->_afkMap->erase(user.resource());
         this->_room->send(user.resource() + " is back from " +r+" (" + boost::posix_time::to_simple_string(period.length()) + ")!");
+    }
+    else //state == "of"
+    {
+        std::string msg;
+        if(!this->_afkMap->count(reason))
+        {
+            msg = "if member \"" + reason + "\" exists, she/he is not afk";
+        }
+        else
+        {
+            boost::posix_time::time_period period((*(this->_afkMap))[reason].first, t);
+            std::string r = (*(this->_afkMap))[reason].second;
+            msg = reason + " is afk ( " + r + ", " + boost::posix_time::to_simple_string(period.length()) + " )!";
+        }
+
+        *response = msg;
+        this->_room->send(msg);
     }
 
     return true;
@@ -72,4 +89,15 @@ bool StateBotCommand::parseArgs(const std::string& args, std::string *state, std
     *reason = cpy.substr(splitpos + 1);
 
     return true;
+}
+
+void StateBotCommand::removeUserState(const JID& user)
+{
+    this->removeUserState(user.resource());
+}
+
+void StateBotCommand::removeUserState(const std::string& nick)
+{
+    if(this->_afkMap->count(nick))
+        this->_afkMap->erase(nick);
 }
