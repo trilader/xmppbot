@@ -75,6 +75,7 @@ private:
     MUCRoom* m_Room;
     BotCommandManager* m_CommandMgr;
     opt::variables_map vm;
+    boost::unordered_map<JID,JID>* m_UserNicknameMap;
 };
 
 #endif // XMPPBOT_H

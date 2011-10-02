@@ -61,6 +61,8 @@ XmppBot::XmppBot()
 
     std::cout << "Done." << std::endl;
 
+    m_UserNicknameMap = new boost::unordered_map<JID,JID>();
+
     JID nick;
     nick.setUsername(username);
     nick.setResource(resource);
@@ -109,19 +111,38 @@ XmppBot::~XmppBot()
 
 void XmppBot::handleMessage( const Message& stanza, MessageSession* session)
 {
-    std::cout << "Message from: "<< stanza.from().username() << ": " << stanza.body() << std::endl;
-
-    std::string jid = stanza.from().bareJID().full();
     std::string msg = stanza.body();
 
-    /*bool success = false;
-    this->m_CommandMgr->tryInvokeFromString(msg, stanza.from(),&success);
+    if(msg.at(0)!='!')
+        return;
+
+    msg = msg.substr(1);
+
+    std::string response;
+
+    bool success = m_UserNicknameMap->count(stanza.from());
 
     if(!success)
-        std::cout <<  "invoke command failed" << std::endl;
-*/
-    Message m(Message::Chat, stanza.from(), "Hi, "+stanza.from().username()+" you wrote: \""+stanza.body()+"\".");
-    m_Client->send(m);
+    {
+        response="I don't think you are in my room";
+    }
+    else
+    {
+        success =this->m_CommandMgr->tryInvokeFromString(msg, (*m_UserNicknameMap)[stanza.from()],&response);
+    }
+
+    std::string state;
+    if(success)
+        state = "[ OK ]";
+    else
+        state = "[ Fail ]";
+
+    if(!success)
+    {
+        std::cout << state << " " << response << std::endl;
+        Message m(Message::Chat, stanza.from(),state+" "+response);
+        m_Client->send(m);
+    }
 }
 
 void XmppBot::onConnect()
@@ -216,11 +237,16 @@ void XmppBot::handleRosterError( const IQ& iq )
 
 void XmppBot::handleMUCParticipantPresence( MUCRoom* room, const MUCRoomParticipant participant, const Presence& presence )
 {
-    std::cout << "Room presence: "<<participant.nick->full()<<" new state: "<<presence.status()<<std::endl;
+    (*m_UserNicknameMap)[*(participant.jid)]=*participant.nick;
+
+    std::cout << "Room presence: "<<participant.nick->full()<<" ("<<participant.jid->bare()<<") new state: "<<presence.status()<<std::endl;
 }
 
 void XmppBot::handleMUCMessage( MUCRoom* room, const Message& stanza, bool priv )
 {
+    if(stanza.when()!=NULL)
+        return;
+
     std::string msg = stanza.body();
     bool handle = priv;
 
@@ -243,9 +269,12 @@ void XmppBot::handleMUCMessage( MUCRoom* room, const Message& stanza, bool priv 
     else
         state = "[ Fail ]";
 
-    std::cout << state << " " << response << std::endl;
-    Message m(Message::Chat, stanza.from(),state+" "+response);
-    m_Client->send(m);
+    if(!success && priv)
+    {
+        std::cout << state << " " << response << std::endl;
+        Message m(Message::Chat, stanza.from(),state+" "+response);
+        m_Client->send(m);
+    }
 }
 
 bool XmppBot::handleMUCRoomCreation( MUCRoom* room )
