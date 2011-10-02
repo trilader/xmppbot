@@ -7,7 +7,7 @@
 class TestBotCommand : public BotCommand
 {
 public:
-    void invoke(const JID& user, const std::string& args) const;
+    bool invoke(const JID& user, const std::string& args, std::string *response) const;
 };
 
 #endif

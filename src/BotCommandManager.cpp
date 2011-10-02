@@ -13,21 +13,24 @@ void BotCommandManager::registerCommand(const std::string& name, BotCommand *com
     (*_commandMap)[name] = command;
 }
 
-void BotCommandManager::tryInvoke(const std::string& name, const std::string& args, const JID& user, bool *success)
+bool BotCommandManager::tryInvoke(const std::string& name, const std::string& args, const JID& user, std::string *response)
 {
-    *success = this->isKnownCommand(name);
+    if(!this->isKnownCommand(name))
+    {
+        *response = "unknown command";
+        return false;
+    }
 
-    if(*success)
-        (*_commandMap)[name]->invoke(user, args);
+     return  (*_commandMap)[name]->invoke(user, args, response);
 }
 
-void BotCommandManager::tryInvokeFromString(const std::string& str,const JID& user, bool *success)
+bool BotCommandManager::tryInvokeFromString(const std::string& str,const JID& user, std::string *response)
 {
     std::string name, args;
 
     BotCommandManager::splitCommandString(str, &name, &args);
 
-    this->tryInvoke(name, args, user, success);
+    return this->tryInvoke(name, args, user, response);
 }
 
 bool BotCommandManager::isKnownCommand(const std::string& name)

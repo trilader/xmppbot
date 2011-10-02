@@ -17,8 +17,8 @@ public:
     BotCommandManager();
 
     void registerCommand(const std::string& name, BotCommand *cmd);
-    void tryInvokeFromString(const std::string& str,const JID& user, bool *success);
-    void tryInvoke(const std::string& name, const std::string& args, const JID& user, bool *success);
+    bool tryInvokeFromString(const std::string& str,const JID& user, std::string *response);
+    bool tryInvoke(const std::string& name, const std::string& args, const JID& user, std::string *response);
     bool isKnownCommand(const std::string& name);
 
     static void splitCommandString(const std::string& str, std::string *name, std::string *args);

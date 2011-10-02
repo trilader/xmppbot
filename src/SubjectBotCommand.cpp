@@ -6,15 +6,21 @@ SubjectBotCommand::SubjectBotCommand(MUCRoom *room, std::string adminpw)
     this->_adminpw = adminpw;
 }
 
-void SubjectBotCommand::invoke(const JID& user, const std::string& args) const
+bool SubjectBotCommand::invoke(const JID& user, const std::string& args, std::string *response) const
 {
     std::string adminpw, subject;
     bool success = this->parseArgs(args, &adminpw, &subject);
     if(!success)
-        return;
+    {
+        *response = "expecting 2 arguments";
+        return false;
+    }
 
     if(adminpw != this->_adminpw)
-        return;
+    {
+        *response = "wrong password";
+        return false;
+    }
 
     std::string prefix = "";
     std::cout << "event name is" << this->_eventname << std::endl;
@@ -27,6 +33,9 @@ void SubjectBotCommand::invoke(const JID& user, const std::string& args) const
     }
 
     this->_room->setSubject(prefix + subject);
+
+    *response = "";
+    return true;
 }
 
 bool SubjectBotCommand::parseArgs(const std::string& args, std::string *adminpw, std::string *subject) const

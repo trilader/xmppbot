@@ -7,12 +7,12 @@ KickCommand::KickCommand(Client* client, MUCRoom* room, std::string password)
     m_Pw = password;
 }
 
-void KickCommand::invoke(const JID& user, const std::string& args) const
+bool KickCommand::invoke(const JID& user, const std::string& args, std::string *response) const
 {
     if(m_Client==NULL)
-        return;
+        return false;
     if(m_Room==NULL)
-        return;
+        return false;
 
     //std::cout << "kick called by "<<user.full() << std::endl;
     //std::cout << "args: " << args << std::endl;
@@ -22,7 +22,7 @@ void KickCommand::invoke(const JID& user, const std::string& args) const
     if(pos == std::string::npos)
     {
         m_Room->kick(user.resource(), "Selfkick.");
-        return;
+        return true;
     }
 
     std::string arg[2];
@@ -36,5 +36,8 @@ void KickCommand::invoke(const JID& user, const std::string& args) const
     {
         //std::cout << "admin kick" << std::endl;
         m_Room->kick(arg[1],"Kicked by "+user.resource());
+        return true;
     }
+
+    return false;
 }

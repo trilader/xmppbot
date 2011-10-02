@@ -13,7 +13,7 @@ class KickCommand : public BotCommand
 {
 public:
     KickCommand(Client* client, MUCRoom* room, std::string password);
-    void invoke(const JID& user, const std::string& args) const;
+    bool invoke(const JID& user, const std::string& args, std::string *response) const;
 
 private:
     Client* m_Client;

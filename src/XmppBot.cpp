@@ -114,12 +114,12 @@ void XmppBot::handleMessage( const Message& stanza, MessageSession* session)
     std::string jid = stanza.from().bareJID().full();
     std::string msg = stanza.body();
 
-    bool success = false;
+    /*bool success = false;
     this->m_CommandMgr->tryInvokeFromString(msg, stanza.from(),&success);
 
     if(!success)
         std::cout <<  "invoke command failed" << std::endl;
-
+*/
     Message m(Message::Chat, stanza.from(), "Hi, "+stanza.from().username()+" you wrote: \""+stanza.body()+"\".");
     m_Client->send(m);
 }
@@ -226,12 +226,17 @@ void XmppBot::handleMUCMessage( MUCRoom* room, const Message& stanza, bool priv 
         return;
 
     std::string msg = stanza.body();
-    bool success = false;
+    std::string response;
 
-    this->m_CommandMgr->tryInvokeFromString(msg, stanza.from(),&success);
+    bool success = this->m_CommandMgr->tryInvokeFromString(msg, stanza.from(),&response);
 
-    if(!success)
-        std::cout <<  "Invoke command failed (" << stanza.from().full() << " tried \"" << msg << "\"" << std::endl;
+    std::string state;
+    if(success)
+        state = "[ OK ]";
+    else
+        state = "[ fail ]";
+
+    std::cout << state << " " << response << std::endl;
 }
 
 bool XmppBot::handleMUCRoomCreation( MUCRoom* room )
