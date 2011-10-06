@@ -2,7 +2,9 @@
 
 XmppBot::XmppBot()
 {
-    std::cout << "Initializing..." << std::endl;
+    LOG_ADD(sys,new ConsoleLog(new StringFormat("system: %_")))
+
+    LOG(sys) << "Initializing...";
 
     opt::options_description desc("Options");
     desc.add_options()
@@ -21,13 +23,15 @@ XmppBot::XmppBot()
         ("bot.message.join","Message on joining in polite-mode")
         ("bot.message.leave","Message on leaving in polite-mode")
         ("bot.message.subscribe","Message the bot sends clients who want to subscribe to the bot")
+        LOG_CONFIG(debug)
+        LOG_CONFIG(command)
         ;
 
     std::ifstream ifs("bot.cfg");
     opt::store(opt::parse_config_file(ifs, desc), vm);
     opt::notify(vm);
 
-    std::cout << "Loaded \"bot.cfg\". Parsing... ";
+    LOG(sys) << "Loaded \"bot.cfg\". Parsing... ";
 
     std::string username;
     std::string password;
@@ -81,7 +85,14 @@ XmppBot::XmppBot()
     if(vm.count("command.subject.format"))
         subject_format = vm["command.subject.format"].as<std::string>();
 
-    std::cout << "Done." << std::endl;
+    //init logs
+    LOG_INIT(vm,debug)
+    LOG_INIT(vm,command)
+
+    LOG(sys) << "Done.";
+
+    this->m_cmdSuccessMsg = new StringFormat("Invoked command \"%1\" from \"%2\". Response message: \"%3\".");
+    this->m_cmdFailMsg = new StringFormat("Failed to invoke command \"%1\" from \"%2\". Error message: \"%3\".");
 
     this->m_bePolite = polite == "yes";
 
@@ -111,7 +122,7 @@ XmppBot::XmppBot()
     //this->m_CommandMgr->registerCommand("test", new TestBotCommand());
     this->m_CommandMgr->registerCommand("kick", new KickBotCommand(m_Client,m_Room,admin_pw));
 
-    SubjectBotCommand *subjcmd = new SubjectBotCommand(this->m_Room, admin_pw, subject_format);
+    SubjectBotCommand *subjcmd = new SubjectBotCommand(this->m_Room, admin_pw, new StringFormat(subject_format));
     if(subject_event_name.length() > 0)
         subjcmd->setEvent(subject_event_name, subject_event_date);
 
@@ -173,6 +184,13 @@ void XmppBot::handleMessage( const Message& stanza, MessageSession* session)
     else
         state = "[ Fail ]";
 */
+    StringFormat *logformat = (success) ? this->m_cmdSuccessMsg : this->m_cmdFailMsg;
+    logformat->assign("1", msg);
+    logformat->assign("2", (*m_UserNicknameMap)[stanza.from()].full());
+    logformat->assign("3", response);
+
+    LOG(command) << logformat->produce();
+
     if(!success)
     {
         //std::cout << state << " " << response << std::endl;
@@ -183,7 +201,8 @@ void XmppBot::handleMessage( const Message& stanza, MessageSession* session)
 
 void XmppBot::onConnect()
 {
-    std::cout << "Connected" << std::endl;
+    LOG(debug) << "Connected";
+
     m_Client->setPresence(Presence::Available, 0);
 
     m_Room->join();
@@ -319,6 +338,14 @@ void XmppBot::handleMUCMessage( MUCRoom* room, const Message& stanza, bool priv 
     else
         state = "[ Fail ]";
 */
+    StringFormat *logformat = (success) ? this->m_cmdSuccessMsg : this->m_cmdFailMsg;
+    logformat->assign("1", msg);
+    logformat->assign("2", stanza.from().full());
+    logformat->assign("3", response);
+
+    LOG(command) << logformat->produce();
+
+
     if(!success && priv)
     {
         //std::cout << state << " " << response << std::endl;

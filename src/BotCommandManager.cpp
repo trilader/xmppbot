@@ -25,6 +25,7 @@ bool BotCommandManager::tryInvoke(const std::string& name, const std::string& ar
     if(!this->isKnownCommand(name))
     {
         *response = "unknown command";
+
         return false;
     }
 

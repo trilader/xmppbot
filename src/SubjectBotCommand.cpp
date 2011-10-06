@@ -1,10 +1,11 @@
 #include "SubjectBotCommand.h"
 
-SubjectBotCommand::SubjectBotCommand(MUCRoom *room, std::string adminpw, std::string format) : ProtectedBotCommand(adminpw)
+SubjectBotCommand::SubjectBotCommand(MUCRoom *room, std::string adminpw, StringFormat *format) : ProtectedBotCommand(adminpw)
 {
     this->_room = room;
     this->_format = format;
-    std::cout << "Format: "<<_format<<std::endl;
+
+    LOG(debug) << "Subject format: " + _format->getFormatString();
 }
 
 bool SubjectBotCommand::invoke(const JID& user, const std::string& args, std::string *response) const
@@ -24,15 +25,18 @@ bool SubjectBotCommand::invoke(const JID& user, const std::string& args, std::st
     }
 
     boost::gregorian::date now(boost::gregorian::day_clock::local_day());
-    boost::gregorian::date_period period(now, this->_eventdate);
-
-    std::string result = _format.substr(0);
 
     if(this->_eventname.length() > 0)
-        boost::algorithm::replace_all(result,"%1",this->_eventname);
+    {
+        boost::gregorian::date_period period(now, this->_eventdate);
 
-    boost::algorithm::replace_all(result,"%2",boost::lexical_cast<std::string>(period.length()));
-    boost::algorithm::replace_all(result,"%3",subject);
+        this->_format->assign("1",this->_eventname);
+        this->_format->assign("2",period.length());
+    }
+
+    this->_format->assign("3", subject);
+
+    std::string result = this->_format->produce();
 
     this->_room->setSubject(result);
     *response = "Subject set to \"" + result + "\".";

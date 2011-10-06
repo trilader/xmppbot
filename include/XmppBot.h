@@ -26,6 +26,9 @@
 #include "HelpBotCommand.h"
 #include "AdminBotCommand.h"
 
+#include "LogHelper.h"
+#include "StringFormat.h"
+
 using namespace gloox;
 namespace opt = boost::program_options;
 
@@ -88,6 +91,9 @@ private:
     std::string msg_join;
     std::string msg_leave;
     std::string msg_subscribe;
+
+    StringFormat *m_cmdSuccessMsg;
+    StringFormat *m_cmdFailMsg;
 };
 
 #endif // XMPPBOT_H
