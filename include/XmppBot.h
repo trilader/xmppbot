@@ -38,6 +38,8 @@ class XmppBot: public MessageHandler, ConnectionListener, RosterListener, MUCRoo
 public:
     XmppBot();
     virtual ~XmppBot();
+
+    void run();
 protected:
     // MessageListener
     void handleMessage(const Message& stanza, MessageSession* session = 0);
@@ -78,6 +80,11 @@ protected:
     void handleMUCRequest( MUCRoom* room, const DataForm& form );
 
 private:
+    void init();
+    void initConfig();
+    void initXmpp();
+    void initCommands();
+
     Client* m_Client;
     RosterManager* m_RosterManager;
     MUCRoom* m_Room;

@@ -9,6 +9,7 @@ FileLog::FileLog(StringFormat *fileformat, StringFormat *entryformat, bool keepo
 
     this->_today = new boost::gregorian::date(boost::gregorian::min_date_time);
 
+    this->_stream = 0;
     this->updateStream();
 }
 
@@ -50,7 +51,7 @@ void FileLog::updateStream()
     *this->_today = today;
 
     if(0 == this->_stream)
-        this->_stream = new std::ofstream();
+         this->_stream = new std::ofstream();
     else if(this->_stream->is_open())
         this->_stream->close();
 }

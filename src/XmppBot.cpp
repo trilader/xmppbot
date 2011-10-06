@@ -2,10 +2,82 @@
 
 XmppBot::XmppBot()
 {
+    this->init();
+}
+
+XmppBot::~XmppBot()
+{
+    if(m_Client!=NULL)
+        delete m_Client;
+
+    if(m_CommandMgr!=NULL)
+        delete m_CommandMgr;
+
+    if(m_UserNicknameMap!=NULL)
+        delete m_UserNicknameMap;
+
+    m_UserNicknameMap=NULL;
+    m_CommandMgr=NULL;
+    m_Client=NULL;
+}
+
+//init
+void XmppBot::init()
+{
     LOG_ADD(sys,new ConsoleLog(new StringFormat("system: %_")))
 
     LOG(sys) << "Initializing...";
 
+    this->initConfig();
+
+    LOG(sys) << "Loaded \"bot.cfg\".";
+
+    LOG(sys) << "Init logs...";
+    //init logs
+
+    LOG_INIT(vm,debug)
+    LOG_INIT(vm,command)
+
+    LOG(sys) << "Done.";
+
+    LOG(sys) << "Init Xmpp...";
+
+    this->initXmpp();
+
+    LOG(sys) << "Done.";
+
+    LOG(sys) << "Init commands...";
+
+    this->initCommands();
+
+    LOG(sys) << "Done.";
+
+    LOG(sys) << "Finalize...";
+
+    std::string polite = "no";
+    msg_join="";
+    msg_leave="";
+    msg_subscribe="";
+
+    if(vm.count("bot.polite"))
+        polite = vm["bot.polite"].as<std::string>();
+    if(vm.count("bot.message.join"))
+        msg_join = vm["bot.message.join"].as<std::string>();
+    if(vm.count("bot.message.leave"))
+        msg_leave = vm["bot.message.leave"].as<std::string>();
+    if(vm.count("bot.message.subscribe"))
+        msg_subscribe = vm["bot.message.subscribe"].as<std::string>();
+
+    this->m_bePolite = polite == "yes";
+
+    this->m_cmdSuccessMsg = new StringFormat("Invoked command \"%1\" from \"%2\". Response message: \"%3\".");
+    this->m_cmdFailMsg = new StringFormat("Failed to invoke command \"%1\" from \"%2\". Error message: \"%3\".");
+
+    LOG(sys) << "Initilization completed.";
+}
+
+void XmppBot::initConfig()
+{
     opt::options_description desc("Options");
     desc.add_options()
         ("server.user","User name")
@@ -30,9 +102,10 @@ XmppBot::XmppBot()
     std::ifstream ifs("bot.cfg");
     opt::store(opt::parse_config_file(ifs, desc), vm);
     opt::notify(vm);
+}
 
-    LOG(sys) << "Loaded \"bot.cfg\". Parsing... ";
-
+void XmppBot::initXmpp()
+{
     std::string username;
     std::string password;
     std::string server;
@@ -40,16 +113,6 @@ XmppBot::XmppBot()
     std::string muc_name;
     std::string muc_room;
     std::string muc_server;
-    std::string admin_pw;
-
-    std::string subject_event_name;
-    std::string subject_event_date;
-    std::string subject_format = "%3";
-
-    std::string polite = "no";
-    msg_join="";
-    msg_leave="";
-    msg_subscribe="";
 
     if(vm.count("server.user"))
         username = vm["server.user"].as<std::string>();
@@ -65,36 +128,6 @@ XmppBot::XmppBot()
         muc_room = vm["muc.room"].as<std::string>();
     if(vm.count("muc.server"))
         muc_server = vm["muc.server"].as<std::string>();
-    if(vm.count("command.admin.password"))
-        admin_pw = vm["command.admin.password"].as<std::string>();
-    if(vm.count("bot.polite"))
-        polite = vm["bot.polite"].as<std::string>();
-    if(vm.count("bot.message.join"))
-        msg_join = vm["bot.message.join"].as<std::string>();
-    if(vm.count("bot.message.leave"))
-        msg_leave = vm["bot.message.leave"].as<std::string>();
-    if(vm.count("bot.message.subscribe"))
-        msg_subscribe = vm["bot.message.subscribe"].as<std::string>();
-
-    if(vm.count("command.subject.eventname") && vm.count("command.subject.eventdate"))
-    {
-        subject_event_name = vm["command.subject.eventname"].as<std::string>();
-        subject_event_date = vm["command.subject.eventdate"].as<std::string>();
-    }
-
-    if(vm.count("command.subject.format"))
-        subject_format = vm["command.subject.format"].as<std::string>();
-
-    //init logs
-    LOG_INIT(vm,debug)
-    LOG_INIT(vm,command)
-
-    LOG(sys) << "Done.";
-
-    this->m_cmdSuccessMsg = new StringFormat("Invoked command \"%1\" from \"%2\". Response message: \"%3\".");
-    this->m_cmdFailMsg = new StringFormat("Failed to invoke command \"%1\" from \"%2\". Error message: \"%3\".");
-
-    this->m_bePolite = polite == "yes";
 
     m_UserNicknameMap = new boost::unordered_map<JID,JID>();
 
@@ -117,10 +150,31 @@ XmppBot::XmppBot()
 
     m_Client->registerMessageHandler(this);
     m_Client->registerConnectionListener(this);
+}
+
+void XmppBot::initCommands()
+{
+    std::string admin_pw;
+
+    std::string subject_event_name;
+    std::string subject_event_date;
+    std::string subject_format = "%3";
+
+    if(vm.count("command.admin.password"))
+        admin_pw = vm["command.admin.password"].as<std::string>();
+
+    if(vm.count("command.subject.eventname") && vm.count("command.subject.eventdate"))
+    {
+        subject_event_name = vm["command.subject.eventname"].as<std::string>();
+        subject_event_date = vm["command.subject.eventdate"].as<std::string>();
+    }
+
+    if(vm.count("command.subject.format"))
+        subject_format = vm["command.subject.format"].as<std::string>();
 
     this->m_CommandMgr = new BotCommandManager();
     //this->m_CommandMgr->registerCommand("test", new TestBotCommand());
-    this->m_CommandMgr->registerCommand("kick", new KickBotCommand(m_Client,m_Room,admin_pw));
+    this->m_CommandMgr->registerCommand("kick", new KickBotCommand(this->m_Client,this->m_Room,admin_pw));
 
     SubjectBotCommand *subjcmd = new SubjectBotCommand(this->m_Room, admin_pw, new StringFormat(subject_format));
     if(subject_event_name.length() > 0)
@@ -136,24 +190,17 @@ XmppBot::XmppBot()
     this->m_CommandMgr->registerCommand("re", new AliasBotCommand("re ","","Come back from being afk",true,this->m_StateCommand));
 
     this->m_CommandMgr->registerCommand("admin", new AdminBotCommand(admin_pw, this->m_Client));
-
-    m_Client->connect();
 }
 
-XmppBot::~XmppBot()
+void XmppBot::run()
 {
-    if(m_Client!=NULL)
-        delete m_Client;
+    LOG(sys) << "Started.";
 
-    if(m_CommandMgr!=NULL)
-        delete m_CommandMgr;
+    LOG(debug) << "Connecting...";
+    m_Client->connect(); //blocks
+    LOG(debug) << "Disconnected.";
 
-    if(m_UserNicknameMap!=NULL)
-        delete m_UserNicknameMap;
-
-    m_UserNicknameMap=NULL;
-    m_CommandMgr=NULL;
-    m_Client=NULL;
+    LOG(sys) << "Stoping...";
 }
 
 void XmppBot::handleMessage( const Message& stanza, MessageSession* session)
