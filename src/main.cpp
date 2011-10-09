@@ -2,7 +2,7 @@
 
 int main(int argc, char** argv)
 {
-    XmppBot* b = new XmppBot();
+    XmppBot* b = new XmppBot("bot.cfg");
     b->run();
 
     delete b; //call dtor

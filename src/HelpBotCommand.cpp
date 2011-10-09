@@ -22,7 +22,7 @@ bool HelpBotCommand::invoke(const JID& user, const std::string& args, std::strin
     }
 
     *response = ss.str();
-    return false;
+    return true;
 }
 
 std::string HelpBotCommand::getHelp() const

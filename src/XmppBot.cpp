@@ -1,7 +1,9 @@
 #include "XmppBot.h"
 
-XmppBot::XmppBot()
+XmppBot::XmppBot(std::string configfile)
 {
+    this->m_ConfigFile = configfile;
+
     this->init();
 }
 
@@ -30,13 +32,14 @@ void XmppBot::init()
 
     this->initConfig();
 
-    LOG(sys) << "Loaded \"bot.cfg\".";
+    LOG(sys) << "Loaded \"" + this->m_ConfigFile + "\".";
 
     LOG(sys) << "Init logs...";
     //init logs
 
     LOG_INIT(vm,debug)
     LOG_INIT(vm,command)
+    LOG_INIT(vm,chat)
 
     LOG(sys) << "Done.";
 
@@ -97,9 +100,10 @@ void XmppBot::initConfig()
         ("bot.message.subscribe","Message the bot sends clients who want to subscribe to the bot")
         LOG_CONFIG(debug)
         LOG_CONFIG(command)
+        LOG_CONFIG(chat)
         ;
 
-    std::ifstream ifs("bot.cfg");
+    std::ifstream ifs(this->m_ConfigFile);
     opt::store(opt::parse_config_file(ifs, desc), vm);
     opt::notify(vm);
 }
@@ -393,12 +397,14 @@ void XmppBot::handleMUCMessage( MUCRoom* room, const Message& stanza, bool priv 
     LOG(command) << logformat->produce();
 
 
-    if(!success && priv)
+    if(!success || priv)
     {
         //std::cout << state << " " << response << std::endl;
         Message m(Message::Chat, stanza.from(),/*state+" "+*/response);
         m_Client->send(m);
     }
+
+    LOG(chat) << stanza.from().resource() + ": " + stanza.body();
 }
 
 bool XmppBot::handleMUCRoomCreation( MUCRoom* room )

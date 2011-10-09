@@ -36,7 +36,7 @@ namespace opt = boost::program_options;
 class XmppBot: public MessageHandler, ConnectionListener, RosterListener, MUCRoomHandler, MUCRoomConfigHandler
 {
 public:
-    XmppBot();
+    XmppBot(std::string configfile);
     virtual ~XmppBot();
 
     void run();
@@ -84,6 +84,8 @@ private:
     void initConfig();
     void initXmpp();
     void initCommands();
+
+    std::string m_ConfigFile;
 
     Client* m_Client;
     RosterManager* m_RosterManager;
