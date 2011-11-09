@@ -8,7 +8,7 @@ static BotCommand* tryFromString(std::string cmd, bool *success)
     if(parts.size() < 1)
     {
         success = false;
-        return nullptr;
+        return NULL;
     }
 
 

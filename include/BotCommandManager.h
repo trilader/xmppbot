@@ -3,6 +3,7 @@
 
 #include <string>
 #include <map>
+#include <vector>
 #include "boost/algorithm/string.hpp"
 #include "boost/unordered_map.hpp"
 #include "boost/algorithm/string/find.hpp"
