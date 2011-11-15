@@ -1,4 +1,4 @@
-This is xmppbot, an xammp or jabber bot written in C++ using gloox and boot.
+This is xmppbot, an xammp or jabber bot written in C++ using gloox and boost.
 
 =Dependecies=
 - Boost 1.4.7.0

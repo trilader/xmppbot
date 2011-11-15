@@ -2,7 +2,9 @@
 #define BOTCOMMAND_H
 
 #include <string>
+#include <vector>
 
+#include "boost/algorithm/string.hpp"
 #include "gloox/jid.h"
 
 using namespace gloox;
