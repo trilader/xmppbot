@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include <fstream>
+#include <list>
+
+#include "JIDMap.h"
 
 #include "gloox/client.h"
 #include "gloox/message.h"
@@ -29,9 +32,13 @@
 #include "LogHelper.h"
 #include "StringFormat.h"
 
+#include "MessageFilter.h"
+#include "CommandMessageFilter.h"
+#include "ForeignMessageFilter.h"
+#include "LogMessageFilter.h"
+
 using namespace gloox;
 namespace opt = boost::program_options;
-
 
 class XmppBot: public MessageHandler, ConnectionListener, RosterListener, MUCRoomHandler, MUCRoomConfigHandler
 {
@@ -84,6 +91,9 @@ private:
     void initConfig();
     void initXmpp();
     void initCommands();
+    void initMessageFilter();
+
+    void handleMessage(const Message& stanza, bool room, bool priv);
 
     std::string m_ConfigFile;
 
@@ -92,7 +102,7 @@ private:
     MUCRoom* m_Room;
     BotCommandManager* m_CommandMgr;
     opt::variables_map vm;
-    boost::unordered_map<JID,JID>* m_UserNicknameMap;
+    JIDMap* m_UserNicknameMap;
 
     StateBotCommand* m_StateCommand;
 
@@ -101,8 +111,7 @@ private:
     std::string msg_leave;
     std::string msg_subscribe;
 
-    StringFormat *m_cmdSuccessMsg;
-    StringFormat *m_cmdFailMsg;
+    std::list<MessageFilter*>* m_MessageFilter;
 };
 
 #endif // XMPPBOT_H

@@ -55,6 +55,12 @@ void XmppBot::init()
 
     LOG(sys) << "Done.";
 
+    LOG(sys) << "Init message filter...";
+
+    this->initMessageFilter();
+
+    LOG(sys) << "Done.";
+
     LOG(sys) << "Finalize...";
 
     std::string polite = "no";
@@ -72,9 +78,6 @@ void XmppBot::init()
         msg_subscribe = vm["bot.message.subscribe"].as<std::string>();
 
     this->m_bePolite = polite == "yes";
-
-    this->m_cmdSuccessMsg = new StringFormat("Invoked command \"%1\" from \"%2\". Response message: \"%3\".");
-    this->m_cmdFailMsg = new StringFormat("Failed to invoke command \"%1\" from \"%2\". Error message: \"%3\".");
 
     LOG(sys) << "Initilization completed.";
 }
@@ -133,7 +136,7 @@ void XmppBot::initXmpp()
     if(vm.count("muc.server"))
         muc_server = vm["muc.server"].as<std::string>();
 
-    m_UserNicknameMap = new boost::unordered_map<JID,JID>();
+    m_UserNicknameMap = new JIDMap();
 
     JID nick;
     nick.setUsername(username);
@@ -196,6 +199,19 @@ void XmppBot::initCommands()
     this->m_CommandMgr->registerCommand("admin", new AdminBotCommand(admin_pw, this->m_Client));
 }
 
+void XmppBot::initMessageFilter()
+{
+    this->m_MessageFilter = new std::list<MessageFilter*>();
+
+    //order is important!
+
+    this->m_MessageFilter->push_back(new ForeignMessageFilter(this->m_UserNicknameMap, this->m_Client));
+
+    this->m_MessageFilter->push_back(new CommandMessageFilter(this->m_CommandMgr,this->m_Client,this->m_UserNicknameMap));
+
+    this->m_MessageFilter->push_back(new LogMessageFilter());
+}
+
 void XmppBot::run()
 {
     LOG(sys) << "Started.";
@@ -209,45 +225,7 @@ void XmppBot::run()
 
 void XmppBot::handleMessage( const Message& stanza, MessageSession* session)
 {
-    std::string msg = stanza.body();
-
-    if(msg.at(0)!='!')
-        return;
-
-    msg = msg.substr(1);
-
-    std::string response;
-
-    bool success = m_UserNicknameMap->count(stanza.from());
-
-    if(!success)
-    {
-        response="I don't think you are in my room";
-    }
-    else
-    {
-        success = this->m_CommandMgr->tryInvokeFromString(msg, (*m_UserNicknameMap)[stanza.from()],&response);
-    }
-/*
-    std::string state;
-    if(success)
-        state = "[ OK ]";
-    else
-        state = "[ Fail ]";
-*/
-    StringFormat *logformat = (success) ? this->m_cmdSuccessMsg : this->m_cmdFailMsg;
-    logformat->assign("1", msg);
-    logformat->assign("2", (*m_UserNicknameMap)[stanza.from()].full());
-    logformat->assign("3", response);
-
-    LOG(command) << logformat->produce();
-
-    if(!success)
-    {
-        //std::cout << state << " " << response << std::endl;
-        Message m(Message::Chat, stanza.from(),/*state+" "+*/response);
-        m_Client->send(m);
-    }
+    this->handleMessage(stanza, false, true);
 }
 
 void XmppBot::onConnect()
@@ -367,44 +345,16 @@ void XmppBot::handleMUCMessage( MUCRoom* room, const Message& stanza, bool priv 
     if(stanza.when()!=NULL)
         return;
 
-    std::string msg = stanza.body();
-    bool handle = priv;
+    this->handleMessage(stanza, true, priv);
+}
 
-    if(msg.size() > 0 && msg.at(0) == '!')
-    {
-        msg = msg.substr(1);
-        handle = true;
-    }
+void XmppBot::handleMessage(const Message& stanza, bool room, bool priv)
+{
+    bool handled = false;
 
-    if(!handle)
-        return;
-
-    std::string response;
-
-    bool success = this->m_CommandMgr->tryInvokeFromString(msg, stanza.from(),&response);
-/*
-    std::string state;
-    if(success)
-        state = "[ OK ]";
-    else
-        state = "[ Fail ]";
-*/
-    StringFormat *logformat = (success) ? this->m_cmdSuccessMsg : this->m_cmdFailMsg;
-    logformat->assign("1", msg);
-    logformat->assign("2", stanza.from().full());
-    logformat->assign("3", response);
-
-    LOG(command) << logformat->produce();
-
-
-    if(!success || priv)
-    {
-        //std::cout << state << " " << response << std::endl;
-        Message m(Message::Chat, stanza.from(),/*state+" "+*/response);
-        m_Client->send(m);
-    }
-
-    LOG(chat) << stanza.from().resource() + ": " + stanza.body();
+    std::list<MessageFilter*>::const_iterator it = this->m_MessageFilter->begin();
+    for(; it!=this->m_MessageFilter->end() && !handled ; it++)
+            (*it)->handleMessage(stanza, room, priv, &handled);
 }
 
 bool XmppBot::handleMUCRoomCreation( MUCRoom* room )
