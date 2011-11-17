@@ -47,3 +47,30 @@ message.leave=Goodbye World!
 
 #Message sent to users wanting to subscribe
 message.subscribe=I am a bot of some_server
+
+[logs]
+#Available logs: command, debug, link, chat
+
+#Set to yes if you want the log to actually log something
+debug.enabled=yes
+#Here you can set the log type. You can use: console, file, void.
+debug.type=console
+#Here you can set the entry format. Available options: %h, %m, %s for the current time. %_ for the actual message.
+debug.entryformat=[%h:%m:%s] debug: %_
+#Here you can set the format for the logname. Available options: %d, %m %y
+#debug.fileformat=./logs/debug_%d_%m_%y.log
+
+command.enabled=yes
+command.type=file
+command.entryformat=[%h:%m:%s]: %_
+command.fileformat=./logs/cmd_%d_%m_%y.log
+
+link.enabled=yes
+link.type=console
+link.entryformat=[%h:%m:%s] %_
+#link.fileformat=./logs/links.log
+
+[filter]
+#Here you can set which protocols you want the bot to look for in room-messanges. If this is not specified
+#the bot will fall back to http and ftp. If you leave this empty, the bot won't record any links.
+link.protocols=http,https,ftp

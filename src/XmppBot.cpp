@@ -40,6 +40,7 @@ void XmppBot::init()
     LOG_INIT(vm,debug)
     LOG_INIT(vm,command)
     LOG_INIT(vm,chat)
+    LOG_INIT(vm,link)
 
     LOG(sys) << "Done.";
 
@@ -101,9 +102,11 @@ void XmppBot::initConfig()
         ("bot.message.join","Message on joining in polite-mode")
         ("bot.message.leave","Message on leaving in polite-mode")
         ("bot.message.subscribe","Message the bot sends clients who want to subscribe to the bot")
+        ("filter.link.protocols","Which URI protocols the bot should look for")
         LOG_CONFIG(debug)
         LOG_CONFIG(command)
         LOG_CONFIG(chat)
+        LOG_CONFIG(link)
         ;
 
     std::ifstream ifs(this->m_ConfigFile);
@@ -192,7 +195,8 @@ void XmppBot::initCommands()
 
     this->m_StateCommand = new StateBotCommand(this->m_Room);
     this->m_CommandMgr->registerCommand("state", this->m_StateCommand);
-    //register aliases for this->m_StateCommand
+
+    // register aliases for this->m_StateCommand
     this->m_CommandMgr->registerCommand("afk", new AliasBotCommand("afk ","","[<message>] - Go afk. An optional message cam be set",true,this->m_StateCommand));
     this->m_CommandMgr->registerCommand("re", new AliasBotCommand("re ","","Come back from being afk",true,this->m_StateCommand));
 
@@ -201,14 +205,19 @@ void XmppBot::initCommands()
 
 void XmppBot::initMessageFilter()
 {
+    std::string link_protos;
+
+    if(vm.count("filter.link.protocols"))
+        link_protos = vm["filter.link.protocols"].as<std::string>();
+    else
+        link_protos = "http,ftp";
+
     this->m_MessageFilter = new std::list<MessageFilter*>();
 
     //order is important!
-
     this->m_MessageFilter->push_back(new ForeignMessageFilter(this->m_UserNicknameMap, this->m_Client));
-
     this->m_MessageFilter->push_back(new CommandMessageFilter(this->m_CommandMgr,this->m_Client,this->m_UserNicknameMap));
-
+    this->m_MessageFilter->push_back(new LinkMessageFilter(link_protos));
     this->m_MessageFilter->push_back(new LogMessageFilter());
 }
 

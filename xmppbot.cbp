@@ -42,6 +42,7 @@
 			<Add library="gloox" />
 			<Add library="boost_program_options-mgw45-mt-1_47" />
 			<Add library="boost_date_time-mgw45-mt-1_47" />
+			<Add library="boost_regex-mgw45-mt-1_47" />
 			<Add directory="lib" />
 			<Add directory="..\boost_1_47_0_sdk\lib" />
 		</Linker>
@@ -56,6 +57,7 @@
 		<Unit filename="include\HelpBotCommand.h" />
 		<Unit filename="include\JIDMap.h" />
 		<Unit filename="include\KickBotCommand.h" />
+		<Unit filename="include\LinkMessageFilter.h" />
 		<Unit filename="include\Log.h" />
 		<Unit filename="include\LogHelper.h" />
 		<Unit filename="include\LogMessageFilter.h" />
@@ -76,6 +78,7 @@
 		<Unit filename="src\ForeignMessageFilter.cpp" />
 		<Unit filename="src\HelpBotCommand.cpp" />
 		<Unit filename="src\KickBotCommand.cpp" />
+		<Unit filename="src\LinkMessageFilter.cpp" />
 		<Unit filename="src\Log.cpp" />
 		<Unit filename="src\LogMessageFilter.cpp" />
 		<Unit filename="src\ProtectedBotCommand.cpp" />

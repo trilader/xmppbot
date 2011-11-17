@@ -36,6 +36,7 @@
 #include "CommandMessageFilter.h"
 #include "ForeignMessageFilter.h"
 #include "LogMessageFilter.h"
+#include "LinkMessageFilter.h"
 
 using namespace gloox;
 namespace opt = boost::program_options;
