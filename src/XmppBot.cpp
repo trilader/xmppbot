@@ -1,5 +1,18 @@
 #include "XmppBot.h"
 
+#include "TestBotCommand.h"
+#include "SubjectBotCommand.h"
+#include "KickBotCommand.h"
+#include "StateBotCommand.h"
+#include "AliasBotCommand.h"
+#include "HelpBotCommand.h"
+#include "AdminBotCommand.h"
+
+#include "CommandMessageFilter.h"
+#include "ForeignMessageFilter.h"
+#include "LogMessageFilter.h"
+#include "LinkMessageFilter.h"
+
 XmppBot::XmppBot(std::string configfile)
 {
     this->m_ConfigFile = configfile;
@@ -157,7 +170,6 @@ void XmppBot::initXmpp()
     muc_nick.setServer(muc_server);
 
     m_Room = new MUCRoom(m_Client, muc_nick, this, this);
-
     m_Client->registerMessageHandler(this);
     m_Client->registerConnectionListener(this);
 }
@@ -200,7 +212,7 @@ void XmppBot::initCommands()
     this->m_CommandMgr->registerCommand("afk", new AliasBotCommand("afk ","","[<message>] - Go afk. An optional message cam be set",true,this->m_StateCommand));
     this->m_CommandMgr->registerCommand("re", new AliasBotCommand("re ","","Come back from being afk",true,this->m_StateCommand));
 
-    this->m_CommandMgr->registerCommand("admin", new AdminBotCommand(admin_pw, this->m_Client));
+    this->m_CommandMgr->registerCommand("admin", new AdminBotCommand(admin_pw, this));
 }
 
 void XmppBot::initMessageFilter()
@@ -221,15 +233,27 @@ void XmppBot::initMessageFilter()
     this->m_MessageFilter->push_back(new LogMessageFilter());
 }
 
-void XmppBot::run()
+XmppBot::ExitState XmppBot::run()
 {
     LOG(sys) << "Started.";
+
+    this->m_ExitState = XmppBot::QUIT;
 
     LOG(debug) << "Connecting...";
     m_Client->connect(); //blocks
     LOG(debug) << "Disconnected.";
 
     LOG(sys) << "Stoping...";
+
+    return this->m_ExitState;
+}
+
+void XmppBot::quit(XmppBot::ExitState state)
+{
+	this->m_ExitState = state;
+
+	this->m_Room->leave();
+	this->m_Client->disconnect();
 }
 
 void XmppBot::handleMessage( const Message& stanza, MessageSession* session)
@@ -333,20 +357,25 @@ void XmppBot::handleRosterError( const IQ& iq )
 
 void XmppBot::handleMUCParticipantPresence( MUCRoom* room, const MUCRoomParticipant participant, const Presence& presence )
 {
+	if(participant.jid == NULL)
+	{
+		LOG(debug) << "Note: invalid participant object received from server... ( no JID )!\nnick is " + participant.nick->full() + "!";
+		return;
+	}
+
     if( presence.presence() == Presence::Unavailable )
     {
         this->m_StateCommand->removeUserState(*(participant.nick));
         m_UserNicknameMap->erase(*(participant.jid));
-        //std::cout << participant.nick->resource()<<" left the room"<<std::endl;
+
+        LOG(debug) << "Note: participant with JID " + participant.jid->full() + " left the room!";
     }
     else
     {
         (*m_UserNicknameMap)[*(participant.jid)]=*participant.nick;
-        //std::cout << participant.nick->resource()<<" joined or updated his status"<<std::endl;
+
+        LOG(debug) << "Note: participant with JID " + participant.jid->full() + " joined or updated his status!";
     }
-
-
-    //std::cout << "Room presence: "<<participant.nick->full()<<" ("<<participant.jid->bare()<<") flags: "<<std::hex<<participant.flags<<std::endl;
 }
 
 void XmppBot::handleMUCMessage( MUCRoom* room, const Message& stanza, bool priv )
@@ -383,7 +412,7 @@ void XmppBot::handleMUCInviteDecline( MUCRoom* room, const JID& invitee, const s
 
 void XmppBot::handleMUCError( MUCRoom* room, StanzaError error )
 {
-//    std::cout <<"Error in " << room->name() << ": "<<error << std::endl;
+	LOG(debug) << "MUC error occured in room \"" + room->name() + "\" ( code " + boost::lexical_cast<std::string>(error) + " )";
 }
 
 void XmppBot::handleMUCInfo( MUCRoom* room, int features, const std::string& name, const DataForm* infoForm )

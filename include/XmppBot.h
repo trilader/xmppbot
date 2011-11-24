@@ -21,22 +21,12 @@
 #include "boost/program_options.hpp"
 
 #include "BotCommandManager.h"
-#include "TestBotCommand.h"
-#include "SubjectBotCommand.h"
-#include "KickBotCommand.h"
 #include "StateBotCommand.h"
-#include "AliasBotCommand.h"
-#include "HelpBotCommand.h"
-#include "AdminBotCommand.h"
 
 #include "LogHelper.h"
 #include "StringFormat.h"
 
 #include "MessageFilter.h"
-#include "CommandMessageFilter.h"
-#include "ForeignMessageFilter.h"
-#include "LogMessageFilter.h"
-#include "LinkMessageFilter.h"
 
 using namespace gloox;
 namespace opt = boost::program_options;
@@ -44,10 +34,22 @@ namespace opt = boost::program_options;
 class XmppBot: public MessageHandler, ConnectionListener, RosterListener, MUCRoomHandler, MUCRoomConfigHandler
 {
 public:
+	enum ExitState
+	{
+		RELOAD_REQUESTED = -1,
+		QUIT = 0,
+
+		//define error states
+		CONFIG_NOT_FOUND,
+		UNABLE_TO_CONNECT
+
+	};
+
     XmppBot(std::string configfile);
     virtual ~XmppBot();
 
-    void run();
+    ExitState run();
+    void quit(ExitState state = XmppBot::QUIT);
 protected:
     // MessageListener
     void handleMessage(const Message& stanza, MessageSession* session = 0);
@@ -97,6 +99,7 @@ private:
     void handleMessage(const Message& stanza, bool room, bool priv);
 
     std::string m_ConfigFile;
+    ExitState m_ExitState;
 
     Client* m_Client;
     RosterManager* m_RosterManager;

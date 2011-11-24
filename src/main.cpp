@@ -2,10 +2,20 @@
 
 int main(int argc, char** argv)
 {
-    XmppBot* b = new XmppBot("bot.cfg");
-    b->run();
+	std::string cfgfile = "bot.cfg";
+	if(argc > 1)
+		cfgfile = std::string(argv[1]);
 
-    delete b; //call dtor
+	XmppBot::ExitState state = XmppBot::QUIT;
 
-    return 0;
+	do
+	{
+		XmppBot* b = new XmppBot(cfgfile);
+		state = b->run();
+
+		delete b; //call dtor
+
+	} while(state < XmppBot::QUIT);
+
+    return state;
 }

@@ -1,8 +1,8 @@
 #include "AdminBotCommand.h"
 
-AdminBotCommand::AdminBotCommand(std::string adminpw, Client *client) : ProtectedBotCommand(adminpw)
+AdminBotCommand::AdminBotCommand(std::string adminpw, XmppBot *bot) : ProtectedBotCommand(adminpw)
 {
-    this->_client = client;
+    this->_bot = bot;
 }
 
 bool AdminBotCommand::showHelp() const
@@ -27,6 +27,9 @@ bool AdminBotCommand::invoke(const JID& user, const std::string& args, std::stri
     if("quit" == cmd)
         return this->quit(response);
 
+    if("reload" == cmd)
+    	return this->reload(response);
+
     *response = "unknown admin cmd";
     return false;
 }
@@ -35,7 +38,16 @@ bool AdminBotCommand::quit(std::string *response) const
 {
     *response = "";
     //std::cout << "disconnecting..." << std::endl;
-    this->_client->disconnect();
+    this->_bot->quit();
 
     return true;
+}
+
+bool AdminBotCommand::reload(std::string *response) const
+{
+	*response = "";
+
+	this->_bot->quit(XmppBot::RELOAD_REQUESTED);
+
+	return true;
 }
