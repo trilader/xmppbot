@@ -8,6 +8,7 @@
 #include "HelpBotCommand.h"
 #include "AdminBotCommand.h"
 
+#include "HistoryMessageFilter.h"
 #include "CommandMessageFilter.h"
 #include "ForeignMessageFilter.h"
 #include "LogMessageFilter.h"
@@ -227,6 +228,7 @@ void XmppBot::initMessageFilter()
     this->m_MessageFilter = new std::list<MessageFilter*>();
 
     //order is important!
+    this->m_MessageFilter->push_back(new HistoryMessageFilter());
     this->m_MessageFilter->push_back(new ForeignMessageFilter(this->m_UserNicknameMap, this->m_Client));
     this->m_MessageFilter->push_back(new CommandMessageFilter(this->m_CommandMgr,this->m_Client,this->m_UserNicknameMap));
     this->m_MessageFilter->push_back(new LinkMessageFilter(link_protos));
@@ -380,9 +382,6 @@ void XmppBot::handleMUCParticipantPresence( MUCRoom* room, const MUCRoomParticip
 
 void XmppBot::handleMUCMessage( MUCRoom* room, const Message& stanza, bool priv )
 {
-    if(stanza.when()!=NULL)
-        return;
-
     this->handleMessage(stanza, true, priv);
 }
 
