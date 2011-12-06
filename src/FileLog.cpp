@@ -8,6 +8,7 @@ FileLog::FileLog(StringFormat *fileformat, StringFormat *entryformat, bool keepo
     this->_keepopen = keepopen;
 
     this->_today = new boost::gregorian::date(boost::gregorian::min_date_time);
+    this->_thishour = boost::posix_time::second_clock::local_time().time_of_day().hours();
 
     this->_stream = 0;
     this->updateStream();
@@ -20,10 +21,7 @@ void FileLog::log(const std::string& msg)
     if(!(this->_stream->is_open()))
         this->_stream->open(this->_filename, std::ofstream::out | std::ofstream::app);
 
-    boost::posix_time::ptime t = boost::posix_time::second_clock::local_time();
-    this->_entryformat->assign("h",t.time_of_day().hours());
-    this->_entryformat->assign("m",t.time_of_day().minutes());
-    this->_entryformat->assign("s",t.time_of_day().seconds());
+    assignFormatDateTime(_entryformat);
 
     this->_entryformat->assign("_", msg);
 
@@ -37,18 +35,18 @@ void FileLog::log(const std::string& msg)
 
 void FileLog::updateStream()
 {
-    boost::gregorian::date today(boost::gregorian::day_clock::local_day());
+    boost::gregorian::date today = boost::gregorian::day_clock::local_day();
+    boost::posix_time::ptime t = boost::posix_time::second_clock::local_time();
 
-    if((0 != this->_stream) && (today == (*this->_today)))
+    if((0 != this->_stream) && (today == (*this->_today)) && (t.time_of_day().hours() == (this->_thishour)))
         return;
-
-    this->_fileformat->assign("d", today.day());
-    this->_fileformat->assign("m", today.month());
-    this->_fileformat->assign("y", today.year());
+        std::cout<<_entryformat->getFormatString()<<std::endl;
+    assignFormatDateTime(_fileformat);
 
     this->_filename = this->_fileformat->produce();
 
     *this->_today = today;
+    this->_thishour = t.time_of_day().hours();
 
     if(0 == this->_stream)
          this->_stream = new std::ofstream();

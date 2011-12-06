@@ -226,7 +226,7 @@ void XmppBot::initMessageFilter()
     else
         link_protos = "http,ftp";
 
-    std::set<gloox::JID> *jidexceptions = new std::set<gloox::JID>();
+    std::set<std::string> *jidexceptions = new std::set<std::string>();
     if(vm.count("filter.foreign.authalways"))
     {
         std::vector<std::string> out;
@@ -235,9 +235,8 @@ void XmppBot::initMessageFilter()
 
         for(unsigned int i=0; i<out.size(); i++)
         {
-            gloox::JID jid(out[i]);
-            jidexceptions->insert(jid);
-            LOG(debug) << "Added " + jid.full() + " to exception list";
+            jidexceptions->insert(out[i]);
+            LOG(debug) << "Added " + out[i] + " to exception list";
         }
     }
 
