@@ -117,6 +117,7 @@ void XmppBot::initConfig()
         ("bot.message.leave","Message on leaving in polite-mode")
         ("bot.message.subscribe","Message the bot sends clients who want to subscribe to the bot")
         ("filter.link.protocols","Which URI protocols the bot should look for")
+        ("filter.foreign.authalways","")
         LOG_CONFIG(debug)
         LOG_CONFIG(command)
         LOG_CONFIG(chat)
@@ -225,11 +226,25 @@ void XmppBot::initMessageFilter()
     else
         link_protos = "http,ftp";
 
+    std::set<std::string> *jidexceptions = new std::set<std::string>();
+    if(vm.count("filter.foreign.authalways"))
+    {
+        std::vector<std::string> out;
+        boost::algorithm::split(out, vm["filter.foreign.authalways"].as<std::string>(),
+                                boost::algorithm::is_any_of(","));
+
+        for(unsigned int i=0; i<out.size(); i++)
+        {
+            jidexceptions->insert(out[i]);
+            LOG(debug) << "Added " + out[i] + " to exception list";
+        }
+    }
+
     this->m_MessageFilter = new std::list<MessageFilter*>();
 
     //order is important!
     this->m_MessageFilter->push_back(new HistoryMessageFilter());
-    this->m_MessageFilter->push_back(new ForeignMessageFilter(this->m_UserNicknameMap, this->m_Client));
+    this->m_MessageFilter->push_back(new ForeignMessageFilter(this->m_UserNicknameMap, jidexceptions, this->m_Client));
     this->m_MessageFilter->push_back(new CommandMessageFilter(this->m_CommandMgr,this->m_Client,this->m_UserNicknameMap));
     this->m_MessageFilter->push_back(new LinkMessageFilter(link_protos));
     this->m_MessageFilter->push_back(new LogMessageFilter());

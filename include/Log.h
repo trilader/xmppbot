@@ -4,6 +4,8 @@
 #include <string>
 #include "boost/lexical_cast.hpp"
 #include "boost/unordered_map.hpp"
+#include "boost/date_time/posix_time/posix_time.hpp"
+#include "StringFormat.h"
 
 class Log
 {
@@ -23,6 +25,8 @@ public:
         this->log(msg);
         return *this;
     }
+protected:
+    void assignFormatDateTime(StringFormat* _format);
 };
 
 #endif

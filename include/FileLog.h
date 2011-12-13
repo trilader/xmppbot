@@ -26,6 +26,7 @@ private:
     bool _keepopen;
 
     boost::gregorian::date *_today;
+    long _thishour;
 };
 
 #endif

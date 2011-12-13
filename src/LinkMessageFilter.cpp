@@ -19,7 +19,7 @@ LinkMessageFilter::LinkMessageFilter(const std::string& protocols)
 
     LOG(debug) << proto;
 
-    std::string expr = proto+"://.+ ";
+    std::string expr = proto+"://[^\\s]+";
     this->_re = new boost::regex(expr, boost::regex::icase);
 }
 
@@ -31,7 +31,6 @@ void LinkMessageFilter::setLogFormat(StringFormat *format)
 void LinkMessageFilter::handleMessage(const Message& stanza, bool room, bool priv, bool *handled)
 {
     std::string msg = stanza.body();
-    bool linkFound = false;
 
     if(msg.size() <= 0)
         return;
@@ -51,8 +50,5 @@ void LinkMessageFilter::handleMessage(const Message& stanza, bool room, bool pri
         logformat->assign("2", it->str());
 
         LOG(link) << logformat->produce();
-        linkFound=true;
     }
-
-    *handled = linkFound;
 }
