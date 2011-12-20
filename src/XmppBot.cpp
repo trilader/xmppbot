@@ -13,6 +13,7 @@
 #include "ForeignMessageFilter.h"
 #include "LogMessageFilter.h"
 #include "LinkMessageFilter.h"
+#include "JIDMessageFilter.h"
 
 XmppBot::XmppBot(std::string configfile)
 {
@@ -182,16 +183,13 @@ void XmppBot::initCommands()
 
     std::string subject_event_name;
     std::string subject_event_date;
-    std::string subject_format = "%3";
+    std::string subject_format = "%2";
 
     if(vm.count("command.admin.password"))
         admin_pw = vm["command.admin.password"].as<std::string>();
 
-    if(vm.count("command.subject.eventname") && vm.count("command.subject.eventdate"))
-    {
-        subject_event_name = vm["command.subject.eventname"].as<std::string>();
+    if(vm.count("command.subject.eventdate"))
         subject_event_date = vm["command.subject.eventdate"].as<std::string>();
-    }
 
     if(vm.count("command.subject.format"))
         subject_format = vm["command.subject.format"].as<std::string>();
@@ -201,8 +199,8 @@ void XmppBot::initCommands()
     this->m_CommandMgr->registerCommand("kick", new KickBotCommand(this->m_Client,this->m_Room,admin_pw));
 
     SubjectBotCommand *subjcmd = new SubjectBotCommand(this->m_Room, admin_pw, new StringFormat(subject_format));
-    if(subject_event_name.length() > 0)
-        subjcmd->setEvent(subject_event_name, subject_event_date);
+    if(subject_event_date.length() > 0)
+        subjcmd->setEvent(subject_event_date);
 
     this->m_CommandMgr->registerCommand("setsbj", subjcmd);
     this->m_CommandMgr->registerCommand("help", new HelpBotCommand(m_CommandMgr->getCommands()));
@@ -245,6 +243,12 @@ void XmppBot::initMessageFilter()
     //order is important!
     this->m_MessageFilter->push_back(new HistoryMessageFilter());
     this->m_MessageFilter->push_back(new ForeignMessageFilter(this->m_UserNicknameMap, jidexceptions, this->m_Client));
+
+    if(jidexceptions->find(this->m_Client->jid().bare()) == jidexceptions->end())
+        this->m_MessageFilter->push_back(new JIDMessageFilter(this->m_Client->jid(), true, true, true));
+    else
+        LOG(debug) << "warning: the bot is able to send himself commands ( 'authalways' configuration directive ), it is up to you to ensure correct priority settings!";
+
     this->m_MessageFilter->push_back(new CommandMessageFilter(this->m_CommandMgr,this->m_Client,this->m_UserNicknameMap));
     this->m_MessageFilter->push_back(new LinkMessageFilter(link_protos));
     this->m_MessageFilter->push_back(new LogMessageFilter());

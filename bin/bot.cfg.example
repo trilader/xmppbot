@@ -25,15 +25,12 @@ server=conference.example.com
 #Bot administration password. Required for some commands like setsbj and kick user
 admin.password=secret
 
-#Event that should be in the subject
-subject.eventname=Awesome event
-
 #Event date for countdown
 subject.eventdate=2011-10-02
 
-#Event format string %1 is the event name, %2 the days until the event date, %3 the custom subject
-#If this is not set it defaults to just the custom message (subject.format=%3)
-subject.format=%1 (%2 days remaining) - %3
+#Event format string %1 the days until the event date, %2 the custom subject
+#If this is not set it defaults to just the custom message (subject.format=%2)
+subject.format=special event (%1 days remaining) - %2
 
 [bot]
 #If set to yes the bot will send a message on joining and leaving the room

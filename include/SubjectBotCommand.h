@@ -19,11 +19,11 @@ public:
     std::string getHelp() const;
     bool showHelp() const;
 
-    void setEvent(std::string name, std::string datestr);
+    void setEvent(std::string datestr);
 
 private:
     MUCRoom *_room;
-    std::string _eventname;
+    bool _eventenabled;
     StringFormat *_format;
     boost::gregorian::date _eventdate;
 };

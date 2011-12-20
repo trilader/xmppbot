@@ -57,6 +57,7 @@
 		<Unit filename="include\HelpBotCommand.h" />
 		<Unit filename="include\HistoryMessageFilter.h" />
 		<Unit filename="include\JIDMap.h" />
+		<Unit filename="include\JIDMessageFilter.h" />
 		<Unit filename="include\KickBotCommand.h" />
 		<Unit filename="include\LinkMessageFilter.h" />
 		<Unit filename="include\Log.h" />
@@ -79,6 +80,7 @@
 		<Unit filename="src\ForeignMessageFilter.cpp" />
 		<Unit filename="src\HelpBotCommand.cpp" />
 		<Unit filename="src\HistoryMessageFilter.cpp" />
+		<Unit filename="src\JIDMessageFilter.cpp" />
 		<Unit filename="src\KickBotCommand.cpp" />
 		<Unit filename="src\LinkMessageFilter.cpp" />
 		<Unit filename="src\Log.cpp" />

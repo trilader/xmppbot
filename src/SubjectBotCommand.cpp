@@ -26,15 +26,14 @@ bool SubjectBotCommand::invoke(const JID& user, const std::string& args, std::st
 
     boost::gregorian::date now(boost::gregorian::day_clock::local_day());
 
-    if(this->_eventname.length() > 0)
+    if(this->_eventenabled)
     {
         boost::gregorian::date_period period(now, this->_eventdate);
 
-        this->_format->assign("1",this->_eventname);
-        this->_format->assign("2",period.length());
+        this->_format->assign("1",period.length());
     }
 
-    this->_format->assign("3", subject);
+    this->_format->assign("2", subject);
 
     std::string result = this->_format->produce();
 
@@ -53,11 +52,8 @@ bool SubjectBotCommand::showHelp() const
     return true;
 }
 
-void SubjectBotCommand::setEvent(std::string name, std::string datestr)
+void SubjectBotCommand::setEvent(std::string datestr)
 {
-    this->_eventname = name;
-
     this->_eventdate = boost::gregorian::from_string(datestr);
-
-    //std::cout << "new event is " << this->_eventname << " and event date is " << this->_eventdate << std::endl;
+    this->_eventenabled = true;
 }
