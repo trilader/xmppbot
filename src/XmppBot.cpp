@@ -15,6 +15,8 @@
 #include "LinkMessageFilter.h"
 #include "JIDMessageFilter.h"
 
+#include "SQLiteLog.h"
+
 XmppBot::XmppBot(std::string configfile)
 {
     this->m_ConfigFile = configfile;
@@ -42,6 +44,9 @@ XmppBot::~XmppBot()
 void XmppBot::init()
 {
     LOG_ADD(sys,new ConsoleLog(new StringFormat("system: %_")))
+
+    SQLiteLog *test = new SQLiteLog("logs/test.db", "log", false);
+    test->log("juhuu");
 
     LOG(sys) << "Initializing...";
 

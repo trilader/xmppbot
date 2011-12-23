@@ -37,14 +37,17 @@
 			<Add option="-DGLOOX_IMPORTS" />
 			<Add directory="include" />
 			<Add directory="..\boost_1_47_0_sdk" />
+			<Add directory="..\sqlitewrapped" />
 		</Compiler>
 		<Linker>
 			<Add library="gloox" />
 			<Add library="boost_program_options-mgw45-mt-1_47" />
 			<Add library="boost_date_time-mgw45-mt-1_47" />
 			<Add library="boost_regex-mgw45-mt-1_47" />
+			<Add library="libsqlitewrapped.a" />
 			<Add directory="lib" />
 			<Add directory="..\boost_1_47_0_sdk\lib" />
+			<Add directory="..\sqlitewrapped\bin\Debug\" />
 		</Linker>
 		<Unit filename="include\AdminBotCommand.h" />
 		<Unit filename="include\AliasBotCommand.h" />
@@ -52,6 +55,7 @@
 		<Unit filename="include\BotCommandManager.h" />
 		<Unit filename="include\CommandMessageFilter.h" />
 		<Unit filename="include\ConsoleLog.h" />
+		<Unit filename="include\DatabaseHelper.h" />
 		<Unit filename="include\FileLog.h" />
 		<Unit filename="include\ForeignMessageFilter.h" />
 		<Unit filename="include\HelpBotCommand.h" />
@@ -65,6 +69,7 @@
 		<Unit filename="include\LogMessageFilter.h" />
 		<Unit filename="include\MessageFilter.h" />
 		<Unit filename="include\ProtectedBotCommand.h" />
+		<Unit filename="include\SQLiteLog.h" />
 		<Unit filename="include\StateBotCommand.h" />
 		<Unit filename="include\StringFormat.h" />
 		<Unit filename="include\SubjectBotCommand.h" />
@@ -86,6 +91,7 @@
 		<Unit filename="src\Log.cpp" />
 		<Unit filename="src\LogMessageFilter.cpp" />
 		<Unit filename="src\ProtectedBotCommand.cpp" />
+		<Unit filename="src\SQLiteLog.cpp" />
 		<Unit filename="src\StateBotCommand.cpp" />
 		<Unit filename="src\StringFormat.cpp" />
 		<Unit filename="src\SubjectBotCommand.cpp" />
