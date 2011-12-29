@@ -4,22 +4,28 @@
 #include "Log.h"
 #include "StringFormat.h"
 #include "DatabaseHelper.h"
+#include "LoggableQuery.h"
 #include "boost/date_time/posix_time/posix_time.hpp"
 #include "boost/date_time/gregorian/gregorian.hpp"
 
 class SQLiteLog : public Log
 {
 public:
-    SQLiteLog(std::string database, std::string table, bool keepopen = false);
+    SQLiteLog(StringFormat *databaseFormat, std::string table);
     void log(const std::string& msg);
 
 private:
     void openDatabase();
 
-    bool _keepopen;
     Database *_db;
 
-    std::string _table;
+    StringFormat *_databaseFormat;
+    StringFormat *_tableFormat;
+    StringFormat *_insertQueryFormat;
+    StringFormat *_createQueryFormat;
+
+    boost::gregorian::date *_today;
+    long _thishour;
 };
 
 #endif

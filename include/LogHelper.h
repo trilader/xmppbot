@@ -5,6 +5,7 @@
 #include "ConsoleLog.h"
 #include "FileLog.h"
 #include "VoidLog.h"
+#include "SQLiteLog.h"
 
 //macros:
 #define LOG_CONFIG(n) ("logs."#n".enabled", "(yes|no) Enable or disable the log") \
@@ -30,6 +31,10 @@
                                 else if("console" == type) \
                                 { \
                                     Log::logMap[#n] = new ConsoleLog(new StringFormat(v["logs."#n".entryformat"].as<std::string>())); \
+                                } \
+                                else if("sql" == type && v.count("logs."#n".fileformat")) \
+                                { \
+                                    Log::logMap[#n] = new SQLiteLog(new StringFormat(v["logs."#n".fileformat"].as<std::string>()), #n); \
                                 } \
                             } \
                         } \

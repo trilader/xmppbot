@@ -7,9 +7,9 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin\xmppbot" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/xmppbot" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="bin" />
-				<Option object_output="obj\Debug" />
+				<Option object_output="obj/Debug" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -17,9 +17,9 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin\xmppbot" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/xmppbot" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="bin" />
-				<Option object_output="obj\Release" />
+				<Option object_output="obj/Release" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -36,69 +36,72 @@
 			<Add option="-fexceptions" />
 			<Add option="-DGLOOX_IMPORTS" />
 			<Add directory="include" />
-			<Add directory="..\boost_1_47_0_sdk" />
-			<Add directory="..\sqlitewrapped" />
+			<Add directory="../boost_1_47_0_sdk" />
+			<Add directory="../sqlitewrapped" />
 		</Compiler>
 		<Linker>
 			<Add library="gloox" />
-			<Add library="boost_program_options-mgw45-mt-1_47" />
-			<Add library="boost_date_time-mgw45-mt-1_47" />
-			<Add library="boost_regex-mgw45-mt-1_47" />
+			<Add library="boost_program_options" />
+			<Add library="boost_date_time" />
+			<Add library="boost_regex" />
 			<Add library="libsqlitewrapped.a" />
+			<Add library="sqlite3" />
 			<Add directory="lib" />
-			<Add directory="..\boost_1_47_0_sdk\lib" />
-			<Add directory="..\sqlitewrapped\bin\Debug\" />
+			<Add directory="../boost_1_47_0_sdk/lib" />
+			<Add directory="../sqlitewrapped/bin/Debug/" />
 		</Linker>
-		<Unit filename="include\AdminBotCommand.h" />
-		<Unit filename="include\AliasBotCommand.h" />
-		<Unit filename="include\BotCommand.h" />
-		<Unit filename="include\BotCommandManager.h" />
-		<Unit filename="include\CommandMessageFilter.h" />
-		<Unit filename="include\ConsoleLog.h" />
-		<Unit filename="include\DatabaseHelper.h" />
-		<Unit filename="include\FileLog.h" />
-		<Unit filename="include\ForeignMessageFilter.h" />
-		<Unit filename="include\HelpBotCommand.h" />
-		<Unit filename="include\HistoryMessageFilter.h" />
-		<Unit filename="include\JIDMap.h" />
-		<Unit filename="include\JIDMessageFilter.h" />
-		<Unit filename="include\KickBotCommand.h" />
-		<Unit filename="include\LinkMessageFilter.h" />
-		<Unit filename="include\Log.h" />
-		<Unit filename="include\LogHelper.h" />
-		<Unit filename="include\LogMessageFilter.h" />
-		<Unit filename="include\MessageFilter.h" />
-		<Unit filename="include\ProtectedBotCommand.h" />
-		<Unit filename="include\SQLiteLog.h" />
-		<Unit filename="include\StateBotCommand.h" />
-		<Unit filename="include\StringFormat.h" />
-		<Unit filename="include\SubjectBotCommand.h" />
-		<Unit filename="include\TestBotCommand.h" />
-		<Unit filename="include\VoidLog.h" />
-		<Unit filename="include\XmppBot.h" />
-		<Unit filename="src\AdminBotCommand.cpp" />
-		<Unit filename="src\AliasBotCommand.cpp" />
-		<Unit filename="src\BotCommandManager.cpp" />
-		<Unit filename="src\CommandMessageFilter.cpp" />
-		<Unit filename="src\ConsoleLog.cpp" />
-		<Unit filename="src\FileLog.cpp" />
-		<Unit filename="src\ForeignMessageFilter.cpp" />
-		<Unit filename="src\HelpBotCommand.cpp" />
-		<Unit filename="src\HistoryMessageFilter.cpp" />
-		<Unit filename="src\JIDMessageFilter.cpp" />
-		<Unit filename="src\KickBotCommand.cpp" />
-		<Unit filename="src\LinkMessageFilter.cpp" />
-		<Unit filename="src\Log.cpp" />
-		<Unit filename="src\LogMessageFilter.cpp" />
-		<Unit filename="src\ProtectedBotCommand.cpp" />
-		<Unit filename="src\SQLiteLog.cpp" />
-		<Unit filename="src\StateBotCommand.cpp" />
-		<Unit filename="src\StringFormat.cpp" />
-		<Unit filename="src\SubjectBotCommand.cpp" />
-		<Unit filename="src\TestBotCommand.cpp" />
-		<Unit filename="src\VoidLog.cpp" />
-		<Unit filename="src\XmppBot.cpp" />
-		<Unit filename="src\main.cpp" />
+		<Unit filename="include/AdminBotCommand.h" />
+		<Unit filename="include/AliasBotCommand.h" />
+		<Unit filename="include/BotCommand.h" />
+		<Unit filename="include/BotCommandManager.h" />
+		<Unit filename="include/CommandMessageFilter.h" />
+		<Unit filename="include/ConsoleLog.h" />
+		<Unit filename="include/DatabaseHelper.h" />
+		<Unit filename="include/FileLog.h" />
+		<Unit filename="include/ForeignMessageFilter.h" />
+		<Unit filename="include/HelpBotCommand.h" />
+		<Unit filename="include/HistoryMessageFilter.h" />
+		<Unit filename="include/JIDMap.h" />
+		<Unit filename="include/JIDMessageFilter.h" />
+		<Unit filename="include/KickBotCommand.h" />
+		<Unit filename="include/LinkMessageFilter.h" />
+		<Unit filename="include/Log.h" />
+		<Unit filename="include/LogHelper.h" />
+		<Unit filename="include/LogMessageFilter.h" />
+		<Unit filename="include/LoggableQuery.h" />
+		<Unit filename="include/MessageFilter.h" />
+		<Unit filename="include/ProtectedBotCommand.h" />
+		<Unit filename="include/SQLiteLog.h" />
+		<Unit filename="include/StateBotCommand.h" />
+		<Unit filename="include/StringFormat.h" />
+		<Unit filename="include/SubjectBotCommand.h" />
+		<Unit filename="include/TestBotCommand.h" />
+		<Unit filename="include/VoidLog.h" />
+		<Unit filename="include/XmppBot.h" />
+		<Unit filename="src/AdminBotCommand.cpp" />
+		<Unit filename="src/AliasBotCommand.cpp" />
+		<Unit filename="src/BotCommandManager.cpp" />
+		<Unit filename="src/CommandMessageFilter.cpp" />
+		<Unit filename="src/ConsoleLog.cpp" />
+		<Unit filename="src/FileLog.cpp" />
+		<Unit filename="src/ForeignMessageFilter.cpp" />
+		<Unit filename="src/HelpBotCommand.cpp" />
+		<Unit filename="src/HistoryMessageFilter.cpp" />
+		<Unit filename="src/JIDMessageFilter.cpp" />
+		<Unit filename="src/KickBotCommand.cpp" />
+		<Unit filename="src/LinkMessageFilter.cpp" />
+		<Unit filename="src/Log.cpp" />
+		<Unit filename="src/LogMessageFilter.cpp" />
+		<Unit filename="src/LoggableQuery.cpp" />
+		<Unit filename="src/ProtectedBotCommand.cpp" />
+		<Unit filename="src/SQLiteLog.cpp" />
+		<Unit filename="src/StateBotCommand.cpp" />
+		<Unit filename="src/StringFormat.cpp" />
+		<Unit filename="src/SubjectBotCommand.cpp" />
+		<Unit filename="src/TestBotCommand.cpp" />
+		<Unit filename="src/VoidLog.cpp" />
+		<Unit filename="src/XmppBot.cpp" />
+		<Unit filename="src/main.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
