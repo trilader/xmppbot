@@ -209,7 +209,7 @@ void XmppBot::initCommands()
     this->m_CommandMgr->registerCommand("state", this->m_StateCommand);
 
     // register aliases for this->m_StateCommand
-    this->m_CommandMgr->registerCommand("afk", new AliasBotCommand("afk ","","[<message>] - Go afk. An optional message cam be set",true,this->m_StateCommand));
+    this->m_CommandMgr->registerCommand("afk", new AliasBotCommand("afk ","","[<message>] - Go afk. An optional message can be set",true,this->m_StateCommand));
     this->m_CommandMgr->registerCommand("re", new AliasBotCommand("re ","","Come back from being afk",true,this->m_StateCommand));
 
     this->m_CommandMgr->registerCommand("admin", new AdminBotCommand(admin_pw, this));
