@@ -7,44 +7,56 @@
 #include "VoidLog.h"
 #include "SQLiteLog.h"
 
+#include "Configuration.h"
+
 //macros:
-#define LOG_CONFIG(n) ("logs."#n".enabled", "(yes|no) Enable or disable the log") \
-                        ("logs."#n".type", "(console|file) The type of the log") \
-                        ("logs."#n".entryformat", "Custom format string") \
-                        ("logs."#n".fileformat", "Custom filename format string ( only for type = file") \
-                         ("logs."#n".keepopen", "")
 
-#define LOG_INIT(v,n)   if(v.count("logs."#n".enabled") && v.count("logs."#n".type") && v.count("logs."#n".entryformat")) \
-                        { \
-                            if(v["logs."#n".enabled"].as<std::string>() == "yes") \
-                            { \
-                                std::string type = v["logs."#n".type"].as<std::string>(); \
-                                if("file" == type && v.count("logs."#n".fileformat")) \
-                                { \
-                                    bool keepopen = false; \
-                                    if(v.count("logs."#n".keepopen")) \
-                                        keepopen = v["logs."#n".keepopen"].as<std::string>() == "yes"; \
-                                    Log::logMap[#n] = new FileLog(new StringFormat(v["logs."#n".fileformat"].as<std::string>()), \
-                                                                       new StringFormat(v["logs."#n".entryformat"].as<std::string>()), \
-                                                                       keepopen); \
-                                } \
-                                else if("console" == type) \
-                                { \
-                                    Log::logMap[#n] = new ConsoleLog(new StringFormat(v["logs."#n".entryformat"].as<std::string>())); \
-                                } \
-                                else if("sql" == type && v.count("logs."#n".fileformat")) \
-                                { \
-                                    Log::logMap[#n] = new SQLiteLog(new StringFormat(v["logs."#n".fileformat"].as<std::string>()), #n); \
-                                } \
-                            } \
-                        } \
-                        if(!(Log::logMap.count(#n)))\
-                        { \
-                            Log::logMap[#n] = new VoidLog(); \
-                        }
+#define LOG_INIT(c,n) LogHelper::init(c,#n);
 
-#define LOG(n) (*(Log::logMap[#n]))
+#define LOG(n) (LogHelper::log(#n))
 
-#define LOG_ADD(n,l) Log::logMap[#n] = (l);
+#define LOG_ADD(n,l) LogHelper::add(#n, l);
+
+class LogHelper
+{
+    public:
+        static void init(Configuration *config, const std::string& name);
+        static void add(const std::string& name, Log *log);
+        static Log& log(const std::string& name);
+
+    private:
+        static boost::unordered_map<std::string, Log* > logMap;
+};
+
+inline void LogHelper::init(Configuration *config, const std::string& name)
+{
+    bool enabled, keepopen;
+    std::string type, fileformat, entryformat;
+    bool exists = config->getLog(name,&type, &fileformat, &entryformat, &enabled, &keepopen);
+
+    if(exists && enabled)
+    {
+            if("file" == type && "" != fileformat && "" != entryformat)
+                LogHelper::logMap[name] = new FileLog(new StringFormat(fileformat),
+                                                new StringFormat(entryformat), keepopen);
+            else if("console" == type && "" != entryformat)
+                LogHelper::logMap[name] = new ConsoleLog(new StringFormat(entryformat));
+            else if("sql" == type && "" != fileformat)
+                LogHelper::logMap[name] = new SQLiteLog(new StringFormat(fileformat), name);
+    }
+
+    if(!(LogHelper::logMap.count(name)))
+        LogHelper::logMap[name] = new VoidLog();
+}
+
+inline void LogHelper::add(const std::string& name, Log *log)
+{
+    LogHelper::logMap[name] = log;
+}
+
+inline Log& LogHelper::log(const std::string& name)
+{
+    return (*(LogHelper::logMap[name]));
+}
 
 #endif

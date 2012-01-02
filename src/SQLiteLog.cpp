@@ -36,19 +36,19 @@ void SQLiteLog::openDatabase()
     this->assignFormatDateTime(this->_databaseFormat);
     this->_db = new Database(this->_databaseFormat->produce());
 
-    LoggableQuery query(*(this->_db));
+    Query query(*(this->_db));
 
     this->_createQueryFormat->assign("table", this->_tableFormat->last());
-    query.executeAndLog(this->_createQueryFormat->produce());
+    query.execute(this->_createQueryFormat->produce());
 }
 
 void SQLiteLog::log(const std::string& msg)
 {
     this->openDatabase();
 
-    LoggableQuery query(*(this->_db));
+    Query query(*(this->_db));
 
     this->_insertQueryFormat->assign("table", this->_tableFormat->last());
     this->_insertQueryFormat->assign("msg", msg);
-    query.executeAndLog(this->_insertQueryFormat->produce());
+    query.execute(this->_insertQueryFormat->produce());
 }

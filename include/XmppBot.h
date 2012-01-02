@@ -1,8 +1,6 @@
 #ifndef XMPPBOT_H
 #define XMPPBOT_H
 
-#include <iostream>
-#include <fstream>
 #include <list>
 
 #include "JIDMap.h"
@@ -18,7 +16,6 @@
 #include "gloox/mucroom.h"
 #include "gloox/mucroomhandler.h"
 #include "gloox/mucroomconfighandler.h"
-#include "boost/program_options.hpp"
 
 #include "BotCommandManager.h"
 #include "StateBotCommand.h"
@@ -28,8 +25,9 @@
 
 #include "MessageFilter.h"
 
+#include "Configuration.h"
+
 using namespace gloox;
-namespace opt = boost::program_options;
 
 class XmppBot: public MessageHandler, ConnectionListener, RosterListener, MUCRoomHandler, MUCRoomConfigHandler
 {
@@ -105,7 +103,7 @@ private:
     RosterManager* m_RosterManager;
     MUCRoom* m_Room;
     BotCommandManager* m_CommandMgr;
-    opt::variables_map vm;
+    Configuration* m_Config;
     JIDMap* m_UserNicknameMap;
 
     StateBotCommand* m_StateCommand;

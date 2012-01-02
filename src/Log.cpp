@@ -19,4 +19,3 @@ void Log::assignFormatDateTime(StringFormat* _format)
     _format->assign("m",t.time_of_day().minutes());
     _format->assign("s",t.time_of_day().seconds());
 }
-boost::unordered_map<std::string, Log* > Log::logMap;
