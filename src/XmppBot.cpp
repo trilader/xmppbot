@@ -261,9 +261,18 @@ XmppBot::ExitState XmppBot::run()
     this->m_ExitState = XmppBot::QUIT;
 
     LOG(debug) << "Connecting...";
-    m_Client->connect(); //blocks
-    LOG(debug) << "Disconnected.";
+    if(m_Client->connect(false))
+	{
+	    std::cout<<".";
+		gloox::ConnectionError error = gloox::ConnectionError::ConnNoError;
+		while(error == gloox::ConnectionError::ConnNoError)
+			error = m_Client->recv( 1000*100 ); //100 mSec
 
+		std::cout<<"Error: "<<error<<std::endl;
+	}
+	//m_Client->disconnect();
+
+	LOG(debug) << "Disconnected.";
     LOG(sys) << "Stoping...";
 
     return this->m_ExitState;
