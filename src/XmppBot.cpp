@@ -17,10 +17,9 @@
 
 #include "FileConfiguration.h"
 
-XmppBot::XmppBot(std::string configfile)
+XmppBot::XmppBot(Configuration *config)
 {
-    this->m_ConfigFile = configfile;
-
+    this->m_Config = config;
     this->init();
 }
 
@@ -43,14 +42,9 @@ XmppBot::~XmppBot()
 //init
 void XmppBot::init()
 {
-    LOG_ADD(sys,new ConsoleLog(new StringFormat("system: %_")));
     LOG_ADD(sql,new ConsoleLog(new StringFormat("sql: %_")));
 
     LOG(sys) << "Initializing...";
-
-    this->initConfig();
-
-    LOG(sys) << "Loaded \"" + this->m_ConfigFile + "\".";
 
     LOG(sys) << "Init logs...";
     //init logs
@@ -89,11 +83,6 @@ void XmppBot::init()
     this->m_bePolite = this->m_Config->getCustomItem("polite") == "yes";
 
     LOG(sys) << "Initilization completed.";
-}
-
-void XmppBot::initConfig()
-{
-    this->m_Config = new FileConfiguration(this->m_ConfigFile);
 }
 
 void XmppBot::initXmpp()

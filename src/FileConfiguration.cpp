@@ -72,7 +72,6 @@ bool FileConfiguration::isItemSet(const std::string& option)
 
 std::string FileConfiguration::getItem(const std::string& option)
 {
-    LOG(sys) << "Config: get Item \'" + option + "\'";
     if(this->isItemSet(option))
         return vm[option].as<std::string>();
 

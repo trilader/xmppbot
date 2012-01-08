@@ -72,6 +72,7 @@
 		<Unit filename="include/LogMessageFilter.h" />
 		<Unit filename="include/LoggableQuery.h" />
 		<Unit filename="include/MessageFilter.h" />
+		<Unit filename="include/Program.h" />
 		<Unit filename="include/ProtectedBotCommand.h" />
 		<Unit filename="include/SQLiteConfiguration.h" />
 		<Unit filename="include/SQLiteLog.h" />
@@ -98,6 +99,7 @@
 		<Unit filename="src/LogHelper.cpp" />
 		<Unit filename="src/LogMessageFilter.cpp" />
 		<Unit filename="src/LoggableQuery.cpp" />
+		<Unit filename="src/Program.cpp" />
 		<Unit filename="src/ProtectedBotCommand.cpp" />
 		<Unit filename="src/SQLiteConfiguration.cpp" />
 		<Unit filename="src/SQLiteLog.cpp" />

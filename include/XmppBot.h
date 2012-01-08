@@ -43,7 +43,7 @@ public:
 
 	};
 
-    XmppBot(std::string configfile);
+    XmppBot(Configuration *config);
     virtual ~XmppBot();
 
     ExitState run();
@@ -89,14 +89,12 @@ protected:
 
 private:
     void init();
-    void initConfig();
     void initXmpp();
     void initCommands();
     void initMessageFilter();
 
     void handleMessage(const Message& stanza, bool room, bool priv);
 
-    std::string m_ConfigFile;
     ExitState m_ExitState;
 
     Client* m_Client;
