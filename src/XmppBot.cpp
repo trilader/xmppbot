@@ -263,12 +263,11 @@ XmppBot::ExitState XmppBot::run()
     LOG(debug) << "Connecting...";
     if(m_Client->connect(false))
 	{
-	    std::cout<<".";
 		gloox::ConnectionError error = gloox::ConnectionError::ConnNoError;
 		while(error == gloox::ConnectionError::ConnNoError)
 			error = m_Client->recv( 1000*100 ); //100 mSec
 
-		std::cout<<"Error: "<<error<<std::endl;
+		LOG(sys)<<"Connection error: "<<error;
 	}
 	//m_Client->disconnect();
 
