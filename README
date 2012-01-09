@@ -1,4 +1,4 @@
-This is xmppbot, an xammp or jabber bot written in C++ using gloox and boost.
+This is xmppbot, an xmpp or jabber bot written in C++ using gloox and boost.
 
 =Dependecies=
 - Boost 1.4.7.0
@@ -8,4 +8,5 @@ This is xmppbot, an xammp or jabber bot written in C++ using gloox and boost.
 Either use the supplied Code::Blocks project file or the included Makefile
 
 =Configuration=
-Copy the example config-file in the bin/ folder and adapt it to suit your needs.
+Create a copy of the example config-file in the bin/ subfolder and adapt it to suit your needs.
+The configuration options are documented in the example config file.
