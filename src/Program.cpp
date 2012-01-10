@@ -22,6 +22,9 @@ int Program::main(int argc, char **argv)
     if(!Program::loadConfiguration())
         return XmppBot::ExitState::CONFIG_NOT_FOUND;
 
+    if(Program::_vm.count("edit") || Program::_vm.count("get"))
+        return Program::editConfiguration();
+
     return Program::runBot();
 }
 
@@ -91,6 +94,55 @@ bool Program::loadConfiguration()
     }
 
     return true;
+}
+
+int Program::editConfiguration()
+{
+    if(Program::_vm.count("get"))
+    {
+        std::string optionstr = Program::_vm["get"].as<std::string>();
+        boost::algorithm::trim(optionstr);
+
+        std::string value;
+        if(Program::_config->getFromSeperatedString(optionstr, &value))
+            LOG(sys) << "Value of configuration option '" + optionstr + "' is '" + value + "'.";
+        else
+            LOG(sys) << "Failed to get configuration option '" + optionstr + "'.";
+
+        return XmppBot::ExitState::QUIT;
+    }
+
+    //edit
+    if(Program::_vm.count("edit"))
+    {
+        if(!Program::_vm.count("value"))
+        {
+            LOG(sys) << "No value specified. Abort.";
+            return XmppBot::ExitState::QUIT;
+        }
+
+        if(!Program::_config->isWritable())
+        {
+            LOG(sys) << "Configuration is not writable. Abort.";
+            return XmppBot::ExitState::QUIT;
+        }
+
+        std::string optionstr = Program::_vm["edit"].as<std::string>(),
+                    value = Program::_vm["value"].as<std::string>();
+
+        boost::algorithm::trim(optionstr);
+        boost::algorithm::trim(value);
+
+        if(Program::_config->setFromSeperatedString(optionstr, value))
+            LOG(sys) << "Set configuration option successfully!";
+        else
+            LOG(sys) << "Failed to set configuration option!";
+
+        return XmppBot::ExitState::QUIT;
+    }
+
+    LOG(sys) << "No valid edit option specified...";
+    return XmppBot::ExitState::QUIT;
 }
 
 int Program::runBot()

@@ -2,6 +2,8 @@
 #define CONFIGURATION_H
 
 #include <string>
+#include <vector>
+#include "boost/algorithm/string.hpp"
 
 class Configuration
 {
@@ -37,6 +39,23 @@ class Configuration
         virtual bool getXmppUser(std::string *user, std::string *password, std::string *address, std::string *resource) = 0;
         virtual bool setXmppMUC(const std::string& name, const std::string& room, const std::string& server) = 0;
         virtual bool getXmppMUC(std::string *name, std::string *room, std::string *server) = 0;
+
+        bool setFromSeperatedString(const std::string& optionstr, const std::string& value, std::string seperator = ".");
+        bool getFromSeperatedString(const std::string& optionstr, std::string *value, std::string seperator = ".");
+
+        const std::string getMUCOptionIdent();
+        const std::string getUserOptionIdent();
+        const std::string getCommandOptionIdent();
+        const std::string getFilterOptionIdent();
+        const std::string getCustomOptionIdent();
+        const std::string getLogOptionIdent();
 };
+
+inline const std::string Configuration::getMUCOptionIdent() { return "muc"; }
+inline const std::string Configuration::getUserOptionIdent() { return "server"; }
+inline const std::string Configuration::getCommandOptionIdent() { return "command"; }
+inline const std::string Configuration::getFilterOptionIdent() { return "filter"; }
+inline const std::string Configuration::getCustomOptionIdent() { return "bot"; }
+inline const std::string Configuration::getLogOptionIdent() { return "logs"; }
 
 #endif

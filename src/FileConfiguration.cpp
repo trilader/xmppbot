@@ -2,32 +2,25 @@
 
 FileConfiguration::FileConfiguration(std::string file)
 {
-    this->cmd_prefix = "command";
-    this->custom_prefix = "bot";
-    this->filter_prefix = "filter";
-    this->muc_prefix = "muc";
-    this->user_prefix = "server";
-    this->log_prefix = "logs";
-
     opt::options_description desc("Options");
     desc.add_options()
-        ((this->user_prefix   + ".user").c_str(),"User name")
-        ((this->user_prefix   + ".password").c_str(),"Password")
-        ((this->user_prefix   + ".address").c_str(),"The server to connect to")
-        ((this->user_prefix   + ".resource").c_str(),"The resource to connect as")
-        ((this->muc_prefix    + ".name").c_str(),"The name to use in the MUC room")
-        ((this->muc_prefix    + ".room").c_str(),"The MUC room to connect to")
-        ((this->muc_prefix    + ".server").c_str(),"The MUC server to connect to")
-        ((this->cmd_prefix    + ".admin.password").c_str(),"Password to use admin function")
-        ((this->cmd_prefix    + ".subject.eventname").c_str(),"Name of an important event which should be mentioned in the room subject")
-        ((this->cmd_prefix    + ".subject.eventdate").c_str(),"Date of an important event ( depends on command.subject.eventname ); format: year-month-day eg: 2002-1-25")
-        ((this->cmd_prefix    + ".subject.format").c_str(),"Format string for the subject command")
-        ((this->custom_prefix + ".polite").c_str(),"if enabled the bot says \"hi\" and \"goodbye\"")
-        ((this->custom_prefix + ".message.join").c_str(),"Message on joining in polite-mode")
-        ((this->custom_prefix + ".message.leave").c_str(),"Message on leaving in polite-mode")
-        ((this->custom_prefix + ".message.subscribe").c_str(),"Message the bot sends clients who want to subscribe to the bot")
-        ((this->filter_prefix + ".link.protocols").c_str(),"Which URI protocols the bot should look for")
-        ((this->filter_prefix + ".foreign.authalways").c_str(),"")
+        ((this->getUserOptionIdent()   + ".user").c_str(),"User name")
+        ((this->getUserOptionIdent()   + ".password").c_str(),"Password")
+        ((this->getUserOptionIdent()   + ".address").c_str(),"The server to connect to")
+        ((this->getUserOptionIdent()   + ".resource").c_str(),"The resource to connect as")
+        ((this->getMUCOptionIdent()    + ".name").c_str(),"The name to use in the MUC room")
+        ((this->getMUCOptionIdent()    + ".room").c_str(),"The MUC room to connect to")
+        ((this->getMUCOptionIdent()    + ".server").c_str(),"The MUC server to connect to")
+        ((this->getCommandOptionIdent()    + ".admin.password").c_str(),"Password to use admin function")
+        ((this->getCommandOptionIdent()    + ".subject.eventname").c_str(),"Name of an important event which should be mentioned in the room subject")
+        ((this->getCommandOptionIdent()    + ".subject.eventdate").c_str(),"Date of an important event ( depends on command.subject.eventname ); format: year-month-day eg: 2002-1-25")
+        ((this->getCommandOptionIdent()    + ".subject.format").c_str(),"Format string for the subject command")
+        ((this->getCustomOptionIdent() + ".polite").c_str(),"if enabled the bot says \"hi\" and \"goodbye\"")
+        ((this->getCustomOptionIdent() + ".message.join").c_str(),"Message on joining in polite-mode")
+        ((this->getCustomOptionIdent() + ".message.leave").c_str(),"Message on leaving in polite-mode")
+        ((this->getCustomOptionIdent() + ".message.subscribe").c_str(),"Message the bot sends clients who want to subscribe to the bot")
+        ((this->getFilterOptionIdent() + ".link.protocols").c_str(),"Which URI protocols the bot should look for")
+        ((this->getFilterOptionIdent() + ".foreign.authalways").c_str(),"")
         ;
 
     this->addLogOptions("debug", &desc);
@@ -43,11 +36,11 @@ FileConfiguration::FileConfiguration(std::string file)
 void FileConfiguration::addLogOptions(const std::string& name, opt::options_description *desc)
 {
     desc->add_options()
-        ((this->log_prefix + "." + name + ".enabled").c_str(), "(yes|no) Enable or disable the log") \
-        ((this->log_prefix + "." + name + ".type").c_str(), "(console|file) The type of the log") \
-        ((this->log_prefix + "." + name + ".entryformat").c_str(), "Custom format string") \
-        ((this->log_prefix + "." + name + ".fileformat").c_str(), "Custom filename format string ( only for type = file") \
-        ((this->log_prefix + "." + name + ".keepopen").c_str(), "");
+        ((this->getLogOptionIdent() + "." + name + ".enabled").c_str(), "(yes|no) Enable or disable the log") \
+        ((this->getLogOptionIdent() + "." + name + ".type").c_str(), "(console|file) The type of the log") \
+        ((this->getLogOptionIdent() + "." + name + ".entryformat").c_str(), "Custom format string") \
+        ((this->getLogOptionIdent() + "." + name + ".fileformat").c_str(), "Custom filename format string ( only for type = file") \
+        ((this->getLogOptionIdent() + "." + name + ".keepopen").c_str(), "");
 }
 
 bool FileConfiguration::isWritable()
@@ -90,7 +83,7 @@ bool FileConfiguration::setLog(const std::string& name, const std::string& type,
 
 bool FileConfiguration::getLog(const std::string& name, std::string *type, bool *enabled, bool *keepopen)
 {
-    std::string prefix = this->log_prefix + "." + name;
+    std::string prefix = this->getLogOptionIdent() + "." + name;
 
     *type = this->getItem(prefix + ".type");
     *enabled = this->getItem(prefix + ".enabled") == "yes";
@@ -101,7 +94,7 @@ bool FileConfiguration::getLog(const std::string& name, std::string *type, bool 
 
 bool FileConfiguration::getLog(const std::string& name, std::string *type, std::string *fileformat, std::string *entryformat, bool *enabled, bool *keepopen)
 {
-    std::string prefix = this->log_prefix + "." + name;
+    std::string prefix = this->getLogOptionIdent() + "." + name;
 
     *fileformat = this->getItem(prefix + ".fileformat");
     *entryformat = this->getItem(prefix + ".entryformat");
@@ -116,14 +109,14 @@ bool FileConfiguration::setCustomItem(const std::string& name, const std::string
 
 std::string FileConfiguration::getCustomItem(const std::string& name)
 {
-    return this->getItem(this->custom_prefix + "." + name);
+    return this->getItem(this->getCustomOptionIdent() + "." + name);
 
     return "";
 }
 
 bool FileConfiguration::isCustomItemSet(const std::string& name)
 {
-    return this->isItemSet(this->custom_prefix + "." + name);
+    return this->isItemSet(this->getCustomOptionIdent() + "." + name);
 }
 
 bool FileConfiguration::setCustomCommandItem(const std::string& command, const std::string& name, const std::string& value)
@@ -133,14 +126,14 @@ bool FileConfiguration::setCustomCommandItem(const std::string& command, const s
 
 std::string FileConfiguration::getCustomCommandItem(const std::string& command, const std::string& name)
 {
-    std::string option = this->cmd_prefix + "." + command + "." + name;
+    std::string option = this->getCommandOptionIdent() + "." + command + "." + name;
 
     return this->getItem(option);
 }
 
 bool FileConfiguration::isCustomCommandItemSet(const std::string& command, const std::string& name)
 {
-    return this->isItemSet(this->cmd_prefix + "." + command + "." + name);
+    return this->isItemSet(this->getCommandOptionIdent() + "." + command + "." + name);
 }
 
 bool FileConfiguration::setCustomFilterItem(const std::string& filter, const std::string& name, const std::string& value)
@@ -150,14 +143,14 @@ bool FileConfiguration::setCustomFilterItem(const std::string& filter, const std
 
 std::string FileConfiguration::getCustomFilterItem(const std::string& filter, const std::string& name)
 {
-    std::string option = this->filter_prefix + "." + filter + "." + name;
+    std::string option = this->getFilterOptionIdent() + "." + filter + "." + name;
 
     return this->getItem(option);
 }
 
 bool FileConfiguration::isCustomFilterItemSet(const std::string& filter, const std::string& name)
 {
-    return this->isItemSet(this->filter_prefix + "." + filter + "." + name);
+    return this->isItemSet(this->getFilterOptionIdent() + "." + filter + "." + name);
 }
 
 bool FileConfiguration::setXmppUser(const std::string& user, const std::string& password, const std::string& address, const std::string& resource)
@@ -167,13 +160,13 @@ bool FileConfiguration::setXmppUser(const std::string& user, const std::string& 
 
 bool FileConfiguration::getXmppUser(std::string *user, std::string *password, std::string *address, std::string *resource)
 {
-    *user = this->getItem(this->user_prefix + ".user");
-    *password = this->getItem(this->user_prefix + ".password");
-    *address = this->getItem(this->user_prefix + ".address");
-    *resource = this->getItem(this->user_prefix + ".resource");
+    *user = this->getItem(this->getUserOptionIdent() + ".user");
+    *password = this->getItem(this->getUserOptionIdent() + ".password");
+    *address = this->getItem(this->getUserOptionIdent() + ".address");
+    *resource = this->getItem(this->getUserOptionIdent() + ".resource");
 
-    return this->isItemSet(this->user_prefix + ".user") && this->isItemSet(this->user_prefix + ".password")
-            && this->isItemSet(this->user_prefix + ".address") && this->isItemSet(this->user_prefix + ".resource");
+    return this->isItemSet(this->getUserOptionIdent() + ".user") && this->isItemSet(this->getUserOptionIdent() + ".password")
+            && this->isItemSet(this->getUserOptionIdent() + ".address") && this->isItemSet(this->getUserOptionIdent() + ".resource");
 }
 
 bool FileConfiguration::setXmppMUC(const std::string& name, const std::string& room, const std::string& server)
@@ -183,10 +176,10 @@ bool FileConfiguration::setXmppMUC(const std::string& name, const std::string& r
 
 bool FileConfiguration::getXmppMUC(std::string *name, std::string *room, std::string *server)
 {
-    *name = this->getItem(this->muc_prefix + ".name");
-    *room = this->getItem(this->muc_prefix + ".room");
-    *server = this->getItem(this->muc_prefix + ".server");
+    *name = this->getItem(this->getMUCOptionIdent() + ".name");
+    *room = this->getItem(this->getMUCOptionIdent() + ".room");
+    *server = this->getItem(this->getMUCOptionIdent() + ".server");
 
-    return this->isItemSet(this->muc_prefix + ".name") && this->isItemSet(this->muc_prefix + ".room")
-                && this->isItemSet(this->muc_prefix + ".server");
+    return this->isItemSet(this->getMUCOptionIdent() + ".name") && this->isItemSet(this->getMUCOptionIdent() + ".room")
+                && this->isItemSet(this->getMUCOptionIdent() + ".server");
 }

@@ -52,12 +52,6 @@ class FileConfiguration : public Configuration
         void addLogOptions(const std::string& name, opt::options_description *desc);
 
         opt::variables_map vm;
-        std::string cmd_prefix;
-        std::string filter_prefix;
-        std::string custom_prefix;
-        std::string muc_prefix;
-        std::string user_prefix;
-        std::string log_prefix;
 };
 
 #endif

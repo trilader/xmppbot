@@ -15,8 +15,6 @@
 #include "LinkMessageFilter.h"
 #include "JIDMessageFilter.h"
 
-#include "FileConfiguration.h"
-
 XmppBot::XmppBot(Configuration *config)
 {
     this->m_Config = config;
