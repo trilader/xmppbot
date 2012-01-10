@@ -19,6 +19,15 @@ int Program::main(int argc, char **argv)
         LOG_ADD(sys,new ConsoleLog(new StringFormat("system: %_")));
     }
 
+    if(Program::_vm.count("sqldebug"))
+    {
+        LOG_ADD(sql,new ConsoleLog(new StringFormat("sql: %_")));
+    }
+    else
+    {
+        LOG_ADD(sql,new VoidLog());
+    }
+
     if(!Program::loadConfiguration())
         return XmppBot::ExitState::CONFIG_NOT_FOUND;
 
@@ -32,19 +41,27 @@ void Program::parseOptions(int argc, char **argv)
 {
     bpo::options_description desc("Options");
     desc.add_options()
-        ("config,c", bpo::value<std::string>()->default_value("bot.cfg"), "the configuration file")
+        ("config,c", bpo::value<std::string>()->default_value("config.db"), "the configuration file")
         ("configmode,m", bpo::value<std::string>()->default_value("writable"), "the configuration mode")
         ("edit,e", bpo::value<std::string>(), "configuration option to edit")
         ("value,v", bpo::value<std::string>(), "new value of the configuration option to edit")
-        ("get", bpo::value<std::string>(), "configuration option to get and print out")
+        ("get,g", bpo::value<std::string>(), "configuration option to get and print out")
         ("silent", "start bot in silent mode ( no 'system' output )")
         ("help,h", "prints help")
     ;
 
+    bpo::options_description hidden_desc("Hidden Options");
+    hidden_desc.add_options()
+        ("sqldebug", "turns on sql console log for debugging.")
+    ;
+
+    bpo::options_description all_desc("All");
+    all_desc.add(desc).add(hidden_desc);
+
     bpo::positional_options_description pdesc;
     pdesc.add("config", -1);
 
-    bpo::store(bpo::command_line_parser(argc, argv).options(desc).positional(pdesc).run(), Program::_vm);
+    bpo::store(bpo::command_line_parser(argc, argv).options(all_desc).positional(pdesc).run(), Program::_vm);
     bpo::notify(Program::_vm);
 
     if(Program::_vm.count("help"))
@@ -85,7 +102,7 @@ bool Program::loadConfiguration()
     }
     else if(boost::algorithm::iends_with(cfgfile, ".db"))
     {
-        Program::_config = new SQLiteConfiguration(cfgfile, !readonly);
+        Program::_config = new SQLiteConfiguration(cfgfile, 0, !readonly);
     }
     else
     {

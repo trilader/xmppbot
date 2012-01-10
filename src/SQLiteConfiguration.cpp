@@ -2,6 +2,7 @@
 
 SQLiteConfiguration::SQLiteConfiguration(std::string filename, unsigned int index, bool writeable)
 {
+    this->_db = 0;
     this->_writeable = writeable;
 
     this->_tableFormat = new StringFormat("xmppbot__%table_config");
@@ -33,7 +34,7 @@ void SQLiteConfiguration::initSQLStatements()
     this->_deleteCommandItemFormat = new SQLiteStringFormat("DELETE FROM %table WHERE command_config_id=%index AND command_name='%name' AND command_option='%option'");
     this->_deleteCustomItemFormat = new SQLiteStringFormat("DELETE FROM %table WHERE custom_config_id=%index AND custom_name='%option'");
     this->_deleteFilterItemFormat = new SQLiteStringFormat("DELETE FROM %table WHERE filter_config_id=%index AND filter_name='%name' AND filter_option='%option'");
-    this->_deleteLogFormat = new SQLiteStringFormat("DELETE FROM %table WHERE log_config_id=%index");
+    this->_deleteLogFormat = new SQLiteStringFormat("DELETE FROM %table WHERE log_config_id=%index AND log_name='%name'");
     this->_deleteXmppMUCFormat = new SQLiteStringFormat("DELETE FROM %table WHERE muc_config_id=%index");
     this->_deleteXmppUserFormat = new SQLiteStringFormat("DELETE FROM %table WHERE user_config_id=%index");
 
@@ -117,8 +118,9 @@ bool SQLiteConfiguration::setConfigurationIndex(unsigned int index)
 
 void SQLiteConfiguration::openDatabase()
 {
-    if(0 != this->_db && this->_db->Connected())
-        return;
+    if(0 != this->_db)
+        if(this->_db->Connected())
+            return;
 
     if(0 != this->_db)
         delete this->_db;
@@ -128,7 +130,76 @@ void SQLiteConfiguration::openDatabase()
 
 void SQLiteConfiguration::initTables()
 {
-    //TODO
+    StringFormat createLogTable(std::string("CREATE TABLE IF NOT EXISTS %table (")
+                                                   +" log_config_id integer not null,"
+                                                   +" log_name varchar(255) not null, "
+                                                   +" log_type varchar(255) default '' not null,"
+                                                   +" log_fileformat varchar(255) default '' not null,"
+                                                   +" log_entryformat varchar(255) default '' not null,"
+                                                   +" log_enabled integer default 0 not null,"
+                                                   +" log_keepopen integer default 0 not null,"
+                                                   +" PRIMARY KEY (log_config_id, log_name));");
+
+    StringFormat createMUCTable(std::string("CREATE TABLE IF NOT EXISTS %table (")
+                                                   +" muc_config_id integer primary key not null,"
+                                                   +" muc_name varchar(255) default '' not null, "
+                                                   +" muc_room varchar(255) default '' not null,"
+                                                   +" muc_server varchar(255) default '' not null);");
+
+    StringFormat createUserTable(std::string("CREATE TABLE IF NOT EXISTS %table (")
+                                                    +" user_config_id integer primary key not null,"
+                                                    +" user_user varchar(255) default '' not null,"
+                                                    +" user_password varchar(255) default '' not null,"
+                                                    +" user_address varchar(255) default '' not null,"
+                                                    +" user_resource varchar(255) default '' not null);");
+
+    StringFormat createCommandTable(std::string("CREATE TABLE IF NOT EXISTS %table (")
+                                                       +" command_config_id integer not null,"
+                                                       +" command_name varchar(255) default '' not null,"
+                                                       +" command_option varchar(255) default '' not null,"
+                                                       +" command_value varchar(255) default '' not null,"
+                                                       +" PRIMARY KEY (command_config_id, command_name, command_option));");
+
+    StringFormat createFilterTable(std::string("CREATE TABLE IF NOT EXISTS %table (")
+                                                       +" filter_config_id integer not null,"
+                                                       +" filter_name varchar(255) default '' not null,"
+                                                       +" filter_option varchar(255) default '' not null,"
+                                                       +" filter_value varchar(255) default '' not null,"
+                                                       +" PRIMARY KEY (filter_config_id, filter_name, filter_option));");
+
+
+    StringFormat createCustomTable(std::string("CREATE TABLE IF NOT EXISTS %table (")
+                                                       +" custom_config_id integer not null,"
+                                                       +" custom_name varchar(255) default '' not null,"
+                                                       +" custom_value varchar(255) default '' not null,"
+                                                       +" PRIMARY KEY (custom_config_id, custom_name));");
+
+    this->_tableFormat->assign("table", "log");
+    createLogTable.assign("table", this->_tableFormat->produce());
+
+    this->_tableFormat->assign("table", "user");
+    createUserTable.assign("table", this->_tableFormat->produce());
+
+    this->_tableFormat->assign("table", "muc");
+    createMUCTable.assign("table", this->_tableFormat->produce());
+
+    this->_tableFormat->assign("table", "command");
+    createCommandTable.assign("table", this->_tableFormat->produce());
+
+    this->_tableFormat->assign("table", "filter");
+    createFilterTable.assign("table", this->_tableFormat->produce());
+
+    this->_tableFormat->assign("table", "custom");
+    createCustomTable.assign("table", this->_tableFormat->produce());
+
+    LoggableQuery query(*this->_db);
+
+    query.executeAndLog(createCommandTable.produce());
+    query.executeAndLog(createCustomTable.produce());
+    query.executeAndLog(createFilterTable.produce());
+    query.executeAndLog(createMUCTable.produce());
+    query.executeAndLog(createUserTable.produce());
+    query.executeAndLog(createLogTable.produce());
 }
 
 bool SQLiteConfiguration::setLog(const std::string& name, const std::string& type, bool enabled, bool keepopen)
@@ -149,8 +220,12 @@ bool SQLiteConfiguration::setLog(const std::string& name, const std::string& typ
     LoggableQuery query(*this->_db);
 
     if("" == type)
+    {
+        this->_deleteLogFormat->assign("name", name);
         return query.executeAndLog(this->_deleteLogFormat->produce(this->_db));
+    }
 
+    this->_replaceLogFormat->assign("name", name);
     this->_replaceLogFormat->assign("type", type);
     this->_replaceLogFormat->assign("fileformat", fileformat);
     this->_replaceLogFormat->assign("entryformat", entryformat);
@@ -174,7 +249,7 @@ bool SQLiteConfiguration::setXmppUser(const std::string& user, const std::string
 
     this->_replaceXmppUserFormat->assign("user", user);
     this->_replaceXmppUserFormat->assign("password", password);
-    this->_replaceXmppUserFormat->assign("address", password);
+    this->_replaceXmppUserFormat->assign("address", address);
     this->_replaceXmppUserFormat->assign("resource", resource);
 
     return query.executeAndLog(this->_replaceXmppUserFormat->produce(this->_db));
@@ -261,7 +336,7 @@ bool SQLiteConfiguration::getLog(const std::string& name, std::string *type, std
 
     *type = ""; *fileformat = ""; *entryformat = ""; *enabled = false; *keepopen = false;
 
-    query.get_result(this->_selectLogFormat->produce(this->_db));
+    query.get_result_and_log(this->_selectLogFormat->produce(this->_db));
     if(query.num_rows() <= 0)
     {
         query.free_result();
@@ -288,7 +363,7 @@ bool SQLiteConfiguration::getXmppUser(std::string *user, std::string *password, 
 
     LoggableQuery query(*this->_db);
 
-    query.get_result(this->_selectXmppUserFormat->produce(this->_db));
+    query.get_result_and_log(this->_selectXmppUserFormat->produce(this->_db));
     if(query.num_rows() <= 0)
     {
         query.free_result();

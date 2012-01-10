@@ -40,8 +40,6 @@ XmppBot::~XmppBot()
 //init
 void XmppBot::init()
 {
-    LOG_ADD(sql,new ConsoleLog(new StringFormat("sql: %_")));
-
     LOG(sys) << "Initializing...";
 
     LOG(sys) << "Init logs...";
@@ -147,7 +145,7 @@ void XmppBot::initCommands()
     // register aliases for this->m_StateCommand
     this->m_CommandMgr->registerCommand("afk", new AliasBotCommand("afk ","","[<message>] - Go afk. An optional message cam be set",true,this->m_StateCommand));
     this->m_CommandMgr->registerCommand("re", new AliasBotCommand("re ","","Come back from being afk",true,this->m_StateCommand));
-
+LOG(sys) << "here";
     this->m_CommandMgr->registerCommand("admin", new AdminBotCommand(admin_pw, this));
 }
 
