@@ -8,9 +8,15 @@ SQLiteLog::SQLiteLog(StringFormat *databaseFormat, std::string table)
     this->_tableFormat->assign("1", table);
     this->_tableFormat->produce();
 
-    this->_createQueryFormat = new SQLiteStringFormat("CREATE TABLE IF NOT EXISTS %table ( id integer primary key autoincrement not null, entry varchar(255) default '' not null );");
+    this->_createQueryFormat = new SQLiteStringFormat(std::string("CREATE TABLE IF NOT EXISTS %table ( ")
+                                                      +"%l_id integer primary key autoincrement not null,"
+                                                      +"%l_entry varchar(255) default '' not null,"
+                                                      +"%l_assoc_user varchar(255) default '' not null,"
+                                                      +"%l_timestamp integer not null);");
+    this->_createQueryFormat->assign("l", table);
 
-    this->_insertQueryFormat = new SQLiteStringFormat("INSERT INTO %table ( entry ) VALUES ('%msg')");
+    this->_insertQueryFormat = new SQLiteStringFormat("INSERT INTO %table ( %l_entry, %l_assoc_user, %l_timestamp ) VALUES ('%msg','',datetime('now'))");
+    this->_insertQueryFormat->assign("l", table);
 
     this->_today = new boost::gregorian::date(boost::gregorian::min_date_time);
     this->_thishour = boost::posix_time::second_clock::local_time().time_of_day().hours();
