@@ -9,7 +9,7 @@
 class SQLiteConfiguration : public Configuration
 {
     public:
-        SQLiteConfiguration(std::string filename, unsigned int index = 0, bool writeable = true);
+        SQLiteConfiguration(std::string filename, bool writeable = true, unsigned int index = 0);
 
         virtual bool setConfigurationIndex(unsigned int index);
         virtual unsigned int getConfigurationIndex();

@@ -43,6 +43,7 @@ void Program::parseOptions(int argc, char **argv)
     desc.add_options()
         ("config,c", bpo::value<std::string>()->default_value("config.db"), "the configuration file")
         ("configmode,m", bpo::value<std::string>()->default_value("writable"), "the configuration mode")
+        ("index,i", bpo::value<unsigned int>()->default_value(0), "the configuration index")
         ("edit,e", bpo::value<std::string>(), "configuration option to edit")
         ("value,v", bpo::value<std::string>(), "new value of the configuration option to edit")
         ("get,g", bpo::value<std::string>(), "configuration option to get and print out")
@@ -102,12 +103,18 @@ bool Program::loadConfiguration()
     }
     else if(boost::algorithm::iends_with(cfgfile, ".db"))
     {
-        Program::_config = new SQLiteConfiguration(cfgfile, 0, !readonly);
+        Program::_config = new SQLiteConfiguration(cfgfile, !readonly);
     }
     else
     {
         LOG(sys) << "error: unknown config file-extension!";
         return false;
+    }
+
+    unsigned int index = Program::_vm.count("index") ? Program::_vm["index"].as<unsigned int>() : 0;
+    if(!Program::_config->setConfigurationIndex(index))
+    {
+        LOG(sys) << "warning: unable to set configuration index....";
     }
 
     return true;
