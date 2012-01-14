@@ -4,6 +4,15 @@ StateBotCommand::StateBotCommand(MUCRoom *room)
 {
     this->_room = room;
     this->_afkMap = new boost::unordered_map<std::string, std::pair<boost::posix_time::ptime,std::string>>();
+    this->_afkFormat = new StringFormat("%user is now away from keyboard %reason");
+    this->_reFormat = new StringFormat("%user is back %reason (%time)");
+}
+
+StateBotCommand::~StateBotCommand()
+{
+    delete _afkMap;
+    delete _afkFormat;
+    delete _reFormat;
 }
 
 bool StateBotCommand::invoke(const JID& user, const std::string& args, std::string *response) const
@@ -25,40 +34,53 @@ bool StateBotCommand::invoke(const JID& user, const std::string& args, std::stri
     boost::posix_time::ptime t(boost::posix_time::second_clock::local_time());
     if(state == "afk")
     {
-        std::string reason_str;
+        std::string reason_str = "";
         if(reason.length() > 0)
-            reason_str = " ( "+reason+" )";
+            reason_str = "("+reason+")";
+
+        _afkFormat->assign("user", user.resource());
+        _afkFormat->assign("reason",reason_str);
 
         (*(this->_afkMap))[user.resource()] = std::pair<boost::posix_time::ptime,std::string>(t,reason_str);
 
-        this->_room->send(user.resource() + " is afk" + reason_str + "!");
+        this->_room->send(_afkFormat->produce());
     }
     else if(state == "re")
     {
         if(!this->_afkMap->count(user.resource()))
         {
-            *response = "You are not afk...";
+            *response = "You are not away...";
             return false;
         }
 
         boost::posix_time::time_period period((*(this->_afkMap))[user.resource()].first, t);
         std::string r = (*(this->_afkMap))[user.resource()].second;
 
+        _reFormat->assign("user",user.resource());
+        _reFormat->assign("reason",r.length()>0?r:"");
+        _reFormat->assign("time",boost::posix_time::to_simple_string(period.length()));
+
         this->_afkMap->erase(user.resource());
-        this->_room->send(user.resource() + " is back from " +r+" (" + boost::posix_time::to_simple_string(period.length()) + ")!");
+        this->_room->send(_reFormat->produce());
     }
     else //state == "of"
     {
         std::string msg;
-        if(!this->_afkMap->count(reason))
+        std::string user = reason;
+
+        msg = user+" is ";
+
+        if(!this->_afkMap->count(user))
         {
-            msg = "If \"" + reason + "\" exists, he/she is not afk";
+            msg += "not away or not in the room";
         }
         else
         {
-            boost::posix_time::time_period period((*(this->_afkMap))[reason].first, t);
-            std::string r = (*(this->_afkMap))[reason].second;
-            msg = reason + " is afk ( " + r + ", " + boost::posix_time::to_simple_string(period.length()) + " )!";
+            boost::posix_time::time_period period((*(this->_afkMap))[user].first, t);
+            std::string r = (*(this->_afkMap))[user].second;
+            msg += "away since: "+boost::posix_time::to_simple_string(period.length());
+
+            if(r.length()>0) msg+=r;
         }
 
         *response = msg;
@@ -70,7 +92,7 @@ bool StateBotCommand::invoke(const JID& user, const std::string& args, std::stri
 
 std::string StateBotCommand::getHelp() const
 {
-    return std::string("<state> [<reason>] - State can be \"afk\", \"re\" or \"of\". If the state is afk you can specify an optional message for the room. With of you can query the state of a user");
+    return std::string("<state> [<reason>] - State can be 'afk', 're' or 'of'. If the state is 'afk' you can specify an optional message for the room. With 'of' you can query the state of a user");
 }
 
 bool StateBotCommand::showHelp() const
