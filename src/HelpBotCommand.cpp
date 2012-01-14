@@ -5,7 +5,7 @@ HelpBotCommand::HelpBotCommand(const boost::unordered_map<std::string, BotComman
     m_CommandList = commandList;
 }
 
-bool HelpBotCommand::invoke(const JID& user, const std::string& args, std::string *response) const
+bool HelpBotCommand::invoke(const JID& user, const bool priv, const std::string& args, std::string *response) const
 {
     if(m_CommandList==NULL)
     {

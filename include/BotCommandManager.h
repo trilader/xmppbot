@@ -19,8 +19,8 @@ public:
     ~BotCommandManager();
 
     void registerCommand(const std::string& name, BotCommand *cmd);
-    bool tryInvokeFromString(const std::string& str,const JID& user, std::string *response);
-    bool tryInvoke(const std::string& name, const std::string& args, const JID& user, std::string *response);
+    bool tryInvokeFromString(const std::string& str,const JID& user, const bool priv, std::string *response);
+    bool tryInvoke(const std::string& name, const std::string& args, const JID& user, const bool priv, std::string *response);
     bool isKnownCommand(const std::string& name);
     const boost::unordered_map<std::string, BotCommand*>* getCommands() const;
 

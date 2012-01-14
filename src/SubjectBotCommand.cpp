@@ -8,7 +8,7 @@ SubjectBotCommand::SubjectBotCommand(MUCRoom *room, std::string adminpw, StringF
     LOG(debug) << "Subject format: " + _format->getFormatString();
 }
 
-bool SubjectBotCommand::invoke(const JID& user, const std::string& args, std::string *response) const
+bool SubjectBotCommand::invoke(const JID& user, const bool priv, const std::string& args, std::string *response) const
 {
     std::string subject;
     bool success = this->checkPassword(args, &subject);

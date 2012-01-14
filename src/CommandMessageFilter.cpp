@@ -33,7 +33,7 @@ void CommandMessageFilter::handleMessage(const Message& stanza, bool room, bool 
 
     JID from = ((room) ? stanza.from() : (*(this->_usermap))[stanza.from()]);
 
-    bool success = this->_manager->tryInvokeFromString(msg, from,&response);
+    bool success = this->_manager->tryInvokeFromString(msg, from, priv, &response);
 
     StringFormat *logformat = (success) ? this->_successformat : this->_failformat;
     logformat->assign("1", msg);

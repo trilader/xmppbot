@@ -15,7 +15,7 @@ std::string AdminBotCommand::getHelp() const
     return "";
 }
 
-bool AdminBotCommand::invoke(const JID& user, const std::string& args, std::string *response) const
+bool AdminBotCommand::invoke(const JID& user, const bool priv, const std::string& args, std::string *response) const
 {
     std::string cmd;
     if(!this->checkPassword(args, &cmd))

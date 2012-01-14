@@ -6,7 +6,7 @@ KickBotCommand::KickBotCommand(Client* client, MUCRoom* room, std::string passwo
     m_Room = room;
 }
 
-bool KickBotCommand::invoke(const JID& user, const std::string& args, std::string *response) const
+bool KickBotCommand::invoke(const JID& user, const bool priv, const std::string& args, std::string *response) const
 {
     if(m_Client==NULL)
         return false;

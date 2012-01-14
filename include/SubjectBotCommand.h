@@ -15,7 +15,7 @@ class SubjectBotCommand : public ProtectedBotCommand
 {
 public:
     SubjectBotCommand(MUCRoom *room, std::string adminpwm, StringFormat *format);
-    bool invoke(const JID& user, const std::string& args, std::string *response) const;
+    bool invoke(const JID& user, const bool priv, const std::string& args, std::string *response) const;
     std::string getHelp() const;
     bool showHelp() const;
 

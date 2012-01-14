@@ -15,7 +15,7 @@ StateBotCommand::~StateBotCommand()
     delete _reFormat;
 }
 
-bool StateBotCommand::invoke(const JID& user, const std::string& args, std::string *response) const
+bool StateBotCommand::invoke(const JID& user, const bool priv, const std::string& args, std::string *response) const
 {
     std::string state, reason;
     bool success = this->parseArgs(args, &state, &reason);
@@ -36,10 +36,10 @@ bool StateBotCommand::invoke(const JID& user, const std::string& args, std::stri
     {
         std::string reason_str = "";
         if(reason.length() > 0)
-            reason_str = "("+reason+")";
+            reason_str = reason;
 
         _afkFormat->assign("user", user.resource());
-        _afkFormat->assign("reason",reason_str);
+        _afkFormat->assign("reason","("+reason_str+")");
 
         (*(this->_afkMap))[user.resource()] = std::pair<boost::posix_time::ptime,std::string>(t,reason_str);
 
@@ -57,7 +57,7 @@ bool StateBotCommand::invoke(const JID& user, const std::string& args, std::stri
         std::string r = (*(this->_afkMap))[user.resource()].second;
 
         _reFormat->assign("user",user.resource());
-        _reFormat->assign("reason",r.length()>0?r:"");
+        _reFormat->assign("reason",r.length()>0?"from "+r:"");
         _reFormat->assign("time",boost::posix_time::to_simple_string(period.length()));
 
         this->_afkMap->erase(user.resource());
@@ -80,11 +80,13 @@ bool StateBotCommand::invoke(const JID& user, const std::string& args, std::stri
             std::string r = (*(this->_afkMap))[user].second;
             msg += "away since: "+boost::posix_time::to_simple_string(period.length());
 
-            if(r.length()>0) msg+=r;
+            if(r.length()>0) msg+=" ("+r+")";
         }
 
-        *response = msg;
-        this->_room->send(msg);
+        if (priv)
+            *response = msg;
+        else
+            this->_room->send(msg);
     }
 
     return true;

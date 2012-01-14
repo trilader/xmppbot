@@ -20,7 +20,7 @@ void BotCommandManager::registerCommand(const std::string& name, BotCommand *com
     (*_commandMap)[name] = command;
 }
 
-bool BotCommandManager::tryInvoke(const std::string& name, const std::string& args, const JID& user, std::string *response)
+bool BotCommandManager::tryInvoke(const std::string& name, const std::string& args, const JID& user, const bool priv, std::string *response)
 {
     if(!this->isKnownCommand(name))
     {
@@ -29,16 +29,16 @@ bool BotCommandManager::tryInvoke(const std::string& name, const std::string& ar
         return false;
     }
 
-     return  (*_commandMap)[name]->invoke(user, args, response);
+     return  (*_commandMap)[name]->invoke(user, priv, args, response);
 }
 
-bool BotCommandManager::tryInvokeFromString(const std::string& str,const JID& user, std::string *response)
+bool BotCommandManager::tryInvokeFromString(const std::string& str,const JID& user, const bool priv, std::string *response)
 {
     std::string name, args;
 
     BotCommandManager::splitCommandString(str, &name, &args);
 
-    return this->tryInvoke(name, args, user, response);
+    return this->tryInvoke(name, args, user, priv, response);
 }
 
 bool BotCommandManager::isKnownCommand(const std::string& name)
