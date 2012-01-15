@@ -35,6 +35,11 @@ XmppBot::~XmppBot()
     m_UserNicknameMap=NULL;
     m_CommandMgr=NULL;
     m_Client=NULL;
+
+    LOG_DELETE(link)
+    LOG_DELETE(chat)
+    LOG_DELETE(command)
+    LOG_DELETE(debug)
 }
 
 //init
