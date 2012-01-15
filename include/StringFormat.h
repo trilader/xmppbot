@@ -10,9 +10,9 @@ class StringFormat
 {
 public:
     StringFormat(std::string format, std::string varprefix = "%");
-    void assign(const std::string& name,const std::string& value);
+    virtual void assign(const std::string& name,const std::string& value);
 
-    std::string produce();
+    virtual std::string produce();
     std::string last();
 
     std::string getFormatString();
@@ -22,13 +22,14 @@ public:
         this->assign(name, boost::lexical_cast<std::string>(value));
     }
 
+protected:
+    boost::unordered_map<std::string, std::string> *_assignments;
+
 private:
     std::string _format;
     std::string _prefix;
 
     std::string _last;
-
-    boost::unordered_map<std::string, std::string> *_assignments;
 };
 
 #endif

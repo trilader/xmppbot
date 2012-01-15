@@ -15,10 +15,9 @@
 #include "LinkMessageFilter.h"
 #include "JIDMessageFilter.h"
 
-XmppBot::XmppBot(std::string configfile)
+XmppBot::XmppBot(Configuration *config)
 {
-    this->m_ConfigFile = configfile;
-
+    this->m_Config = config;
     this->init();
 }
 
@@ -36,26 +35,25 @@ XmppBot::~XmppBot()
     m_UserNicknameMap=NULL;
     m_CommandMgr=NULL;
     m_Client=NULL;
+
+    LOG_DELETE(link)
+    LOG_DELETE(chat)
+    LOG_DELETE(command)
+    LOG_DELETE(debug)
 }
 
 //init
 void XmppBot::init()
 {
-    LOG_ADD(sys,new ConsoleLog(new StringFormat("system: %_")))
-
     LOG(sys) << "Initializing...";
-
-    this->initConfig();
-
-    LOG(sys) << "Loaded \"" + this->m_ConfigFile + "\".";
 
     LOG(sys) << "Init logs...";
     //init logs
 
-    LOG_INIT(vm,debug)
-    LOG_INIT(vm,command)
-    LOG_INIT(vm,chat)
-    LOG_INIT(vm,link)
+    LOG_INIT(this->m_Config,debug)
+    LOG_INIT(this->m_Config,command)
+    LOG_INIT(this->m_Config,chat)
+    LOG_INIT(this->m_Config,link)
 
     LOG(sys) << "Done.";
 
@@ -79,55 +77,13 @@ void XmppBot::init()
 
     LOG(sys) << "Finalize...";
 
-    std::string polite = "no";
-    msg_join="";
-    msg_leave="";
-    msg_subscribe="";
+    msg_join= this->m_Config->getCustomItem("message.join");
+    msg_leave= this->m_Config->getCustomItem("message.leave");
+    msg_subscribe= this->m_Config->getCustomItem("message.subscribe");
 
-    if(vm.count("bot.polite"))
-        polite = vm["bot.polite"].as<std::string>();
-    if(vm.count("bot.message.join"))
-        msg_join = vm["bot.message.join"].as<std::string>();
-    if(vm.count("bot.message.leave"))
-        msg_leave = vm["bot.message.leave"].as<std::string>();
-    if(vm.count("bot.message.subscribe"))
-        msg_subscribe = vm["bot.message.subscribe"].as<std::string>();
-
-    this->m_bePolite = polite == "yes";
+    this->m_bePolite = this->m_Config->getCustomItem("polite") == "yes";
 
     LOG(sys) << "Initilization completed.";
-}
-
-void XmppBot::initConfig()
-{
-    opt::options_description desc("Options");
-    desc.add_options()
-        ("server.user","User name")
-        ("server.password","Password")
-        ("server.address","The server to connect to")
-        ("server.resource","The resource to connect as")
-        ("muc.name","The name to use in the MUC room")
-        ("muc.room","The MUC room to connect to")
-        ("muc.server","The MUC server to connect to")
-        ("command.admin.password","Password to use admin function")
-        ("command.subject.eventname","Name of an important event which should be mentioned in the room subject")
-        ("command.subject.eventdate","Date of an important event ( depends on command.subject.eventname ); format: year-month-day eg: 2002-1-25")
-        ("command.subject.format","Format string for the subject command")
-        ("bot.polite","if enabled the bot says \"hi\" and \"goodbye\"")
-        ("bot.message.join","Message on joining in polite-mode")
-        ("bot.message.leave","Message on leaving in polite-mode")
-        ("bot.message.subscribe","Message the bot sends clients who want to subscribe to the bot")
-        ("filter.link.protocols","Which URI protocols the bot should look for")
-        ("filter.foreign.authalways","")
-        LOG_CONFIG(debug)
-        LOG_CONFIG(command)
-        LOG_CONFIG(chat)
-        LOG_CONFIG(link)
-        ;
-
-    std::ifstream ifs(this->m_ConfigFile);
-    opt::store(opt::parse_config_file(ifs, desc), vm);
-    opt::notify(vm);
 }
 
 void XmppBot::initXmpp()
@@ -140,20 +96,9 @@ void XmppBot::initXmpp()
     std::string muc_room;
     std::string muc_server;
 
-    if(vm.count("server.user"))
-        username = vm["server.user"].as<std::string>();
-    if(vm.count("server.password"))
-        password = vm["server.password"].as<std::string>();
-    if(vm.count("server.address"))
-        server = vm["server.address"].as<std::string>();
-    if(vm.count("server.resource"))
-        resource = vm["server.resource"].as<std::string>();
-    if(vm.count("muc.name"))
-        muc_name = vm["muc.name"].as<std::string>();
-    if(vm.count("muc.room"))
-        muc_room = vm["muc.room"].as<std::string>();
-    if(vm.count("muc.server"))
-        muc_server = vm["muc.server"].as<std::string>();
+    this->m_Config->getXmppUser(&username, &password, &server, &resource);
+
+    this->m_Config->getXmppMUC(&muc_name, &muc_room, &muc_server);
 
     m_UserNicknameMap = new JIDMap();
 
@@ -179,39 +124,33 @@ void XmppBot::initXmpp()
 
 void XmppBot::initCommands()
 {
-    std::string admin_pw;
+    std::string admin_pw = this->m_Config->getCustomCommandItem("admin", "password");
 
-    std::string subject_event_name;
-    std::string subject_event_date;
-    std::string subject_format = "%2";
-
-    if(vm.count("command.admin.password"))
-        admin_pw = vm["command.admin.password"].as<std::string>();
-
-    if(vm.count("command.subject.eventdate"))
-        subject_event_date = vm["command.subject.eventdate"].as<std::string>();
-
-    if(vm.count("command.subject.format"))
-        subject_format = vm["command.subject.format"].as<std::string>();
+    std::string subject_event_date = this->m_Config->getCustomCommandItem("subject", "eventdate");
+    std::string subject_format = this->m_Config->getCustomCommandItem("subject", "format");
+    if(subject_format == "")
+        subject_format = "%2";
 
     this->m_CommandMgr = new BotCommandManager();
     //this->m_CommandMgr->registerCommand("test", new TestBotCommand());
     this->m_CommandMgr->registerCommand("kick", new KickBotCommand(this->m_Client,this->m_Room,admin_pw));
 
     SubjectBotCommand *subjcmd = new SubjectBotCommand(this->m_Room, admin_pw, new StringFormat(subject_format));
+
     if(subject_event_date.length() > 0)
         subjcmd->setEvent(subject_event_date);
 
     this->m_CommandMgr->registerCommand("setsbj", subjcmd);
+
     this->m_CommandMgr->registerCommand("help", new HelpBotCommand(m_CommandMgr->getCommands()));
 
     this->m_StateCommand = new StateBotCommand(this->m_Room);
     this->m_CommandMgr->registerCommand("state", this->m_StateCommand);
 
     // register aliases for this->m_StateCommand
-    this->m_CommandMgr->registerCommand("afk", new AliasBotCommand("afk ","","[<message>] - Go afk. An optional message can be set",true,this->m_StateCommand));
+    this->m_CommandMgr->registerCommand("afk", new AliasBotCommand("afk ","","[<message>] - Go afk. An optional message cam be set",true,this->m_StateCommand));
     this->m_CommandMgr->registerCommand("re", new AliasBotCommand("re ","","Come back from being afk",true,this->m_StateCommand));
-
+LOG(sys) << "here";
     this->m_CommandMgr->registerCommand("admin", new AdminBotCommand(admin_pw, this));
 }
 
@@ -219,16 +158,17 @@ void XmppBot::initMessageFilter()
 {
     std::string link_protos;
 
-    if(vm.count("filter.link.protocols"))
-        link_protos = vm["filter.link.protocols"].as<std::string>();
+    if(this->m_Config->isCustomFilterItemSet("link", "protocols"))
+        link_protos = this->m_Config->getCustomFilterItem("link", "protocols");
     else
         link_protos = "http,ftp";
 
     std::set<std::string> *jidexceptions = new std::set<std::string>();
-    if(vm.count("filter.foreign.authalways"))
+    if(this->m_Config->isCustomFilterItemSet("foreign", "authalways"))
     {
         std::vector<std::string> out;
-        boost::algorithm::split(out, vm["filter.foreign.authalways"].as<std::string>(),
+        std::string jidexceptions_string = this->m_Config->getCustomFilterItem("foreign", "authalways");
+        boost::algorithm::split(out, jidexceptions_string,
                                 boost::algorithm::is_any_of(","));
 
         for(unsigned int i=0; i<out.size(); i++)

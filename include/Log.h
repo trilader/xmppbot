@@ -13,8 +13,6 @@ public:
     virtual void log(const std::string& entry) = 0;
     Log& operator<<(const std::string& msg);
 
-    static boost::unordered_map<std::string, Log* > logMap;
-
     template <class TIn> void log(const TIn& entry)
     {
         this->log(boost::lexical_cast<std::string>(entry));

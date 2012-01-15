@@ -1,4 +1,5 @@
 *.cfg
+*.db
 *.exe
 obj/
 *.layout
