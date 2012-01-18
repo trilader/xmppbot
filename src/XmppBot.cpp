@@ -7,6 +7,7 @@
 #include "AliasBotCommand.h"
 #include "HelpBotCommand.h"
 #include "AdminBotCommand.h"
+#include "ConfigurationBotCommand.h"
 
 #include "HistoryMessageFilter.h"
 #include "CommandMessageFilter.h"
@@ -140,6 +141,8 @@ void XmppBot::initCommands()
     this->m_CommandMgr->registerCommand("re", new AliasBotCommand("re ","","Come back from being afk",true,this->m_StateCommand));
 
     this->m_CommandMgr->registerCommand("admin", new AdminBotCommand(this->m_Config, this));
+
+    this->m_CommandMgr->registerCommand("config", new ConfigurationBotCommand(this->m_Config));
 }
 
 void XmppBot::initMessageFilter()
