@@ -14,7 +14,7 @@ class CommandMessageFilter : public MessageFilter
 public:
     CommandMessageFilter(BotCommandManager *mgr, Client *client, JIDMap* usermap);
 
-    void handleMessage(const Message& stanza, bool room, bool priv, bool *handled);
+    void handleMessage(MessageInfo *info);
     void setLogFormat(StringFormat *success, StringFormat *fail);
 
 private:

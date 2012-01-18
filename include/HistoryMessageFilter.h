@@ -9,7 +9,7 @@ using namespace gloox;
 class HistoryMessageFilter: public MessageFilter
 {
 public:
-    void handleMessage(const Message& stanza, bool room, bool priv, bool *handled);
+    void handleMessage(MessageInfo *info);
 };
 
 #endif

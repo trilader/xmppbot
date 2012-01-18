@@ -1,6 +1,7 @@
 #include "HistoryMessageFilter.h"
 
-void HistoryMessageFilter::handleMessage(const Message& stanza, bool room, bool priv, bool *handled)
+void HistoryMessageFilter::handleMessage(MessageInfo *info)
 {
-    *handled = (stanza.when()!=NULL);
+    if(info->getMessage().when() != NULL)
+        info->markHandled();
 }

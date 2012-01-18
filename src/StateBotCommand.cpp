@@ -15,19 +15,22 @@ StateBotCommand::~StateBotCommand()
     delete _reFormat;
 }
 
-bool StateBotCommand::invoke(const JID& user, const bool priv, const std::string& args, std::string *response) const
+bool StateBotCommand::invoke(BotCommandInfo *info) const
 {
     std::string state, reason;
-    bool success = this->parseArgs(args, &state, &reason);
-    if(!success)
+    BotCommandArgs args = info->parseArgs(2);
+    if(args.size() < 1)
     {
-        *response = "expecting 2 arguments";
+        info->setResponse("expecting 2 arguments");
         return false;
     }
 
+    state = args[0];
+    reason = (args.size() > 1) ? args[1] : "";
+
     if(state != "afk" && state != "re" && state != "of")
     {
-        *response = "unknown state";
+        info->setResponse("unknown state");
         return false;
     }
 
@@ -38,29 +41,29 @@ bool StateBotCommand::invoke(const JID& user, const bool priv, const std::string
         if(reason.length() > 0)
             reason_str = reason;
 
-        _afkFormat->assign("user", user.resource());
+        _afkFormat->assign("user", info->getUser().resource());
         _afkFormat->assign("reason","("+reason_str+")");
 
-        (*(this->_afkMap))[user.resource()] = std::pair<boost::posix_time::ptime,std::string>(t,reason_str);
+        (*(this->_afkMap))[info->getUser().resource()] = std::pair<boost::posix_time::ptime,std::string>(t,reason_str);
 
         this->_room->send(_afkFormat->produce());
     }
     else if(state == "re")
     {
-        if(!this->_afkMap->count(user.resource()))
+        if(!this->_afkMap->count(info->getUser().resource()))
         {
-            *response = "You are not away...";
+            info->setResponse("You are not away...");
             return false;
         }
 
-        boost::posix_time::time_period period((*(this->_afkMap))[user.resource()].first, t);
-        std::string r = (*(this->_afkMap))[user.resource()].second;
+        boost::posix_time::time_period period((*(this->_afkMap))[info->getUser().resource()].first, t);
+        std::string r = (*(this->_afkMap))[info->getUser().resource()].second;
 
-        _reFormat->assign("user",user.resource());
+        _reFormat->assign("user",info->getUser().resource());
         _reFormat->assign("reason",r.length()>0?"from "+r:"");
         _reFormat->assign("time",boost::posix_time::to_simple_string(period.length()));
 
-        this->_afkMap->erase(user.resource());
+        this->_afkMap->erase(info->getUser().resource());
         this->_room->send(_reFormat->produce());
     }
     else //state == "of"
@@ -68,23 +71,23 @@ bool StateBotCommand::invoke(const JID& user, const bool priv, const std::string
         std::string msg;
         std::string user = reason;
 
-        msg = user+" is ";
+        msg = info->getUser()+" is ";
 
-        if(!this->_afkMap->count(user))
+        if(!this->_afkMap->count(info->getUser().resource()))
         {
             msg += "not away or not in the room";
         }
         else
         {
-            boost::posix_time::time_period period((*(this->_afkMap))[user].first, t);
-            std::string r = (*(this->_afkMap))[user].second;
+            boost::posix_time::time_period period((*(this->_afkMap))[info->getUser().resource()].first, t);
+            std::string r = (*(this->_afkMap))[info->getUser().resource()].second;
             msg += "away since: "+boost::posix_time::to_simple_string(period.length());
 
             if(r.length()>0) msg+=" ("+r+")";
         }
 
-        if (priv)
-            *response = msg;
+        if (info->isPrivate())
+            info->setResponse(msg);
         else
             this->_room->send(msg);
     }
@@ -99,24 +102,6 @@ std::string StateBotCommand::getHelp() const
 
 bool StateBotCommand::showHelp() const
 {
-    return true;
-}
-
-bool StateBotCommand::parseArgs(const std::string& args, std::string *state, std::string *reason) const
-{
-    std::string cpy = boost::trim_copy(args);
-
-    std::size_t splitpos = cpy.find(" ");
-
-    if(std::string::npos == splitpos)
-    {
-        *state = cpy;
-        return true;
-    }
-
-    *state = cpy.substr(0,splitpos);
-    *reason = cpy.substr(splitpos + 1);
-
     return true;
 }
 

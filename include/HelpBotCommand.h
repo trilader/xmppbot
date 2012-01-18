@@ -11,7 +11,7 @@ class HelpBotCommand: public BotCommand
 {
     public:
         HelpBotCommand(const boost::unordered_map<std::string, BotCommand*>* commandList);
-        bool invoke(const JID& user, const bool priv, const std::string& args, std::string *response) const;
+        bool invoke(BotCommandInfo *info) const;
         std::string getHelp() const;
         bool showHelp() const;
     protected:

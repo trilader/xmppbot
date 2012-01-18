@@ -1,14 +1,20 @@
 #ifndef MESSAGEHANDLER_H
 #define MESSAGEHANDLER_H
 
-#include "gloox/message.h"
+#include "MessageInfo.h"
+#include "ConfigurationBased.h"
 
 using namespace gloox;
 
-class MessageFilter
+class MessageFilter : public ConfigurationBased
 {
 public:
-    virtual void handleMessage(const Message& stanza, bool room, bool priv, bool *handled) = 0;
+    MessageFilter(Configuration *config = 0);
+
+    virtual void handleMessage(MessageInfo *info) = 0;
+
+protected:
+    virtual std::string getOption(const std::string& name, const std::string& option) const;
 };
 
 #endif

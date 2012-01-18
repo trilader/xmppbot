@@ -1,9 +1,9 @@
 #include "LogMessageFilter.h"
 
-void LogMessageFilter::handleMessage(const Message& stanza, bool room, bool priv, bool *handled)
+void LogMessageFilter::handleMessage(MessageInfo *info)
 {
-    if(!room)
+    if(!info->isRoom())
         return;
 
-    LOG(chat) << stanza.from().resource() + ": " + stanza.body();
+    LOG(chat) << info->getMessage().from().resource() + ": " + info->getMessage().body();
 }

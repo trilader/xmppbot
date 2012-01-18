@@ -28,17 +28,17 @@ void LinkMessageFilter::setLogFormat(StringFormat *format)
     this->_format = format;
 }
 
-void LinkMessageFilter::handleMessage(const Message& stanza, bool room, bool priv, bool *handled)
+void LinkMessageFilter::handleMessage(MessageInfo *info)
 {
-    std::string msg = stanza.body();
+    std::string msg = info->getMessage().body();
 
     if(msg.size() <= 0)
         return;
 
-    if(!room || priv)
+    if(!info->isRoom() || info->isPrivate())
         return;
 
-    JID from = stanza.from();
+    JID from = info->getMessage().from();
     StringFormat *logformat = this->_format;
 
     boost::sregex_iterator it(msg.begin(), msg.end(), *_re);

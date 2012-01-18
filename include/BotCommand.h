@@ -7,14 +7,23 @@
 #include "boost/algorithm/string.hpp"
 #include "gloox/jid.h"
 
+#include "BotCommandInfo.h"
+#include "Configuration.h"
+#include "ConfigurationBased.h"
+
 using namespace gloox;
 
-class BotCommand
+class BotCommand : public ConfigurationBased
 {
 public:
-    virtual bool invoke(const JID& user, const bool priv, const std::string& args, std::string *response) const = 0;
+    BotCommand(Configuration *config = 0);
+
+    virtual bool invoke(BotCommandInfo *info) const = 0;
     virtual std::string getHelp() const = 0;
     virtual bool showHelp() const = 0;
+
+protected:
+    virtual std::string getOption(const std::string& name, const std::string& option) const;
 };
 
 #endif

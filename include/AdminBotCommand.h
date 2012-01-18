@@ -8,15 +8,15 @@
 class AdminBotCommand : public ProtectedBotCommand
 {
 public:
-    AdminBotCommand(std::string adminpw, XmppBot* client);
-    bool invoke(const JID& user, const bool priv, const std::string& args, std::string *response) const;
+    AdminBotCommand(Configuration *config, XmppBot* client);
+    bool invoke(BotCommandInfo *info) const;
 
     std::string getHelp() const;
     bool showHelp() const;
 
 private:
-    bool quit(std::string *response) const;
-    bool reload(std::string *response) const;
+    bool quit() const;
+    bool reload() const;
 
     XmppBot *_bot;
 };

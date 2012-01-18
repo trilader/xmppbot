@@ -124,23 +124,11 @@ void XmppBot::initXmpp()
 
 void XmppBot::initCommands()
 {
-    std::string admin_pw = this->m_Config->getCustomCommandItem("admin", "password");
-
-    std::string subject_event_date = this->m_Config->getCustomCommandItem("subject", "eventdate");
-    std::string subject_format = this->m_Config->getCustomCommandItem("subject", "format");
-    if(subject_format == "")
-        subject_format = "%2";
-
     this->m_CommandMgr = new BotCommandManager();
     //this->m_CommandMgr->registerCommand("test", new TestBotCommand());
-    this->m_CommandMgr->registerCommand("kick", new KickBotCommand(this->m_Client,this->m_Room,admin_pw));
+    this->m_CommandMgr->registerCommand("kick", new KickBotCommand(this->m_Client,this->m_Room,this->m_Config));
 
-    SubjectBotCommand *subjcmd = new SubjectBotCommand(this->m_Room, admin_pw, new StringFormat(subject_format));
-
-    if(subject_event_date.length() > 0)
-        subjcmd->setEvent(subject_event_date);
-
-    this->m_CommandMgr->registerCommand("setsbj", subjcmd);
+    this->m_CommandMgr->registerCommand("setsbj", new SubjectBotCommand(this->m_Room, this->m_Config));
 
     this->m_CommandMgr->registerCommand("help", new HelpBotCommand(m_CommandMgr->getCommands()));
 
@@ -150,8 +138,8 @@ void XmppBot::initCommands()
     // register aliases for this->m_StateCommand
     this->m_CommandMgr->registerCommand("afk", new AliasBotCommand("afk ","","[<message>] - Go afk. An optional message cam be set",true,this->m_StateCommand));
     this->m_CommandMgr->registerCommand("re", new AliasBotCommand("re ","","Come back from being afk",true,this->m_StateCommand));
-LOG(sys) << "here";
-    this->m_CommandMgr->registerCommand("admin", new AdminBotCommand(admin_pw, this));
+
+    this->m_CommandMgr->registerCommand("admin", new AdminBotCommand(this->m_Config, this));
 }
 
 void XmppBot::initMessageFilter()
@@ -354,11 +342,11 @@ void XmppBot::handleMUCMessage( MUCRoom* room, const Message& stanza, bool priv 
 
 void XmppBot::handleMessage(const Message& stanza, bool room, bool priv)
 {
-    bool handled = false;
+    MessageInfo info(stanza, room, priv);
 
     std::list<MessageFilter*>::const_iterator it = this->m_MessageFilter->begin();
-    for(; it!=this->m_MessageFilter->end() && !handled ; it++)
-            (*it)->handleMessage(stanza, room, priv, &handled);
+    for(; it!=this->m_MessageFilter->end() && !(info.isHandled()) ; it++)
+            (*it)->handleMessage(&info);
 }
 
 bool XmppBot::handleMUCRoomCreation( MUCRoom* room )

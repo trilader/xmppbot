@@ -1,40 +1,39 @@
 #include "KickBotCommand.h"
 
-KickBotCommand::KickBotCommand(Client* client, MUCRoom* room, std::string password): ProtectedBotCommand(password)
+KickBotCommand::KickBotCommand(Client* client, MUCRoom* room, Configuration *config): ProtectedBotCommand(config)
 {
     m_Client = client;
     m_Room = room;
 }
 
-bool KickBotCommand::invoke(const JID& user, const bool priv, const std::string& args, std::string *response) const
+bool KickBotCommand::invoke(BotCommandInfo *info) const
 {
     if(m_Client==NULL)
         return false;
     if(m_Room==NULL)
         return false;
 
-    size_t pos=args.find_first_of(" ");
+    BotCommandArgs args = info->parseArgs(2);
 
-    if(std::string::npos == pos)
+    if(args.size() < 2)
     {
-        m_Room->kick(user.resource(), "Selfkick.");
+        m_Room->kick(info->getUser().resource(), "Selfkick.");
         return true;
     }
 
-    std::string cmd;
-    if(!this->checkPassword(args, &cmd))
+    if(!this->checkPassword(args[0]))
     {
-        *response = "wrong password";
+        info->setResponse("wrong password");
         return false;
     }
 
-    if(""==cmd)
+    if(""==args[1])
     {
-        *response = "No user given";
+        info->setResponse("No user given");
         return false;
     }
 
-    m_Room->kick(cmd,"Kicked by "+user.resource());
+    m_Room->kick(args[1],"Kicked by "+info->getUser().resource());
     return true;
 }
 

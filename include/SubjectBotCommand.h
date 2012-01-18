@@ -14,18 +14,13 @@
 class SubjectBotCommand : public ProtectedBotCommand
 {
 public:
-    SubjectBotCommand(MUCRoom *room, std::string adminpwm, StringFormat *format);
-    bool invoke(const JID& user, const bool priv, const std::string& args, std::string *response) const;
+    SubjectBotCommand(MUCRoom *room, Configuration *config);
+    bool invoke(BotCommandInfo *info) const;
     std::string getHelp() const;
     bool showHelp() const;
 
-    void setEvent(std::string datestr);
-
 private:
     MUCRoom *_room;
-    bool _eventenabled;
-    StringFormat *_format;
-    boost::gregorian::date _eventdate;
 };
 
 #endif

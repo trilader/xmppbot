@@ -10,7 +10,7 @@ class JIDMessageFilter : public MessageFilter
 public:
     JIDMessageFilter(const JID& jid, bool cmpBareOnly, bool room, bool priv);
 
-    void handleMessage(const Message& stanza, bool room, bool priv, bool *handled);
+    void handleMessage(MessageInfo *info);
 
 private:
     JID *_jid;

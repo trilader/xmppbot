@@ -9,9 +9,11 @@ AliasBotCommand::AliasBotCommand(std::string prefix, std::string postfix, std::s
     this->_showInHelp = showInHelp;
 }
 
-bool AliasBotCommand::invoke(const JID& user, const bool priv, const std::string& args, std::string *response) const
+bool AliasBotCommand::invoke(BotCommandInfo *info) const
 {
-    return this->_command->invoke(user, priv, this->_prefix + args + this->_postfix, response);
+    info->setArgumentString(this->_prefix + info->getArgumentString() + this->_prefix);
+
+    return this->_command->invoke(info);
 }
 
 std::string AliasBotCommand::getHelp() const

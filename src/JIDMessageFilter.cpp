@@ -19,17 +19,18 @@ JIDMessageFilter::JIDMessageFilter(const JID& jid, bool cmpBareOnly, bool room, 
     this->_priv = priv;
 }
 
-void JIDMessageFilter::handleMessage(const Message& stanza, bool room, bool priv, bool *handled)
+void JIDMessageFilter::handleMessage(MessageInfo *info)
 {
-    if(room && !this->_room)
+    if(info->isRoom() && !this->_room)
         return;
 
-    if(priv && !this->_priv)
+    if(info->isPrivate() && !this->_priv)
         return;
 
-    JID from = stanza.from();
+    JID from = info->getMessage().from();
     if(this->_cmpBareOnly)
         from = from.bare();
 
-    *handled = *(this->_jid) == from;
+    if(*(this->_jid) == from)
+        info->markHandled();
 }

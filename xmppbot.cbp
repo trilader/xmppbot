@@ -53,9 +53,11 @@
 		<Unit filename="include/AdminBotCommand.h" />
 		<Unit filename="include/AliasBotCommand.h" />
 		<Unit filename="include/BotCommand.h" />
+		<Unit filename="include/BotCommandInfo.h" />
 		<Unit filename="include/BotCommandManager.h" />
 		<Unit filename="include/CommandMessageFilter.h" />
 		<Unit filename="include/Configuration.h" />
+		<Unit filename="include/ConfigurationBased.h" />
 		<Unit filename="include/ConsoleLog.h" />
 		<Unit filename="include/DatabaseHelper.h" />
 		<Unit filename="include/FileConfiguration.h" />
@@ -72,6 +74,7 @@
 		<Unit filename="include/LogMessageFilter.h" />
 		<Unit filename="include/LoggableQuery.h" />
 		<Unit filename="include/MessageFilter.h" />
+		<Unit filename="include/MessageInfo.h" />
 		<Unit filename="include/Program.h" />
 		<Unit filename="include/ProtectedBotCommand.h" />
 		<Unit filename="include/SQLiteConfiguration.h" />
@@ -85,9 +88,12 @@
 		<Unit filename="include/XmppBot.h" />
 		<Unit filename="src/AdminBotCommand.cpp" />
 		<Unit filename="src/AliasBotCommand.cpp" />
+		<Unit filename="src/BotCommand.cpp" />
+		<Unit filename="src/BotCommandInfo.cpp" />
 		<Unit filename="src/BotCommandManager.cpp" />
 		<Unit filename="src/CommandMessageFilter.cpp" />
 		<Unit filename="src/Configuration.cpp" />
+		<Unit filename="src/ConfigurationBased.cpp" />
 		<Unit filename="src/ConsoleLog.cpp" />
 		<Unit filename="src/FileConfiguration.cpp" />
 		<Unit filename="src/FileLog.cpp" />
@@ -101,6 +107,8 @@
 		<Unit filename="src/LogHelper.cpp" />
 		<Unit filename="src/LogMessageFilter.cpp" />
 		<Unit filename="src/LoggableQuery.cpp" />
+		<Unit filename="src/MessageFilter.cpp" />
+		<Unit filename="src/MessageInfo.cpp" />
 		<Unit filename="src/Program.cpp" />
 		<Unit filename="src/ProtectedBotCommand.cpp" />
 		<Unit filename="src/SQLiteConfiguration.cpp" />

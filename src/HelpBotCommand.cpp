@@ -5,11 +5,11 @@ HelpBotCommand::HelpBotCommand(const boost::unordered_map<std::string, BotComman
     m_CommandList = commandList;
 }
 
-bool HelpBotCommand::invoke(const JID& user, const bool priv, const std::string& args, std::string *response) const
+bool HelpBotCommand::invoke(BotCommandInfo *info) const
 {
     if(m_CommandList==NULL)
     {
-        *response = "Internal error!";
+        info->setResponse("Internal error!");
         return false;
     }
 
@@ -21,7 +21,7 @@ bool HelpBotCommand::invoke(const JID& user, const bool priv, const std::string&
             ss<<it->first<<"\t"<<it->second->getHelp()<<std::endl;
     }
 
-    *response = ss.str();
+    info->setResponse(ss.str());
     return true;
 }
 

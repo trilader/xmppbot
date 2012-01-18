@@ -1,44 +1,47 @@
 #include "SubjectBotCommand.h"
 
-SubjectBotCommand::SubjectBotCommand(MUCRoom *room, std::string adminpw, StringFormat *format) : ProtectedBotCommand(adminpw)
+SubjectBotCommand::SubjectBotCommand(MUCRoom *room, Configuration *config) : ProtectedBotCommand(config)
 {
     this->_room = room;
-    this->_format = format;
-
-    LOG(debug) << "Subject format: " + _format->getFormatString();
 }
 
-bool SubjectBotCommand::invoke(const JID& user, const bool priv, const std::string& args, std::string *response) const
+bool SubjectBotCommand::invoke(BotCommandInfo *info) const
 {
-    std::string subject;
-    bool success = this->checkPassword(args, &subject);
-    if("" == subject)
+    BotCommandArgs args = info->parseArgs(2);
+
+    if(args.size() < 1 || !this->checkPassword(args[0]))
     {
-        *response = "Expecting custom subject";
+        info->setResponse("Wrong password");
         return false;
     }
-
-    if(!success)
+    else if(args.size() < 2)
     {
-        *response = "Wrong password";
+        info->setResponse("Expecting custom subject");
         return false;
     }
 
     boost::gregorian::date now(boost::gregorian::day_clock::local_day());
 
-    if(this->_eventenabled)
-    {
-        boost::gregorian::date_period period(now, this->_eventdate);
+    std::string formatstr = this->getOption("subject", "format");
+    if("" == formatstr)
+        formatstr = "%2";
 
-        this->_format->assign("1",period.length());
+    StringFormat format(formatstr);
+
+    if(this->getConfig()->isCustomCommandItemSet("subject","eventdate"))
+    {
+        std::string datestr = this->getOption("subject", "eventdate");
+        boost::gregorian::date_period period(now, boost::gregorian::from_string(datestr));
+
+        format.assign("1",period.length());
     }
 
-    this->_format->assign("2", subject);
+    format.assign("2", args[1]);
 
-    std::string result = this->_format->produce();
+    std::string result = format.produce();
 
     this->_room->setSubject(result);
-    *response = "Subject set to \"" + result + "\".";
+    info->setResponse("Subject set to \"" + result + "\".");
     return true;
 }
 
@@ -50,10 +53,4 @@ std::string SubjectBotCommand::getHelp() const
 bool SubjectBotCommand::showHelp() const
 {
     return true;
-}
-
-void SubjectBotCommand::setEvent(std::string datestr)
-{
-    this->_eventdate = boost::gregorian::from_string(datestr);
-    this->_eventenabled = true;
 }

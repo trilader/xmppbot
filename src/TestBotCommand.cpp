@@ -1,9 +1,9 @@
 #include "TestBotCommand.h"
 
-bool TestBotCommand::invoke(const JID& user, const bool priv, const std::string& args, std::string *response) const
+bool TestBotCommand::invoke(BotCommandInfo *info) const
 {
-    std::cout << args << std::endl;
-    *response = "You wrote: " + args;
+    //LOG(debug) << info->getArgumentString();
+    info->setResponse("You wrote: " + info->getArgumentString());
 
     return true;
 }

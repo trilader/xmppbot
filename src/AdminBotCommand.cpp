@@ -1,6 +1,6 @@
 #include "AdminBotCommand.h"
 
-AdminBotCommand::AdminBotCommand(std::string adminpw, XmppBot *bot) : ProtectedBotCommand(adminpw)
+AdminBotCommand::AdminBotCommand(Configuration *config, XmppBot *bot) : ProtectedBotCommand(config)
 {
     this->_bot = bot;
 }
@@ -15,38 +15,36 @@ std::string AdminBotCommand::getHelp() const
     return "";
 }
 
-bool AdminBotCommand::invoke(const JID& user, const bool priv, const std::string& args, std::string *response) const
+bool AdminBotCommand::invoke(BotCommandInfo *info) const
 {
-    std::string cmd;
-    if(!this->checkPassword(args, &cmd))
+    BotCommandArgs args = info->parseArgs(2);
+    if(args.size() < 1 || !this->checkPassword(args[0]))
     {
-        *response = "wrong password";
+        info->setResponse("wrong password");
         return false;
     }
 
+    std::string cmd = (args.size() > 1) ? args[1] : "";
+
     if("quit" == cmd)
-        return this->quit(response);
+        return this->quit();
 
     if("reload" == cmd)
-    	return this->reload(response);
+    	return this->reload();
 
-    *response = "unknown admin cmd";
+    info->setResponse("unknown admin cmd");
     return false;
 }
 
-bool AdminBotCommand::quit(std::string *response) const
+bool AdminBotCommand::quit() const
 {
-    *response = "";
-    //std::cout << "disconnecting..." << std::endl;
     this->_bot->quit();
 
     return true;
 }
 
-bool AdminBotCommand::reload(std::string *response) const
+bool AdminBotCommand::reload() const
 {
-	*response = "";
-
 	this->_bot->quit(XmppBot::RELOAD_REQUESTED);
 
 	return true;

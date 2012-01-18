@@ -15,7 +15,7 @@ class LinkMessageFilter : public MessageFilter
 public:
     LinkMessageFilter(const std::string& protocols);
 
-    void handleMessage(const Message& stanza, bool room, bool priv, bool *handled);
+    void handleMessage(MessageInfo *info);
     void setLogFormat(StringFormat *format);
 
 private:

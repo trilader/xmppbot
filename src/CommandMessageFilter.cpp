@@ -16,14 +16,14 @@ void CommandMessageFilter::setLogFormat(StringFormat *success, StringFormat *fai
     this->_successformat = success;
 }
 
-void CommandMessageFilter::handleMessage(const Message& stanza, bool room, bool priv, bool *handled)
+void CommandMessageFilter::handleMessage(MessageInfo *info)
 {
-    std::string msg = stanza.body();
+    std::string msg = info->getMessage().body();
 
     if(msg.size() <= 0)
         return;
 
-    if(room && !priv && msg.at(0)!='!')
+    if(info->isRoom() && !info->isPrivate() && msg.at(0)!='!')
         return;
 
     if(msg.at(0)=='!')
@@ -31,9 +31,10 @@ void CommandMessageFilter::handleMessage(const Message& stanza, bool room, bool 
 
     std::string response;
 
-    JID from = ((room) ? stanza.from() : (*(this->_usermap))[stanza.from()]);
+    JID from = ((info->isRoom())    ? info->getMessage().from()
+                                    : (*(this->_usermap))[info->getMessage().from()]);
 
-    bool success = this->_manager->tryInvokeFromString(msg, from, priv, &response);
+    bool success = this->_manager->tryInvoke(info, &response);
 
     StringFormat *logformat = (success) ? this->_successformat : this->_failformat;
     logformat->assign("1", msg);
@@ -42,11 +43,11 @@ void CommandMessageFilter::handleMessage(const Message& stanza, bool room, bool 
 
     LOG(command) << logformat->produce();
 
-    if(!success || priv || !room)
+    if(!success || info->isPrivate() || !info->isRoom())
     {
-        Message m(Message::Chat, stanza.from(),response);
+        Message m(Message::Chat, info->getMessage().from(),response);
         this->_client->send(m);
     }
 
-    *handled = true;
+    info->markHandled();
 }

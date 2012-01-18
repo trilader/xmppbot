@@ -12,7 +12,7 @@ class ForeignMessageFilter : public MessageFilter
 public:
     ForeignMessageFilter(JIDMap* usermap, std::set<std::string> *authusers, Client *client);
 
-    void handleMessage(const Message& stanza, bool room, bool priv, bool *handled);
+    void handleMessage(MessageInfo *info);
 
 private:
     JIDMap* _usermap;

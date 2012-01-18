@@ -8,12 +8,13 @@
 #include "gloox/message.h"
 
 #include "ProtectedBotCommand.h"
+#include "Configuration.h"
 
 class KickBotCommand : public ProtectedBotCommand
 {
 public:
-    KickBotCommand(Client* client, MUCRoom* room, std::string password);
-    bool invoke(const JID& user, const bool priv, const std::string& args, std::string *response) const;
+    KickBotCommand(Client* client, MUCRoom* room, Configuration *config);
+    bool invoke(BotCommandInfo *info) const;
     std::string getHelp() const;
     bool showHelp() const;
 
