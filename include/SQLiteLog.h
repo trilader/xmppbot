@@ -2,7 +2,7 @@
 #define SQLITELOG_H
 
 #include "Log.h"
-#include "SQLiteStringFormat.h"
+#include "StringFormat.h"
 #include "DatabaseHelper.h"
 #include "boost/date_time/posix_time/posix_time.hpp"
 #include "boost/date_time/gregorian/gregorian.hpp"
@@ -16,12 +16,12 @@ public:
 private:
     void openDatabase();
 
-    Database *_db;
+    soci::session *_db;
 
     StringFormat *_databaseFormat;
     StringFormat *_tableFormat;
-    SQLiteStringFormat *_insertQueryFormat;
-    SQLiteStringFormat *_createQueryFormat;
+    StringFormat *_insertQueryFormat;
+    StringFormat *_createQueryFormat;
 
     boost::gregorian::date *_today;
     long _thishour;

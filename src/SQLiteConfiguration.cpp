@@ -23,28 +23,28 @@ bool SQLiteConfiguration::isWritable()
 
 void SQLiteConfiguration::initSQLStatements()
 {
-    this->_selectLogFormat = new SQLiteStringFormat(std::string("SELECT logs_type, logs_fileformat, logs_entryformat, logs_enabled, logs_keepopen ")
-                                                + "FROM %table WHERE logs_name = '%name' AND logs_config_id=%index LIMIT 1");
-    this->_selectCommandItemFormat = new SQLiteStringFormat("SELECT command_value FROM %table WHERE command_name = '%name' AND command_option = '%option' AND command_config_id=%index LIMIT 1");
-    this->_selectCustomItemFormat = new SQLiteStringFormat("SELECT custom_value FROM %table WHERE custom_name = '%option' AND custom_config_id=%index LIMIT 1");
-    this->_selectFilterItemFormat = new SQLiteStringFormat("SELECT filter_value FROM %table WHERE filter_name = '%name' AND filter_option = '%option' AND filter_config_id=%index LIMIT 1");
-    this->_selectXmppMUCFormat = new SQLiteStringFormat("SELECT muc_server, muc_room, muc_name FROM %table WHERE muc_config_id=%index LIMIT 1");
-    this->_selectXmppUserFormat = new SQLiteStringFormat("SELECT server_user, server_password, server_address, server_resource FROM %table WHERE server_config_id=%index LIMIT 1");
+    this->_selectLogFormat = new StringFormat(std::string("SELECT logs_type, logs_fileformat, logs_entryformat, logs_enabled, logs_keepopen ")
+                                                + "FROM %table WHERE logs_name = :name AND logs_config_id=%index LIMIT 1");
+    this->_selectCommandItemFormat = new StringFormat("SELECT command_value FROM %table WHERE command_name = :name AND command_option = :option AND command_config_id=%index LIMIT 1");
+    this->_selectCustomItemFormat = new StringFormat("SELECT custom_value FROM %table WHERE custom_name = '%option' AND custom_config_id=%index LIMIT 1");
+    this->_selectFilterItemFormat = new StringFormat("SELECT filter_value FROM %table WHERE filter_name = :name AND filter_option = :option AND filter_config_id=%index LIMIT 1");
+    this->_selectXmppMUCFormat = new StringFormat("SELECT muc_server, muc_room, muc_name FROM %table WHERE muc_config_id=%index LIMIT 1");
+    this->_selectXmppUserFormat = new StringFormat("SELECT server_user, server_password, server_address, server_resource FROM %table WHERE server_config_id=%index LIMIT 1");
 
-    this->_deleteCommandItemFormat = new SQLiteStringFormat("DELETE FROM %table WHERE command_config_id=%index AND command_name='%name' AND command_option='%option'");
-    this->_deleteCustomItemFormat = new SQLiteStringFormat("DELETE FROM %table WHERE custom_config_id=%index AND custom_name='%option'");
-    this->_deleteFilterItemFormat = new SQLiteStringFormat("DELETE FROM %table WHERE filter_config_id=%index AND filter_name='%name' AND filter_option='%option'");
-    this->_deleteLogFormat = new SQLiteStringFormat("DELETE FROM %table WHERE logs_config_id=%index AND logs_name='%name'");
-    this->_deleteXmppMUCFormat = new SQLiteStringFormat("DELETE FROM %table WHERE muc_config_id=%index");
-    this->_deleteXmppUserFormat = new SQLiteStringFormat("DELETE FROM %table WHERE server_config_id=%index");
+    this->_deleteCommandItemFormat = new StringFormat("DELETE FROM %table WHERE command_config_id=%index AND command_name=:name AND command_option=:option");
+    this->_deleteCustomItemFormat = new StringFormat("DELETE FROM %table WHERE custom_config_id=%index AND custom_name=:option");
+    this->_deleteFilterItemFormat = new StringFormat("DELETE FROM %table WHERE filter_config_id=%index AND filter_name=:name AND filter_option=:option");
+    this->_deleteLogFormat = new StringFormat("DELETE FROM %table WHERE logs_config_id=%index AND logs_name=:name");
+    this->_deleteXmppMUCFormat = new StringFormat("DELETE FROM %table WHERE muc_config_id=%index");
+    this->_deleteXmppUserFormat = new StringFormat("DELETE FROM %table WHERE server_config_id=%index");
 
-    this->_replaceCommandItemFormat = new SQLiteStringFormat("REPLACE INTO %table (command_config_id, command_name, command_option, command_value) VALUES (%index, '%name', '%option', '%value')");
-    this->_replaceCustomItemFormat = new SQLiteStringFormat("REPLACE INTO %table (custom_config_id, custom_name, custom_value) VALUES (%index, '%option', '%value')");
-    this->_replaceFilterItemFormat = new SQLiteStringFormat("REPLACE INTO %table (filter_config_id, filter_name, filter_option, filter_value) VALUES (%index, '%name', '%option', '%value')");
-    this->_replaceXmppMUCFormat = new SQLiteStringFormat("REPLACE INTO %table (muc_config_id, muc_server, muc_room, muc_name) VALUES (%index, '%server', '%room', '%name')");
-    this->_replaceXmppUserFormat = new SQLiteStringFormat("REPLACE INTO %table (server_config_id, server_user, server_password, server_address, server_resource) VALUES (%index, '%user', '%password', '%address', '%resource')");
-    this->_replaceLogFormat = new SQLiteStringFormat(std::string("REPLACE INTO %table (logs_config_id, logs_name, logs_type, logs_fileformat, logs_entryformat, logs_enabled, logs_keepopen) VALUES ")
-                                               +"(%index, '%name', '%type', '%fileformat', '%entryformat', %enabled, %keepopen)");
+    this->_replaceCommandItemFormat = new StringFormat("REPLACE INTO %table (command_config_id, command_name, command_option, command_value) VALUES (%index, :name, :option, :value)");
+    this->_replaceCustomItemFormat = new StringFormat("REPLACE INTO %table (custom_config_id, custom_name, custom_value) VALUES (%index, :option, :value)");
+    this->_replaceFilterItemFormat = new StringFormat("REPLACE INTO %table (filter_config_id, filter_name, filter_option, filter_value) VALUES (%index, :name, :option,:value)");
+    this->_replaceXmppMUCFormat = new StringFormat("REPLACE INTO %table (muc_config_id, muc_server, muc_room, muc_name) VALUES (%index, :server, :room, :name)");
+    this->_replaceXmppUserFormat = new StringFormat("REPLACE INTO %table (server_config_id, server_user, server_password, server_address, server_resource) VALUES (%index, :user, :password, :address, :resource)");
+    this->_replaceLogFormat = new StringFormat(std::string("REPLACE INTO %table (logs_config_id, logs_name, logs_type, logs_fileformat, logs_entryformat, logs_enabled, logs_keepopen) VALUES ")
+                                               +"(%index, :name, :type, :fileformat, :entryformat, :enabled, :keepopen)");
 
     this->_tableFormat->assign("table", this->getLogOptionIdent());
     this->_tableFormat->produce();
@@ -119,13 +119,9 @@ bool SQLiteConfiguration::setConfigurationIndex(unsigned int index)
 void SQLiteConfiguration::openDatabase()
 {
     if(0 != this->_db)
-        if(this->_db->Connected())
-            return;
+        return;
 
-    if(0 != this->_db)
-        delete this->_db;
-
-    this->_db = new Database(this->_dbFile);
+    this->_db = new soci::session(soci::sqlite3, this->_dbFile);
 }
 
 void SQLiteConfiguration::initTables()
@@ -192,14 +188,12 @@ void SQLiteConfiguration::initTables()
     this->_tableFormat->assign("table", this->getCustomOptionIdent());
     createCustomTable.assign("table", this->_tableFormat->produce());
 
-    LoggableQuery query(*this->_db);
-
-    query.executeAndLog(createCommandTable.produce());
-    query.executeAndLog(createCustomTable.produce());
-    query.executeAndLog(createFilterTable.produce());
-    query.executeAndLog(createMUCTable.produce());
-    query.executeAndLog(createUserTable.produce());
-    query.executeAndLog(createLogTable.produce());
+    *this->_db << createLogTable.produce();
+    *this->_db << createCommandTable.produce();
+    *this->_db << createCustomTable.produce();
+    *this->_db << createFilterTable.produce();
+    *this->_db << createMUCTable.produce();
+    *this->_db << createUserTable.produce();
 }
 
 bool SQLiteConfiguration::setLog(const std::string& name, const std::string& type, bool enabled, bool keepopen)
@@ -217,22 +211,23 @@ bool SQLiteConfiguration::setLog(const std::string& name, const std::string& typ
 
     this->openDatabase();
 
-    LoggableQuery query(*this->_db);
 
     if("" == type && "" == fileformat && "" == entryformat && !enabled && !keepopen)
     {
-        this->_deleteLogFormat->assign("name", name);
-        return query.executeAndLog(this->_deleteLogFormat->produce(this->_db));
+        *this->_db << this->_deleteLogFormat->produce(), soci::use(name);
+
+        return true;
     }
 
-    this->_replaceLogFormat->assign("name", name);
-    this->_replaceLogFormat->assign("type", type);
-    this->_replaceLogFormat->assign("fileformat", fileformat);
-    this->_replaceLogFormat->assign("entryformat", entryformat);
-    this->_replaceLogFormat->assign("enabled", (enabled ? "1" : "0"));
-    this->_replaceLogFormat->assign("keepopen", (keepopen ? "1" : "0"));
+    *this->_db << this->_replaceLogFormat->produce(),
+                    soci::use(name,"name"),
+                    soci::use(type,"type"),
+                    soci::use(fileformat,"fileformat"),
+                    soci::use(entryformat, "entryformat"),
+                    soci::use(enabled ? 1 : 0, "enabled"),
+                    soci::use(keepopen ? 1 : 0, "keepopen");
 
-    return query.executeAndLog(this->_replaceLogFormat->produce(this->_db));
+    return true;
 }
 
 bool SQLiteConfiguration::setXmppUser(const std::string& user, const std::string& password, const std::string& address, const std::string& resource)
@@ -242,17 +237,19 @@ bool SQLiteConfiguration::setXmppUser(const std::string& user, const std::string
 
     this->openDatabase();
 
-    LoggableQuery query(*this->_db);
-
     if("" == user && "" == password && "" == address && "" == resource)
-        return query.executeAndLog(this->_deleteXmppUserFormat->produce(this->_db));
+    {
+        *this->_db << this->_deleteXmppUserFormat->produce();
+        return true;
+    }
 
-    this->_replaceXmppUserFormat->assign("user", user);
-    this->_replaceXmppUserFormat->assign("password", password);
-    this->_replaceXmppUserFormat->assign("address", address);
-    this->_replaceXmppUserFormat->assign("resource", resource);
+    *this->_db << this->_replaceXmppUserFormat->produce(),
+                    soci::use(user,"user"),
+                    soci::use(password,"password"),
+                    soci::use(address,"address"),
+                    soci::use(resource,"resource");
 
-    return query.executeAndLog(this->_replaceXmppUserFormat->produce(this->_db));
+    return true;
 }
 
 bool SQLiteConfiguration::setXmppMUC(const std::string& name, const std::string& room, const std::string& server)
@@ -262,19 +259,21 @@ bool SQLiteConfiguration::setXmppMUC(const std::string& name, const std::string&
 
     this->openDatabase();
 
-    LoggableQuery query(*this->_db);
-
     if("" == name && "" == room && "" == server)
-        return query.executeAndLog(this->_deleteXmppMUCFormat->produce(this->_db));
+    {
+        *this->_db << this->_deleteXmppMUCFormat->produce();
+        return true;
+    }
 
-    this->_replaceXmppMUCFormat->assign("name", name);
-    this->_replaceXmppMUCFormat->assign("room", room);
-    this->_replaceXmppMUCFormat->assign("server", server);
+    *this->_db << this->_replaceXmppMUCFormat->produce(),
+                    soci::use(name, "name"),
+                    soci::use(room, "room"),
+                    soci::use(server, "server");
 
-    return query.executeAndLog(this->_replaceXmppMUCFormat->produce(this->_db));
+    return true;
 }
 
-bool SQLiteConfiguration::setOptionByFormat(SQLiteStringFormat *format, const std::string& name, const std::string& option, const std::string& value)
+bool SQLiteConfiguration::setOptionByFormat(StringFormat *format, const std::string& name, const std::string& option, const std::string& value)
 {
     format->assign("name", name);
     format->assign("option", option);
@@ -282,9 +281,12 @@ bool SQLiteConfiguration::setOptionByFormat(SQLiteStringFormat *format, const st
 
     this->openDatabase();
 
-    LoggableQuery query(*this->_db);
+    *this->_db << format->produce(),
+        soci::use(name, "name"),
+        soci::use(option, "option"),
+        soci::use(value, "value");
 
-    return query.executeAndLog(format->produce(this->_db));
+    return true;
 }
 
 bool SQLiteConfiguration::setCustomCommandItem(const std::string& cmd, const std::string& name, const std::string& value)
@@ -335,23 +337,19 @@ bool SQLiteConfiguration::getLog(const std::string& name, std::string *type, std
     this->_selectLogFormat->assign("name", name);
 
     *type = ""; *fileformat = ""; *entryformat = ""; *enabled = false; *keepopen = false;
+    int enabled_buff, keepopen_buff;
 
-    query.get_result_and_log(this->_selectLogFormat->produce(this->_db));
-    if(query.num_rows() <= 0)
-    {
-        query.free_result();
-        return false;
-    }
+    *this->_db << this->_selectLogFormat->produce(),
+                    soci::use(name, "name"),
+                    soci::into(*type),
+                    soci::into(*fileformat),
+                    soci::into(*entryformat),
+                    soci::into(enabled_buff),
+                    soci::into(keepopen_buff);
 
-    query.fetch_row();
+    *enabled = enabled_buff > 0;
+    *keepopen = keepopen_buff > 0;
 
-    *type = query.getstr("logs_type");
-    *fileformat = query.getstr("logs_fileformat");
-    *entryformat = query.getstr("logs_entryformat");
-    *enabled = query.getnum("logs_enabled") > 0;
-    *keepopen = query.getnum("logs_keepopen") > 0;
-
-    query.free_result();
     return true;
 }
 
@@ -361,23 +359,11 @@ bool SQLiteConfiguration::getXmppUser(std::string *user, std::string *password, 
 
     *user = ""; *password = ""; *address = ""; *resource = "";
 
-    LoggableQuery query(*this->_db);
-
-    query.get_result_and_log(this->_selectXmppUserFormat->produce(this->_db));
-    if(query.num_rows() <= 0)
-    {
-        query.free_result();
-        return false;
-    }
-
-    query.fetch_row();
-
-    *user = query.getstr("server_user");
-    *password = query.getstr("server_password");
-    *address = query.getstr("server_address");
-    *resource = query.getstr("server_resource");
-
-    query.free_result();
+    *this->_db << this->_selectXmppUserFormat->produce(),
+                    soci::into(*user),
+                    soci::into(*password),
+                    soci::into(*address),
+                    soci::into(*resource);
 
     return true;
 }
@@ -388,50 +374,25 @@ bool SQLiteConfiguration::getXmppMUC(std::string *name, std::string *room, std::
 
     *name = ""; *room = ""; *server = "";
 
-    LoggableQuery query(*this->_db);
-
-    query.get_result(this->_selectXmppMUCFormat->produce(this->_db));
-    if(query.num_rows() <= 0)
-    {
-        query.free_result();
-        return false;
-    }
-
-    query.fetch_row();
-
-    *name = query.getstr("muc_name");
-    *room = query.getstr("muc_room");
-    *server = query.getstr("muc_server");
-
-    query.free_result();
+    *this->_db << this->_selectXmppUserFormat->produce(),
+                    soci::into(*name),
+                    soci::into(*room),
+                    soci::into(*server);
 
     return true;
 }
 
-bool SQLiteConfiguration::getOptionByFormat(SQLiteStringFormat *format, const std::string& name, const std::string& option, std::string *value)
+bool SQLiteConfiguration::getOptionByFormat(StringFormat *format, const std::string& name, const std::string& option, std::string *value)
 {
     this->openDatabase();
 
     format->assign("name", name);
     format->assign("option", option);
 
-    LoggableQuery query(*this->_db);
-
-    *value = "";
-
-    query.get_result(format->produce(this->_db));
-    if(query.num_rows() <= 0)
-    {
-        query.free_result();
-
-        return false;
-    }
-
-    query.fetch_row();
-
-    *value = query.getstr();
-
-    query.free_result();
+    *this->_db << format->produce(),
+        soci::use(name, "name"),
+        soci::use(option, "option"),
+        soci::into(*value);
 
     return true;
 }

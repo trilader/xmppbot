@@ -10,8 +10,6 @@ class SQLiteStringFormat : public StringFormat
     public:
         SQLiteStringFormat(std::string format, std::string varprefix = "%");
 
-        void safeVariables(Database *db);
-        std::string produce(Database *db);
         void assign(const std::string& name,const std::string& value);
 
         template <class TIn> void assign(const std::string& name, const TIn& value)

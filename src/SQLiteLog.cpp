@@ -8,14 +8,14 @@ SQLiteLog::SQLiteLog(StringFormat *databaseFormat, std::string table)
     this->_tableFormat->assign("1", table);
     this->_tableFormat->produce();
 
-    this->_createQueryFormat = new SQLiteStringFormat(std::string("CREATE TABLE IF NOT EXISTS %table ( ")
+    this->_createQueryFormat = new StringFormat(std::string("CREATE TABLE IF NOT EXISTS %table ( ")
                                                       +"%l_id integer primary key autoincrement not null,"
                                                       +"%l_entry varchar(255) default '' not null,"
                                                       +"%l_assoc_user varchar(255) default '' not null,"
                                                       +"%l_timestamp integer not null);");
     this->_createQueryFormat->assign("l", table);
 
-    this->_insertQueryFormat = new SQLiteStringFormat("INSERT INTO %table ( %l_entry, %l_assoc_user, %l_timestamp ) VALUES ('%msg','',datetime('now'))");
+    this->_insertQueryFormat = new StringFormat("INSERT INTO %table ( %l_entry, %l_assoc_user, %l_timestamp ) VALUES (:msg,'',datetime('now'))");
     this->_insertQueryFormat->assign("l", table);
 
     this->_today = new boost::gregorian::date(boost::gregorian::min_date_time);
@@ -40,21 +40,17 @@ void SQLiteLog::openDatabase()
         delete (this->_db);
 
     this->assignFormatDateTime(this->_databaseFormat);
-    this->_db = new Database(this->_databaseFormat->produce());
-
-    Query query(*(this->_db));
+    this->_db = new soci::session(soci::sqlite3, this->_databaseFormat->produce());
 
     this->_createQueryFormat->assign("table", this->_tableFormat->last());
-    query.execute(this->_createQueryFormat->produce(this->_db));
+    *this->_db << this->_createQueryFormat->produce();
 }
 
 void SQLiteLog::log(const std::string& msg)
 {
     this->openDatabase();
 
-    Query query(*(this->_db));
-
     this->_insertQueryFormat->assign("table", this->_tableFormat->last());
-    this->_insertQueryFormat->assign("msg", msg);
-    query.execute(this->_insertQueryFormat->produce(this->_db));
+
+    *this->_db << this->_insertQueryFormat->produce(), soci::use(msg, "msg");
 }

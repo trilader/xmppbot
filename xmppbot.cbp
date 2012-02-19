@@ -38,14 +38,17 @@
 			<Add directory="include" />
 			<Add directory="../boost_1_47_0_sdk" />
 			<Add directory="../sqlitewrapped" />
+			<Add directory="/usr/include/soci" />
 		</Compiler>
 		<Linker>
 			<Add library="gloox" />
 			<Add library="boost_program_options" />
 			<Add library="boost_date_time" />
 			<Add library="boost_regex" />
-			<Add library="libsqlitewrapped.a" />
 			<Add library="sqlite3" />
+			<Add library="libsoci_core" />
+			<Add library="libsoci_sqlite3" />
+			<Add library="libsoci_mysql" />
 			<Add directory="lib" />
 			<Add directory="../boost_1_47_0_sdk/lib" />
 			<Add directory="../sqlitewrapped/bin/Debug/" />
@@ -58,6 +61,7 @@
 		<Unit filename="include/CommandMessageFilter.h" />
 		<Unit filename="include/Configuration.h" />
 		<Unit filename="include/ConfigurationBased.h" />
+		<Unit filename="include/ConfigurationBotCommand.h" />
 		<Unit filename="include/ConsoleLog.h" />
 		<Unit filename="include/DatabaseHelper.h" />
 		<Unit filename="include/FileConfiguration.h" />
@@ -94,6 +98,7 @@
 		<Unit filename="src/CommandMessageFilter.cpp" />
 		<Unit filename="src/Configuration.cpp" />
 		<Unit filename="src/ConfigurationBased.cpp" />
+		<Unit filename="src/ConfigurationBotCommand.cpp" />
 		<Unit filename="src/ConsoleLog.cpp" />
 		<Unit filename="src/FileConfiguration.cpp" />
 		<Unit filename="src/FileLog.cpp" />

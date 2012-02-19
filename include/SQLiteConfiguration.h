@@ -3,8 +3,8 @@
 
 #include "Configuration.h"
 #include "DatabaseHelper.h"
-#include "SQLiteStringFormat.h"
 #include "LoggableQuery.h"
+#include "StringFormat.h"
 
 class SQLiteConfiguration : public Configuration
 {
@@ -47,33 +47,33 @@ class SQLiteConfiguration : public Configuration
         void initSQLStatements();
         void initTables();
         void openDatabase();
-        bool setOptionByFormat(SQLiteStringFormat *format, const std::string& name, const std::string& option, const std::string& value);
-        bool getOptionByFormat(SQLiteStringFormat *format, const std::string& name, const std::string& option, std::string *value);
+        bool setOptionByFormat(StringFormat *format, const std::string& name, const std::string& option, const std::string& value);
+        bool getOptionByFormat(StringFormat *format, const std::string& name, const std::string& option, std::string *value);
 
         StringFormat *_tableFormat;
 
-        SQLiteStringFormat *_selectLogFormat;
-        SQLiteStringFormat *_selectXmppUserFormat;
-        SQLiteStringFormat *_selectXmppMUCFormat;
-        SQLiteStringFormat *_selectCommandItemFormat;
-        SQLiteStringFormat *_selectFilterItemFormat;
-        SQLiteStringFormat *_selectCustomItemFormat;
+        StringFormat *_selectLogFormat;
+        StringFormat *_selectXmppUserFormat;
+        StringFormat *_selectXmppMUCFormat;
+        StringFormat *_selectCommandItemFormat;
+        StringFormat *_selectFilterItemFormat;
+        StringFormat *_selectCustomItemFormat;
 
-        SQLiteStringFormat *_deleteLogFormat;
-        SQLiteStringFormat *_deleteXmppUserFormat;
-        SQLiteStringFormat *_deleteXmppMUCFormat;
-        SQLiteStringFormat *_deleteCommandItemFormat;
-        SQLiteStringFormat *_deleteFilterItemFormat;
-        SQLiteStringFormat *_deleteCustomItemFormat;
+        StringFormat *_deleteLogFormat;
+        StringFormat *_deleteXmppUserFormat;
+        StringFormat *_deleteXmppMUCFormat;
+        StringFormat *_deleteCommandItemFormat;
+        StringFormat *_deleteFilterItemFormat;
+        StringFormat *_deleteCustomItemFormat;
 
-        SQLiteStringFormat *_replaceLogFormat;
-        SQLiteStringFormat *_replaceXmppUserFormat;
-        SQLiteStringFormat *_replaceXmppMUCFormat;
-        SQLiteStringFormat *_replaceCommandItemFormat;
-        SQLiteStringFormat *_replaceFilterItemFormat;
-        SQLiteStringFormat *_replaceCustomItemFormat;
+        StringFormat *_replaceLogFormat;
+        StringFormat *_replaceXmppUserFormat;
+        StringFormat *_replaceXmppMUCFormat;
+        StringFormat *_replaceCommandItemFormat;
+        StringFormat *_replaceFilterItemFormat;
+        StringFormat *_replaceCustomItemFormat;
 
-        Database *_db;
+        soci::session *_db;
         unsigned int _index;
         bool _writeable;
         std::string _dbFile;

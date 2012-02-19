@@ -4,12 +4,12 @@
 #include "DatabaseHelper.h"
 #include "LogHelper.h"
 
-class LoggableQuery : public Query
+class LoggableQuery
 {
     public:
-        LoggableQuery(Database& db);
+        LoggableQuery(soci::session& db);
         bool executeAndLog(const std::string& sql);
-        sqlite3_stmt* get_result_and_log(const std::string& sql);
+        std::string get_result_and_log(const std::string& sql);
 };
 
 #endif
