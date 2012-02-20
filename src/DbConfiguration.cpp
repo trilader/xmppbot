@@ -1,3 +1,5 @@
+#ifdef DB_SUPPORT
+
 #include "DbConfiguration.h"
 
 DbConfiguration::DbConfiguration(const soci::backend_factory& factory, std::string connString, bool writeable, unsigned int index) : _factory(factory)
@@ -121,7 +123,7 @@ void DbConfiguration::openDatabase()
     if(0 != this->_db)
         return;
 
-    this->_db = new soci::session(soci::sqlite3, this->_connString);
+    this->_db = new soci::session(this->_factory, this->_connString);
 }
 
 void DbConfiguration::initTables()
@@ -369,3 +371,4 @@ bool DbConfiguration::isCustomItemSet(const std::string& name)
     return this->getOptionByFormat(this->_selectFilterItemFormat, "", name, &value);
 }
 
+#endif

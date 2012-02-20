@@ -101,10 +101,12 @@ bool Program::loadConfiguration()
 
         Program::_config = new FileConfiguration(cfgfile);
     }
+    #if defined DB_SUPPORT && defined DB_SQLITE_SUPPORT
     else if(boost::algorithm::iends_with(cfgfile, ".db"))
     {
         Program::_config = new SQLiteConfiguration(cfgfile, !readonly);
     }
+    #endif
     else
     {
         LOG(sys) << "error: unknown config file-extension!";

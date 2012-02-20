@@ -1,6 +1,8 @@
 #ifndef DBLOG_H
 #define DBLOG_H
 
+#ifdef DB_SUPPORT
+
 #include "Log.h"
 #include "StringFormat.h"
 #include "DatabaseHelper.h"
@@ -29,5 +31,7 @@ protected:
     boost::gregorian::date *_today;
     long _thishour;
 };
+
+#endif
 
 #endif

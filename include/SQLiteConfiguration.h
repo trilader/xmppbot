@@ -1,6 +1,8 @@
 #ifndef SQLITECONFIGURATION_H
 #define SQLITECONFIGURATION_H
 
+#if defined DB_SUPPORT && defined DB_SQLITE_SUPPORT
+
 #include "DbConfiguration.h"
 
 class SQLiteConfiguration : public DbConfiguration
@@ -12,5 +14,7 @@ class SQLiteConfiguration : public DbConfiguration
 
         virtual void initTables();
 };
+
+#endif
 
 #endif

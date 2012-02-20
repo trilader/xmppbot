@@ -1,6 +1,8 @@
 #ifndef DBCONFIGURATION_H
 #define DBCONFIGURATION_H
 
+#ifdef DB_SUPPORT
+
 #include "Configuration.h"
 #include "DatabaseHelper.h"
 #include "StringFormat.h"
@@ -80,6 +82,8 @@ class DbConfiguration : public Configuration
         bool _writeable;
         std::string _connString;
 };
+
+#endif
 
 #endif
 

@@ -1,3 +1,5 @@
+#if defined DB_SUPPORT && defined DB_SQLITE_SUPPORT
+
 #include "SQLiteConfiguration.h"
 
 SQLiteConfiguration::SQLiteConfiguration(std::string filename, bool writeable, unsigned int index) : DbConfiguration(soci::sqlite3,filename, writeable, index)
@@ -75,3 +77,5 @@ void SQLiteConfiguration::initTables()
     *this->_db << createMUCTable.produce();
     *this->_db << createUserTable.produce();
 }
+
+#endif

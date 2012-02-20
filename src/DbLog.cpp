@@ -1,3 +1,5 @@
+#ifdef DB_SUPPORT
+
 #include "DbLog.h"
 
 DbLog::DbLog(const soci::backend_factory& factory, StringFormat *databaseFormat, std::string table) : _factory(factory)
@@ -40,7 +42,7 @@ void DbLog::openDatabase()
         delete (this->_db);
 
     this->assignFormatDateTime(this->_databaseFormat);
-    this->_db = new soci::session(soci::sqlite3, this->_databaseFormat->produce());
+    this->_db = new soci::session(this->_factory, this->_databaseFormat->produce());
 
     this->_createQueryFormat->assign("table", this->_tableFormat->last());
     *this->_db << this->_createQueryFormat->produce();
@@ -55,3 +57,4 @@ void DbLog::log(const std::string& msg)
     *this->_db << this->_insertQueryFormat->produce(), soci::use(msg, "msg");
 }
 
+#endif

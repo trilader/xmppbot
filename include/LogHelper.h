@@ -44,8 +44,10 @@ inline void LogHelper::init(Configuration *config, const std::string& name)
                                                 new StringFormat(entryformat), keepopen);
             else if("console" == type && "" != entryformat)
                 LogHelper::logMap[name] = new ConsoleLog(new StringFormat(entryformat));
+#if defined DB_SUPPORT && defined DB_SQLITE_SUPPORT
             else if("sql" == type && "" != fileformat)
                 LogHelper::logMap[name] = new SQLiteLog(new StringFormat(fileformat), name);
+#endif
     }
 
     if(!(LogHelper::logMap.count(name)))
