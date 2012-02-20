@@ -6,6 +6,7 @@
 #include "FileLog.h"
 #include "VoidLog.h"
 #include "SQLiteLog.h"
+#include "MySQLLog.h"
 
 #include "Configuration.h"
 
@@ -47,6 +48,10 @@ inline void LogHelper::init(Configuration *config, const std::string& name)
 #if defined DB_SUPPORT && defined DB_SQLITE_SUPPORT
             else if("sql" == type && "" != fileformat)
                 LogHelper::logMap[name] = new SQLiteLog(new StringFormat(fileformat), name);
+#endif
+#if defined DB_SUPPORT && defined DB_MYSQL_SUPPORT
+            else if("mysql" == type && "" != fileformat)
+                LogHelper::logMap[name] = new MySQLLog(new StringFormat(fileformat), name);
 #endif
     }
 

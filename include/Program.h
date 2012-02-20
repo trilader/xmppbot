@@ -5,6 +5,7 @@
 #include "XmppBot.h"
 #include "FileConfiguration.h"
 #include "SQLiteConfiguration.h"
+#include "MySQLConfiguration.h"
 #include "LogHelper.h"
 
 #include "boost/program_options.hpp"

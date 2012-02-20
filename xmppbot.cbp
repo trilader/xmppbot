@@ -16,6 +16,7 @@
 					<Add option="-g" />
 					<Add option="-DDB_SUPPORT" />
 					<Add option="-DDB_SQLITE_SUPPORT" />
+					<Add option="-DDB_MYSQL_SUPPORT" />
 				</Compiler>
 			</Target>
 			<Target title="Release">
@@ -41,6 +42,7 @@
 			<Add directory="../boost_1_47_0_sdk" />
 			<Add directory="../sqlitewrapped" />
 			<Add directory="/usr/include/soci" />
+			<Add directory="/usr/include/mysql" />
 		</Compiler>
 		<Linker>
 			<Add library="gloox" />
@@ -82,6 +84,8 @@
 		<Unit filename="include/LogMessageFilter.h" />
 		<Unit filename="include/MessageFilter.h" />
 		<Unit filename="include/MessageInfo.h" />
+		<Unit filename="include/MySQLConfiguration.h" />
+		<Unit filename="include/MySQLLog.h" />
 		<Unit filename="include/Program.h" />
 		<Unit filename="include/ProtectedBotCommand.h" />
 		<Unit filename="include/SQLiteConfiguration.h" />
@@ -117,6 +121,8 @@
 		<Unit filename="src/LogMessageFilter.cpp" />
 		<Unit filename="src/MessageFilter.cpp" />
 		<Unit filename="src/MessageInfo.cpp" />
+		<Unit filename="src/MySQLConfiguration.cpp" />
+		<Unit filename="src/MySQLLog.cpp" />
 		<Unit filename="src/Program.cpp" />
 		<Unit filename="src/ProtectedBotCommand.cpp" />
 		<Unit filename="src/SQLiteConfiguration.cpp" />

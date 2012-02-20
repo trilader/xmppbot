@@ -114,6 +114,12 @@ bool Program::loadConfiguration()
         Program::_config = new SQLiteConfiguration(cfgfile, !readonly);
     }
     #endif
+    #if defined DB_SUPPORT && defined DB_MYSQL_SUPPORT
+    else if("mysql" == cfgdriver)
+    {
+        Program::_config = new MySQLConfiguration(cfgfile, !readonly);
+    }
+    #endif
     else
     {
         LOG(sys) << "error: unknown config driver!";
