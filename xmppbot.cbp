@@ -64,6 +64,8 @@
 		<Unit filename="include/ConfigurationBotCommand.h" />
 		<Unit filename="include/ConsoleLog.h" />
 		<Unit filename="include/DatabaseHelper.h" />
+		<Unit filename="include/DbConfiguration.h" />
+		<Unit filename="include/DbLog.h" />
 		<Unit filename="include/FileConfiguration.h" />
 		<Unit filename="include/FileLog.h" />
 		<Unit filename="include/ForeignMessageFilter.h" />
@@ -76,14 +78,12 @@
 		<Unit filename="include/Log.h" />
 		<Unit filename="include/LogHelper.h" />
 		<Unit filename="include/LogMessageFilter.h" />
-		<Unit filename="include/LoggableQuery.h" />
 		<Unit filename="include/MessageFilter.h" />
 		<Unit filename="include/MessageInfo.h" />
 		<Unit filename="include/Program.h" />
 		<Unit filename="include/ProtectedBotCommand.h" />
 		<Unit filename="include/SQLiteConfiguration.h" />
 		<Unit filename="include/SQLiteLog.h" />
-		<Unit filename="include/SQLiteStringFormat.h" />
 		<Unit filename="include/StateBotCommand.h" />
 		<Unit filename="include/StringFormat.h" />
 		<Unit filename="include/SubjectBotCommand.h" />
@@ -100,6 +100,8 @@
 		<Unit filename="src/ConfigurationBased.cpp" />
 		<Unit filename="src/ConfigurationBotCommand.cpp" />
 		<Unit filename="src/ConsoleLog.cpp" />
+		<Unit filename="src/DbConfiguration.cpp" />
+		<Unit filename="src/DbLog.cpp" />
 		<Unit filename="src/FileConfiguration.cpp" />
 		<Unit filename="src/FileLog.cpp" />
 		<Unit filename="src/ForeignMessageFilter.cpp" />
@@ -111,14 +113,12 @@
 		<Unit filename="src/Log.cpp" />
 		<Unit filename="src/LogHelper.cpp" />
 		<Unit filename="src/LogMessageFilter.cpp" />
-		<Unit filename="src/LoggableQuery.cpp" />
 		<Unit filename="src/MessageFilter.cpp" />
 		<Unit filename="src/MessageInfo.cpp" />
 		<Unit filename="src/Program.cpp" />
 		<Unit filename="src/ProtectedBotCommand.cpp" />
 		<Unit filename="src/SQLiteConfiguration.cpp" />
 		<Unit filename="src/SQLiteLog.cpp" />
-		<Unit filename="src/SQLiteStringFormat.cpp" />
 		<Unit filename="src/StateBotCommand.cpp" />
 		<Unit filename="src/StringFormat.cpp" />
 		<Unit filename="src/SubjectBotCommand.cpp" />
