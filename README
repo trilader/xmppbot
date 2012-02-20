@@ -3,8 +3,8 @@ This is xmppbot, an xmpp or jabber bot written in C++ using gloox and boost.
 =Dependecies=
 - Boost 1.4.x ( tested with 1.4.7.0 and 1.4.8.0 )
 - Gloox 1.0
-- sqlite3
-- sqlitewrapped
+- sqlite3 ( optional )
+- soci ( optional )
 
 =Building=
 Either use the supplied Code::Blocks project file or the included Makefile
