@@ -11,7 +11,7 @@ AliasBotCommand::AliasBotCommand(std::string prefix, std::string postfix, std::s
 
 bool AliasBotCommand::invoke(BotCommandInfo *info) const
 {
-    info->setArgumentString(this->_prefix + info->getArgumentString() + this->_prefix);
+    info->setArgumentString(this->_prefix + info->getArgumentString() + this->_postfix);
 
     return this->_command->invoke(info);
 }
