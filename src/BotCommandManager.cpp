@@ -36,7 +36,7 @@ bool BotCommandManager::tryInvoke(MessageInfo *info, std::string *response)
 {
     std::string name, args;
 
-    BotCommandManager::splitCommandString(info->getMessage().body(), &name, &args);
+    BotCommandManager::splitCommandString(info->getBody(), &name, &args);
 
     BotCommandInfo cmdinfo(name, args, info);
 

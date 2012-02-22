@@ -30,7 +30,7 @@ void LinkMessageFilter::setLogFormat(StringFormat *format)
 
 void LinkMessageFilter::handleMessage(MessageInfo *info)
 {
-    std::string msg = info->getMessage().body();
+    std::string msg = info->getBody();
 
     if(msg.size() <= 0)
         return;
@@ -38,7 +38,7 @@ void LinkMessageFilter::handleMessage(MessageInfo *info)
     if(!info->isRoom() || info->isPrivate())
         return;
 
-    JID from = info->getMessage().from();
+    JID from = info->getFrom();
     StringFormat *logformat = this->_format;
 
     boost::sregex_iterator it(msg.begin(), msg.end(), *_re);

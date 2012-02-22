@@ -58,6 +58,7 @@
 		<Unit filename="include/CommandMessageFilter.h" />
 		<Unit filename="include/Configuration.h" />
 		<Unit filename="include/ConfigurationBased.h" />
+		<Unit filename="include/ConfigurationBotCommand.h" />
 		<Unit filename="include/ConsoleLog.h" />
 		<Unit filename="include/DatabaseHelper.h" />
 		<Unit filename="include/FileConfiguration.h" />
@@ -94,6 +95,7 @@
 		<Unit filename="src/CommandMessageFilter.cpp" />
 		<Unit filename="src/Configuration.cpp" />
 		<Unit filename="src/ConfigurationBased.cpp" />
+		<Unit filename="src/ConfigurationBotCommand.cpp" />
 		<Unit filename="src/ConsoleLog.cpp" />
 		<Unit filename="src/FileConfiguration.cpp" />
 		<Unit filename="src/FileLog.cpp" />

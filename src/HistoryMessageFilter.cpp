@@ -2,6 +2,6 @@
 
 void HistoryMessageFilter::handleMessage(MessageInfo *info)
 {
-    if(info->getMessage().when() != NULL)
+    if(info->getWhen() != NULL)
         info->markHandled();
 }

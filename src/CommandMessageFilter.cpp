@@ -18,7 +18,7 @@ void CommandMessageFilter::setLogFormat(StringFormat *success, StringFormat *fai
 
 void CommandMessageFilter::handleMessage(MessageInfo *info)
 {
-    std::string msg = info->getMessage().body();
+    std::string msg = info->getBody();
 
     if(msg.size() <= 0)
         return;
@@ -29,10 +29,12 @@ void CommandMessageFilter::handleMessage(MessageInfo *info)
     if(msg.at(0)=='!')
         msg = msg.substr(1);
 
+    info->setBody(msg);
+
     std::string response;
 
-    JID from = ((info->isRoom())    ? info->getMessage().from()
-                                    : (*(this->_usermap))[info->getMessage().from()]);
+    JID from = ((info->isRoom())    ? info->getFrom()
+                                    : (*(this->_usermap))[info->getFrom()]);
 
     bool success = this->_manager->tryInvoke(info, &response);
 
@@ -45,7 +47,7 @@ void CommandMessageFilter::handleMessage(MessageInfo *info)
 
     if(!success || info->isPrivate() || !info->isRoom())
     {
-        Message m(Message::Chat, info->getMessage().from(),response);
+        Message m(Message::Chat, info->getFrom(),response);
         this->_client->send(m);
     }
 

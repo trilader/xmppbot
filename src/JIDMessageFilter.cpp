@@ -27,7 +27,7 @@ void JIDMessageFilter::handleMessage(MessageInfo *info)
     if(info->isPrivate() && !this->_priv)
         return;
 
-    JID from = info->getMessage().from();
+    JID from = info->getFrom();
     if(this->_cmpBareOnly)
         from = from.bare();
 

@@ -5,5 +5,5 @@ void LogMessageFilter::handleMessage(MessageInfo *info)
     if(!info->isRoom())
         return;
 
-    LOG(chat) << info->getMessage().from().resource() + ": " + info->getMessage().body();
+    LOG(chat) << info->getFrom().resource() + ": " + info->getBody();
 }

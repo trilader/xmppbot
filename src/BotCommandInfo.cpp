@@ -9,7 +9,7 @@ BotCommandInfo::BotCommandInfo(std::string name, std::string args, MessageInfo *
     this->_private = info->isPrivate();
     this->_room = info->isRoom();
 
-    this->_user = info->getMessage().from();
+    this->_user = info->getFrom();
 }
 
 const std::string& BotCommandInfo::getName()

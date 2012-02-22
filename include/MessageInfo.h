@@ -14,10 +14,18 @@ class MessageInfo
         bool isHandled();
         void markHandled();
 
-        const gloox::Message& getMessage();
+        std::string getBody();
+        void setBody(const std::string& body);
+
+        gloox::JID getFrom();
+        void setFrom(const gloox::JID& jid);
+
+        const gloox::DelayedDelivery* getWhen();
 
     private:
-        const gloox::Message& _message;
+        std::string _body;
+        gloox::JID _from;
+        const gloox::DelayedDelivery *_when;
         bool _room;
         bool _private;
         bool _handled;
