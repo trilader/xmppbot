@@ -3,7 +3,7 @@ CFLAGS=-c -std=c++0x -O3 -Iinclude -Wall
 CDB_FLAGS=
 LBASE_FLAGS=-lgloox -lboost_program_options -lboost_date_time -lboost_regex -lpthread
 LDB_FLAGS=-lsoci_core
-LDB_SQLITE_FLAGS=-lsoci_sqlite3 -lsqlite3
+LDB_SQLITE_FLAGS=-lsoci_sqlite3
 LDB_MYSQL_FLAGS=-lsoci_mysql
 
 EXECUTABLE=bin/xmppbot
