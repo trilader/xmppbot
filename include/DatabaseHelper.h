@@ -1,20 +1,18 @@
 #ifndef DATABASEHELPER_H
 #define DATABASEHELPER_H
 
-#include "sqlite3.h"
+#ifdef DB_SUPPORT
 
-#ifndef WIN32
+    #include "soci.h"
 
-#include "libsqlitewrapped.h"
+    #ifdef DB_SQLITE_SUPPORT
+    #include "sqlite3/soci-sqlite3.h"
+    #endif
 
-#else //WIN32
+    #ifdef DB_MYSQL_SUPPORT
+    #include "mysql/soci-mysql.h"
+    #endif
 
-#include "Database.h"
-#include "Query.h"
-#include "IError.h"
-#include "StderrLog.h"
-#include "SysLog.h"
-
-#endif //WIN32
+#endif
 
 #endif

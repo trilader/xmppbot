@@ -42,6 +42,7 @@ void Program::parseOptions(int argc, char **argv)
     bpo::options_description desc("Options");
     desc.add_options()
         ("config,c", bpo::value<std::string>()->default_value("config.db"), "the configuration file")
+        ("configdriver,d", bpo::value<std::string>()->default_value("sqlite"), "the configuration driver (file,sqlite or mysql)")
         ("configmode,m", bpo::value<std::string>()->default_value("writable"), "the configuration mode")
         ("index,i", bpo::value<unsigned int>()->default_value(0), "the configuration index")
         ("edit,e", bpo::value<std::string>(), "configuration option to edit")
@@ -83,6 +84,12 @@ bool Program::loadConfiguration()
 
     boost::algorithm::trim(cfgmode);
 
+    std::string cfgdriver = "sqlite";
+    if(Program::_vm.count("configdriver"))
+        cfgdriver = Program::_vm["configdriver"].as<std::string>();
+
+    boost::algorithm::trim(cfgdriver);
+
     bool readonly = false;
     if(cfgmode == "readonly")
         readonly = true;
@@ -94,20 +101,28 @@ bool Program::loadConfiguration()
         return false;
     }
 
-    if(boost::algorithm::iends_with(cfgfile, ".cfg"))
+    if("file" == cfgdriver)
     {
         if(!readonly)
             LOG(sys) << "warning: unable to load configuration with specified configmode 'writable'! Loading configuration 'readonly' instead...";
 
         Program::_config = new FileConfiguration(cfgfile);
     }
-    else if(boost::algorithm::iends_with(cfgfile, ".db"))
+    #if defined DB_SUPPORT && defined DB_SQLITE_SUPPORT
+    else if("sqlite" == cfgdriver)
     {
         Program::_config = new SQLiteConfiguration(cfgfile, !readonly);
     }
+    #endif
+    #if defined DB_SUPPORT && defined DB_MYSQL_SUPPORT
+    else if("mysql" == cfgdriver)
+    {
+        Program::_config = new MySQLConfiguration(cfgfile, !readonly);
+    }
+    #endif
     else
     {
-        LOG(sys) << "error: unknown config file-extension!";
+        LOG(sys) << "error: unknown config driver!";
         return false;
     }
 

@@ -1,13 +1,13 @@
-#if defined DB_SUPPORT && defined DB_SQLITE_SUPPORT
+#if defined DB_SUPPORT && defined DB_MYSQL_SUPPORT
 
-#include "SQLiteConfiguration.h"
+#include "MySQLConfiguration.h"
 
-SQLiteConfiguration::SQLiteConfiguration(std::string filename, bool writeable, unsigned int index) : DbConfiguration(soci::sqlite3,filename, writeable, index)
+MySQLConfiguration::MySQLConfiguration(std::string connString, bool writeable, unsigned int index) : DbConfiguration(soci::mysql,connString, writeable, index)
 {
     this->initTables();
 }
 
-void SQLiteConfiguration::initTables()
+void MySQLConfiguration::initTables()
 {
     StringFormat createLogTable(std::string("CREATE TABLE IF NOT EXISTS %table (")
                                                    +" logs_config_id integer not null,"
@@ -80,3 +80,4 @@ void SQLiteConfiguration::initTables()
 }
 
 #endif
+

@@ -3,13 +3,12 @@ This is xmppbot, an xmpp or jabber bot written in C++ using gloox and boost.
 =Dependecies=
 - Boost 1.4.x ( tested with 1.4.7.0 and 1.4.8.0 )
 - Gloox 1.0
-- sqlite3
-- sqlitewrapped
+- soci ( optional )
 
 =Building=
 Either use the supplied Code::Blocks project file or the included Makefile
 
 =Configuration=
 
-Either create a copy of the example config-file in the bin/ subfolder and adapt it to suit your needs and start the bot with "/path/to/bot/xmppbot myconfig.cfg" or use the create_basic_config.sh to create a sqlite config( which the bot uses as default )..
+Either create a copy of the example config-file in the bin/ subfolder and adapt it to suit your needs and start the bot with "/path/to/bot/xmppbot -d file myconfig.cfg" or use the create_basic_config.sh to create a sqlite config( which the bot uses as default )..
 The configuration options are documented in the example config file.
