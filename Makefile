@@ -26,18 +26,18 @@ DB_MYSQL_OBJECTS=$(DB_MYSQL_SOURCES:.cpp=.o)
 
 #--- Targets
 
-all: CDB_FLAGS+=-DDB_SUPPORT -DDB_SQLITE_SUPPORT -DDB_MYSQL_SUPPORT -I/usr/include/soci -I/usr/include/mysql
+all: CDB_FLAGS+=-DDB_SUPPORT -DDB_SQLITE_SUPPORT -DDB_MYSQL_SUPPORT -I/usr/include/soci -I/usr/include/mysql -I/usr/local/include/soci -I/usr/local/include/mysql
 all: base_obj db_obj mysql_obj sqlite_obj
 	$(CC) $(LBASE_FLAGS) $(LDB_FLAGS) $(LDB_MYSQL_FLAGS) $(LDB_SQLITE_FLAGS) $(BASE_OBJECTS) $(COMMAND_OBJECTS) $(FILTER_OBJECTS) $(DB_OBJECTS) $(DB_MYSQL_OBJECTS) $(DB_SQLITE_OBJECTS) -o $(EXECUTABLE)
 
 base: base_obj
 	$(CC) $(LBASE_FLAGS) $(BASE_OBJECTS) $(COMMAND_OBJECTS) $(FILTER_OBJECTS) -o $(EXECUTABLE)
 
-mysql: CDB_FLAGS+=-DDB_SUPPORT -DDB_MYSQL_SUPPORT -I/usr/include/soci -I/usr/include/mysql
+mysql: CDB_FLAGS+=-DDB_SUPPORT -DDB_MYSQL_SUPPORT -I/usr/include/soci -I/usr/include/mysql -I/usr/local/include/soci -I/usr/local/include/mysql
 mysql: base_obj db_obj mysql_obj
 	$(CC) $(LBASE_FLAGS) $(LDB_FLAGS) $(LDB_MYSQL_FLAGS) $(BASE_OBJECTS) $(COMMAND_OBJECTS) $(FILTER_OBJECTS) $(DB_OBJECTS) $(DB_MYSQL_OBJECTS) -o $(EXECUTABLE)
 
-sqlite: CDB_FLAGS+=-DDB_SUPPORT -DDB_SQLITE_SUPPORT -I/usr/include/soci
+sqlite: CDB_FLAGS+=-DDB_SUPPORT -DDB_SQLITE_SUPPORT -I/usr/include/soci -I/usr/local/include/soci
 sqlite: base_obj db_obj sqlite_obj
 	$(CC) $(LBASE_FLAGS) $(LDB_FLAGS) $(LDB_SQLITE_FLAGS) $(BASE_OBJECTS) $(COMMAND_OBJECTS) $(FILTER_OBJECTS) $(DB_OBJECTS) $(DB_SQLITE_OBJECTS) -o $(EXECUTABLE)
 
