@@ -11,3 +11,5 @@ Thumbs.db
 bin/xmppbot
 *.swp
 *.swo
+src/*.o
+*.html

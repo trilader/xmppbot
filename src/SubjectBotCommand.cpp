@@ -14,11 +14,6 @@ bool SubjectBotCommand::invoke(BotCommandInfo *info) const
         info->setResponse("Wrong password");
         return false;
     }
-    else if(args.size() < 2)
-    {
-        info->setResponse("Expecting custom subject");
-        return false;
-    }
 
     boost::gregorian::date now(boost::gregorian::day_clock::local_day());
 
@@ -36,6 +31,12 @@ bool SubjectBotCommand::invoke(BotCommandInfo *info) const
         format.assign("1",period.length());
     }
 
+    if(args.size()<2 && "%2"==formatstr)
+    {
+        info->setResponse("Expecting custom subject");
+        return false;
+    }
+
     format.assign("2", args[1]);
 
     std::string result = format.produce();
@@ -47,7 +48,7 @@ bool SubjectBotCommand::invoke(BotCommandInfo *info) const
 
 std::string SubjectBotCommand::getHelp() const
 {
-    return std::string("<password> <subject> - Set the rooms description");
+    return std::string("<password> [<subject>] - Set or update the rooms subject");
 }
 
 bool SubjectBotCommand::showHelp() const
