@@ -36,8 +36,9 @@ bool SubjectBotCommand::invoke(BotCommandInfo *info) const
         info->setResponse("Expecting custom subject");
         return false;
     }
-
-    format.assign("2", args[1]);
+    
+    if(args.size()>=2)
+    	format.assign("2", args[1]);
 
     std::string result = format.produce();
 
