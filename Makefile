@@ -53,4 +53,4 @@ base_obj: $(BASE_SOURCES) $(COMMAND_SOURCES) $(FILTER_SOURCES) $(BASE_OBJECTS) $
 	$(CC) $(CFLAGS) $(CDB_FLAGS) $< -o $@
 
 clean:
-	rm -r src/*.o
+	rm -rf src/*.o
