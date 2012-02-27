@@ -50,7 +50,7 @@ message.subscribe=I am a bot of some_server
 
 #Set to yes if you want the log to actually log something
 debug.enabled=yes
-#Here you can set the log type. You can use: console, file, sqlite and mysql.
+#Here you can set the log type. You can use: console, file, void, sqlite and mysql.
 debug.type=console
 #Here you can set the entry format. Available options: %h, %m, %s for the current time.
 #%Y, %M, %D for the current date. %_ for the actual message.
