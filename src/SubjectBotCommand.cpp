@@ -3,6 +3,7 @@
 SubjectBotCommand::SubjectBotCommand(MUCRoom *room, Configuration *config) : ProtectedBotCommand(config)
 {
     this->_room = room;
+    this->_defaultFormat = "%_";
 }
 
 bool SubjectBotCommand::invoke(BotCommandInfo *info) const
@@ -19,26 +20,35 @@ bool SubjectBotCommand::invoke(BotCommandInfo *info) const
 
     std::string formatstr = this->getOption("subject", "format");
     if("" == formatstr)
-        formatstr = "%2";
+        formatstr = this->_defaultFormat;
 
     StringFormat format(formatstr);
-
-    if(this->getConfig()->isCustomCommandItemSet("subject","eventdate"))
+    std::string datestr = this->getOption("subject", "eventdate");
+    if(datestr.length() > 0)
     {
-        std::string datestr = this->getOption("subject", "eventdate");
-        boost::gregorian::date_period period(now, boost::gregorian::from_string(datestr));
+        std::vector<std::string> dates;
+        boost::algorithm::split(dates,datestr,boost::algorithm::is_any_of(","));
 
-        format.assign("1",period.length());
+        for(unsigned int i = 0; i < dates.size(); i++)
+        {
+            boost::algorithm::trim(dates[i]);
+            if(dates[i].length() < 1)
+                continue;
+
+            boost::gregorian::date_period period(now, boost::gregorian::from_string(dates[i]));
+
+            format.assign(boost::lexical_cast<std::string>(i+1),period.length());
+        }
     }
 
-    if(args.size()<2 && "%2"==formatstr)
+    if(args.size()<2 && this->_defaultFormat==formatstr)
     {
         info->setResponse("Expecting custom subject");
         return false;
     }
-    
+
     if(args.size()>=2)
-    	format.assign("2", args[1]);
+    	format.assign("_", args[1]);
 
     std::string result = format.produce();
 

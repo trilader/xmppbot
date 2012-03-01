@@ -11,6 +11,8 @@
 
 #include "LogHelper.h"
 
+#include <vector>
+
 class SubjectBotCommand : public ProtectedBotCommand
 {
 public:
@@ -21,6 +23,7 @@ public:
 
 private:
     MUCRoom *_room;
+    std::string _defaultFormat;
 };
 
 #endif
