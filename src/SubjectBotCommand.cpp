@@ -49,6 +49,8 @@ bool SubjectBotCommand::invoke(BotCommandInfo *info) const
 
     if(args.size()>=2)
     	format.assign("_", args[1]);
+    else // don't display anything if there is nothing to display
+        format.assign("_","");
 
     std::string result = format.produce();
 
