@@ -306,10 +306,10 @@ bool DbConfiguration::getXmppMUC(std::string *name, std::string *room, std::stri
 
     *name = ""; *room = ""; *server = "";
 
-    *this->_db << this->_selectXmppUserFormat->produce(),
-                    soci::into(*name),
+    *this->_db << this->_selectXmppMUCFormat->produce(),
+                    soci::into(*server),
                     soci::into(*room),
-                    soci::into(*server);
+                    soci::into(*name);
 
     return true;
 }
