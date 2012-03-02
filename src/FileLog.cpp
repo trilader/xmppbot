@@ -40,7 +40,7 @@ void FileLog::updateStream()
 
     if((0 != this->_stream) && (today == (*this->_today)) && (t.time_of_day().hours() == (this->_thishour)))
         return;
-        std::cout<<_entryformat->getFormatString()<<std::endl;
+        //std::cout<<_entryformat->getFormatString()<<std::endl;
     assignFormatDateTime(_fileformat);
 
     this->_filename = this->_fileformat->produce();

@@ -108,6 +108,7 @@ void XmppBot::initXmpp()
     nick.setResource(resource);
     nick.setServer(server);
 
+    LOG(debug)<< "Connecting to "<<server<<" as "<<username<<"/"<<resource;
     m_Client = new Client( nick, password);
 
     m_RosterManager = m_Client->rosterManager();
@@ -118,6 +119,7 @@ void XmppBot::initXmpp()
     muc_nick.setResource(muc_name);
     muc_nick.setServer(muc_server);
 
+    LOG(debug)<< "Joining room "<<muc_room<<" on server "<<muc_server<<" as "<<muc_name;
     m_Room = new MUCRoom(m_Client, muc_nick, this, this);
     m_Client->registerMessageHandler(this);
     m_Client->registerConnectionListener(this);

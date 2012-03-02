@@ -17,7 +17,7 @@ LinkMessageFilter::LinkMessageFilter(const std::string& protocols)
     }
     proto+=")";
 
-    LOG(debug) << proto;
+    //LOG(debug) << proto;
 
     std::string expr = proto+"://[^\\s]+";
     this->_re = new boost::regex(expr, boost::regex::icase);

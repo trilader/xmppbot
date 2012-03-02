@@ -13,3 +13,4 @@ bin/xmppbot
 *.swo
 src/*.o
 *.html
+*.cbTemp
